@@ -1,4 +1,1 @@
-Assignments and labs
-making some changes to see if it works
-
-commit
+Labs and Assignment files for CMPT-225 Summer 2024
