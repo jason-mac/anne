@@ -1,0 +1,19 @@
+all: tc ttd
+
+tc: TemperatureConverter.o Temperature.o
+	g++ -Wall -o tc TemperatureConverter.o Temperature.o
+	
+ttd: TemperatureTestDriver.o Temperature.o
+	g++ -Wall -o ttd TemperatureTestDriver.o Temperature.o
+
+TemperatureConverter.o: TemperatureConverter.cpp Temperature.h
+	g++ -Wall -c TemperatureConverter.cpp
+
+TemperatureTestDriver.o: TemperatureTestDriver.cpp Temperature.h
+	g++ -Wall -c TemperatureTestDriver.cpp
+	
+Temperature.o: Temperature.h Temperature.cpp
+	g++ -Wall -c Temperature.cpp
+
+clean:
+	rm -f tc ttd *.o
