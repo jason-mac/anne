@@ -1,5 +1,6 @@
 #include "Circle.h"
 #include <iostream>
+#include <math.h>
 using std::cout;
 using std::endl;
 // Default Constructor
@@ -75,7 +76,7 @@ bool Circle::intersect(Circle c) const {
   }
   int deltaX = abs(this->xCoordinate - c.xCoordinate);
   int deltaY = abs(this->yCoordinate - c.yCoordinate);
-  double delta = std::sqrt(deltaX * deltaX + deltaY * deltaX);
+  double delta = sqrt(deltaX * deltaX + deltaY * deltaX);
   double radiusSum = this->radius + c.radius;
   if (delta > radiusSum) {
     return false;
