@@ -1,0 +1,4 @@
+c1.getX() = 5
+c1.getY() = 2
+c2.getRadius() = 5
+c2.computeArea() = 78.5
