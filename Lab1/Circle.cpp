@@ -69,7 +69,20 @@ void Circle::displayCircle() const {
 // Postcondition: returns true if 'this' and c are intersecting, returns false
 // otherwise
 bool Circle::intersect(Circle c) const {
+  if (this->xCoordinate == c.xCoordinate &&
+      this->yCoordinate == c.yCoordinate && this->radius == c.radius) {
+    return true;
+  }
+  int deltaX = abs(this->xCoordinate - c.xCoordinate);
+  int deltaY = abs(this->yCoordinate - c.yCoordinate);
+  double delta = std::sqrt(deltaX * deltaX + deltaY * deltaX);
   double radiusSum = this->radius + c.radius;
+  if (delta > radiusSum) {
+    return false;
+  }
+  if (delta < abs(this->radius - c.radius)) {
+    return false;
+  }
   return true;
 }
 
