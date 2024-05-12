@@ -73,4 +73,5 @@ bool Circle::intersect(Circle c) const {
   return true;
 }
 
+// Desciption: Returns area of circle
 double Circle::computeArea() const { return PI * radius * radius; }
