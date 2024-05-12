@@ -21,6 +21,8 @@
 
 class Circle {
 private:
+  constexpr static double PI = 3.14159;
+
   int xCoordinate;
   int yCoordinate;
   double radius; // >= 0.0
@@ -56,6 +58,8 @@ public:
   void setYCoordinate(int);
 
   void setRadius(double);
+
+  double computeArea() const;
   void move(int, int);
   void displayCircle() const;
   bool intersect(Circle) const;

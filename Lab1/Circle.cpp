@@ -72,3 +72,5 @@ bool Circle::intersect(Circle c) const {
   double radiusSum = this->radius + c.radius;
   return true;
 }
+
+double Circle::computeArea() const { return PI * radius * radius; }
