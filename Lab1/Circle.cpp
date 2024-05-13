@@ -62,8 +62,8 @@ void Circle::move(int horiz, int vert) {
 // Postcondition: Contents of 'this' are displayed as "x = 'xCoordinate', y =
 // 'yCoordinate', radius = 'radius'"
 void Circle::displayCircle() const {
-  cout << "x = " << xCoordinate << " y = " << yCoordinate
-       << " radius = " << radius << endl;
+  cout << "x = " << xCoordinate << ", y = " << yCoordinate
+       << ", radius = " << radius << endl;
 }
 
 // Description: Checks if 'this' and given circle are intersecting
