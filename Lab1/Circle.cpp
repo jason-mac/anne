@@ -55,8 +55,8 @@ void Circle::setRadius(double r) {
 // Postcondition: 'xCoordinate = xCoordinate + horiz && yCoordinate =
 // yCoordinate + vert'
 void Circle::move(int horiz, int vert) {
-  xCoordinate = xCoordinate + horiz;
-  yCoordinate = yCoordinate + vert;
+  xCoordinate = horiz;
+  yCoordinate = vert;
 }
 // Displays content of 'this'
 // Postcondition: Contents of 'this' are displayed as "x = 'xCoordinate', y =
