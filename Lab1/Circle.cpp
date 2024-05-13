@@ -76,7 +76,7 @@ bool Circle::intersect(Circle c) const {
   }
   int deltaX = abs(this->xCoordinate - c.xCoordinate);
   int deltaY = abs(this->yCoordinate - c.yCoordinate);
-  double delta = sqrt(deltaX * deltaX + deltaY * deltaX);
+  double delta = sqrt(deltaX * deltaX + deltaY * deltaY);
   double radiusSum = this->radius + c.radius;
   if (delta > radiusSum) {
     return false;
