@@ -22,7 +22,8 @@ int main() {
     cin >> value;
     arr[i] = value;
   }
+  int sum = sumArray(arr, size);
   delete[] arr;
 
-  return sumArray(arr, size);
+  return sum;
 }
