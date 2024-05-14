@@ -1,1 +1,1 @@
-Labs and Assignment files for CMPT-225 Summer 2024
+Labs and Assignments for DSA
