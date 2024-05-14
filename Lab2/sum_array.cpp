@@ -15,7 +15,7 @@ int main() {
   int size;
   int value;
   cout << "insert size of array";
-  cin >> value;
+  cin >> size;
   for (int i = 0; i < size; i++) {
     cout << "insert value of array at index " << i;
     cin >> value;
