@@ -30,5 +30,6 @@ int main() {
     cin >> radius;
     circleArray[i] = new Circle(x, y, radius);
   }
+  print(circleArray, size);
   return 0;
 }
