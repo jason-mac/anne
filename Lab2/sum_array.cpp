@@ -12,10 +12,11 @@ int sumArray(int arr[], unsigned int size) {
 }
 int main() {
   int *arr = nullptr;
-  int size;
+  unsigned int size;
   int value;
   cout << "insert size of array";
   cin >> size;
+  arr = new int[size];
   for (int i = 0; i < size; i++) {
     cout << "insert value of array at index " << i;
     cin >> value;
