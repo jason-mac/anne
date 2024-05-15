@@ -12,6 +12,9 @@ void print(Circle **arr, unsigned int size) {
   }
 }
 
+// Description: Main function for testing the class.h cnad cliss.cpp files
+// Precondition: attempting to break the program
+// Precondition: No errors ideally!
 int main() {
   Circle **circleArray = nullptr;
   unsigned int size;
@@ -21,6 +24,7 @@ int main() {
   cout << " insert size ";
   cin >> size;
   while (size < 0) {
+    cout << " insert positive size ";
     cin >> size;
   }
   circleArray = new Circle *[size];
