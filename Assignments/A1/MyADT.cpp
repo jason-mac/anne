@@ -95,6 +95,28 @@ MyADT::~MyADT() {
   }
 }
 
+// Description: Returns index of found element returns -1 if not found
+int MyADT::getIndex(Profile *profiles, unsigned int size,
+                    const Profile &target) {
+
+  // Using binary search since profiles array is sorted
+  int left = 0;
+  int right = size - 1;
+  int middle;
+  while (left <= right) {
+    middle = (right + left) / 2;
+    if (profiles[middle] == target) {
+      return middle;
+    }
+    if (profiles[middle] < target) {
+      left = middle + 1;
+    } else {
+      right = middle - 1;
+    }
+  }
+  return left;
+}
+
 // Description: Returns the total number of elements currently stored in the
 // data collection MyADT.
 unsigned int MyADT::getElementCount() const {
@@ -170,6 +192,7 @@ bool MyADT::insert(const Profile &newElement) { /* Put your code here */
 
   // Binary search has failed to find newElement, able to insert newElement at
   // index left Shift each element by one index before inserting newElement
+  cout << left << " left " << endl;
   for (unsigned int i = elementCountAtSearchKey - 1; i > left; i--) {
     profiles[i] = profiles[i - 1];
   }
