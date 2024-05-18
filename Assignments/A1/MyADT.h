@@ -49,6 +49,7 @@ private:
    */
 
   // Utility method(s)
+  int getIndex(Profile *, unsigned int, const Profile &);
 
 public:
   /*
