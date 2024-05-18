@@ -13,7 +13,7 @@
  * key.
  *                  - Each element is unique (no duplicates).
  *
- * Author: AL and <put your name here>
+ * Author: AL and <Jason Mac>
  * Last modified on: May 2024
  */
 
@@ -33,12 +33,11 @@ MyADT::MyADT() {
   // out again before you submit your Assignment 1.
 
   /* Put your code here */
+
+  // Initialize each pointer in elements to nullptr and set its corresponding
+  // elementCount array to 0
   for (unsigned int i = 0; i < MAX_ALPHA; i++) {
-
-    // initially each character 'a - z' has 0 elements corresponding to it
     elementCount[i] = 0;
-
-    // only insert elements when needed, otherwise we keep it as nullptr
     elements[i] = nullptr;
   }
 }
@@ -51,25 +50,33 @@ MyADT::MyADT(const MyADT &rhs) {
   // out again before you submit your Assignment 1.
 
   /* Put your code here */
+
+  // Loop through each Profile array of rhs to copy
   for (unsigned int i = 0; i < MAX_ALPHA; i++) {
+
+    // Copy the elementCount and set each pointer in elements to nullptr
     elementCount[i] = rhs.elementCount[i];
-    Profile *rhsCopy = rhs.elements[i];
-    if (!rhsCopy) {
-      elements[i] = nullptr;
-      continue;
+    elements[i] = nullptr;
+
+    // Retrieve Profile array from rhs to copy
+    Profile *rhsProfiles = rhs.elements[i];
+
+    // Checks if rhsProfiles has elements, if so, deep copy the elements
+    if (rhsProfiles) {
+      Profile *newProfiles = new Profile[MAX_ELEMENTS];
+      // Copy each element from rhsCopy into newProfiles
+      for (unsigned int j = 0; j < elementCount[i]; j++) {
+        newProfiles[j] = rhsProfiles[j];
+      }
+      // Store deep copied profiles array into appropiate index
+      elements[i] = newProfiles;
     }
-    Profile *thisCopy = new Profile[elementCount[i]];
-    for (unsigned int j = 0; j < elementCount[i]; j++) {
-      thisCopy[j] = rhsCopy[j];
-    }
-    elements[i] = thisCopy;
   }
 }
 
 // Overloaded assignment operator - Covered in Lab 4
 // Therefore, we shall not be overloading this operator in our Assignment 1
-// MyADT & MyADT::operator=(const MyADT& rhs) { }
-
+// MyADT & MyADT::operator=(const MyADT& rhs) { stuff and more stuff }
 // Destructor - Covered in Lab 3
 // Description: Destroys this object, releasing heap-allocated memory.
 MyADT::~MyADT() {
@@ -79,17 +86,26 @@ MyADT::~MyADT() {
   // you submit your Assignment 1.
 
   /* Put your code here */
-  this->removeAll();
+
+  // Deallocates all memory in elements array
+  for (int i = 0; i < MAX_ALPHA; i++) {
+    if (elements[i]) {
+      delete[] elements[i];
+    }
+  }
 }
 
 // Description: Returns the total number of elements currently stored in the
 // data collection MyADT.
-unsigned int MyADT::getElementCount() const { /* Put your code here */
-  int count = 0;
+unsigned int MyADT::getElementCount() const {
+  /* Put your code here */
+  unsigned int totalElementCount = 0;
+
+  // Iterate through elementCount array and sum value
   for (unsigned int i = 0; i < MAX_ALPHA; i++) {
-    count += elementCount[i];
+    totalElementCount += elementCount[i];
   }
-  return count;
+  return totalElementCount;
 }
 
 // Description: Inserts an element in the data collection MyADT.
@@ -98,51 +114,71 @@ unsigned int MyADT::getElementCount() const { /* Put your code here */
 // Precondition: newElement must not already be in the data collection MyADT.
 // Postcondition: newElement inserted, MyADT's class invariants are still true
 //                and the appropriate elementCount has been incremented.
-// Time Efficiency:
+// Time Efficiency: O(n)
 bool MyADT::insert(const Profile &newElement) { /* Put your code here */
   char searchKey = newElement.getSearchKey();
-  unsigned int profileIndexKey = int(searchKey) - int('a');
-  unsigned int elementCountAtSearchKey = elementCount[profileIndexKey];
+  unsigned int profilesIndexKey = int(searchKey) - int('a');
+  unsigned int elementCountAtSearchKey = elementCount[profilesIndexKey];
 
-  // insert failed, cannot insert more elements
+  // Check for full Profile array, return false if so
   if (elementCountAtSearchKey == MAX_ELEMENTS) {
     return false;
   }
-  // create new array on heap if there is no array
-  if (elementCountAtSearchKey == 0) {
-    Profile *profile = new Profile[MAX_ELEMENTS];
-    profile[0] = newElement;
-    elements[profileIndexKey] = profile;
-    elementCount[profileIndexKey] += 1;
+  // Dynamically allocate memory for new array if there is no array
+  if (!elements[profilesIndexKey]) {
+    Profile *profiles = new Profile[MAX_ELEMENTS];
+
+    // Check if new operator failed, return false if so
+    if (!profiles) {
+      return false;
+    }
+
+    // Insert element into the profiles array
+    profiles[0] = newElement;
+
+    // Store new profiles array into elements at appropiate index
+    elements[profilesIndexKey] = profiles;
+
+    // Increment elementCount at appropiate index
+    elementCount[profilesIndexKey] += 1;
     return true;
   }
 
-  Profile *profile = elements[int(searchKey) - int('a')];
-  unsigned int left = 0;
-  unsigned int right = elementCountAtSearchKey - 1;
+  // Retrieve appropiate Profile array for insertion of newElement
+  Profile *profiles = elements[profilesIndexKey];
 
   // Binary search to determine existence of newElement
   // Also detemines index of insertion if element does not exist
+  unsigned int left = 0;
+  unsigned int right = elementCountAtSearchKey - 1;
   while (left <= right) {
     unsigned int middle = (left + right) / 2;
-    if (profile[middle] == newElement) {
+
+    if (profiles[middle] == newElement) {
+
+      // At this point, newElement exists in profiles array, return false to
+      // indicate insertion failure
       return false;
     }
-    if (profile[middle] < newElement) {
+    if (profiles[middle] < newElement) {
       left = middle + 1;
     }
-    if (profile[middle] > newElement) {
+    if (profiles[middle] > newElement) {
       right = middle - 1;
     }
   }
 
-  // if binary search fails to find element then we are able to insert at left
-  // shift each element by one index before inserting newElement
+  // Binary search has failed to find newElement, able to insert newElement at
+  // index left Shift each element by one index before inserting newElement
   for (unsigned int i = elementCountAtSearchKey - 1; i > left; i--) {
-    profile[i] = profile[i - 1];
+    profiles[i] = profiles[i - 1];
   }
-  profile[left] = newElement;
-  elementCount[profileIndexKey] += 1;
+
+  // Insert newElement into array
+  profiles[left] = newElement;
+
+  // Increment elementCount for appropiate index
+  elementCount[profilesIndexKey] += 1;
   return true;
 }
 
@@ -153,35 +189,41 @@ bool MyADT::insert(const Profile &newElement) { /* Put your code here */
 // Postcondition: toBeRemoved (if found) is removed, MyADT's class invariants
 // are still true
 //                and the appropriate elementCount is decremented.
-// Time Efficiency:
+// Time Efficiency: O(n)
 bool MyADT::remove(const Profile &toBeRemoved) { /* Put your code here */
   char searchKey = toBeRemoved.getSearchKey();
-  unsigned int profileIndexKey = int(searchKey) - int('a');
-  unsigned int elementCountAtSearchKey = elementCount[profileIndexKey];
+  unsigned int profilesIndexKey = int(searchKey) - int('a');
+  unsigned int elementCountAtSearchKey = elementCount[profilesIndexKey];
   // check for empty list, if empty then the toBeRemoved does not exists and
-  // return false
+
+  // Checks for empty array, and returns false as toBeRemoved cannot exist in
+  // empty array
   if (elementCountAtSearchKey == 0) {
     return false;
   }
-  Profile *profile = elements[profileIndexKey];
+
+  // Retrieve appropiate profiles array from elements
+  Profile *profiles = elements[profilesIndexKey];
+
+  // Binary Search algorithm to find existence of toBeRemoved in profiles array
   unsigned int left = 0;
   unsigned int right = elementCountAtSearchKey;
   unsigned int middle = (left + right) / 2;
   while (left <= right) {
     middle = (left + right) / 2;
-    if (profile[middle] == toBeRemoved) {
+    if (profiles[middle] == toBeRemoved) {
       break;
     }
-    if (profile[middle] < toBeRemoved) {
+    if (profiles[middle] < toBeRemoved) {
       left = middle + 1;
     }
-    if (profile[middle] > toBeRemoved) {
+    if (profiles[middle] > toBeRemoved) {
       right = middle - 1;
     }
   }
-  if (profile[middle] == toBeRemoved) {
+  if (profiles[middle] == toBeRemoved) {
     for (unsigned int i = middle; i < elementCountAtSearchKey - 1; i++) {
-      profile[i] = profile[i + 1];
+      profiles[i] = profiles[i + 1];
     }
     return true;
   }
@@ -196,10 +238,18 @@ bool MyADT::remove(const Profile &toBeRemoved) { /* Put your code here */
 // Time Efficiency:
 void MyADT::removeAll() {
   /* Put your code here */
+
+  // Loop through each Profile array in elements
   for (unsigned int i = 0; i < MAX_ALPHA; i++) {
-    if (!elements[i])
-      continue;
-    delete[] elements[i];
+    // Check if the element at index i is not nullptr
+    if (elements[i]) {
+      // Delete the dynamically allocated memory
+      delete[] elements[i];
+      // Set the pointer to nullptr to avoid dangling pointer issues
+      elements[i] = nullptr;
+    }
+    // Reset the element count for this index
+    elementCount[i] = 0;
   }
 }
 
@@ -210,23 +260,23 @@ void MyADT::removeAll() {
 // Time Efficiency:
 Profile *MyADT::search(const Profile &target) { /* Put your code here */
   char searchKey = target.getSearchKey();
-  unsigned int profileIndexKey = int(searchKey) - int('a');
-  unsigned int elementCountAtSearchKey = elementCount[profileIndexKey];
-  Profile *profile = elements[profileIndexKey];
-  if (!profile) {
+  unsigned int profilesIndexKey = int(searchKey) - int('a');
+  unsigned int elementCountAtSearchKey = elementCount[profilesIndexKey];
+  Profile *profiles = elements[profilesIndexKey];
+  if (!profiles) {
     return nullptr;
   }
   unsigned int left = 0;
   unsigned int right = elementCountAtSearchKey - 1;
   unsigned int middle = (right + left) / 2;
   while (left <= right) {
-    if (profile[middle] == target) {
-      return &profile[middle];
+    if (profiles[middle] == target) {
+      return &profiles[middle];
     }
-    if (profile[middle] < target) {
+    if (profiles[middle] < target) {
       left = middle + 1;
     }
-    if (profile[middle] > target) {
+    if (profiles[middle] > target) {
       right = middle - 1;
     }
   }
