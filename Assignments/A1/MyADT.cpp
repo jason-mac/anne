@@ -88,7 +88,7 @@ MyADT::~MyADT() {
   /* Put your code here */
 
   // Deallocates all memory in elements array
-  for (int i = 0; i < MAX_ALPHA; i++) {
+  for (unsigned int i = 0; i < MAX_ALPHA; i++) {
     if (elements[i]) {
       delete[] elements[i];
     }
