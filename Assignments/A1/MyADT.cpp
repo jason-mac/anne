@@ -33,7 +33,7 @@ MyADT::MyADT() {
   // out again before you submit your Assignment 1.
 
   /* Put your code here */
-  for (int i = 0; i < MAX_ALPHA; i++) {
+  for (unsigned int i = 0; i < MAX_ALPHA; i++) {
 
     // initially each character 'a - z' has 0 elements corresponding to it
     elementCount[i] = 0;
@@ -51,15 +51,15 @@ MyADT::MyADT(const MyADT &rhs) {
   // out again before you submit your Assignment 1.
 
   /* Put your code here */
-  for (int i = 0; i < MAX_ALPHA; i++) {
+  for (unsigned int i = 0; i < MAX_ALPHA; i++) {
     elementCount[i] = rhs.elementCount[i];
     Profile *rhsCopy = rhs.elements[i];
     if (!rhsCopy) {
       elements[i] = nullptr;
       continue;
     }
-    Profile *thisCopy = new Profile[rhs.elementCount[i]];
-    for (int j = 0; j < elementCount[i]; j++) {
+    Profile *thisCopy = new Profile[elementCount[i]];
+    for (unsigned int j = 0; j < elementCount[i]; j++) {
       thisCopy[j] = rhsCopy[j];
     }
     elements[i] = thisCopy;
@@ -85,6 +85,11 @@ MyADT::~MyADT() {
 // Description: Returns the total number of elements currently stored in the
 // data collection MyADT.
 unsigned int MyADT::getElementCount() const { /* Put your code here */
+  int count = 0;
+  for (unsigned int i = 0; i < MAX_ALPHA; i++) {
+    count += elementCount[i];
+  }
+  return count;
 }
 
 // Description: Inserts an element in the data collection MyADT.
@@ -96,8 +101,8 @@ unsigned int MyADT::getElementCount() const { /* Put your code here */
 // Time Efficiency:
 bool MyADT::insert(const Profile &newElement) { /* Put your code here */
   char searchKey = newElement.getSearchKey();
-  int profileIndexKey = int(searchKey) - int('a');
-  int elementCountAtSearchKey = elementCount[profileIndexKey];
+  unsigned int profileIndexKey = int(searchKey) - int('a');
+  unsigned int elementCountAtSearchKey = elementCount[profileIndexKey];
 
   // insert failed, cannot insert more elements
   if (elementCountAtSearchKey == MAX_ELEMENTS) {
@@ -113,13 +118,13 @@ bool MyADT::insert(const Profile &newElement) { /* Put your code here */
   }
 
   Profile *profile = elements[int(searchKey) - int('a')];
-  int left = 0;
-  int right = elementCountAtSearchKey - 1;
+  unsigned int left = 0;
+  unsigned int right = elementCountAtSearchKey - 1;
 
   // Binary search to determine existence of newElement
   // Also detemines index of insertion if element does not exist
   while (left <= right) {
-    int middle = (left + right) / 2;
+    unsigned int middle = (left + right) / 2;
     if (profile[middle] == newElement) {
       return false;
     }
@@ -133,7 +138,7 @@ bool MyADT::insert(const Profile &newElement) { /* Put your code here */
 
   // if binary search fails to find element then we are able to insert at left
   // shift each element by one index before inserting newElement
-  for (int i = elementCountAtSearchKey - 1; i > left; i--) {
+  for (unsigned int i = elementCountAtSearchKey - 1; i > left; i--) {
     profile[i] = profile[i - 1];
   }
   profile[left] = newElement;
@@ -151,17 +156,17 @@ bool MyADT::insert(const Profile &newElement) { /* Put your code here */
 // Time Efficiency:
 bool MyADT::remove(const Profile &toBeRemoved) { /* Put your code here */
   char searchKey = toBeRemoved.getSearchKey();
-  int profileIndexKey = int(searchKey) - int('a');
-  int elementCountAtSearchKey = elementCount[profileIndexKey];
+  unsigned int profileIndexKey = int(searchKey) - int('a');
+  unsigned int elementCountAtSearchKey = elementCount[profileIndexKey];
   // check for empty list, if empty then the toBeRemoved does not exists and
   // return false
   if (elementCountAtSearchKey == 0) {
     return false;
   }
   Profile *profile = elements[profileIndexKey];
-  int left = 0;
-  int right = elementCountAtSearchKey;
-  int middle = (left + right) / 2;
+  unsigned int left = 0;
+  unsigned int right = elementCountAtSearchKey;
+  unsigned int middle = (left + right) / 2;
   while (left <= right) {
     middle = (left + right) / 2;
     if (profile[middle] == toBeRemoved) {
@@ -175,7 +180,7 @@ bool MyADT::remove(const Profile &toBeRemoved) { /* Put your code here */
     }
   }
   if (profile[middle] == toBeRemoved) {
-    for (int i = middle; i < elementCountAtSearchKey - 1; i++) {
+    for (unsigned int i = middle; i < elementCountAtSearchKey - 1; i++) {
       profile[i] = profile[i + 1];
     }
     return true;
@@ -191,7 +196,7 @@ bool MyADT::remove(const Profile &toBeRemoved) { /* Put your code here */
 // Time Efficiency:
 void MyADT::removeAll() {
   /* Put your code here */
-  for (int i = 0; i < MAX_ALPHA; i++) {
+  for (unsigned int i = 0; i < MAX_ALPHA; i++) {
     if (!elements[i])
       continue;
     delete[] elements[i];
@@ -205,15 +210,15 @@ void MyADT::removeAll() {
 // Time Efficiency:
 Profile *MyADT::search(const Profile &target) { /* Put your code here */
   char searchKey = target.getSearchKey();
-  int profileIndexKey = int(searchKey) - int('a');
-  int elementCountAtSearchKey = elementCount[profileIndexKey];
+  unsigned int profileIndexKey = int(searchKey) - int('a');
+  unsigned int elementCountAtSearchKey = elementCount[profileIndexKey];
   Profile *profile = elements[profileIndexKey];
   if (!profile) {
     return nullptr;
   }
-  int left = 0;
-  int right = elementCountAtSearchKey - 1;
-  int middle = (right + left) / 2;
+  unsigned int left = 0;
+  unsigned int right = elementCountAtSearchKey - 1;
+  unsigned int middle = (right + left) / 2;
   while (left <= right) {
     if (profile[middle] == target) {
       return &profile[middle];
@@ -233,10 +238,10 @@ Profile *MyADT::search(const Profile &target) { /* Put your code here */
 // ***For Testing Purposes - Not part of this class' public interface.***
 // Time Efficiency: O(m)
 void MyADT::print() { /* Put your code here */
-  for (int i = 0; i < MAX_ALPHA; i++) {
+  for (unsigned int i = 0; i < MAX_ALPHA; i++) {
     if (!elements[i])
       continue;
-    for (int j = 0; j < elementCount[i]; j++) {
+    for (unsigned int j = 0; j < elementCount[i]; j++) {
       cout << elements[j];
     }
   }
