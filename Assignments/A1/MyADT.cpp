@@ -242,7 +242,7 @@ void MyADT::print() { /* Put your code here */
     if (!elements[i])
       continue;
     for (unsigned int j = 0; j < elementCount[i]; j++) {
-      cout << elements[j];
+      cout << elements[i][j];
     }
   }
 }
