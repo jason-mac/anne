@@ -291,25 +291,13 @@ Profile *MyADT::search(const Profile &target) { /* Put your code here */
   if (!profiles) {
     return nullptr;
   }
-  unsigned int left = 0;
-  unsigned int right = elementCountAtSearchKey - 1;
-  unsigned int middle = (right + left) / 2;
-  while (left <= right) {
-    middle = (right + left) / 2;
-    if (profiles[middle] == target) {
-      // CHANGE
+  for (int i = 0; i < elementCountAtSearchKey; i++) {
+    if (profiles[i] == target) {
       cout << "found" << endl;
-      return &profiles[middle];
-    }
-    if (profiles[middle] < target) {
-      left = middle + 1;
-    }
-    if (profiles[middle] > target) {
-      right = middle - 1;
+      return &profiles[i];
     }
   }
-  // CHANGE
-  cout << "NOT FOUND" << endl;
+  cout << " not found" << endl;
   return nullptr;
 }
 
