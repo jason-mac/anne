@@ -191,7 +191,7 @@ bool MyADT::insert(const Profile &newElement) { /* Put your code here */
   // than newElement in profiles array, therefore the insertion index becomes
   // elementCountAtSearchKey
   if (insertIndex == -1) {
-    profiles[profilesIndexKey] = newElement;
+    profiles[elementCountAtSearchKey] = newElement;
 
     // Increment elementCount for appropiate character
     elementCount[profilesIndexKey] += 1;
@@ -201,7 +201,8 @@ bool MyADT::insert(const Profile &newElement) { /* Put your code here */
   }
 
   // Shift each element to the right by one index before inserting newElement
-  for (unsigned int i = elementCountAtSearchKey - 1; i > insertIndex; i--) {
+
+  for (unsigned int i = elementCountAtSearchKey; i > insertIndex; i--) {
     profiles[i] = profiles[i - 1];
   }
 
@@ -227,8 +228,8 @@ bool MyADT::remove(const Profile &toBeRemoved) { /* Put your code here */
   char searchKey = toBeRemoved.getSearchKey();
   unsigned int profilesIndexKey = int(searchKey) - int('a');
   unsigned int elementCountAtSearchKey = elementCount[profilesIndexKey];
-  // check for empty list, if empty then the toBeRemoved does not exists and
-
+  bool found = false;
+  bool hasBeenRemoved = false;
   // Checks for empty array, and returns false as toBeRemoved cannot exist in
   // empty array
   if (elementCountAtSearchKey == 0) {
@@ -238,29 +239,42 @@ bool MyADT::remove(const Profile &toBeRemoved) { /* Put your code here */
   // Retrieve appropiate profiles array from elements
   Profile *profiles = elements[profilesIndexKey];
 
-  // Binary Search algorithm to find existence of toBeRemoved in profiles array
-  unsigned int left = 0;
-  unsigned int right = elementCountAtSearchKey;
-  unsigned int middle = (left + right) / 2;
-  while (left <= right) {
-    middle = (left + right) / 2;
-    if (profiles[middle] == toBeRemoved) {
-      break;
+  // Searches for toBeRemoved in profiles array and shifts elements by one index
+  // if found while overwrting toBeRemoved
+  for (int i = 0; i < elementCountAtSearchKey; i++) {
+    if (profiles[i] == toBeRemoved) {
+      elementCount[profilesIndexKey] -= 1;
+      found = true;
+      hasBeenRemoved = true;
     }
-    if (profiles[middle] < toBeRemoved) {
-      left = middle + 1;
-    }
-    if (profiles[middle] > toBeRemoved) {
-      right = middle - 1;
-    }
-  }
-  if (profiles[middle] == toBeRemoved) {
-    for (unsigned int i = middle; i < elementCountAtSearchKey - 1; i++) {
+
+    // If toBeRemoved was found, shift elements to the left and overwrites
+    // toBeRemoved
+    if (found && i < elementCountAtSearchKey - 1) {
       profiles[i] = profiles[i + 1];
     }
-    return true;
   }
-  return false;
+
+  // Decrement elemntCount for appropiate character if an element is removed
+  // from profiles array
+  // Note: there is a special case where toBeRemoved is at
+  // profiles[elementCountAtSearchKey] not covered by the previous for loop,
+  // but this is covered by decrementing elementCount
+  if (hasBeenRemoved) {
+    elementCount[profilesIndexKey] -= 1;
+  }
+
+  // For memory efficiency, if after removal there are no elements,
+  // delete the dyamically allocated array
+  if (elementCount[profilesIndexKey] == 0) {
+    delete[] profiles;
+
+    // Avoid dangling pointers
+    profiles = nullptr;
+    elements[profilesIndexKey] = profiles;
+  }
+
+  return hasBeenRemoved;
 }
 
 // Description: Removes all elements from the data collection MyADT.
