@@ -175,7 +175,7 @@ bool MyADT::insert(const Profile &newElement) { /* Put your code here */
   // newElement is the insertion index, thus whenever
   // newElement > profiles[insertIndex], the insertion index has been found
   while (insertIndex < elementCountAtSearchKey &&
-         profiles[insertIndex] > newElement) {
+         profiles[insertIndex] < newElement) {
 
     // Check if newElement already exists in the array
     if (profiles[insertIndex] == newElement) {
