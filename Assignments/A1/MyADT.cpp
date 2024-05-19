@@ -178,7 +178,7 @@ bool MyADT::insert(const Profile &newElement) { /* Put your code here */
          profiles[insertIndex] > newElement) {
 
     // Check if newElement already exists in the array
-    if (profiles[i] == newElement) {
+    if (profiles[insertIndex] == newElement) {
 
       // Unsuccessful insert, return false to indicate as such
       return false;
