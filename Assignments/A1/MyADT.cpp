@@ -141,7 +141,7 @@ bool MyADT::insert(const Profile &newElement) { /* Put your code here */
   char searchKey = newElement.getSearchKey();
   unsigned int profilesIndexKey = int(searchKey) - int('a');
   unsigned int elementCountAtSearchKey = elementCount[profilesIndexKey];
-  int insertIndex = -1;
+  int insertIndex = 0;
 
   // Retrieve appropiate Profile array for insertion of newElement
   Profile *profiles = elements[profilesIndexKey];
@@ -171,7 +171,11 @@ bool MyADT::insert(const Profile &newElement) { /* Put your code here */
   }
 
   // Check if newElement exists in array and find insertion index
-  for (int i = 0; i < elementCountAtSearchKey && insertIndex == -1; i++) {
+  // Due to sorted order, the first element that is greater than
+  // newElement is the insetion index, thus whenever
+  // newElement > profiles[insertIndex], the insert index has been found
+  while (insertIndex < elementCountAtSearchKey &&
+         newElement < profiles[insertIndex]) {
 
     // Check if newElement already exists in the array
     if (profiles[i] == newElement) {
@@ -180,28 +184,10 @@ bool MyADT::insert(const Profile &newElement) { /* Put your code here */
       return false;
     }
 
-    // Due to sorted order, the first found element that is greater than
-    // newElement is the insertion index
-    if (profiles[i] > newElement) {
-      insertIndex = i;
-    }
-  }
-
-  // If insertIndex == -1 it implies that there was no element greater
-  // than newElement in profiles array, therefore the insertion index becomes
-  // elementCountAtSearchKey
-  if (insertIndex == -1) {
-    profiles[elementCountAtSearchKey] = newElement;
-
-    // Increment elementCount for appropiate character
-    elementCount[profilesIndexKey] += 1;
-
-    // Successful insert, return true to indicate as such
-    return true;
+    insertIndex++;
   }
 
   // Shift each element to the right by one index before inserting newElement
-
   for (unsigned int i = elementCountAtSearchKey; i > insertIndex; i--) {
     profiles[i] = profiles[i - 1];
   }
@@ -241,7 +227,7 @@ bool MyADT::remove(const Profile &toBeRemoved) { /* Put your code here */
 
   // Searches for toBeRemoved in profiles array and shifts elements by one index
   // if found while overwrting toBeRemoved
-  for (int i = 0; i < elementCountAtSearchKey; i++) {
+  for (unsigned int i = 0; i < elementCountAtSearchKey; i++) {
     if (profiles[i] == toBeRemoved) {
       elementCount[profilesIndexKey] -= 1;
       found = true;
