@@ -141,7 +141,7 @@ bool MyADT::insert(const Profile &newElement) { /* Put your code here */
   char searchKey = newElement.getSearchKey();
   unsigned int profilesIndexKey = int(searchKey) - int('a');
   unsigned int elementCountAtSearchKey = elementCount[profilesIndexKey];
-  int insertIndex = 0;
+  unsigned int insertIndex = 0;
 
   // Retrieve appropiate Profile array for insertion of newElement
   Profile *profiles = elements[profilesIndexKey];
@@ -171,11 +171,11 @@ bool MyADT::insert(const Profile &newElement) { /* Put your code here */
   }
 
   // Check if newElement exists in array and find insertion index
-  // Due to sorted order, the first element that is greater than
-  // newElement is the insetion index, thus whenever
-  // newElement > profiles[insertIndex], the insert index has been found
+  // Due to sorted order, the first element found that is greater than
+  // newElement is the insertion index, thus whenever
+  // newElement > profiles[insertIndex], the insertion index has been found
   while (insertIndex < elementCountAtSearchKey &&
-         newElement < profiles[insertIndex]) {
+         profiles[insertIndex] > newElement) {
 
     // Check if newElement already exists in the array
     if (profiles[i] == newElement) {
