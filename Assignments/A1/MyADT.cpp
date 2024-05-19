@@ -295,6 +295,7 @@ Profile *MyADT::search(const Profile &target) { /* Put your code here */
   unsigned int right = elementCountAtSearchKey - 1;
   unsigned int middle = (right + left) / 2;
   while (left <= right) {
+    middle = (right + left) / 2;
     if (profiles[middle] == target) {
       // CHANGE
       cout << "found" << endl;
