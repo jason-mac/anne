@@ -229,8 +229,16 @@ bool MyADT::remove(const Profile &toBeRemoved) { /* Put your code here */
   // if found while overwrting toBeRemoved
   for (unsigned int i = 0; i < elementCountAtSearchKey; i++) {
     if (profiles[i] == toBeRemoved) {
+
+      // Decrement element count as toBeRemoved has been found and will be
+      // removed
       elementCount[profilesIndexKey] -= 1;
+
+      // Indicates toBeRemoved has been found in order to begin shifting of
+      // elements for removal
       found = true;
+
+      // For report of successfull removal
       hasBeenRemoved = true;
     }
 
@@ -239,15 +247,6 @@ bool MyADT::remove(const Profile &toBeRemoved) { /* Put your code here */
     if (found && i < elementCountAtSearchKey - 1) {
       profiles[i] = profiles[i + 1];
     }
-  }
-
-  // Decrement elemntCount for appropiate character if an element is removed
-  // from profiles array
-  // Note: there is a special case where toBeRemoved is at
-  // profiles[elementCountAtSearchKey] not covered by the previous for loop,
-  // but this is covered by decrementing elementCount
-  if (hasBeenRemoved) {
-    elementCount[profilesIndexKey] -= 1;
   }
 
   // For memory efficiency, if after removal there are no elements,
