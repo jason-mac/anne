@@ -281,30 +281,27 @@ void MyADT::removeAll() {
 // Precondition: The data collection MyADT is not empty.
 // Time Efficiency:
 Profile *MyADT::search(const Profile &target) { /* Put your code here */
+  bool found = false;
   char searchKey = target.getSearchKey();
   unsigned int profilesIndexKey = int(searchKey) - int('a');
   cout << profilesIndexKey << " profilesIndexKey " << endl;
   unsigned int elementCountAtSearchKey = elementCount[profilesIndexKey];
+  Profile *toReturn = nullptr;
   cout << elementCountAtSearchKey << "elementCountAtSearchKey" << endl;
   Profile *profiles = elements[profilesIndexKey];
   if (!profiles) {
     return nullptr;
   }
-  unsigned int left = 0;
-  unsigned int right = elementCountAtSearchKey - 1;
-  while (left <= right) {
-    unsigned int middle = (left + right) / 2;
-    if (profiles[middle] == target) {
-      return &profiles[middle];
+  unsigned int i = 0;
+  while (i < elementCountAtSearchKey && !found) {
+    if (profiles[i] == target) {
+      toReturn = &profiles[i];
+      found = true;
     }
-    if (profiles[middle] < target) {
-      left = middle + 1;
-    } else {
-      right = middle - 1;
-    }
+    i++;
   }
   cout << " not found" << endl;
-  return nullptr;
+  return toReturn;
 }
 
 // Description: Prints all elements stored in the data collection MyADT in
