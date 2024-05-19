@@ -184,8 +184,7 @@ bool MyADT::insert(const Profile &newElement) { /* Put your code here */
     }
     if (profiles[middle] < newElement) {
       left = middle + 1;
-    }
-    if (profiles[middle] > newElement) {
+    } else {
       right = middle - 1;
     }
   }
@@ -291,10 +290,10 @@ Profile *MyADT::search(const Profile &target) { /* Put your code here */
   if (!profiles) {
     return nullptr;
   }
-  unsigned left = 0;
-  unsigned right = elementCountAtSearchKey - 1;
+  unsigned int left = 0;
+  unsigned int right = elementCountAtSearchKey - 1;
   while (left <= right) {
-    unsigned middle = (left + right) / 2;
+    unsigned int middle = (left + right) / 2;
     if (profiles[middle] == target) {
       return &profiles[middle];
     }
