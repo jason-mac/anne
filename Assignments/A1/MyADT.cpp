@@ -284,7 +284,9 @@ void MyADT::removeAll() {
 Profile *MyADT::search(const Profile &target) { /* Put your code here */
   char searchKey = target.getSearchKey();
   unsigned int profilesIndexKey = int(searchKey) - int('a');
+  cout << profilesIndexKey << " profilesIndexKey " << endl;
   unsigned int elementCountAtSearchKey = elementCount[profilesIndexKey];
+  cout << elementCountAtSearchKey << "elementCountAtSearchKey" << endl;
   Profile *profiles = elements[profilesIndexKey];
   if (!profiles) {
     return nullptr;
