@@ -299,7 +299,7 @@ Profile *MyADT::search(const Profile &target) { /* Put your code here */
       return &profiles[middle];
     }
     if (profiles[middle] < target) {
-      left = midde + 1;
+      left = middle + 1;
     } else {
       right = middle - 1;
     }
