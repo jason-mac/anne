@@ -294,6 +294,8 @@ Profile *MyADT::search(const Profile &target) { /* Put your code here */
   unsigned int middle = (right + left) / 2;
   while (left <= right) {
     if (profiles[middle] == target) {
+      // CHANGE
+      cout << "found" << endl;
       return &profiles[middle];
     }
     if (profiles[middle] < target) {
@@ -303,6 +305,8 @@ Profile *MyADT::search(const Profile &target) { /* Put your code here */
       right = middle - 1;
     }
   }
+  // CHANGE
+  cout << "NOT FOUND" << endl;
   return nullptr;
 }
 
