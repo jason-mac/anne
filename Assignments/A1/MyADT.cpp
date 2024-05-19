@@ -141,19 +141,21 @@ bool MyADT::insert(const Profile &newElement) { /* Put your code here */
   char searchKey = newElement.getSearchKey();
   unsigned int profilesIndexKey = int(searchKey) - int('a');
   unsigned int elementCountAtSearchKey = elementCount[profilesIndexKey];
+  int insertIndex = -1;
 
-  // Check for full Profile array, return false if so
+  // Retrieve appropiate Profile array for insertion of newElement
+  Profile *profiles = elements[profilesIndexKey];
+
+  // Check for full profiles array, cannot insert into full array
   if (elementCountAtSearchKey == MAX_ELEMENTS) {
+
+    // Unsuccessful insert, return false to indicate as such
     return false;
   }
-  // Dynamically allocate memory for new array if there is no array
-  if (!elements[profilesIndexKey]) {
-    Profile *profiles = new Profile[MAX_ELEMENTS];
 
-    // Check if new operator failed, return false if so
-    if (!profiles) {
-      return false;
-    }
+  // Dynamically allocate memory if there is no array for particular searchKey
+  if (!profiles) {
+    profiles = new Profile[MAX_ELEMENTS];
 
     // Insert element into the profiles array
     profiles[0] = newElement;
@@ -161,46 +163,55 @@ bool MyADT::insert(const Profile &newElement) { /* Put your code here */
     // Store new profiles array into elements at appropiate index
     elements[profilesIndexKey] = profiles;
 
-    // Increment elementCount at appropiate index
+    // Increment elementCount for appropiate character
     elementCount[profilesIndexKey] += 1;
+
+    // Successful insert, return true
     return true;
   }
 
-  // Retrieve appropiate Profile array for insertion of newElement
-  Profile *profiles = elements[profilesIndexKey];
+  // Check if newElement exists in array and find insertion index
+  for (int i = 0; i < elementCountAtSearchKey && insertIndex == -1; i++) {
 
-  // Binary search to determine existence of newElement
-  // Also detemines index of insertion if element does not exist
-  unsigned int left = 0;
-  unsigned int right = elementCountAtSearchKey - 1;
-  while (left <= right) {
-    unsigned int middle = (left + right) / 2;
+    // Check if newElement already exists in the array
+    if (profiles[i] == newElement) {
 
-    if (profiles[middle] == newElement) {
-
-      // At this point, newElement exists in profiles array, return false to
-      // indicate insertion failure
+      // Unsuccessful insert, return false to indicate as such
       return false;
     }
-    if (profiles[middle] < newElement) {
-      left = middle + 1;
-    } else {
-      right = middle - 1;
+
+    // Due to sorted order, the first found element that is greater than
+    // newElement is the insertion index
+    if (profiles[i] > newElement) {
+      insertIndex = i;
     }
   }
 
-  // Binary search has failed to find newElement, able to insert newElement at
-  // index left Shift each element by one index before inserting newElement
-  cout << left << " left " << endl;
-  for (unsigned int i = elementCountAtSearchKey - 1; i > left; i--) {
+  // If insertIndex == -1 it implies that there was no element greater
+  // than newElement in profiles array, therefore the insertion index becomes
+  // elementCountAtSearchKey
+  if (insertIndex == -1) {
+    profiles[profilesIndexKey] = newElement;
+
+    // Increment elementCount for appropiate character
+    elementCount[profilesIndexKey] += 1;
+
+    // Successful insert, return true to indicate as such
+    return true;
+  }
+
+  // Shift each element to the right by one index before inserting newElement
+  for (unsigned int i = elementCountAtSearchKey - 1; i > insertIndex; i--) {
     profiles[i] = profiles[i - 1];
   }
 
   // Insert newElement into array
-  profiles[left] = newElement;
+  profiles[insertIndex] = newElement;
 
-  // Increment elementCount for appropiate index
+  // Increment elementCount for appropiate character
   elementCount[profilesIndexKey] += 1;
+
+  // Successful insert, return true to indicate as such
   return true;
 }
 
