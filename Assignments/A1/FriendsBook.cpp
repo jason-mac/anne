@@ -163,10 +163,9 @@ int main() {
 
     // Variables declaration
     MyADT members = MyADT(); 
-    join(members)
     bool done = false;
     char input = 0;
-    MyADT copy = members;
+    MyADT copy;
     // Keep going until the user exits
     while (not done) {
         // Print menu to stdout
