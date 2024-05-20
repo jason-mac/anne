@@ -13,8 +13,14 @@
  * key.
  *                  - Each element is unique (no duplicates).
  *
- * Author: AL and <Jason Mac>
+ * Author: AL and <put your name here>
  * Last modified on: May 2024
+ */
+
+/* *** PLEASE READ ***
+ * IGNORE THE FOLLOWING LINES IN THIS FILE:
+ * 1) // clang-format off
+ * 2) // clang-format on
  */
 
 #ifndef MyADT_H
@@ -23,6 +29,8 @@
 /*
  * You can add more #include statements, if needed.
  */
+
+// clang-format off
 
 #include "Profile.h"
 #include <string>
@@ -35,14 +43,11 @@ private:
    * but you cannot remove/change the data members below.
    * However, you can change the value "5" used to initialise MAX_ELEMENTS.
    */
-
-  constexpr static unsigned int MAX_ALPHA = 26; // 26 letters in the alphabet
-  constexpr static unsigned int MAX_ELEMENTS =
-      5; // Small capacity so can test when data collection becomes full
-         // Feel free to change this MAX_ELEMENTS value.
-  Profile *elements[MAX_ALPHA];         // MAX_ALPHA arrays of elements
-  unsigned int elementCount[MAX_ALPHA]; // Current element count in each of the
-                                        // MAX_ALPHA arrays of elements
+    constexpr static unsigned int MAX_ALPHA = 26;   // 26 letters in the alphabet 
+    constexpr static unsigned int MAX_ELEMENTS = 5; // Small capacity so can test when data collection becomes full 
+                                                    // Feel free to change this MAX_ELEMENTS value.
+    Profile * elements[MAX_ALPHA];                  // MAX_ALPHA arrays of elements 
+    unsigned int elementCount[MAX_ALPHA];           // Current element count in each of the MAX_ALPHA arrays of elements
 
   /*
    * You can add private methods to this class, if needed.
@@ -98,14 +103,14 @@ public:
   // Postcondition: MyADT reverts back to its initialization state, i.e.,
   //                the state it is in once it has been constructed (once
   //                the default constructor has executed).
-  // Time Efficiency: O(max(m for 'a', m for 'b',..., m for 'z'))
+  // Time Efficiency: O(m)
   void removeAll();
 
   // Description: Searches for target element in the data collection MyADT.
   //              Returns a pointer to the element if found, otherwise, returns
   //              nullptr.
   // Precondition: The data collection MyADT is not empty.
-  // Time Efficiency: O(m)
+  // Time Efficiency: O(max(m for 'a', m for 'b', ... , m for 'z'))
   Profile *search(const Profile &target);
 
   // Description: Prints all elements stored in the data collection MyADT in
@@ -116,3 +121,5 @@ public:
 
 }; // end MyADT
 #endif
+
+// clang-format off

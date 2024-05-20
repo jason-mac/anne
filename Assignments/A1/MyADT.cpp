@@ -17,6 +17,14 @@
  * Last modified on: May 2024
  */
 
+/* *** PLEASE READ ***
+ * IGNORE THE FOLLOWING LINES IN THIS FILE:
+ * 1) // clang-format off
+ * 2) // clang-format on
+ */
+
+// clang-format off
+
 #include "MyADT.h"   // Header file of MyADT file
 #include "Profile.h" // Header file of Profile class
 #include <cctype>
@@ -50,20 +58,17 @@ MyADT::MyADT(const MyADT &rhs) {
   // out again before you submit your Assignment 1.
 
   /* Put your code here */
-
   // Create a deep copy from rhs data collection to this instance
   for (unsigned int i = 0; i < MAX_ALPHA; i++) {
 
-    // Copy the elementCount from rhs and set each pointer in elements to
-    // nullptr
+    // Copy the elementCount from rhs and set each pointer in elements to nullptr
     elementCount[i] = rhs.elementCount[i];
     elements[i] = nullptr;
 
     // Retrieve Profile array for particular character from rhs to copy
     Profile *rhsProfiles = rhs.elements[i];
 
-    // Checks if rhsProfiles has has been dynamically allocated, if so, deep
-    // copy the elements
+    // Checks if rhsProfiles has has been dynamically allocated, if so, deep copy the elements
     if (rhsProfiles) {
 
       // Dynamically allocate a new profile array for deep copy
@@ -105,7 +110,7 @@ MyADT::~MyADT() {
 }
 
 // Description: Returns the total number of elements currently stored in the
-// data collection MyADT.
+//              data collection MyADT.
 unsigned int MyADT::getElementCount() const {
   /* Put your code here */
   unsigned int totalElementCount = 0;
@@ -125,7 +130,9 @@ unsigned int MyADT::getElementCount() const {
 // Postcondition: newElement inserted, MyADT's class invariants are still true
 //                and the appropriate elementCount has been incremented.
 // Time Efficiency: O(m)
-bool MyADT::insert(const Profile &newElement) { /* Put your code here */
+bool MyADT::insert(const Profile &newElement) { 
+
+  /* Put your code here */
 
   // Get search key for elements array and element counts for search key
   unsigned int elementsIndexKey = newElement.getSearchKey() - 'a';
@@ -146,14 +153,13 @@ bool MyADT::insert(const Profile &newElement) { /* Put your code here */
   // Dynamically allocate memory if there is no array for particular searchKey
   if (!profiles) {
     profiles = new Profile[MAX_ELEMENTS];
+
     // Insert element into the profiles array
     profiles[0] = newElement;
+    elementCount[elementsIndexKey] += 1;
 
     // Store new profiles array into elements at appropiate index
     elements[elementsIndexKey] = profiles;
-
-    // Increment elementCount for appropiate character
-    elementCount[elementsIndexKey] += 1;
 
     // Successful insert, return true
     return true;
@@ -163,8 +169,7 @@ bool MyADT::insert(const Profile &newElement) { /* Put your code here */
   // Due to ascending sorted order, the first element found that is greater than
   // newElement is the insertion index, thus whenever
   // newElement > profiles[insertIndex], the insertion index has been found
-  while (insertIndex < elementCountAtIndex &&
-         profiles[insertIndex] < newElement) {
+  while (insertIndex < elementCountAtIndex && profiles[insertIndex] < newElement) {
 
     if (profiles[insertIndex] == newElement) {
       // Unsuccessful insert, element already exists, return false
@@ -172,7 +177,6 @@ bool MyADT::insert(const Profile &newElement) { /* Put your code here */
     }
     insertIndex++;
   }
-
   // Shift each element to the right to make space for newElement
   for (unsigned int i = elementCountAtIndex; i > insertIndex; i--) {
     profiles[i] = profiles[i - 1];
@@ -194,7 +198,10 @@ bool MyADT::insert(const Profile &newElement) { /* Put your code here */
 // are still true
 //                and the appropriate elementCount is decremented.
 // Time Efficiency: O(n)
-bool MyADT::remove(const Profile &toBeRemoved) { /* Put your code here */
+bool MyADT::remove(const Profile &toBeRemoved) { 
+
+  /* Put your code here */
+
   // Get search key for elements array and element counts for search key
   unsigned int elementsIndexKey = toBeRemoved.getSearchKey() - 'a';
   unsigned int elementCountAtIndex = elementCount[elementsIndexKey];
@@ -259,6 +266,7 @@ bool MyADT::remove(const Profile &toBeRemoved) { /* Put your code here */
 //                the default constructor has executed).
 // Time Efficiency: O(max(m for 'a', m for 'b',..., m for 'z')))
 void MyADT::removeAll() {
+
   /* Put your code here */
 
   // Loop through each Profile array in elements
@@ -284,15 +292,17 @@ void MyADT::removeAll() {
 //              nullptr.
 // Precondition: The data collection MyADT is not empty.
 // Time Efficiency: O(m)
-Profile *MyADT::search(const Profile &target) { /* Put your code here */
-  bool found = false;
-  Profile *toReturn = nullptr;
+Profile *MyADT::search(const Profile &target) { 
+
+  /* Put your code here */
+
   unsigned int elementsIndexKey = target.getSearchKey() - 'a';
   unsigned int elementCountAtIndex = elementCount[elementsIndexKey];
   Profile *profiles = elements[elementsIndexKey];
+  bool found = false;
+  Profile *toReturn = nullptr;
 
-  // If the profiles array is empty, return nullptr since the target cannot
-  // exist
+  // If the profiles array is empty, return nullptr since the target cannot exist
   if (!profiles) {
     return toReturn;
   }
@@ -300,6 +310,8 @@ Profile *MyADT::search(const Profile &target) { /* Put your code here */
   // For loop to search for target in the profiles array
   for (unsigned int i = 0; i < elementCountAtIndex && !found; i++) {
     if (profiles[i] == target) {
+
+      // Update return variable to a reference of the found object
       toReturn = &profiles[i];
       found = true;
     }
@@ -312,7 +324,10 @@ Profile *MyADT::search(const Profile &target) { /* Put your code here */
 // ascending order of search key.
 // ***For Testing Purposes - Not part of this class' public interface.***
 // Time Efficiency: O(m)
-void MyADT::print() { /* Put your code here */
+void MyADT::print() { 
+
+  /* Put your code here */
+
   for (unsigned int i = 0; i < MAX_ALPHA; i++) {
     if (!elements[i])
       continue;
@@ -323,3 +338,4 @@ void MyADT::print() { /* Put your code here */
 }
 
 //  End of implementation file
+//  clang-format on
