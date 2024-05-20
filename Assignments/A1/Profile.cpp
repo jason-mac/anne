@@ -117,7 +117,6 @@ void Profile::setBirthday(const string aBirthday) {
 bool Profile::operator==(const Profile &rhs) {
 
   // Compare both Profile objects
-  cout << this->userName << " " << rhs.getUserName() << endl;
   return (this->userName == rhs.getUserName());
 }
 
