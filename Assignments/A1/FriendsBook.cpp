@@ -392,6 +392,8 @@ int main() {
 
     // Destructor test will automatically be invoked at the end of main
     std::cout << "Destructor test will occur at the end of the program.\n";
+
+    testMyADT();
     return 0;
 }
 // clang-format on 
