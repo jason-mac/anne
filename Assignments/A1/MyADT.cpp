@@ -168,8 +168,8 @@ bool MyADT::insert(const Profile &newElement) {
   // Check if newElement exists in array and find insertion index
   // Due to ascending sorted order, the first element found that is greater than
   // newElement is the insertion index, thus whenever
-  // newElement > profiles[insertIndex], the insertion index has been found
-  while (insertIndex < elementCountAtIndex && profiles[insertIndex] < newElement) {
+  // profiles[insertIndex] > newElement, the insertion index has been found
+  while (insertIndex < elementCountAtIndex && !(profiles[insertIndex] > newElement)) {
 
     if (profiles[insertIndex] == newElement) {
       // Unsuccessful insert, element already exists, return false
@@ -218,25 +218,21 @@ bool MyADT::remove(const Profile &toBeRemoved) {
   // Retrieve appropiate profiles array from elements
   Profile *profiles = elements[elementsIndexKey];
 
-  // Searches for toBeRemoved in profiles array and shifts elements by one index
-  // to the left if found
+  // Searches for toBeRemoved in profiles array and shifts elements by one index to the left if found
   for (unsigned int i = 0; i < elementCountAtIndex; i++) {
     if (profiles[i] == toBeRemoved) {
 
-      // Decrement element count as toBeRemoved has been found and will be
-      // removed
+      // Decrement element count as toBeRemoved has been found and will be removed
       elementCount[elementsIndexKey] -= 1;
 
-      // Indicates toBeRemoved has been found in order to begin shifting of
-      // elements for removal
+      // Indicates toBeRemoved has been found to begin shifting of elements
       found = true;
 
       // For report of successfull removal
       hasBeenRemoved = true;
     }
 
-    // If toBeRemoved was found, shift elements to the left and overwrites
-    // toBeRemoved
+    // If toBeRemoved was found, shift elements to the left and overwrites toBeRemoved
     if (found && i != elementCountAtIndex - 1) {
       profiles[i] = profiles[i + 1];
     }
