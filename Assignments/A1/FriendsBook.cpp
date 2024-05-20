@@ -194,6 +194,7 @@ int main() {
         }
     }
     MyADT adtcopy = members;
+    adtcopy.insert(Profile());
     members.removeAll();
     
     cout << "print out copy after everything we've done to members";
