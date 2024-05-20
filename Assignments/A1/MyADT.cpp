@@ -329,10 +329,10 @@ void MyADT::print() {
   /* Put your code here */
 
   for (unsigned int i = 0; i < MAX_ALPHA; i++) {
-    if (!elements[i])
-      continue;
-    for (unsigned int j = 0; j < elementCount[i]; j++) {
-      cout << elements[i][j];
+    if (elements[i]) {
+      for (unsigned int j = 0; j < elementCount[i]; j++) {
+        cout << elements[i][j];
+      }
     }
   }
 }

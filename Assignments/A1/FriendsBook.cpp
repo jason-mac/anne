@@ -165,7 +165,6 @@ int main() {
     MyADT members = MyADT(); 
     bool done = false;
     char input = 0;
-    MyADT copy;
     // Keep going until the user exits
     while (not done) {
         // Print menu to stdout
@@ -195,11 +194,10 @@ int main() {
         }
         copy = members;
     }
+    MyADT copy = members;
     members.removeAll();
     
     cout << "print out copy after everything we've done to members";
-    
-  cout << " print out coy after removing all from members" << endl;
     print(copy);
 
     cout << " printing members after remove all" << endl;
