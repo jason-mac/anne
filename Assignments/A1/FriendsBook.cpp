@@ -192,13 +192,12 @@ int main() {
                       done = true; break;
             default: cout << "Not sure what you mean! Please, try again!" << endl;
         }
-        copy = members;
     }
-    MyADT copy = members;
+    MyADT adtcopy = members;
     members.removeAll();
     
     cout << "print out copy after everything we've done to members";
-    print(copy);
+    print(adtcopy);
 
     cout << " printing members after remove all" << endl;
     print(members);
