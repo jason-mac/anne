@@ -1,6 +1,6 @@
 /*
  * FriendsBook.cpp - Assignment 1
- * 
+ *
  * Class Description: Social network application.
  *
  * In this version, we use our MyADT class.
@@ -8,7 +8,7 @@
  * Author: Software developer A
  * Modified on: May 2024
  */
-
+// clang-format off
 #include <iostream>
 #include <string>
 #include <cctype>
@@ -163,9 +163,10 @@ int main() {
 
     // Variables declaration
     MyADT members = MyADT(); 
+    join(members)
     bool done = false;
     char input = 0;
-        
+    MyADT copy = members;
     // Keep going until the user exits
     while (not done) {
         // Print menu to stdout
@@ -193,8 +194,17 @@ int main() {
                       done = true; break;
             default: cout << "Not sure what you mean! Please, try again!" << endl;
         }
-
+        copy = members;
     }
+    members.removeAll();
+    
+    cout << "print out copy after everything we've done to members";
+    
+  cout << " print out coy after removing all from members" << endl;
+    print(copy);
 
+    cout << " printing members after remove all" << endl;
+    print(members);
     return 0;
 }
+// clang-format on 
