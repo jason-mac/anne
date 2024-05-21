@@ -263,7 +263,7 @@ bool MyADT::remove(const Profile &toBeRemoved) {
 // Postcondition: MyADT reverts back to its initialization state, i.e.,
 //                the state it is in once it has been constructed (once
 //                the default constructor has executed).
-// Time Efficiency: O(max(m for 'a', m for 'b',..., m for 'z')))
+// Time Efficiency: O(n)
 void MyADT::removeAll() {
 
   /* Put your code here */

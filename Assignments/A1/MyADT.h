@@ -110,7 +110,7 @@ public:
   //              Returns a pointer to the element if found, otherwise, returns
   //              nullptr.
   // Precondition: The data collection MyADT is not empty.
-  // Time Efficiency: O(max(m for 'a', m for 'b', ... , m for 'z'))
+  // Time Efficiency: O(n)
   Profile *search(const Profile &target);
 
   // Description: Prints all elements stored in the data collection MyADT in

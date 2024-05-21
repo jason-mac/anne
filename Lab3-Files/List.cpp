@@ -30,7 +30,7 @@ List::List() {}
 //              of an existing List object, passed as parameter.
 List::List(const List &lst) {
   elementCount = lst.elementCount;
-  if (!lst.head) {
+  if (lst.head) {
     Node *current = lst.head;
     Node *newNode = new Node(current->data);
     Node *previous = nullptr;
@@ -50,7 +50,7 @@ List::~List() {
   if (!head) {
     Node *previous = nullptr;
     Node *current = head;
-    while (!current) {
+    while (current) {
       current = current->next;
       previous = current;
       delete previous;
