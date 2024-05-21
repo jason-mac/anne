@@ -33,13 +33,14 @@ List::List(const List &lst) {
   if (lst.head) {
     Node *current = lst.head;
     Node *thisCurrent = new Node(current->data);
-    Node *previous = nullptr;
+    Node *newNode = nullptr;
     head = thisCurrent;
+    current = current->next;
     while (current) {
-      previous = thisCurrent;
+      newNode = new Node(current->data);
       current = current->next;
-      thisCurrent = new Node(current->data);
-      previous->next = thisCurrent;
+      thisCurrent->next = newNode;
+      thisCurrent = thisCurrent->next;
     }
   } else {
     head = nullptr;
