@@ -51,8 +51,8 @@ List::~List() {
     Node *previous = nullptr;
     Node *current = head;
     while (current) {
-      current = current->next;
       previous = current;
+      current = current->next;
       delete previous;
     }
   }
