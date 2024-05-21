@@ -30,7 +30,7 @@ void listTest() {
   cout << endl << "Does it contain {1,2,3}?" << endl;
 
   cout << endl << "Make a copy of the List object." << endl;
-  List *ls2 = ls1;
+  List *ls2 = new List(*ls1);
   cout << endl << "Print second List object." << endl;
   ls2->printList();
   cout << endl << "Does it contain {1,2,3}?" << endl;
