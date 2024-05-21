@@ -35,11 +35,12 @@ List::List(const List &lst) {
     Node *newNode = new Node(current->data);
     Node *previous = nullptr;
     head = newNode;
+    current = current->next;
     while (current) {
-      current = current->next;
       previous = newNode;
       newNode = new Node(current->data);
       previous->next = newNode;
+      current = current->next;
     }
     previous->next = nullptr;
   } else {
