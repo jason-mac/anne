@@ -32,14 +32,14 @@ List::List(const List &lst) {
   elementCount = lst.elementCount;
   if (lst.head) {
     Node *current = lst.head;
-    Node *newNode = new Node(current->data);
+    Node *thisCurrent = new Node(current->data);
     Node *previous = nullptr;
-    head = newNode;
+    head = thisCurrent;
     while (current) {
-      previous = newNode;
+      previous = thisCurrent;
       current = current->next;
-      newNode = new Node(current->data);
-      previous->next = newNode;
+      thisCurrent = new Node(current->data);
+      previous->next = thisCurrent;
     }
   } else {
     head = nullptr;
