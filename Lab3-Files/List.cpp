@@ -41,6 +41,7 @@ List::List(const List &lst) {
       newNode = new Node(current->data);
       previous->next = newNode;
     }
+    previous->next = nullptr;
   } else {
     head = nullptr;
   }
