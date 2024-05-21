@@ -17,6 +17,9 @@
  * Last modified on: May 2024
  */
 
+// TODO
+// Finish comments
+
 /* *** PLEASE READ ***
  * IGNORE THE FOLLOWING LINES IN THIS FILE:
  * 1) // clang-format off
@@ -42,8 +45,7 @@ MyADT::MyADT() {
 
   /* Put your code here */
 
-  // Initialize each pointer in elements to nullptr and set its corresponding
-  // elementCount array to 0
+  // Initialize each pointer in elements to nullptr and set its corresponding elementCount array to 0
   for (unsigned int i = 0; i < MAX_ALPHA; i++) {
     elementCount[i] = 0;
     elements[i] = nullptr;
@@ -68,7 +70,7 @@ MyADT::MyADT(const MyADT &rhs) {
     // Retrieve Profile array for particular character from rhs to copy
     Profile *rhsProfiles = rhs.elements[i];
 
-    // Checks if rhsProfiles has has been dynamically allocated, if so, deep copy the elements
+    // Checks if rhsProfiles has been dynamically allocated, if so, deep copy the elements
     if (rhsProfiles) {
 
       // Dynamically allocate a new profile array for deep copy
@@ -79,7 +81,7 @@ MyADT::MyADT(const MyADT &rhs) {
         newProfiles[j] = rhsProfiles[j];
       }
 
-      // Store deep copied profiles array into appropiate index
+      // Store deep copied profiles array into this elements appropiate index
       elements[i] = newProfiles;
     }
   }
@@ -138,11 +140,12 @@ bool MyADT::insert(const Profile &newElement) {
   unsigned int elementsIndexKey = newElement.getSearchKey() - 'a';
   unsigned int elementCountAtIndex = elementCount[elementsIndexKey];
 
+  // Retrieve appropiate Profile array for insertion of newElement
+  Profile *profiles = elements[elementsIndexKey];
+
   // Use to store insertion index of newElement into array
   unsigned int insertIndex = 0;
 
-  // Retrieve appropiate Profile array for insertion of newElement
-  Profile *profiles = elements[elementsIndexKey];
 
   // Check for full profiles array, cannot insert into full array
   if (elementCountAtIndex == MAX_ELEMENTS) {
@@ -205,6 +208,9 @@ bool MyADT::remove(const Profile &toBeRemoved) {
   // Get search key for elements array and element counts for search key
   unsigned int elementsIndexKey = toBeRemoved.getSearchKey() - 'a';
   unsigned int elementCountAtIndex = elementCount[elementsIndexKey];
+  
+  // Retrieve appropiate profiles array from elements for removal of toBeRemoved
+  Profile *profiles = elements[elementsIndexKey];
 
   bool found = false;
   bool hasBeenRemoved = false;
@@ -214,9 +220,6 @@ bool MyADT::remove(const Profile &toBeRemoved) {
   if (elementCountAtIndex == 0) {
     return hasBeenRemoved;
   }
-
-  // Retrieve appropiate profiles array from elements
-  Profile *profiles = elements[elementsIndexKey];
 
   // Searches for toBeRemoved in profiles array and shifts elements by one index to the left if found
   for (unsigned int i = 0; i < elementCountAtIndex; i++) {
@@ -292,9 +295,13 @@ Profile *MyADT::search(const Profile &target) {
 
   /* Put your code here */
 
+  // Get search key
   unsigned int elementsIndexKey = target.getSearchKey() - 'a';
   unsigned int elementCountAtIndex = elementCount[elementsIndexKey];
+
+  // Retrieve appropiate profiles array for searching target
   Profile *profiles = elements[elementsIndexKey];
+
   bool found = false;
   Profile *toReturn = nullptr;
 
@@ -319,7 +326,7 @@ Profile *MyADT::search(const Profile &target) {
 // Description: Prints all elements stored in the data collection MyADT in
 // ascending order of search key.
 // ***For Testing Purposes - Not part of this class' public interface.***
-// Time Efficiency: O(m)
+// Time Efficiency: O(n)
 void MyADT::print() { 
 
   /* Put your code here */
@@ -335,3 +342,4 @@ void MyADT::print() {
 
 //  End of implementation file
 //  clang-format on
+
