@@ -61,7 +61,6 @@ List::~List() {
       previous = current;
       current = current->next;
       cout << "before delete" << endl;
-      delete previous;
     }
   }
 }
