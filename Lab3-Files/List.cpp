@@ -60,6 +60,7 @@ List::~List() {
       cout << previous->data << " previous " << endl;
       previous = current;
       current = current->next;
+      cout << "before delete" << endl;
       delete previous;
     }
   }
