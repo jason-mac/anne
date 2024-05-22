@@ -52,6 +52,7 @@ List::~List() {
   // You need to write this!
   cout << "hi" << endl;
   if (head) {
+    cout << " head " << endl;
     Node *previous = nullptr;
     Node *current = head;
     while (current) {
