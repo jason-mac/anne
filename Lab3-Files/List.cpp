@@ -57,10 +57,11 @@ List::~List() {
     Node *current = head;
     cout << " here " << endl;
     while (current) {
-      cout << previous->data << " previous " << endl;
       previous = current;
+      cout << previous->data << " previous " << endl;
       current = current->next;
       cout << "before delete" << endl;
+      delete previous;
     }
   }
 }
