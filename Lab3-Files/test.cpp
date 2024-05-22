@@ -50,6 +50,9 @@ void listTest() {
   cout << endl << "If it was deep copied, it should contain: {1,2,3}." << endl;
   cout << endl;
 
+  delete ls1;
+  delete ls2;
+
   return;
 }
 int main() {
