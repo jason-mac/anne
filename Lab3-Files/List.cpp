@@ -55,6 +55,7 @@ List::~List() {
     cout << " head " << endl;
     Node *previous = nullptr;
     Node *current = head;
+    cout << " here " << endl;
     while (current) {
       cout << previous->data << " previous " << endl;
       previous = current;
