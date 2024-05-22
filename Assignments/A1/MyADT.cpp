@@ -17,9 +17,6 @@
  * Last modified on: May 2024
  */
 
-// TODO
-// Finish comments
-
 /* *** PLEASE READ ***
  * IGNORE THE FOLLOWING LINES IN THIS FILE:
  * 1) // clang-format off
@@ -200,7 +197,7 @@ bool MyADT::insert(const Profile &newElement) {
 // Postcondition: toBeRemoved (if found) is removed, MyADT's class invariants
 // are still true
 //                and the appropriate elementCount is decremented.
-// Time Efficiency: O(n)
+// Time Efficiency: O(m)
 bool MyADT::remove(const Profile &toBeRemoved) { 
 
   /* Put your code here */
@@ -244,16 +241,6 @@ bool MyADT::remove(const Profile &toBeRemoved) {
   // Note: In the loop above if toBeRemoved is found at elementCountAtIndex - 1
   // it is not overwritten but its access is removed by the decrementation of
   // the element count.
-
-  // For memory efficiency, if after removal there are no elements,
-  // delete the dyamically allocated array
-  if (elementCount[elementsIndexKey] == 0) {
-    delete[] profiles;
-
-    // Avoid dangling pointers
-    profiles = nullptr;
-    elements[elementsIndexKey] = profiles;
-  }
 
   return hasBeenRemoved;
 }

@@ -191,6 +191,22 @@ void testMyADT() {
     adt3.print();
     std::cout << std::endl;
 
+    adt3.insert(Profile("jOhnathan"));
+    adt3.insert(Profile("mclovin"));
+    cout << "printintg adt3 after inserting john" << endl;
+    adt3.print();
+    cout << "printing adt1 after making copy of adt1 through 3 " << endl;
+    adt1.print();
+    adt1.removeAll();
+    cout << "printing adt1 after deleintg all" << endl;
+    adt1.print();
+  
+    cout << "printing adt3 after deleting adt1 " << endl;
+    adt3.print();
+    cout << "attempting to insert a copied profile into adt3" << endl;
+    if(!adt3.insert(Profile("mclovin"))) {
+    cout << "COPY NOT SUCCESSFUL" << endl;
+  }
     // Insert profiles into adt2
     std::cout << "Inserting profiles into adt2:" << std::endl;
     std::cout << "Insert eve: " << adt2.insert(p5) << std::endl;

@@ -103,14 +103,14 @@ public:
   // Postcondition: MyADT reverts back to its initialization state, i.e.,
   //                the state it is in once it has been constructed (once
   //                the default constructor has executed).
-  // Time Efficiency: O(m)
+  // Time Efficiency: O(n)
   void removeAll();
 
   // Description: Searches for target element in the data collection MyADT.
   //              Returns a pointer to the element if found, otherwise, returns
   //              nullptr.
   // Precondition: The data collection MyADT is not empty.
-  // Time Efficiency: O(n)
+  // Time Efficiency: O(m)
   Profile *search(const Profile &target);
 
   // Description: Prints all elements stored in the data collection MyADT in
