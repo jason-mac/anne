@@ -71,10 +71,12 @@ int main() {
   cout << "Printing out first after inserting a new profile into second"
        << endl;
   first.print();
+  cout << endl;
   cout << "Printing out second after inserting new profile into second, "
           "should include all same profiles but with addition of zebra profile "
        << endl;
   second.print();
+  cout << endl;
   cout << "Testing out remove function" << endl;
 
   cout << "Testing remove function" << endl;
