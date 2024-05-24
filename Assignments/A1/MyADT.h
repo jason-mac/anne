@@ -1,25 +1,24 @@
+//***IGNORE***
+// clang-format off
+//***IGNORE***
+
 /*
 * MyADT.h
 *
 * Class Description: A linear data collection ADT.
 *                    Its concrete data structure (CDT) is not expandable.
-*                    This signifies that when this data collection becomes
-full,
-*                    you do not have to resize its data structure (not in this
-Assignment 1).
+*                    This signifies that when this data collection becomes full,
+*                    you do not have to resize its data structure (not in this Assignment 1).
 *
 * Class Invariant: Data collection with the following characteristics:
 *                  - This is a value-oriented data collection and
-*                    the elements are kept in ascending sort order of search
-key.
+*                    the elements are kept in ascending sort order of search key.
 *                  - Each element is unique (no duplicates).
 *
 * Author: AL and <Jason Mac>
 * Last modified on: May 2024
 */
 
-// clang-format off
- 
  
 #ifndef MyADT_H
 #define MyADT_H
@@ -84,8 +83,8 @@ public:
     //              Returns "true" when the insertion is successfull, otherwise "false".
     // Precondition: newElement must not already be in the data collection MyADT.  
     // Postcondition: newElement inserted, MyADT's class invariants are still true
-	//                and the appropriate elementCount has been incremented.
-	// Time Efficiency: O(m)
+	  //                and the appropriate elementCount has been incremented.
+    // Time Efficiency: O(m)
     bool insert(const Profile& newElement);
 
     // Description: Removes an element from the data collection MyADT. 
@@ -93,7 +92,7 @@ public:
     // Precondition: The data collection MyADT is not empty.  
     // Postcondition: toBeRemoved (if found) is removed, MyADT's class invariants are still true
     //                and the appropriate elementCount is decremented.
-	// Time Efficiency: O(m)
+	  // Time Efficiency: O(m)
     bool remove(const Profile& toBeRemoved);
 	
     // Description: Removes all elements from the data collection MyADT. 
@@ -101,12 +100,12 @@ public:
     // Postcondition: MyADT reverts back to its initialization state, i.e., 
     //                the state it is in once it has been constructed (once
     //                the default constructor has executed). 
-	// Time Efficiency: O(n)
+	  // Time Efficiency: O(n)
     void removeAll();
    
     // Description: Searches for target element in the data collection MyADT. 
     //              Returns a pointer to the element if found, otherwise, returns nullptr.
-	// Precondition: The data collection MyADT is not empty. 
+	  // Precondition: The data collection MyADT is not empty. 
     // Time Efficiency: O(m) 	
     Profile * search(const Profile& target);
     
@@ -119,4 +118,6 @@ public:
 }; // end MyADT
 #endif
 
+//***IGNORE***
 // clang-format on
+//***IGNORE***
