@@ -20,6 +20,9 @@ int main() {
           "starting with character 'j'"
        << endl;
   MyADT first;
+  cout << "Checking elementCount of first object after instantiation" << endl;
+  cout << "elemenctCount of first object is : " << first.getElementCount()
+       << endl;
   Profile p1("jason");
   Profile p2("jordan");
   Profile p3("jayz");
