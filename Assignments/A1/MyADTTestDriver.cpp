@@ -25,17 +25,31 @@ int main() {
   Profile p3("jayz");
   Profile p4("jiggle");
   Profile p5("johncena");
+
   Profile p1copy = p1;
-  first.insert(p1);
+  cout << "Testing insert on MyADT first" << endl;
+  if (first.insert(p1)) {
+    cout << p1.getUserName() << " has been inserted! (Expected behaviour)"
+         << endl;
+    cout << "current elementCount for object first is: "
+         << first.getElementCount() << endl;
+  } else {
+    cout << p1.getUserName() << " could not be inserted (Unexpected behaviour)"
+         << endl;
+  }
+  cout << endl;
+
   first.insert(p2);
   first.insert(p3);
   first.insert(p4);
-  cout << "Testing insert on MyADT first" << endl;
-  cout << "Testing if profile duplicates can be inserted" << endl;
+  cout << "Testing if profile duplicates can be inserted by inserting "
+          "Profile('jason'), into data collection again"
+       << endl;
   if (first.insert(p1copy)) {
-    cout << "Inserted profile copy" << endl;
+    cout << "Inserted profile copy (Unexpected behaviour)" << endl;
   } else {
-    cout << "Attmempt of insertion of same profile failed" << endl;
+    cout << "Attmempt of insertion of same profile failed (Expected behaviour)"
+         << endl;
   }
   first.insert(p5);
   cout << "Printing out first ADT instance (5 profiles with username starting "
