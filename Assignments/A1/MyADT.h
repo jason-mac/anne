@@ -35,6 +35,7 @@ key.
 class MyADT {
 
 private:
+  void deleteAll();
 
 /* 
  * You can add more data members (attributes) to this class, if needed,
@@ -84,7 +85,7 @@ public:
     // Precondition: newElement must not already be in the data collection MyADT.  
     // Postcondition: newElement inserted, MyADT's class invariants are still true
 	//                and the appropriate elementCount has been incremented.
-	// Time Efficiency: 
+	// Time Efficiency: O(m)
     bool insert(const Profile& newElement);
 
     // Description: Removes an element from the data collection MyADT. 
@@ -92,7 +93,7 @@ public:
     // Precondition: The data collection MyADT is not empty.  
     // Postcondition: toBeRemoved (if found) is removed, MyADT's class invariants are still true
     //                and the appropriate elementCount is decremented.
-	// Time Efficiency: 
+	// Time Efficiency: O(m)
     bool remove(const Profile& toBeRemoved);
 	
     // Description: Removes all elements from the data collection MyADT. 
@@ -100,18 +101,18 @@ public:
     // Postcondition: MyADT reverts back to its initialization state, i.e., 
     //                the state it is in once it has been constructed (once
     //                the default constructor has executed). 
-	// Time Efficiency: 
+	// Time Efficiency: O(n)
     void removeAll();
    
     // Description: Searches for target element in the data collection MyADT. 
     //              Returns a pointer to the element if found, otherwise, returns nullptr.
 	// Precondition: The data collection MyADT is not empty. 
-    // Time Efficiency: 	
+    // Time Efficiency: O(m) 	
     Profile * search(const Profile& target);
     
     // Description: Prints all elements stored in the data collection MyADT in ascending order of search key.
     // ***For Testing Purposes - Not part of this class' public interface.***
-    // Time Efficiency: 
+    // Time Efficiency: O(n)
 	void print();
    
 

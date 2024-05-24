@@ -209,27 +209,19 @@ bool MyADT::remove(const Profile &toBeRemoved) {
   // Retrieve appropiate profiles array from elements for removal of toBeRemoved
   Profile *profiles = elements[elementsIndexKey];
 
+  // for report of removal and condition variable to shift elements
   bool found = false;
-  bool hasBeenRemoved = false;
 
-  // Checks for empty array, and returns false as toBeRemoved cannot exist in
-  // empty array
-  if (elementCountAtIndex == 0) {
-    return hasBeenRemoved;
+  // Checks if profiles array does not exist, if so, returns false as toBeRemoved cannot exist
+  if (!profiles) {
+    return found;
   }
 
   // Searches for toBeRemoved in profiles array and shifts elements by one index to the left if found
   for (unsigned int i = 0; i < elementCountAtIndex; i++) {
     if (profiles[i] == toBeRemoved) {
-
-      // Decrement element count as toBeRemoved has been found and will be removed
-      elementCount[elementsIndexKey] -= 1;
-
       // Indicates toBeRemoved has been found to begin shifting of elements
       found = true;
-
-      // For report of successfull removal
-      hasBeenRemoved = true;
     }
 
     // If toBeRemoved was found, shift elements to the left and overwrites toBeRemoved
@@ -242,7 +234,12 @@ bool MyADT::remove(const Profile &toBeRemoved) {
   // it is not overwritten but its access is removed by the decrementation of
   // the element count.
 
-  return hasBeenRemoved;
+  // decrement elementCount as toBeRemoved was found and removed
+  if(found) {
+    elementCount[elementsIndexKey] -= 1;
+  }
+
+  return found;
 }
 
 // Description: Removes all elements from the data collection MyADT.
@@ -261,14 +258,14 @@ void MyADT::removeAll() {
     // Check if the Profile array at index i has been dynamically allocated
     if (elements[i]) {
 
-      // Delete the dynamically allocated memory
+      // Delete the dynamically allocated array 
       delete[] elements[i];
 
       // Set the pointer to nullptr to avoid dangling pointers
       elements[i] = nullptr;
     }
 
-    // Reset the element count for this index
+    // Reset the element count for this character 
     elementCount[i] = 0;
   }
 }
@@ -292,7 +289,7 @@ Profile *MyADT::search(const Profile &target) {
   bool found = false;
   Profile *toReturn = nullptr;
 
-  // If the profiles array is empty, return nullptr since the target cannot exist
+  // Check if profiles array does not exist, if so, return nullptr since the target cannot exist
   if (!profiles) {
     return toReturn;
   }
@@ -301,7 +298,7 @@ Profile *MyADT::search(const Profile &target) {
   for (unsigned int i = 0; i < elementCountAtIndex && !found; i++) {
     if (profiles[i] == target) {
 
-      // Update return variable to a reference of the found object
+      // Update return variable once target has been found 
       toReturn = &profiles[i];
       found = true;
     }
