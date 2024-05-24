@@ -68,7 +68,8 @@ int main() {
   cout << "Printing out first after inserting a new profile into second"
        << endl;
   first.print();
-  cout << "Printing out second after inserting new profile into second (should "
+  cout << "Printing out second after inserting new profile into second, "
+          "include all same profiles but with addition of zebra profile(should "
           "be different than first if copy constructor was implemented "
           "correctly!)"
        << endl;
