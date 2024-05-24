@@ -50,6 +50,7 @@ int main() {
     cout << "Failed to insert past MAX_ELEMENTS capacity for character j"
          << endl;
   }
+  cout << endl;
   cout << "Testing copy constructor by making a new object MyADT second = first"
        << endl;
   MyADT second = first;
@@ -60,6 +61,7 @@ int main() {
           "constructor)"
        << endl;
   second.print();
+  cout << endl;
   cout << "Inserting a new profile into second" << endl;
   if (second.insert(Profile("zebra"))) {
     cout << "Profile('zebra') has been inserted into second!" << endl;
