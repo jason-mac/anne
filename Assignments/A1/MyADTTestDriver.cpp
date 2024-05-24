@@ -50,7 +50,8 @@ int main() {
     cout << "Failed to insert past MAX_ELEMENTS capacity for character j"
          << endl;
   }
-  cout << "Testing copy constructor by making MyADT second = first" << endl;
+  cout << "Testing copy constructor by making a new object MyADT second = first"
+       << endl;
   MyADT second = first;
   cout << "Printing out first object" << endl;
   first.print();
@@ -69,8 +70,7 @@ int main() {
        << endl;
   first.print();
   cout << "Printing out second after inserting new profile into second, "
-          "include all same profiles but with addition of zebra profile "
-          "Testing copy constructor"
+          "should include all same profiles but with addition of zebra profile "
        << endl;
   second.print();
   cout << "Testing out remove function" << endl;
