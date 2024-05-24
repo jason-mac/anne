@@ -1,30 +1,22 @@
 /*
- * MyADT.cpp
- *
- * Class Description: A linear data collection ADT.
- *                    Its concrete data structure (CDT) is not expandable.
- *                    This signifies that when this data collection becomes
- *                    full, you do not have to resize its data structure (not in
- *                    this Assignment 1).
- /*
- * MyADT.h
- *
- * Class Description: A linear data collection ADT.
- *                    Its concrete data structure (CDT) is not expandable.
- *                    This signifies that when this data collection becomes
- full,
- *                    you do not have to resize its data structure (not in this
- Assignment 1).
- *
- * Class Invariant: Data collection with the following characteristics:
- *                  - This is a value-oriented data collection and
- *                    the elements are kept in ascending sort order of search
- key.
- *                  - Each element is unique (no duplicates).
- *
- * Author: AL and <put your name here>
- * Last modified on: May 2024
- */
+* MyADT.h
+*
+* Class Description: A linear data collection ADT.
+*                    Its concrete data structure (CDT) is not expandable.
+*                    This signifies that when this data collection becomes
+full,
+*                    you do not have to resize its data structure (not in this
+Assignment 1).
+*
+* Class Invariant: Data collection with the following characteristics:
+*                  - This is a value-oriented data collection and
+*                    the elements are kept in ascending sort order of search
+key.
+*                  - Each element is unique (no duplicates).
+*
+* Author: AL and <Jason Mac>
+* Last modified on: May 2024
+*/
 
 // clang-format off
  
