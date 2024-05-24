@@ -68,6 +68,7 @@ int main() {
   } else {
     cout << "Could not insert Profile('zebra') into second" << endl;
   }
+  cout << endl;
   cout << "Printing out first after inserting a new profile into second"
        << endl;
   first.print();
@@ -87,7 +88,7 @@ int main() {
   } else {
     cout << "jason has failed to be removed" << endl;
   }
-
+  cout << endl;
   cout << "Removing non-existent profile (aaaa) from first (should fail)"
        << endl;
   if (first.remove(Profile("aaaa"))) {
@@ -95,6 +96,7 @@ int main() {
   } else {
     cout << "aaaa has failed to be removed" << endl;
   }
+  cout << endl;
 
   return EXIT_SUCCESS;
 }
