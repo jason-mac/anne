@@ -75,5 +75,22 @@ int main() {
   second.print();
   cout << "Testing out remove function" << endl;
 
+  cout << "Testing remove function" << endl;
+  cout << "Removing existing profile (jason) from first (should be successful)"
+       << endl;
+  if (first.remove(Profile("jason"))) {
+    cout << "Jason has been removed!" << endl;
+  } else {
+    cout << "jason has failed to be removed" << endl;
+  }
+
+  cout << "Removing non-existent profile (aaaa) from first (should fail)"
+       << endl;
+  if (first.remove(Profile("aaaa"))) {
+    cout << "aaaa has been removed" << endl;
+  } else {
+    cout << "aaaa has failed to be removed" << endl;
+  }
+
   return EXIT_SUCCESS;
 }
