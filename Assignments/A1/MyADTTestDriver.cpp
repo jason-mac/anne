@@ -101,7 +101,7 @@ int main() {
   cout << "Removing existing profile (jason) from first (should be successful)"
        << endl;
   if (first.remove(Profile("jason"))) {
-    cout << "Jason has been removed!" << endl;
+    cout << "jason has been removed!" << endl;
   } else {
     cout << "jason has failed to be removed" << endl;
   }
@@ -128,5 +128,25 @@ int main() {
        << endl;
   first.print();
   cout << endl;
+
+  cout << "Testing out search function on second object" << endl;
+  cout << "Searching for existig profile (jordan) in second ADT" << endl;
+  if (second.search(p2)) {
+    cout << p2.getUserName()
+         << " has been found in second ADT! (Expected behaviour)" << endl;
+  } else {
+    cout << p2.getUserName()
+         << " has not been found in second ADT! (Unexpected behaviour)" << endl;
+  }
+  cout << endl;
+  const Profile fake("fake");
+  cout << "Searching for non-existent profile (fake) in second ADT" << endl;
+  if (second.search(fake) != nullptr) {
+    cout << fake.getUserName()
+         << " has been found in second ADT (Unexpected behaviour)" << endl;
+  } else
+    cout << fake.getUserName()
+         << " has not been found in second ADT (Expected behaviour)" << endl;
+
   return EXIT_SUCCESS;
 }
