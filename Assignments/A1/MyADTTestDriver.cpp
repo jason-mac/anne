@@ -98,5 +98,18 @@ int main() {
   }
   cout << endl;
 
+  cout << "Testing out removeAll() on first" << endl;
+  cout << first.getElementCount()
+       << " elemenctCount of first before calling first.removeAll()" << endl;
+  first.removeAll();
+  cout << first.getElementCount()
+       << " elemenctCount of first after calliong first.removeAll() (should be "
+          "zero!)"
+       << endl;
+  cout << "Calling first.print() after removing all elements, should print "
+          "nothing"
+       << endl;
+  first.print();
+  cout << endl;
   return EXIT_SUCCESS;
 }
