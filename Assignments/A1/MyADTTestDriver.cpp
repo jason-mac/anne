@@ -16,8 +16,10 @@ using std::endl;
 
 // Test Driver function for myadt class
 int main() {
+  cout << "Creating MyADT first object, and 5 profiles objects with username "
+          "starting with character 'j'"
+       << endl;
   MyADT first;
-  MyADT second;
   Profile p1("jason");
   Profile p2("jordan");
   Profile p3("jayz");
@@ -28,6 +30,7 @@ int main() {
   first.insert(p2);
   first.insert(p3);
   first.insert(p4);
+  cout << "Testing insert on MyADT first" << endl;
   cout << "Testing if profile duplicates can be inserted" << endl;
   if (first.insert(p1copy)) {
     cout << "Inserted profile copy" << endl;
@@ -42,9 +45,35 @@ int main() {
   cout << "Attempting to add profiles past MAX_ELEMENTS with character j"
        << endl;
   if (first.insert(Profile("j"))) {
-    cout << "Inserted past MAX_ELEMENTS capacity" << endl;
+    cout << "Inserted past MAX_ELEMENTS capacity for character j" << endl;
   } else {
-    cout << "Failed to insert past MAX_ELEMENTS capacity" << endl;
+    cout << "Failed to insert past MAX_ELEMENTS capacity for character j"
+         << endl;
   }
+  cout << "Testing copy constructor by making MyADT second = first" << endl;
+  MyADT second = first;
+  cout << "Printing out first object" << endl;
+  first.print();
+  cout << endl;
+  cout << "Printing out second object (should be same since using copy "
+          "constructor)"
+       << endl;
+  second.print();
+  cout << "Inserting a new profile into second" << endl;
+  if (second.insert(Profile("zebra"))) {
+    cout << "Profile('zebra') has been inserted into second!" << endl;
+  } else {
+    cout << "Could not insert Profile('zebra') into second" << endl;
+  }
+  cout << "Printing out first after inserting a new profile into second"
+       << endl;
+  first.print();
+  cout << "Printing out second after inserting new profile into second (should "
+          "be different than first if copy constructor was implemented "
+          "correctly!)"
+       << endl;
+  second.print();
+  cout << "Testing out remove function" << endl;
+
   return EXIT_SUCCESS;
 }
