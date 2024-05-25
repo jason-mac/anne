@@ -1,4 +1,4 @@
-//
+// clang-format off
 /*
  * MyADT.cpp
  *
@@ -17,14 +17,6 @@
  * Author: AL and <Jason Mac>
  * Last modified on: May 2024
  */
-
-/* *** PLEASE READ ***
- * IGNORE THE FOLLOWING LINES IN THIS FILE:
- * 1) // clang-format off
- * 2) // clang-format on
- */
-
-// clang-format off
 
 #include "MyADT.h"   // Header file of MyADT file
 #include "Profile.h" // Header file of Profile class
@@ -327,4 +319,3 @@ void MyADT::print() {
 
 //  End of implementation file
 //  clang-format on
-
