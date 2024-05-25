@@ -17,28 +17,9 @@ using std::string;
 // friend void makeFullADT(MyADT& adt);
 
 // Fills a MyADT object
-void makeFullADT(MyADT& adt) {
-    const int MAX_REPEATS = adt.MAX_ELEMENTS;
-    for (char ch = 'a'; ch <= 'z'; ++ch) {
-        for (int repeats = 1; repeats <= MAX_REPEATS; ++repeats) {
-            //fill constructor
-            string username(repeats, ch);
-            Profile temp(username); 
-            adt.insert(temp); 
-        }
-    }
-}
 
 // Test Driver function for MyADT class
 int main() {
-  MyADT fullADT;
-
-  // Test: Full MyADT
-  makeFullADT(fullADT);
-  cout << "Printing full MyADT object. Expecting 5 usernames per character 'a' -> 'z'" << endl;
-  fullADT.print();
-  cout << "Expecting 26 * 5 = 130 element count (MAX_ELEMENTS * MAX_ALPHA). fullADT.getElementCount() = " << fullADT.getElementCount() << endl;
-  cout << endl;
 
   // For formatting
   string dash = "----------------------------------------------------";

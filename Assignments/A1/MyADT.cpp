@@ -1,4 +1,3 @@
-// clang-format off
 /*
  * MyADT.cpp
  *
@@ -318,4 +317,3 @@ void MyADT::print() {
 }
 
 //  End of implementation file
-//  clang-format on
