@@ -18,8 +18,7 @@ using std::string;
 
 // Fills a MyADT object
 void makeFullADT(MyADT& adt) {
-    const int MAX_REPEATS = 5;
-    int insertions = adt.MAX_ELEMENTS * adt.MAX_ALPHA;
+    const int MAX_REPEATS = adt.MAX_ELEMENTS;
     for (char ch = 'a'; ch <= 'z'; ++ch) {
         for (int repeats = 1; repeats <= MAX_REPEATS; ++repeats) {
             //fill constructor
