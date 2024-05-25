@@ -1,7 +1,6 @@
 //***IGNORE***
 // clang-format off
 //***IGNORE***
-
 /*
 * MyADT.h
 *
@@ -34,7 +33,6 @@
 class MyADT {
 
 private:
-  void deleteAll();
 
 /* 
  * You can add more data members (attributes) to this class, if needed,
@@ -112,7 +110,7 @@ public:
     // Description: Prints all elements stored in the data collection MyADT in ascending order of search key.
     // ***For Testing Purposes - Not part of this class' public interface.***
     // Time Efficiency: O(n)
-  	void print();
+	void print();
    
 
 }; // end MyADT
