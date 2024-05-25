@@ -112,6 +112,9 @@ public:
     // Time Efficiency: O(n)
 	void print();
    
+  // Description: Fills the data collection of MyADT with the maximum allowed number of elements for testing purposes.
+  // ***For Testing Purposes - Not part of this class' public interface.***
+  friend void makeFullADT(MyADT&);
 
 }; // end MyADT
 #endif
