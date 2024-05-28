@@ -231,7 +231,7 @@ int main() {
   cout << "Before calling test.removeAll(), test.getElementCount() = " << test.getElementCount() << endl;
   cout << "Calling test.removeAll()... " << endl;
   test.removeAll();
-  cout << "After calling test.removeAll() (Expecting 0), test.getElementCount() = " << test.getElementCount() << endl;
+  cout << "Check getElementCount() after calling test.removeAll() (Expecting 0), test.getElementCount() = " << test.getElementCount() << endl;
   cout << endl;
 
 
