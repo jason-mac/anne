@@ -25,6 +25,35 @@
 using std::cout;
 using std::endl;
 
+void MyADT::deepCopy(const MyADT &rhs) {
+
+  for (unsigned int i = 0; i < MAX_ALPHA; i++) {
+
+    // Copy the elementCount from rhs and set each pointer in elements to
+    // nullptr
+    this->elementCount[i] = rhs.elementCount[i];
+    this->elements[i] = nullptr;
+
+    // Retrieve Profile array for particular character from rhs to copy
+    Profile *rhsProfiles = rhs.elements[i];
+
+    // Checks if rhsProfiles has been dynamically allocated, if so, deep copy
+    // the elements
+    if (rhsProfiles) {
+
+      // Dynamically allocate a new profile array for deep copy
+      Profile *newProfiles = new Profile[MAX_ELEMENTS];
+
+      // Copy each element from rhsCopy into newProfiles
+      for (unsigned int j = 0; j < elementCount[i]; j++) {
+        newProfiles[j] = rhsProfiles[j];
+      }
+
+      // Store deep copied profiles array into this elements appropiate index
+      this->elements[i] = newProfiles;
+    }
+  }
+}
 // Default constructor.
 MyADT::MyADT() {
   // cout << "MyADT::default constructor executed!" << endl;   // For testing
@@ -51,32 +80,7 @@ MyADT::MyADT(const MyADT &rhs) {
 
   /* Put your code here */
   // Create a deep copy from rhs data collection to this instance
-  for (unsigned int i = 0; i < MAX_ALPHA; i++) {
-
-    // Copy the elementCount from rhs and set each pointer in elements to
-    // nullptr
-    elementCount[i] = rhs.elementCount[i];
-    elements[i] = nullptr;
-
-    // Retrieve Profile array for particular character from rhs to copy
-    Profile *rhsProfiles = rhs.elements[i];
-
-    // Checks if rhsProfiles has been dynamically allocated, if so, deep copy
-    // the elements
-    if (rhsProfiles) {
-
-      // Dynamically allocate a new profile array for deep copy
-      Profile *newProfiles = new Profile[MAX_ELEMENTS];
-
-      // Copy each element from rhsCopy into newProfiles
-      for (unsigned int j = 0; j < elementCount[i]; j++) {
-        newProfiles[j] = rhsProfiles[j];
-      }
-
-      // Store deep copied profiles array into this elements appropiate index
-      elements[i] = newProfiles;
-    }
-  }
+  this->deepCopy(rhs);
 }
 
 // Overloaded assignment operator - Covered in Lab 4
@@ -336,34 +340,8 @@ ostream &operator<<(ostream &os, const MyADT &ADT) {
 }
 
 MyADT &MyADT::operator=(const MyADT &rhs) {
-  (*this).removeAll();
-
-  for (unsigned int i = 0; i < MAX_ALPHA; i++) {
-
-    // Copy the elementCount from rhs and set each pointer in elements to
-    // nullptr
-    this->elementCount[i] = rhs.elementCount[i];
-    this->elements[i] = nullptr;
-
-    // Retrieve Profile array for particular character from rhs to copy
-    Profile *rhsProfiles = rhs.elements[i];
-
-    // Checks if rhsProfiles has been dynamically allocated, if so, deep copy
-    // the elements
-    if (rhsProfiles) {
-
-      // Dynamically allocate a new profile array for deep copy
-      Profile *newProfiles = new Profile[MAX_ELEMENTS];
-
-      // Copy each element from rhsCopy into newProfiles
-      for (unsigned int j = 0; j < elementCount[i]; j++) {
-        newProfiles[j] = rhsProfiles[j];
-      }
-
-      // Store deep copied profiles array into this elements appropiate index
-      this->elements[i] = newProfiles;
-    }
-  }
+  this->removeAll();
+  this->deepCopy(rhs);
   return *this;
 }
 //  End of implementation file

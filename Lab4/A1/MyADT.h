@@ -49,6 +49,7 @@ private:
    */
 
   // Utility method(s)
+  void deepCopy(const MyADT &rhs);
 
 public:
   /*
