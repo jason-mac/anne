@@ -327,9 +327,9 @@ void MyADT::print() {
   }
 }
 ostream &operator<<(ostream &os, const MyADT &ADT) {
-  for (int i = 0; i < ADT.MAX_ALPHA; i++) {
+  for (unsigned int i = 0; i < ADT.MAX_ALPHA; i++) {
     if (ADT.elements[i]) {
-      for (int j = 0; j < ADT.elementCount[i]; j++) {
+      for (unsigned int j = 0; j < ADT.elementCount[i]; j++) {
         Profile profile = ADT.elements[i][j];
         os << profile.getUserName() << " " << profile.getName()
            << profile.getEmail() << " " << profile.getBirthday() << endl;
