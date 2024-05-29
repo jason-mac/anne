@@ -261,11 +261,34 @@ int main() {
   //testing operator =
   cout << "testing operator =" << endl;
   test = copy;
+  cout << "Printing out test object" << endl;
+  cout << dash << endl;
   cout << test;
+  cout << dash << endl;
+  cout << endl;
+
   cout << copy;
+  cout << "Printing out copy object" << endl;
+  cout << dash << endl;
+  cout << copy;
+  cout << dash << endl;
+  cout << endl;
+
   copy.insert(Profile("lmfao"));
+
   cout << test;
+  cout << "Printing out test object" << endl;
+  cout << dash << endl;
+  cout << test;
+  cout << dash << endl;
+  cout << endl;
+
   cout << copy;
+  cout << "Printing out copy object" << endl;
+  cout << dash << endl;
+  cout << copy;
+  cout << dash << endl;
+  cout << endl;
   // End of test driver
   cout << "End of MyADT test driver" << endl;
   return 0;
