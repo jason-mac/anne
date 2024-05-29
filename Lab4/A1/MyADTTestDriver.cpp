@@ -78,7 +78,7 @@ int main() {
   // Test: Print function and element count. Expecting Created Profiles to be displyaed in ascending order
   cout << "Printing out test ADT instance (Expecting 5 profiles with username starting with j)" << endl;
   cout << dash << endl;
-  test.print();
+  cout << test;
   cout << dash << endl;
   cout << endl;
   cout << "Printing element count. Expected Result: 5, test.getElementCount() = " << test.getElementCount() << endl;
@@ -112,13 +112,13 @@ int main() {
 
   cout << "Printing out test object" << endl;
   cout << dash << endl;
-  test.print();
+  cout << test;
   cout << dash << endl;
   cout << endl;
 
   cout << "Printing out copy object. Expected Result: Exact same print as test" << endl;
   cout << dash << endl;
-  copy.print();
+  cout << copy;
   cout << dash << endl;
   cout << endl;
 
@@ -145,13 +145,13 @@ int main() {
 
   cout << "Printing out test after inserting a new profile into copy and removing random from test" << endl;
   cout << dash << endl;
-  test.print();
+  cout << test;
   cout << dash << endl;
   cout << endl;
 
   cout << "Printing out copy after inserting new profile into copy and removing random from test" << endl;
   cout << dash << endl;
-  copy.print();
+  cout << copy;
   cout << dash << endl;
   cout << endl;
 
@@ -238,7 +238,7 @@ int main() {
   // Check for empty array. Expecting empty print statement for test object
   cout << "Printing after calling test.removeAll() should print no elements" << endl;
   cout << "Calling test.print()..." << endl;
-  test.print();
+  cout << test;
   cout << endl;
   cout << "See nothing?? good!" << endl;
 
@@ -248,16 +248,23 @@ int main() {
   
   cout << "Printing out test object" << endl;
   cout << dash << endl;
-  test.print();
+  cout << test;
   cout << dash << endl;
   cout << endl;
 
   cout << "Printing out copy object" << endl;
   cout << dash << endl;
-  copy.print();
+  cout << copy;
   cout << dash << endl;
   cout << endl;
 
+  //testing operator =
+  test = copy;
+  cout << test;
+  cout << copy;
+  copy.insert(Profile("lmfao"));
+  cout << test;
+  cout << copy;
   // End of test driver
   cout << "End of MyADT test driver" << endl;
   return 0;
