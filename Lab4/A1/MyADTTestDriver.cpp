@@ -259,6 +259,7 @@ int main() {
   cout << endl;
 
   //testing operator =
+  cout << "testing operator =" << endl;
   test = copy;
   cout << test;
   cout << copy;
