@@ -1,3 +1,4 @@
+// clang-format off
 /*
  * MyADT.cpp
  *
@@ -326,11 +327,13 @@ void MyADT::print() {
     }
   }
 }
+
 ostream &operator<<(ostream &os, const MyADT &ADT) {
-  for (unsigned int i = 0; i < ADT.MAX_ALPHA; i++) {
-    if (ADT.elements[i]) {
-      for (unsigned int j = 0; j < ADT.elementCount[i]; j++) {
-        Profile profile = ADT.elements[i][j];
+  for (unsigned int index = 0; index < ADT.MAX_ALPHA; index++) {
+    Profile *profiles = ADT.elements[index];
+    if (profiles) {
+      for (unsigned int element = 0; element < ADT.elementCount[index]; element++) {
+        Profile profile = profiles[element];
         os << profile.getUserName() << " " << profile.getName()
            << profile.getEmail() << " " << profile.getBirthday() << endl;
       }
@@ -344,4 +347,5 @@ MyADT &MyADT::operator=(const MyADT &rhs) {
   this->deepCopy(rhs);
   return *this;
 }
+// clang-format on
 //  End of implementation file
