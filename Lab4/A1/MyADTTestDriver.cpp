@@ -262,6 +262,7 @@ int main() {
   cout << "testing operator =" << endl;
   test = copy;
   cout << endl;
+
   cout << "Printing out test object" << endl;
   cout << dash << endl;
   cout << test;
@@ -269,23 +270,20 @@ int main() {
   cout << endl;
 
   cout << "Printing out copy object" << endl;
-  cout << copy;
   cout << dash << endl;
-  cout << copy;
+  cout << copy << endl;
   cout << dash << endl;
   cout << endl;
 
   copy.insert(Profile("lmfao"));
 
   cout << "Printing out test object" << endl;
-  cout << test;
   cout << dash << endl;
   cout << test;
   cout << dash << endl;
   cout << endl;
 
   cout << "Printing out copy object" << endl;
-  cout << copy;
   cout << dash << endl;
   cout << copy;
   cout << dash << endl;
