@@ -42,7 +42,7 @@ int main() {
   cout << "Create a valid default MyADT data collection named 'test' -> testing constructor MyADT()" << endl;
   MyADT test;
 
-  // Test: getElementCount() with default constructor
+  // Test: getElementCount() with default constructor. Expecting 0 elements
   cout << "Testing getElementCount() function with default constructor instantiated test object" << endl;
   cout << "Expected result: 0. test.getElementCount() = " << test.getElementCount() << endl;
   cout << endl;
@@ -58,7 +58,7 @@ int main() {
   // Creating an extra copy of one of the profiles for testing
   Profile p1copy = Profile(p1.getUserName());
 
-  // Test: Insert function. Expecting succesful insert
+  // Test: Insert function. Expected Result: succesful insert
   cout << "Testing insert function" << endl;
   cout << dash << endl;
   cout << "Attempting to insert " << p1.getUserName() << " into test object using test.insert()" << endl;
@@ -218,9 +218,9 @@ int main() {
   // Searching for non-existent profile. Expecting non-existent to not be found
   cout << "Searching for non-existent profile in test object. Expected Result: failure" << endl;
   if (test.search(doesNotExist) == nullptr) {
-    cout << "\t" << doesNotExist.getUserName() << " has not been found in copy ADT (Expected Result)" << endl;
-  } else {
-    cout << "\t" << doesNotExist.getUserName() << " has been found in test ADT (Unexpected Result)" << endl;
+    cout << "\t" << doesNotExist.getUserName() << " has not been found in test ADT (Expected Result)" << endl;
+  } else { //can only test if it return nullptr
+    cout << "Unexpected behaviour has occured" << endl;
   }
   cout << endl;
 
