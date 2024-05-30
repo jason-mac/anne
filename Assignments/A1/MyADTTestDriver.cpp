@@ -40,7 +40,7 @@ int main() {
   string dash = "----------------------------------------------------";
 
   // Creating test object using default constructor. 
-  cout << "Create a valid default MyADT data collection -> testing constructor MyADT()." << endl;
+  cout << "Create a valid default MyADT data collection named 'test' -> testing constructor MyADT()" << endl;
   MyADT test;
 
   // Test: getElementCount() with default constructor
@@ -57,12 +57,12 @@ int main() {
   Profile p5("johncena", "John Cena", "cantseeme@outlook.com", "April 23 1977");
 
   // Creating an extra copy of one of the profiles for testing
-  Profile p1copy = p1;
+  Profile p1copy = Profile(p1.getUserName());
 
   // Test: Insert function. Expecting succesful insert
   cout << "Testing insert function" << endl;
   cout << dash << endl;
-  cout << "Attempting to insert " << p1.getUserName() << " into test object" << endl;
+  cout << "Attempting to insert " << p1.getUserName() << " into test object using test.insert()" << endl;
   if (test.insert(p1)) {
     cout << "\t" << p1.getUserName() << " has been inserted! (Expected Result)" << endl;
     cout << "\tChecking element count after insertion, expecting 1 : test.getElementCount() = " << test.getElementCount() << endl;
@@ -84,47 +84,49 @@ int main() {
   }
   cout << endl;
   cout << "Printing current state of test object" << endl;
-  cout << "Expecting to only have " << p1.getUserName() << " in test data collection" << endl;
+  cout << "Expecting Result: Only have " << p1.getUserName() << " in test data collection, no duplication" << endl;
   printADT(test);
   
   // Insert remainder profiles
-  cout << "Inserting four more profiles with 'j' usernames..." << endl;
+  cout << "Inserting four more profiles with 'j' usernames" << endl;
   test.insert(p2);
   test.insert(p3);
   test.insert(p4);
   test.insert(p5);
   cout << endl;
 
-  // Test: Print function and element count. Expecting Created Profiles to be displyaed in ascending order
+  // Test: Print function. Expecting Created Profiles to be displyaed in ascending order
   cout << "Printing current state of test object" << endl;
-  cout << "Printing out test ADT instance (Expecting 5 profiles with username starting with j)" << endl;
+  cout << "Printing out test ADT instance. Expecting 5 profiles with username starting with j in ascending " 
+       << "alphabetical order" << endl;
   printADT(test);
   cout << "Printing element count. Expected Result: 5, test.getElementCount() = " << test.getElementCount() << endl;
   cout << endl;
   
-  // Test: Insert beyond MAX_ELEMENTS. Expecting failure insert
+  // Test: Insert beyond MAX_ELEMENTS, where MAX_ELEMENTS = 5. Expecting failure insert
   Profile extraJ("jupitr");
-  cout << "Attempting to add profiles past MAX_ELEMENTS with character j..." << endl;
+  cout << "MAX_ELEMENTS for the profiles array is: 5" << endl;
+  cout << "Attempting to insert " << extraJ.getUserName() << "profile, past MAX_ELEMENTS with character j" << endl;
+  cout << "Expecting failure" << endl;
   if (test.insert(extraJ)) {
     cout << "\t" << "Inserted past MAX_ELEMENTS capacity for character j (Unexpected Result)" << endl;
   } else {
-    cout << "\t" << "Failed to insert past MAX_ELEMENTS capacity for character j (Expected Result)" << endl;
+    cout << "\t" << "Failed to insert " << extraJ.getUserName() << " past MAX_ELEMENTS capacity for character j (Expected Result)" << endl;
   }
   cout << endl;
-  cout << "Printing current state of test object" << endl;
-  cout << "Expecting to have 5 profiles starting with 'j', but no profile with " << extraJ.getUserName() << endl;
 
-  // Insert variety of Profiles
-  cout << "Inserting a variety of profiles into test..." << endl;
+  // Insert variety of Profiles to test other usernames other than 'j'
+  cout << "Inserting a variety of profiles into test" << endl;
   Profile p6("random");
   Profile p7("unicorn");
   test.insert(p6);
   test.insert(p7);
   cout << endl;
-  cout << "Printing current state of test object" << endl;
+  cout << "Printing current state of test object. Expecting an inclusion of new profiles in alphabetical order, but with no profile named " 
+       << extraJ.getUserName() << endl;
   printADT(test);
 
-  // Test: Copy constructor (deep copy). Expecting test and copy to not be alises of each other
+  // Test: Copy constructor (deep copy). Expecting test and copy to not be aliases of each other
   cout << "Testing copy constructor by making a new object with MyADT copy = test" << endl;
   cout << dash << endl;
   MyADT copy = test;
@@ -138,33 +140,37 @@ int main() {
   cout << "Printing out copy object. Expected Result: Exact same print as test" << endl;
   printADT(test);
 
+  cout << "Testing elementCount of test and copy. Expected Result: Same values for both" << endl;
+  cout << "test.getElementCount() = " << test.getElementCount() << ". copy.getElementCount() = " << copy.getElementCount() << endl; 
+
   // Test: Deep copy implementation. Expecting different print statements for test and copy objects
-  cout << "Inserting a new profile into copy..." << endl;
-  if (copy.insert(Profile("zebra"))) {
+  Profile zebra("zebra");
+  cout << "Inserting a new profile into copy" << endl;
+  if (copy.insert(zebra)) {
     cout << "\tProfile('zebra') has been inserted into copy! (Expected Result)" << endl;
   } else {
     cout << "\tCould not insert Profile('zebra') into copy (Unexpected Result)" << endl;
   }
 
-  cout << "Removing " << p6.getUserName() << " from test object..." << endl;
+  cout << "Removing " << p6.getUserName() << " from test object" << endl;
   if(test.remove(p6)) {
     cout << "\t" <<  p6.getUserName() << " has been removed (Expected Result)" << endl;
   } else {
     cout << "\t" << p6.getUserName() << " has not been removed (Unexpected Result)" << endl;
   }
   cout << endl;
-  cout << "Printing current state of test object. Expected Result: p6.getUserName() is not in print statement" << endl;
-  printADT(test);
 
   // Print both test and copy after modifications
   cout << "Printing out both test and copy after inserting another profile into copy and removal of a profile from test" << endl; 
-  cout << "Expected Result: copy should have the same profiles but should have zebra and random as well" << endl;
+  cout << "Expected Result: copy should have the same print but should include profiles with usernames, "  
+       << zebra.getUserName() << " " << p6.getUserName() << endl;
+  
   cout << endl;
 
   cout << "Printing out test after inserting a new profile into copy and removing random from test" << endl;
   printADT(test);
 
-  cout << "Printing out copy after inserting new profile into copy and removing random from test" << endl;
+  cout << "Printing out copy after inserting new profile into copy and removing a profile from test" << endl;
   printADT(copy);
 
 
@@ -172,9 +178,8 @@ int main() {
   cout << "Testing remove function" << endl;
   cout << dash << endl;
 
-
   // Removing existing profile. Expecting exisiting profile to be removed successfully
-  cout << "Attemping to remove " << p1.getUserName() << " from test object (should succeed)..." << endl;
+  cout << "Attemping to remove " << p1.getUserName() << " from test object using test.remove()" << endl;
   if (test.remove(p1)) {
     cout << "\t" << p1.getUserName() << " has been removed! (Expected Result)" << endl;
   } else {
@@ -187,7 +192,7 @@ int main() {
 
   // Removing non-existent profile. Expecting failure of removal of non-existent profile
   Profile doesNotExist("doesNotExist");
-  cout << "Attempting to remove non-existent profile from test (should fail)..." << endl;
+  cout << "Attempting to remove non-existent profile from test using test.remove()" << endl;
   if (test.remove(doesNotExist)) {
     cout << "\t" << doesNotExist.getUserName() << " has been removed (Unexpected Result)" << endl;
   } else {
@@ -198,20 +203,20 @@ int main() {
   cout << "Expecting same print as previous print" << endl;
  
   // Test: search function
-  cout << "Testing out search function on test object" << endl;
+  cout << "Testing search function on test object using test.search()" << endl;
   cout << dash << endl;
 
   // Searching for existing profile. Expecting existing profile to be found
-  cout << "Searching for " << p2.getUserName() << " in test object..." << endl;
+  cout << "Searching for " << p2.getUserName() << " in test object. Expecting success" << endl;
   if (test.search(p2)) {
-    cout << "\t" << p2.getUserName() << " has been found in test ADT! (Expected Result)" << endl;
+    cout << "\t" << p2.getUserName() << " has been found in test ADT (Expected Result)" << endl;
   } else {
-    cout << "\t" << p2.getUserName() << " has not been found in test ADT! (Unexpected Result)" << endl;
+    cout << "\t" << p2.getUserName() << " has not been found in test ADT (Unexpected Result)" << endl;
   }
   cout << endl;
   
   // Searching for non-existent profile. Expecting non-existent to not be found
-  cout << "Searching for non-existent profile in test object..." << endl;
+  cout << "Searching for non-existent profile in test object. Expecting failure" << endl;
   if (test.search(doesNotExist) != nullptr) {
     cout << "\t" << doesNotExist.getUserName() << " has been found in test ADT (Unexpected Result)" << endl;
   } else {
@@ -221,19 +226,18 @@ int main() {
 
 
   // Test: removeAll function
-  cout << "Testing out removeAll() on test" << endl;
+  cout << "Testing removeAll() on test" << endl;
   cout << "Before calling test.removeAll(), test.getElementCount() = " << test.getElementCount() << endl;
   cout << "Calling test.removeAll()" << endl;
   test.removeAll();
-  cout << "Check getElementCount() after calling test.removeAll() (Expecting 0), test.getElementCount() = " << test.getElementCount() << endl;
+  cout << "Check getElementCount() after calling test.removeAll(). Expecting 0. test.getElementCount() = " << test.getElementCount() << endl;
   cout << endl;
 
 
-  // Check for empty MyADT. Expecting empty print statement for test object
+  // Check for empty print on test after removing all elements
   cout << "Printing after calling test.removeAll() should print no elements" << endl;
   printADT(test);
   cout << endl;
-  cout << "See nothing?? good!" << endl;
 
   // Test: Printing final state of test and copy objects
   cout << "Final state of test and copy objects" << endl;
