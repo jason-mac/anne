@@ -26,10 +26,10 @@ using std::string;
 
 //Printing function for easier to read formatting
 void printADT(MyADT& adt) { 
-  string dash = "----------------------------------------------------";
-  cout << dash << " PRINT START" << endl;
+  string border = "====================================================";
+  cout << border << " PRINT START" << endl;
   adt.print();
-  cout << dash << " PRINT END" << endl;
+  cout << border << " PRINT END" << endl;
   cout << endl;
 }
 // Test Driver function for MyADT class
