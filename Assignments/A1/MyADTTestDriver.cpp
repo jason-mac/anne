@@ -122,6 +122,8 @@ int main() {
   Profile p9("b3234");
   test.insert(p6);
   test.insert(p7);
+  test.insert(p8);
+  test.insert(p9);
   cout << endl;
   cout << "Printing current state of test object. Expecting an inclusion of new profiles in alphabetical order, but with no profile named " 
        << extraJ.getUserName() << endl;
