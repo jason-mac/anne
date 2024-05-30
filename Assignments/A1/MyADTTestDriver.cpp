@@ -207,8 +207,8 @@ int main() {
   }
   cout << endl;
   cout << "Printing current state of test object" << endl;
-  printADT(test);
   cout << "Expected Result: same print as previous print as no profiles were removed" << endl;
+  printADT(test);
   cout << endl;
 
   // Removing profiles from test for easier to read print 
