@@ -1,12 +1,13 @@
 // clang-format off
 /* MyADTTestDriver.cpp - Assignment 1 Part 2 
  * 
- * Class Description: Testing our MyADT Data Collection
+ * Class Description: Testing our MyADT Class Data Collection 
  *
  * Author: Jason Mac 
  * Modified on: May 2024
  */
 #include "MyADT.h"
+#include "Profile.h"
 #include <cstdlib>
 #include <iostream>
 
@@ -15,14 +16,13 @@ using std::cout;
 using std::endl;
 using std::string;
 
-// Functions
+// Functions of MyADT class
 // Profile * search(const Profile& target);
 // void print();
 // void removeAll();
 // bool remove(const Profile& toBeRemoved);
 // bool insert(const Profile& newElement);
 // unsigned int getElementCount() const;
-// friend void makeFullADT(MyADT& adt);
 
 //Printing function for easier to read formatting
 void printADT(MyADT& adt) { 
@@ -59,7 +59,7 @@ int main() {
   Profile p1copy = Profile(p1.getUserName());
 
   // Test: Insert function. Expected Result: succesful insert
-  cout << "TESTING INSERT FUNCTION" << endl;
+  cout << "Testing insert function" << endl;
   cout << dash << endl;
   cout << "Attempting to insert " << p1.getUserName() << " into test object using test.insert()" << endl;
   if (test.insert(p1)) {
@@ -166,15 +166,15 @@ int main() {
 
   // Print both test and copy after modifications
   cout << "Printing out both test and copy after inserting another profile into copy and removal of a profile from test" << endl; 
-  cout << "Expected Result: copy should have the profiles but should include profiles with usernames, "  
+  cout << "Expected Result: copy should have the same profiles but should include profiles with usernames, "  
        << zebra.getUserName() << " and " << p6.getUserName() << endl;
   
   cout << endl;
 
-  cout << "Printing out test after inserting a new profile into copy and removing random from test" << endl;
+  cout << "Printing out test after inserting a new profile into copy and removing a profile from test" << endl;
   printADT(test);
 
-  cout << "Printing out copy after inserting new profile into copy and removing a profile from test" << endl;
+  cout << "Printing out copy after inserting a new profile into copy and removing a profile from test" << endl;
   printADT(copy);
 
 
@@ -189,6 +189,7 @@ int main() {
   } else {
     cout << "\t" << p1.getUserName() << " has failed to be removed (Unexpected Result)" << endl;
   }
+
   cout << endl;
   cout << "Printing current state of test object" << endl;
   cout << "Expected Result: " << p1.getUserName() << " to not be a part of print statement" << endl;
