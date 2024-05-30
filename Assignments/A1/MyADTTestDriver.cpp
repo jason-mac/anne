@@ -24,8 +24,7 @@ using std::string;
 // unsigned int getElementCount() const;
 // friend void makeFullADT(MyADT& adt);
 
-// Fills a MyADT object
-
+//Printing function for easier to read formatting
 void printADT(MyADT& adt) { 
   string dash = "----------------------------------------------------";
   cout << dash << " START" << endl;
@@ -84,7 +83,7 @@ int main() {
   }
   cout << endl;
   cout << "Printing current state of test object" << endl;
-  cout << "Expecting Result: Only have " << p1.getUserName() << " in test data collection, no duplication" << endl;
+  cout << "Expected Result: Only have " << p1.getUserName() << " in test data collection, no duplication" << endl;
   printADT(test);
   
   // Insert remainder profiles
@@ -107,7 +106,7 @@ int main() {
   Profile extraJ("jupitr");
   cout << "MAX_ELEMENTS for the profiles array is: 5" << endl;
   cout << "Attempting to insert " << extraJ.getUserName() << "profile, past MAX_ELEMENTS with character j" << endl;
-  cout << "Expecting failure" << endl;
+  cout << "Expected Result: failure" << endl;
   if (test.insert(extraJ)) {
     cout << "\t" << "Inserted past MAX_ELEMENTS capacity for character j (Unexpected Result)" << endl;
   } else {
@@ -118,7 +117,7 @@ int main() {
   // Insert variety of Profiles to test other usernames other than 'j'
   cout << "Inserting a variety of profiles into test" << endl;
   Profile p6("random");
-  Profile p7("unicorn");
+  Profile p7("davidGoggins");
   test.insert(p6);
   test.insert(p7);
   cout << endl;
@@ -142,6 +141,7 @@ int main() {
 
   cout << "Testing elementCount of test and copy. Expected Result: Same values for both" << endl;
   cout << "test.getElementCount() = " << test.getElementCount() << ". copy.getElementCount() = " << copy.getElementCount() << endl; 
+  cout << endl;
 
   // Test: Deep copy implementation. Expecting different print statements for test and copy objects
   Profile zebra("zebra");
@@ -162,8 +162,8 @@ int main() {
 
   // Print both test and copy after modifications
   cout << "Printing out both test and copy after inserting another profile into copy and removal of a profile from test" << endl; 
-  cout << "Expected Result: copy should have the same print but should include profiles with usernames, "  
-       << zebra.getUserName() << " " << p6.getUserName() << endl;
+  cout << "Expected Result: copy should have the profiles but should include profiles with usernames, "  
+       << zebra.getUserName() << " and " << p6.getUserName() << endl;
   
   cout << endl;
 
@@ -179,7 +179,7 @@ int main() {
   cout << dash << endl;
 
   // Removing existing profile. Expecting exisiting profile to be removed successfully
-  cout << "Attemping to remove " << p1.getUserName() << " from test object using test.remove()" << endl;
+  cout << "Attemping to remove " << p1.getUserName() << " from test object using test.remove(). Expected Result: success" << endl;
   if (test.remove(p1)) {
     cout << "\t" << p1.getUserName() << " has been removed! (Expected Result)" << endl;
   } else {
@@ -187,12 +187,12 @@ int main() {
   }
   cout << endl;
   cout << "Printing current state of test object" << endl;
-  cout << "Expecting " << p1.getUserName() << " to not be a part of print statement" << endl;
+  cout << "Expected Result: " << p1.getUserName() << " to not be a part of print statement" << endl;
   printADT(test);
 
   // Removing non-existent profile. Expecting failure of removal of non-existent profile
   Profile doesNotExist("doesNotExist");
-  cout << "Attempting to remove non-existent profile from test using test.remove()" << endl;
+  cout << "Attempting to remove non-existent profile from test using test.remove(). Expected Result: failure" << endl;
   if (test.remove(doesNotExist)) {
     cout << "\t" << doesNotExist.getUserName() << " has been removed (Unexpected Result)" << endl;
   } else {
@@ -200,15 +200,15 @@ int main() {
   }
   cout << endl;
   cout << "Printing current state of test object" << endl;
-  cout << "Expecting same print as previous print" << endl;
+  cout << "Expected Result: same print as previous print" << endl;
  
   // Test: search function
   cout << "Testing search function on test object using test.search()" << endl;
   cout << dash << endl;
 
   // Searching for existing profile. Expecting existing profile to be found
-  cout << "Searching for " << p2.getUserName() << " in test object. Expecting success" << endl;
-  if (test.search(p2)) {
+  cout << "Searching for " << p2.getUserName() << " in test object. Expected Result: success" << endl;
+  if (*test.search(p2) == p2) {
     cout << "\t" << p2.getUserName() << " has been found in test ADT (Expected Result)" << endl;
   } else {
     cout << "\t" << p2.getUserName() << " has not been found in test ADT (Unexpected Result)" << endl;
@@ -216,26 +216,26 @@ int main() {
   cout << endl;
   
   // Searching for non-existent profile. Expecting non-existent to not be found
-  cout << "Searching for non-existent profile in test object. Expecting failure" << endl;
-  if (test.search(doesNotExist) != nullptr) {
-    cout << "\t" << doesNotExist.getUserName() << " has been found in test ADT (Unexpected Result)" << endl;
-  } else {
+  cout << "Searching for non-existent profile in test object. Expected Result: failure" << endl;
+  if (test.search(doesNotExist) == nullptr) {
     cout << "\t" << doesNotExist.getUserName() << " has not been found in copy ADT (Expected Result)" << endl;
+  } else {
+    cout << "\t" << doesNotExist.getUserName() << " has been found in test ADT (Unexpected Result)" << endl;
   }
   cout << endl;
 
 
   // Test: removeAll function
   cout << "Testing removeAll() on test" << endl;
-  cout << "Before calling test.removeAll(), test.getElementCount() = " << test.getElementCount() << endl;
-  cout << "Calling test.removeAll()" << endl;
+  cout << "\tBefore calling test.removeAll(), test.getElementCount() = " << test.getElementCount() << endl;
+  cout << "\tCalling test.removeAll()" << endl;
   test.removeAll();
-  cout << "Check getElementCount() after calling test.removeAll(). Expecting 0. test.getElementCount() = " << test.getElementCount() << endl;
+  cout << "\tCheck getElementCount() after calling test.removeAll(). Expected Result: 0. test.getElementCount() = " << test.getElementCount() << endl;
   cout << endl;
 
 
   // Check for empty print on test after removing all elements
-  cout << "Printing after calling test.removeAll() should print no elements" << endl;
+  cout << "Printing after calling test.removeAll(). Expected Result: no elements displayed" << endl;
   printADT(test);
   cout << endl;
 
