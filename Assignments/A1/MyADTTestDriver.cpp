@@ -206,10 +206,12 @@ int main() {
   }
   cout << endl;
   cout << "Printing current state of test object" << endl;
+  printADT(test);
   cout << "Expected Result: same print as previous print" << endl;
+  cout << endl;
 
   // Removing profiles from test for easier to read print 
-  cout << "Removing some profiles from test object" << endl;
+  cout << "Removing some profiles from test object for easier reading" << endl;
   test.remove(p4);
   test.remove(p5);
   test.remove(p6);
