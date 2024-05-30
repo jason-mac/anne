@@ -59,7 +59,7 @@ int main() {
   // Creating an extra copy of one of the profiles for testing
   Profile p1copy = Profile(p1.getUserName());
 
-  // Test: Insert function. Expected Result: succesful insert
+  // Test: Insert function
   cout << "Testing insert function" << endl;
   cout << dash << endl;
   cout << "Attempting to insert " << p1.getUserName() << " into test object using test.insert()" << endl;
@@ -146,7 +146,7 @@ int main() {
   printADT(test);
 
   cout << "Testing elementCount of test and copy. Expected Result: Same values for both" << endl;
-  cout << "test.getElementCount() = " << test.getElementCount() << ". copy.getElementCount() = " << copy.getElementCount() << endl; 
+  cout << "\ttest.getElementCount() = " << test.getElementCount() << ". copy.getElementCount() = " << copy.getElementCount() << endl; 
   cout << endl;
 
   // Test: Deep copy implementation. Expecting different print statements for test and copy objects
