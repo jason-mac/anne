@@ -197,7 +197,7 @@ int main() {
 
   // Removing non-existent profile. Expecting failure of removal of non-existent profile
   Profile doesNotExist("doesNotExist");
-  cout << "Attempting to remove non-existent profile from test using test.remove(). Expected Result: failure" << endl;
+  cout << "Attempting to remove " << doesNotExist.getUserName() << " profile from test using test.remove(). Expected Result: failure" << endl;
   if (test.remove(doesNotExist)) {
     cout << "\t" << doesNotExist.getUserName() << " has been removed (Unexpected Result)" << endl;
   } else {
