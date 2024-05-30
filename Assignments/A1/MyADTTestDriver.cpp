@@ -59,7 +59,7 @@ int main() {
   Profile p1copy = Profile(p1.getUserName());
 
   // Test: Insert function. Expected Result: succesful insert
-  cout << "Testing insert function" << endl;
+  cout << "TESTING INSERT FUNCTION" << endl;
   cout << dash << endl;
   cout << "Attempting to insert " << p1.getUserName() << " into test object using test.insert()" << endl;
   if (test.insert(p1)) {
@@ -79,7 +79,7 @@ int main() {
   if (test.insert(p1copy)) {
     cout << "\tDuplicate profile inserted (Unexpected Result)" << endl;
   } else {
-    cout << "\tAttmempt of insertion of duplicate profile failed (Expected Result)" << endl;
+    cout << "\tAttempt of insertion of duplicate profile failed (Expected Result)" << endl;
   }
   cout << endl;
   cout << "Printing current state of test object" << endl;
