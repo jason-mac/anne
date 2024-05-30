@@ -28,9 +28,9 @@ using std::string;
 
 void printADT(MyADT& adt) { 
   string dash = "----------------------------------------------------";
-  cout << dash << endl;
+  cout << dash << " START" << endl;
   adt.print();
-  cout << dash << endl;
+  cout << dash << " END" << endl;
   cout << endl;
 }
 // Test Driver function for MyADT class
@@ -65,7 +65,7 @@ int main() {
   cout << "Attempting to insert " << p1.getUserName() << " into test object using test.insert()" << endl;
   if (test.insert(p1)) {
     cout << "\t" << p1.getUserName() << " has been inserted! (Expected Result)" << endl;
-    cout << "\tChecking element count after insertion, expecting 1 : test.getElementCount() = " << test.getElementCount() << endl;
+    cout << "\tChecking element count after insertion. Expected Result: 1. test.getElementCount() = " << test.getElementCount() << endl;
   } else {
     cout << "\t" << p1.getUserName() << " could not be inserted (Unexpected Result)" << endl;
   }
