@@ -208,8 +208,12 @@ int main() {
 
   // Searching for existing profile. Expecting existing profile to be found
   cout << "Searching for " << p2.getUserName() << " in test object. Expected Result: success" << endl;
-  if (*test.search(p2) == p2) {
-    cout << "\t" << p2.getUserName() << " has been found in test ADT (Expected Result)" << endl;
+  if (test.search(p2) != nullptr) {
+    if(*test.search(p2) == p2) {
+      cout << "\t" << p2.getUserName() << " has been found in test ADT (Expected Result)" << endl;
+    } else {
+      cout << "\t" << p2.getUserName() << " has not been found in test ADT (Unexpected Result)" << endl;
+    }
   } else {
     cout << "\t" << p2.getUserName() << " has not been found in test ADT (Unexpected Result)" << endl;
   }
@@ -219,8 +223,8 @@ int main() {
   cout << "Searching for non-existent profile in test object. Expected Result: failure" << endl;
   if (test.search(doesNotExist) == nullptr) {
     cout << "\t" << doesNotExist.getUserName() << " has not been found in test ADT (Expected Result)" << endl;
-  } else { //can only test if it return nullptr
-    cout << "Unexpected behaviour has occured" << endl;
+  } else {
+    cout << "\t" << "A profile corresponding to " << doesNotExist.getUserName() << " has been found (Unexpected Result)" << endl;
   }
   cout << endl;
 
