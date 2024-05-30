@@ -96,8 +96,7 @@ int main() {
 
   // Test: Print function. Expecting Created Profiles to be displyaed in ascending order
   cout << "Printing current state of test object" << endl;
-  cout << "Printing out test ADT instance. Expecting 5 profiles with username starting with j in ascending " 
-       << "alphabetical order" << endl;
+  cout << "Printing out test ADT instance. Expecting 5 profiles with username starting with j in ascending order" << endl;
   printADT(test);
   cout << "Printing element count. Expected Result: 5, test.getElementCount() = " << test.getElementCount() << endl;
   cout << endl;
@@ -120,10 +119,12 @@ int main() {
   Profile p7("rANdom");
   Profile p8("b2134");
   Profile p9("b3234");
+  Profile p10("batman");
   test.insert(p6);
   test.insert(p7);
   test.insert(p8);
   test.insert(p9);
+  test.insert(p10);
   cout << endl;
   cout << "Printing current state of test object. Expecting an inclusion of new profiles in alphabetical order, but with no profile named " 
        << extraJ.getUserName() << endl;
