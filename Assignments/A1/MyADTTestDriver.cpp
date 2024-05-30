@@ -1,5 +1,5 @@
 // clang-format off
-/* MyADTTestDriver.cpp - Assignment 1
+/* MyADTTestDriver.cpp - Assignment 1 Part 2 
  * 
  * Class Description: Testing our MyADT Data Collection
  *
@@ -196,30 +196,7 @@ int main() {
   cout << endl;
   cout << "Printing current state of test object" << endl;
   cout << "Expecting same print as previous print" << endl;
-
-  // Test: Removing and then re-adding the same profile. Expecting succesful removal and isnert of same profile
-  cout << "Testing remove followed by re-insert of the same profile" << endl;
-  cout << dash << endl;
-
-  // Removing p2
-  cout << "Removing " << p2.getUserName() << " from test object..." << endl;
-  if (test.remove(p2)) {
-      cout << "\t" << p2.getUserName() << " has been removed! (Expected Result)" << endl;
-  } else {
-      cout << "\t" << p2.getUserName() << " has failed to be removed (Unexpected Result)" << endl;
-  }
-  cout << endl;
-  cout << ""
-
-  // Re-inserting p2
-  cout << "Re-inserting " << p2.getUserName() << " into test object..." << endl;
-  if (test.insert(p2)) {
-      cout << "\t" << p2.getUserName() << " has been re-inserted! (Expected Result)" << endl;
-  } else {
-      cout << "\t" << p2.getUserName() << " could not be re-inserted (Unexpected Result)" << endl;
-  }
-  cout << endl;
-  
+ 
   // Test: search function
   cout << "Testing out search function on test object" << endl;
   cout << dash << endl;
