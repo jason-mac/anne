@@ -104,8 +104,8 @@ int main() {
   
   // Test: Insert beyond MAX_ELEMENTS, where MAX_ELEMENTS = 5. Expecting failure insert
   Profile extraJ("jupitr");
-  cout << "MAX_ELEMENTS for the profiles array is: 5" << endl;
-  cout << "Attempting to insert " << extraJ.getUserName() << "profile, past MAX_ELEMENTS with character j" << endl;
+  cout << "MAX_ELEMENTS for any character, 'a' to 'z' in the profiles array is: 5" << endl;
+  cout << "Attempting to insert " << extraJ.getUserName() << " profile, past MAX_ELEMENTS with character j" << endl;
   cout << "Expected Result: failure" << endl;
   if (test.insert(extraJ)) {
     cout << "\t" << "Inserted past MAX_ELEMENTS capacity for character j (Unexpected Result)" << endl;
