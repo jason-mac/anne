@@ -116,8 +116,10 @@ int main() {
 
   // Insert variety of Profiles to test other usernames other than 'j'
   cout << "Inserting a variety of profiles into test" << endl;
-  Profile p6("random");
-  Profile p7("davidGoggins");
+  Profile p6("rAndom");
+  Profile p7("rANdom");
+  Profile p8("b2134");
+  Profile p9("b3234");
   test.insert(p6);
   test.insert(p7);
   cout << endl;
