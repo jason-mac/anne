@@ -126,7 +126,7 @@ int main() {
   test.insert(p9);
   test.insert(p10);
   cout << endl;
-  cout << "Printing current state of test object. Expecting an inclusion of new profiles in alphabetical order, but with no profile named " 
+  cout << "Printing current state of test object. Expecting an inclusion of new profiles in ascending order, but with no profile named " 
        << extraJ.getUserName() << endl;
   printADT(test);
 
