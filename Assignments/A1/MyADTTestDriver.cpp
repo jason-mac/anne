@@ -34,6 +34,7 @@ void printADT(MyADT& adt) {
 }
 // Test Driver function for MyADT class
 int main() {
+  cout << "Testing MyADT Class" << endl;
 
   // For formatting
   string dash = "----------------------------------------------------";
