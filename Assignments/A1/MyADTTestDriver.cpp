@@ -109,6 +109,7 @@ int main() {
   cout << "Expected Result: Failed insertion" << endl;
   if (test.insert(extraJ)) {
     cout << "\t" << "Insertion past MAX_ELEMENTS capacity for character j has been successful (Unexpected Result)" << endl;
+    cout << "\t Check test.elementCount. Expected Result: 5. test.getElementCount() = " << test.getElementCount() << endl;
   } else {
     cout << "\t" << "Insertion past MAX_ELEMENTS capacity for character j has failed (Expected Result)" << endl;
   }
