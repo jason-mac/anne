@@ -132,58 +132,6 @@ int main() {
        << extraJ.getUserName() << endl;
   printADT(test);
 
-  // Test: Copy constructor (deep copy). Expecting test and copy to NOT be aliases of each other
-  cout << "Testing copy constructor by making a new object with MyADT copy = test" << endl;
-  cout << dash << endl;
-  MyADT copy = test;
-  cout << "Calling MyADT copy = test" << endl;
-  cout << "A deep copy of test has been instantiated" << endl;
-  cout << endl;
-
-  cout << "Printing out test object for comparison to copy object" << endl;
-  printADT(test);
-
-  cout << "Printing out copy object. Expected Result: Exact same print as test" << endl;
-  printADT(test);
-
-  // Check for equal element count amongst copy and test
-  cout << "Testing elementCount of test and copy. Expected Result: Same values for both" << endl;
-  cout << "\ttest.getElementCount() = " << test.getElementCount() << ". copy.getElementCount() = " << copy.getElementCount(); 
-  if(test.getElementCount() == copy.getElementCount()) {
-    cout << " (Expected Result)" << endl;
-  } else {
-    cout << " (Unexpected Result)" << endl;
-  }
-  cout << endl;
-
-  // Test: Deep copy implementation. Expecting different print statements for test and copy objects
-  cout << "Testing the deep copy implementation by removing a profile from test and inserting a new proifle into copy " 
-       << "and checking respective print statements" << endl;
-  Profile zebra("zebra");
-  cout << "Inserting a new profile into copy" << endl;
-  copy.insert(zebra);
-  cout << "\tA new proilfe with username, " << zebra.getUserName() << ", has been inserted into copy object" << endl;
-  cout << endl;
-
-  cout << "Removing a profile from test object" << endl;
-  test.remove(p6);
-  cout << "\tProfile, " << p6.getUserName() << ", has been removed from test object" << endl;
-  cout << endl;
-
-  // Print both test and copy after modifications
-  cout << "Printing out both test and copy after inserting another profile into copy and removal of a profile from test" << endl; 
-  cout << "Expected Result: copy should have the same profiles but should include profiles with usernames, "  
-       << zebra.getUserName() << " and " << p6.getUserName() << endl;
-  
-  cout << endl;
-
-  cout << "Printing out test after inserting a new profile into copy and removing a profile from test" << endl;
-  printADT(test);
-
-  cout << "Printing out copy after inserting a new profile into copy and removing a profile from test" << endl;
-  printADT(copy);
-
-
   // Test: Remove function
   cout << "Testing remove function" << endl;
   cout << dash << endl;
@@ -251,7 +199,56 @@ int main() {
     cout << "\t" << "A profile corresponding to " << doesNotExist.getUserName() << " has been found (Unexpected Result)" << endl;
   }
   cout << endl;
+  // Test: Copy constructor (deep copy). Expecting test and copy to NOT be aliases of each other
+  cout << "Testing copy constructor by making a new object with MyADT copy = test" << endl;
+  cout << dash << endl;
+  MyADT copy = test;
+  cout << "Calling MyADT copy = test" << endl;
+  cout << "A deep copy of test has been instantiated" << endl;
+  cout << endl;
 
+  cout << "Printing out test object for comparison to copy object" << endl;
+  printADT(test);
+
+  cout << "Printing out copy object. Expected Result: Exact same print as test" << endl;
+  printADT(test);
+
+  // Check for equal element count amongst copy and test
+  cout << "Testing elementCount of test and copy. Expected Result: Same values for both" << endl;
+  cout << "\ttest.getElementCount() = " << test.getElementCount() << ". copy.getElementCount() = " << copy.getElementCount(); 
+  if(test.getElementCount() == copy.getElementCount()) {
+    cout << " (Expected Result)" << endl;
+  } else {
+    cout << " (Unexpected Result)" << endl;
+  }
+  cout << endl;
+
+  // Test: Deep copy implementation. Expecting different print statements for test and copy objects
+  cout << "Testing the deep copy implementation by removing a profile from test and inserting a new proifle into copy " 
+       << "and checking respective print statements" << endl;
+  Profile zebra("zebra");
+  cout << "Inserting a new profile into copy" << endl;
+  copy.insert(zebra);
+  cout << "\tA new proilfe with username, " << zebra.getUserName() << ", has been inserted into copy object" << endl;
+  cout << endl;
+
+  cout << "Removing a profile from test object" << endl;
+  test.remove(p6);
+  cout << "\tProfile, " << p6.getUserName() << ", has been removed from test object" << endl;
+  cout << endl;
+
+  // Print both test and copy after modifications
+  cout << "Printing out both test and copy after inserting another profile into copy and removal of a profile from test" << endl; 
+  cout << "Expected Result: copy should have the same profiles but should include profiles with usernames, "  
+       << zebra.getUserName() << " and " << p6.getUserName() << endl;
+  
+  cout << endl;
+
+  cout << "Printing out test after inserting a new profile into copy and removing a profile from test" << endl;
+  printADT(test);
+
+  cout << "Printing out copy after inserting a new profile into copy and removing a profile from test" << endl;
+  printADT(copy);
 
   // Test: removeAll function
   cout << "Testing removeAll() on test" << endl;
@@ -260,7 +257,6 @@ int main() {
   test.removeAll();
   cout << "\tCheck getElementCount() after calling test.removeAll(). Expected Result: 0. test.getElementCount() = " << test.getElementCount() << endl;
   cout << endl;
-
 
   // Check for empty print on test after removing all elements
   cout << "Printing after calling test.removeAll(). Expected Result: no elements displayed" << endl;
