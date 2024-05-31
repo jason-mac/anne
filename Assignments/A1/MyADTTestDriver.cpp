@@ -197,8 +197,10 @@ int main() {
   cout << "Expected Result: " << p1.getUserName() << " to not be a part of print statement" << endl;
   printADT(test);
 
-  // Removing non-existent profile. Expecting failure of removal of non-existent profile
+  //Profile for testing search and remove functions
   Profile doesNotExist("doesNotExist");
+
+  // Removing non-existent profile. Expecting failure of removal of non-existent profile
   cout << "Attempting to remove " << doesNotExist.getUserName() << " profile from test using test.remove(). Expected Result: failure" << endl;
   if (test.remove(doesNotExist)) {
     cout << "\t" << doesNotExist.getUserName() << " has been removed (Unexpected Result)" << endl;
@@ -262,7 +264,7 @@ int main() {
   cout << endl;
 
   // Test: Printing final state of test and copy objects
-  cout << "Final state of test and copy objects" << endl;
+  cout << "Final state of test and copy objects. Expected Result: Two differenet print statements" << endl;
   cout << dash << endl;
   
   cout << "Printing out test object" << endl;
