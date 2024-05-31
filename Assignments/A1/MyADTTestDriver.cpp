@@ -1,7 +1,7 @@
 // clang-format off
 /* MyADTTestDriver.cpp - Assignment 1 Part 2 
  * 
- r Class Description: Testing our MyADT Class Data Collection 
+ * Class Description: Testing our MyADT Class Data Collection 
  *
  * Author: Jason Mac 
  * Modified on: May 2024
@@ -11,6 +11,7 @@
 #include <cstdlib>
 #include <iostream>
 
+//MESSAGE: if you are reading this, I hope you have a good day :)
 
 using std::cout;
 using std::endl;
@@ -171,6 +172,7 @@ int main() {
   test.remove(p5);
   test.remove(p6);
   test.remove(p7);
+  test.remove(p8);
   cout << "Printing current state of test object after removing various profiles" << endl;
   printADT(test);
  
@@ -233,8 +235,8 @@ int main() {
   cout << endl;
 
   cout << "Removing a profile from test object" << endl;
-  test.remove(p6);
-  cout << "\tProfile, " << p6.getUserName() << ", has been removed from test object" << endl;
+  test.remove(p2);
+  cout << "\tProfile, " << p2.getUserName() << ", has been removed from test object" << endl;
   cout << endl;
 
   // Print both test and copy after modifications
