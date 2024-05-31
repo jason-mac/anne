@@ -1,7 +1,7 @@
 // clang-format off
 /* MyADTTestDriver.cpp - Assignment 1 Part 2 
  * 
- * Class Description: Testing our MyADT Class Data Collection 
+ r Class Description: Testing our MyADT Class Data Collection 
  *
  * Author: Jason Mac 
  * Modified on: May 2024
@@ -62,12 +62,12 @@ int main() {
   // Test: Insert function
   cout << "Testing insert function" << endl;
   cout << dash << endl;
-  cout << "Attempting to insert " << p1.getUserName() << " into test object using test.insert()" << endl;
+  cout << "Attempting to insert " << p1.getUserName() << " into test object using test.insert(). Expected Result: Succuessful insertion" << endl;
   if (test.insert(p1)) {
-    cout << "\t" << p1.getUserName() << " has been inserted! (Expected Result)" << endl;
+    cout << "\t" << p1.getUserName() << " has been successfully inserted! (Expected Result)" << endl;
     cout << "\tChecking element count after insertion. Expected Result: 1. test.getElementCount() = " << test.getElementCount() << endl;
   } else {
-    cout << "\t" << p1.getUserName() << " could not be inserted (Unexpected Result)" << endl;
+    cout << "\t" << p1.getUserName() << " has failed not be inserted (Unexpected Result)" << endl;
   }
   cout << endl;
   cout << "Printing current state of test object" << endl;
@@ -76,11 +76,11 @@ int main() {
   // Test: Duplicate insertion. Expecting failure of duplicate insertion
   cout << "Testing if duplicate profile can be inserted by inserting " << p1copy.getUserName() << " again" << endl;
   cout << dash << dash << endl;
-  cout << "Inserting " << p1copy.getUserName() << " into test object again... " << endl;
+  cout << "Inserting " << p1copy.getUserName() << " into test object again. Expected Result: Failed insertion" << endl;
   if (test.insert(p1copy)) {
-    cout << "\tDuplicate profile inserted (Unexpected Result)" << endl;
+    cout << "\tDuplicate profile has successfully been inserted (Unexpected Result)" << endl;
   } else {
-    cout << "\tAttempt of insertion of duplicate profile failed (Expected Result)" << endl;
+    cout << "\tDuplicate profile has failed to be inserted (Expected Result)" << endl;
   }
   cout << endl;
   cout << "Printing current state of test object" << endl;
@@ -106,16 +106,16 @@ int main() {
   Profile extraJ("jupitr");
   cout << "MAX_ELEMENTS for any character, 'a' to 'z' in the profiles array is: 5" << endl;
   cout << "Attempting to insert " << extraJ.getUserName() << " profile, past MAX_ELEMENTS with character j" << endl;
-  cout << "Expected Result: failure" << endl;
+  cout << "Expected Result: Failed insertion" << endl;
   if (test.insert(extraJ)) {
-    cout << "\t" << "Inserted past MAX_ELEMENTS capacity for character j (Unexpected Result)" << endl;
+    cout << "\t" << "Insertion past MAX_ELEMENTS capacity for character j has been successful (Unexpected Result)" << endl;
   } else {
-    cout << "\t" << "Failed to insert " << extraJ.getUserName() << " past MAX_ELEMENTS capacity for character j (Expected Result)" << endl;
+    cout << "\t" << "Insertion past MAX_ELEMENTS capacity for character j has failed (Expected Result)" << endl;
   }
   cout << endl;
 
   // Insert variety of Profiles to test other usernames other than 'j'
-  cout << "Inserting a variety of profiles into test" << endl;
+  cout << "Inserting a variety of profiles into test..." << endl;
   Profile p6("rAndom");
   Profile p7("rANdom");
   Profile p8("b2134");
@@ -127,11 +127,11 @@ int main() {
   test.insert(p9);
   test.insert(p10);
   cout << endl;
-  cout << "Printing current state of test object. Expecting an inclusion of new profiles in ascending order, but with no profile named " 
+  cout << "Printing current state of test object. Expected Result: an inclusion of new profiles in ascending order, but with no profile named " 
        << extraJ.getUserName() << endl;
   printADT(test);
 
-  // Test: Copy constructor (deep copy). Expecting test and copy to not be aliases of each other
+  // Test: Copy constructor (deep copy). Expecting test and copy to NOT be aliases of each other
   cout << "Testing copy constructor by making a new object with MyADT copy = test" << endl;
   cout << dash << endl;
   MyADT copy = test;
@@ -139,31 +139,34 @@ int main() {
   cout << "A deep copy of test has been instantiated" << endl;
   cout << endl;
 
-  cout << "Printing out test object" << endl;
+  cout << "Printing out test object for comparison to copy object" << endl;
   printADT(test);
 
   cout << "Printing out copy object. Expected Result: Exact same print as test" << endl;
   printADT(test);
 
+  // Check for equal element count amongst copy and test
   cout << "Testing elementCount of test and copy. Expected Result: Same values for both" << endl;
-  cout << "\ttest.getElementCount() = " << test.getElementCount() << ". copy.getElementCount() = " << copy.getElementCount() << endl; 
+  cout << "\ttest.getElementCount() = " << test.getElementCount() << ". copy.getElementCount() = " << copy.getElementCount(); 
+  if(test.getElementCount() == copy.getElementCount()) {
+    cout << " (Expected Result)" << endl;
+  } else {
+    cout << " (Unexpected Result)" << endl;
+  }
   cout << endl;
 
   // Test: Deep copy implementation. Expecting different print statements for test and copy objects
+  cout << "Testing the deep copy implementation by removing a profile from test and inserting a new proifle into copy " 
+       << "and checking respective print statements" << endl;
   Profile zebra("zebra");
   cout << "Inserting a new profile into copy" << endl;
-  if (copy.insert(zebra)) {
-    cout << "\tProfile('zebra') has been inserted into copy! (Expected Result)" << endl;
-  } else {
-    cout << "\tCould not insert Profile('zebra') into copy (Unexpected Result)" << endl;
-  }
+  copy.insert(zebra);
+  cout << "\tA new proilfe with username, " << zebra.getUserName() << ", has been inserted into copy object" << endl;
+  cout << endl;
 
-  cout << "Removing " << p6.getUserName() << " from test object" << endl;
-  if(test.remove(p6)) {
-    cout << "\t" <<  p6.getUserName() << " has been removed (Expected Result)" << endl;
-  } else {
-    cout << "\t" << p6.getUserName() << " has not been removed (Unexpected Result)" << endl;
-  }
+  cout << "Removing a profile from test object" << endl;
+  test.remove(p6);
+  cout << "\tProfile, " << p6.getUserName() << ", has been removed from test object" << endl;
   cout << endl;
 
   // Print both test and copy after modifications
@@ -185,7 +188,7 @@ int main() {
   cout << dash << endl;
 
   // Removing existing profile. Expecting exisiting profile to be removed successfully
-  cout << "Attemping to remove " << p1.getUserName() << " from test object using test.remove(). Expected Result: success" << endl;
+  cout << "Attemping to remove " << p1.getUserName() << " from test object using test.remove(). Expected Result: Successful removal" << endl;
   if (test.remove(p1)) {
     cout << "\t" << p1.getUserName() << " has been removed! (Expected Result)" << endl;
   } else {
@@ -201,7 +204,7 @@ int main() {
   Profile doesNotExist("doesNotExist");
 
   // Removing non-existent profile. Expecting failure of removal of non-existent profile
-  cout << "Attempting to remove " << doesNotExist.getUserName() << " profile from test using test.remove(). Expected Result: failure" << endl;
+  cout << "Attempting to remove " << doesNotExist.getUserName() << " profile from test using test.remove(). Expected Result: Failed removal" << endl;
   if (test.remove(doesNotExist)) {
     cout << "\t" << doesNotExist.getUserName() << " has been removed (Unexpected Result)" << endl;
   } else {
@@ -227,7 +230,7 @@ int main() {
   cout << dash << endl;
 
   // Searching for existing profile. Expecting existing profile to be found
-  cout << "Searching for " << p2.getUserName() << " in test object. Expected Result: success" << endl;
+  cout << "Searching for " << p2.getUserName() << " in test object. Expected Result: Successful search" << endl;
   if (test.search(p2) != nullptr) {
     if(*test.search(p2) == p2) {
       cout << "\t" << p2.getUserName() << " has been found in test ADT (Expected Result)" << endl;
@@ -240,7 +243,7 @@ int main() {
   cout << endl;
   
   // Searching for non-existent profile. Expecting non-existent to not be found
-  cout << "Searching for non-existent profile in test object. Expected Result: failure" << endl;
+  cout << "Searching for non-existent profile in test object. Expected Result: Failed search" << endl;
   if (test.search(doesNotExist) == nullptr) {
     cout << "\t" << doesNotExist.getUserName() << " has not been found in test ADT (Expected Result)" << endl;
   } else {
