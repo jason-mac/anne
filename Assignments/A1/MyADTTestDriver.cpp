@@ -33,6 +33,7 @@ void printADT(MyADT& adt) {
   cout << border << " PRINT END" << endl;
   cout << endl;
 }
+
 // Test Driver function for MyADT class
 int main() {
   cout << "Testing MyADT Class" << endl;
@@ -140,7 +141,7 @@ int main() {
   // Removing existing profile. Expecting exisiting profile to be removed successfully
   cout << "Attemping to remove " << p1.getUserName() << " from test object using test.remove(). Expected Result: Successful removal" << endl;
   if (test.remove(p1)) {
-    cout << "\t" << p1.getUserName() << " has been removed! (Expected Result)" << endl;
+    cout << "\t" << p1.getUserName() << " has successfully been removed (Expected Result)" << endl;
   } else {
     cout << "\t" << p1.getUserName() << " has failed to be removed (Unexpected Result)" << endl;
   }
@@ -181,7 +182,7 @@ int main() {
   cout << dash << endl;
 
   // Searching for existing profile. Expecting existing profile to be found
-  cout << "Searching for " << p2.getUserName() << " in test object. Expected Result: Successful search" << endl;
+  cout << "Searching for existing profile, " << p2.getUserName() << ", in test object using test.search(). Expected Result: Successful search" << endl;
   if (test.search(p2) != nullptr) {
     if(*test.search(p2) == p2) {
       cout << "\t" << p2.getUserName() << " has been found in test ADT (Expected Result)" << endl;
@@ -194,13 +195,14 @@ int main() {
   cout << endl;
   
   // Searching for non-existent profile. Expecting non-existent to not be found
-  cout << "Searching for non-existent profile in test object. Expected Result: Failed search" << endl;
+  cout << "Searching for non-existent profile, " << doesNotExist.getUserName() << ", in test object using test.search(). Expected Result: Failed search" << endl;
   if (test.search(doesNotExist) == nullptr) {
     cout << "\t" << doesNotExist.getUserName() << " has not been found in test ADT (Expected Result)" << endl;
   } else {
     cout << "\t" << "A profile corresponding to " << doesNotExist.getUserName() << " has been found (Unexpected Result)" << endl;
   }
   cout << endl;
+
   // Test: Copy constructor (deep copy). Expecting test and copy to NOT be aliases of each other
   cout << "Testing copy constructor by making a new object with MyADT copy = test" << endl;
   cout << dash << endl;
@@ -242,8 +244,7 @@ int main() {
   // Print both test and copy after modifications
   cout << "Printing out both test and copy after inserting another profile into copy and removal of a profile from test" << endl; 
   cout << "Expected Result: copy should have the same profiles but should include profiles with usernames, "  
-       << zebra.getUserName() << " and " << p2.getUserName() << endl;
-  
+       << zebra.getUserName() << " and " << p2.getUserName() << endl;  
   cout << endl;
 
   cout << "Printing out test after inserting a new profile into copy and removing a profile from test" << endl;
@@ -265,16 +266,6 @@ int main() {
   printADT(test);
   cout << endl;
 
-  // Test: Printing final state of test and copy objects
-  cout << "Final state of test and copy objects. Expected Result: Two differenet print statements" << endl;
-  cout << dash << endl;
-  
-  cout << "Printing out test object" << endl;
-  printADT(test);
-
-  cout << "Printing out copy object" << endl;
-  printADT(copy);
-  // End of test driver
   cout << "End of MyADT test driver" << endl;
   return 0;
 }
