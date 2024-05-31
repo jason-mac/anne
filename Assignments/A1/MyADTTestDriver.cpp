@@ -242,7 +242,7 @@ int main() {
   // Print both test and copy after modifications
   cout << "Printing out both test and copy after inserting another profile into copy and removal of a profile from test" << endl; 
   cout << "Expected Result: copy should have the same profiles but should include profiles with usernames, "  
-       << zebra.getUserName() << " and " << p6.getUserName() << endl;
+       << zebra.getUserName() << " and " << p2.getUserName() << endl;
   
   cout << endl;
 
