@@ -112,7 +112,7 @@ int main() {
         cout << "\t" << "Insertion past MAX_ELEMENTS capacity for character j has been successful (Unexpected Result)" << endl;
     } else {
         cout << "\t" << "Insertion past MAX_ELEMENTS capacity for character j has failed (Expected Result)" << endl;
-        cout << "\tCheck test.elementCount. Expected Result: 5. test.getElementCount() = " << test.getElementCount() << endl;
+        cout << "\tCheck test.getElementCount(). Expected Result: 5. test.getElementCount() = " << test.getElementCount() << endl;
     }
     cout << endl;
     
@@ -193,7 +193,7 @@ int main() {
     }
     cout << endl;
     
-    // Searching for non-existent profile. Expecting non-existent to not be found
+    // Searching for non-existent profile. Expecting non-existent profile to not be found
     cout << "Searching for non-existent profile, " << doesNotExist.getUserName() << ", in test object using test.search(). Expected Result: Failed search" << endl;
     if (test.search(doesNotExist) == nullptr) {
         cout << "\t" << doesNotExist.getUserName() << " has not been found in test ADT (Expected Result)" << endl;
@@ -257,11 +257,13 @@ int main() {
     cout << "\tBefore calling test.removeAll(), test.getElementCount() = " << test.getElementCount() << endl;
     cout << "\tCalling test.removeAll()" << endl;
     test.removeAll();
-    cout << "\tCheck getElementCount() after calling test.removeAll(). Expected Result: 0. test.getElementCount() = " << test.getElementCount() << endl;
+    
+    // Verify that element count is zero, corresponding to an empty data collection
+    cout << "\tCheck test.getElementCount() after calling test.removeAll(). Expected Result: 0. test.getElementCount() = " << test.getElementCount() << endl;
     cout << endl;
     
     // Check for empty print on test after removing all elements
-    cout << "Printing after calling test.removeAll(). Expected Result: no elements displayed" << endl;
+    cout << "Printing after calling test.removeAll(). Expected Result: No elements displayed" << endl;
     printADT(test);
     cout << endl;
     
