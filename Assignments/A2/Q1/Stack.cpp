@@ -25,6 +25,7 @@ void Stack::push(int element) {
   nodeToInsert->data = element;
   nodeToInsert->next = nullptr;
   if(!head) {
+    elementCount += 1;
     head = nodeToInsert;
     return;
   }
