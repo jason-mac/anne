@@ -46,6 +46,7 @@ void Stack::pop(){
   StackNode* trail = nullptr;
   StackNode* current = head;
   while(current->next) {
+    trail = current;
     current = current->next;
   }
   trail->next = nullptr;
@@ -57,13 +58,21 @@ void Stack::popAll() {
   if(isEmpty()) { return; } 
   StackNode* trail = nullptr;
   StackNode* current = head;
-  while(current->next) {
+  while(current) {
     trail = current;
     current = current->next;
     delete trail;
   }
   elementCount = 0;
   head = nullptr;
+}
+
+int Stack::peek() const {
+  StackNode* current = head;
+  while(current->next) {
+    current = current->next;
+  }
+  return current->data;
 }
 
 bool Stack::isEmpty() const {
