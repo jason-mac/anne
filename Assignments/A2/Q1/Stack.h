@@ -9,6 +9,9 @@
  * Author: Jason Mac
  * Date: May 2024
  */
+
+#ifndef STACK_H
+#define STACK_H
  
 class Stack {
 
@@ -27,19 +30,24 @@ class Stack {
 /* Put your code here! */   
 
     
+    // Description: Default Constructor
+    // Postcondition: Stack has no elements
     Stack();
+
+    // Description: Desctructor
+    // Postcondition: All nodes are deallocated from heap
     ~Stack();
 
     // Description: Adds a new element to the top of this Stack.
-    // Exception: Throws PushFailedException if push unsuccessful.
+    // Postcondition: newElement is inserted at top of the stack
     // Time Efficiency: O(n)
-    void push(int);
+    bool push(int newElement);
 
     // Description: Removes the top element of this Stack.
     // Precondition: The Stack is not empty.
-    // Exception: Throws EmptyStackException if this Stack is empty.
+    // Postconditon: Element at top to the stack is removed
     // Time Efficiency: O(n)
-    void pop();
+    bool pop();
   
     // Description: Removes all elements from this Stack.
     // Postcondition: Stack is in same state as when constructed.
@@ -58,5 +66,7 @@ class Stack {
     bool isEmpty() const;
 
 };
+
+#endif
 
 // clang-format on

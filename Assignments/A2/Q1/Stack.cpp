@@ -3,7 +3,6 @@
 
 Stack::Stack() {
   head = nullptr;
-  elementCount = 0;
 }
 
 Stack::~Stack() {
@@ -18,31 +17,30 @@ Stack::~Stack() {
   }
 }
 
-void Stack::push(int element) {
+bool Stack::push(int element) {
   // Create a new head if one has not been established
 
   StackNode* nodeToInsert = new StackNode();                  
   nodeToInsert->data = element;
   nodeToInsert->next = nullptr;
   if(!head) {
-    elementCount += 1;
     head = nodeToInsert;
-    return;
+    return true;
   }
   StackNode* current = head;
   while(current->next) {
     current = current->next;
   }
-  elementCount += 1;
   current->next = nodeToInsert;
+  return true;
 }
 
-void Stack::pop(){
-  if(isEmpty()) { return; }
+bool Stack::pop(){
+  if(isEmpty()) { return false; }
   if(head->next == nullptr) {
     delete head;
     head = nullptr;
-    return;
+    return true;
   }
   StackNode* trail = nullptr;
   StackNode* current = head;
@@ -51,8 +49,8 @@ void Stack::pop(){
     current = current->next;
   }
   trail->next = nullptr;
-  elementCount -= 1;
   delete current;
+  return true;
 }
 
 void Stack::popAll() {
@@ -64,7 +62,6 @@ void Stack::popAll() {
     current = current->next;
     delete trail;
   }
-  elementCount = 0;
   head = nullptr;
 }
 
@@ -77,6 +74,6 @@ int Stack::peek() const {
 }
 
 bool Stack::isEmpty() const {
-  return elementCount == 0;
+  return head == nullptr;
 }
 // clang-format on
