@@ -10,6 +10,9 @@
  * Date: May 2024
  */
 
+// TODO
+// 1) comments
+//
 #ifndef STACK_H
 #define STACK_H
  
@@ -25,7 +28,6 @@ class Stack {
     };
 /* Put your code here! */       
     StackNode* head = nullptr;
-    unsigned int elementCount;
   public:
 /* Put your code here! */   
 
