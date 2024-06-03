@@ -63,20 +63,17 @@ int main () {
         Token token = opstack.pop();
         Token newToken;
         newToken.tt = integer;
-        newToken.val = evaluate(num1, num2, token);
+        newToken.val = evaluate(num2, num1, token);
         numstack.push(newToken); 
       }
     } else if (t.tt == pltok || t.tt == mitok || t.tt == eof) {
       if((!opstack.isEmpty()) && ((opstack.peek().tt == pltok) || (opstack.peek().tt == mitok) || (opstack.peek().tt == asttok) || (opstack.peek().tt == slashtok))) {
-        int num1 = numstack.peek().val;
-        numstack.pop();
-        int num2 = numstack.peek().val;
-        numstack.pop();
-        Token token = opstack.peek();
-        opstack.pop();
+        int num1 = numstack.pop().val;
+        int num2 = numstack.pop().val;
+        Token token = opstack.pop();
         Token newToken;
         newToken.tt = integer;
-        newToken.val = evaluate(num1, num2, token);
+        newToken.val = evaluate(num2, num1, token);
         numstack.push(newToken); 
       } else {
         opstack.push(t);
@@ -84,15 +81,12 @@ int main () {
       }
     } else if (t.tt == asttok || t.tt == slashtok) {
       if(!opstack.isEmpty() && ((opstack.peek().tt == slashtok) || (opstack.peek().tt == asttok))) {
-        int num1 = numstack.peek().val;
-        numstack.pop();
-        int num2 = numstack.peek().val;
-        numstack.pop();
-        Token token = opstack.peek();
-        opstack.pop();
+        int num1 = numstack.pop().val;
+        int num2 = numstack.pop().val;
+        Token token = opstack.pop();
         Token newToken;
         newToken.tt = integer;
-        newToken.val = evaluate(num1, num2, token);
+        newToken.val = evaluate(num2, num1, token);
         numstack.push(newToken); 
       } else {
         opstack.push(t);
