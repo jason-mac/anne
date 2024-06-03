@@ -16,21 +16,25 @@ using std::cout;
 using std::endl;
 using std::cin;
 
-int evaluate(int num1, int num2, string op) {
-  if(op == "+") {
-    return num1 + num2;
+int evaluate(int num1, int num2, Token token) {
+  int value;
+  switch(token.tt) {
+    case pltok:
+      value = num1 + num2;
+      break;
+    case mitok:
+      value = num1 - num2;
+      break;
+    case slashtok:
+      value = num1 / num2;
+      break;
+    case asttok:
+      value = num1 * num2;
+      break;  
+    default:
+      value = -1;
   }
-  if(op == "-") {
-    return num1 - num2;
-  } 
-  if(op == "*") {
-    return num1 * num2;
-  }
-  if(op == "/") {
-    return num1 / num2;
-  }
-  cout << " return -1 " << endl;
-  return -1;
+  return value;
 }
 
 int main () {
@@ -57,24 +61,24 @@ int main () {
         numstack.pop();
         int num2 = numstack.peek().val;
         numstack.pop();
-        string op = opstack.peek().text;
+        Token token = opstack.peek();
         opstack.pop();
         Token newToken;
         newToken.tt = integer;
-        newToken.val = evaluate(num1, num2, op);
+        newToken.val = evaluate(num1, num2, token);
         numstack.push(newToken); 
       }
     } else if (t.tt == pltok || t.tt == mitok || t.tt == eof) {
-      if(!opstack.isEmpty() && (opstack.peek().tt == pltok || opstack.peek().tt == mitok || opstack.peek().tt == asttok || opstack.peek().tt == slashtok)) {
+      if((!opstack.isEmpty()) && ((opstack.peek().tt == pltok) || (opstack.peek().tt == mitok) || (opstack.peek().tt == asttok) || (opstack.peek().tt == slashtok))) {
         int num1 = numstack.peek().val;
         numstack.pop();
         int num2 = numstack.peek().val;
         numstack.pop();
-        string op = opstack.peek().text;
+        Token token = opstack.peek();
         opstack.pop();
         Token newToken;
         newToken.tt = integer;
-        newToken.val = evaluate(num1, num2, op);
+        newToken.val = evaluate(num1, num2, token);
         numstack.push(newToken); 
       } else {
         opstack.push(t);
@@ -86,11 +90,11 @@ int main () {
         numstack.pop();
         int num2 = numstack.peek().val;
         numstack.pop();
-        string op = opstack.peek().text;
+        Token token = opstack.peek();
         opstack.pop();
         Token newToken;
         newToken.tt = integer;
-        newToken.val = evaluate(num1, num2, op);
+        newToken.val = evaluate(num1, num2, token);
         numstack.push(newToken); 
       } else {
         opstack.push(t);
