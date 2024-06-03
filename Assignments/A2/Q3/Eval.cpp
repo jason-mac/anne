@@ -58,12 +58,9 @@ int main () {
         opstack.pop();
         t = S.getnext();
       } else {
-        int num1 = numstack.peek().val;
-        numstack.pop();
-        int num2 = numstack.peek().val;
-        numstack.pop();
-        Token token = opstack.peek();
-        opstack.pop();
+        int num1 = numstack.pop().val;
+        int num2 = numstack.pop().val;
+        Token token = opstack.pop();
         Token newToken;
         newToken.tt = integer;
         newToken.val = evaluate(num1, num2, token);
