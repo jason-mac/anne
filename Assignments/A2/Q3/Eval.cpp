@@ -32,6 +32,7 @@ int evaluate(int num1, int num2, Token token) {
       value = num1 / num2;
       break;
     default:
+      cout << "value = -1" << endl;
       value = -1;
   }
   return value;
