@@ -29,6 +29,7 @@ int evaluate(int num1, int num2, string op) {
   if(op == "/") {
     return num1 / num2;
   }
+  cout << " return -1 " << endl;
   return -1;
 }
 
@@ -79,7 +80,7 @@ int main () {
         opstack.push(t);
         t = S.getnext();
       }
-    } else if(t.tt == asttok || t.tt == slashtok) {
+    } else if (t.tt == asttok || t.tt == slashtok) {
       if(!opstack.isEmpty() && (opstack.peek().tt == slashtok || opstack.peek().tt == asttok)) {
         int num1 = numstack.peek().val;
         numstack.pop();
@@ -97,7 +98,7 @@ int main () {
       }
     }
   }
-  cout << numstack.peek().val << "value" << endl;
+  cout << numstack.peek().val << endl;
   cout << endl;
   // End pretty printer coding demo.
 
