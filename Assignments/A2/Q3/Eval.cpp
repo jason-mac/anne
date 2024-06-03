@@ -30,15 +30,19 @@ Token evaluate(Stack<Token>& numstack, Stack<Token>& opstack) {
   int value;
   Token op = opstack.pop();
   switch(op.tt) { 
+    // case plus
     case pltok:
       value = num2 + num1;
       break;
+    // case minus
     case mitok:
       value = num2 - num1;
       break;
+    // case multiplication
     case asttok:
       value = num2 * num1;
       break;  
+    // case division
     case slashtok:
       value = num2 / num1;
       break;
@@ -50,34 +54,13 @@ Token evaluate(Stack<Token>& numstack, Stack<Token>& opstack) {
   return newToken;
 }
 
-int oldEvaluate(int num1, int num2, Token token) {
-  int value;
-  switch(token.tt) {
-    case pltok:
-      value = num1 + num2;
-      break;
-    case mitok:
-      value = num1 - num2;
-      break;
-    case asttok:
-      value = num1 * num2;
-      break;  
-    case slashtok:
-      value = num1 / num2;
-      break;
-    default:
-      cout << "value = -1" << endl;
-      value = -1;
-  }
-  return value;
-}
+ // typedef enum { pltok, mitok, asttok, slashtok, lptok, rptok, integer, errtok, eof }
 
 int main () {
   Scanner S(cin);
   Token t;
 
   Stack<Token> numstack, opstack;  // 2x Stacks of type Token
- //  typedef enum { pltok, mitok, asttok, slashtok, lptok, rptok, integer, errtok, eof }
 
   t = S.getnext();
   while((t.tt != eof) || (!opstack.isEmpty())) {
