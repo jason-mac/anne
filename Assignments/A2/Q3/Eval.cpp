@@ -114,7 +114,6 @@ int main () {
     }
   }
   cout << numstack.peek().val << endl;
-  cout << endl;
   // End pretty printer coding demo.
 
   return 0;
