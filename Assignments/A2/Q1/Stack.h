@@ -1,5 +1,5 @@
 // clang-format off
-/* 
+/*
  * Stack.h
  *
  * Description: Implementation of a linked list-based Stack ADT class - SHSL list
@@ -9,10 +9,10 @@
  * Author: Jason Mac
  * Date: May 2024
  */
-
 // TODO
-// 1) comments
-//
+// 1) comments, look at lecture slides for function descriptions
+// 2) exhaustive testing
+// 3) throw error for peek? (check with anne or TA)
 #ifndef STACK_H
 #define STACK_H
  
@@ -47,7 +47,7 @@ class Stack {
 
     // Description: Removes the top element of this Stack.
     // Precondition: The Stack is not empty.
-    // Postconditon: Element at top to the stack is removed
+    // Postconditon: Element at top of the stack is removed
     // Time Efficiency: O(n)
     bool pop();
   
@@ -58,7 +58,6 @@ class Stack {
     // Description: Returns the top of this Stack.
     // Precondition: The Stack is not empty.
     // Postcondition: This Stack is unchanged.
-    // Exceptions: Throws EmptyStackException if this Stack is empty. ???????
     // Time Efficiency: O(n)
     int peek() const;
 
