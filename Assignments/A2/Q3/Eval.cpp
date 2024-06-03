@@ -96,8 +96,8 @@ int main () {
         t = S.getnext();
       }
     }
-    cout << numstack.peek().val << "value" << endl;
   }
+  cout << numstack.peek().val << "value" << endl;
   cout << endl;
   // End pretty printer coding demo.
 
