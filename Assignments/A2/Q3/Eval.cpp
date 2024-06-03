@@ -41,6 +41,7 @@ int main () {
 
   t = S.getnext();
   while(t.tt != eof || !opstack.isEmpty()) {
+    cout << "hi" << endl;
     if(t.tt == integer) {
       numstack.push(t);
       t = S.getnext();
