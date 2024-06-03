@@ -7,8 +7,14 @@
  * Author: Jason Mac
  * Date: May 2024 
  */
+// TODO 
+// 1) include comments that correspond to the algorithm
+// 2) clean up eveluate evaluate, abstract the operator evaluation
+// 3) make more test cases in samples
+// 4) extensive testing with more complex test cases
 
 #include <iostream>
+#include <new>
 #include "Scanner.h"
 #include "Stack.h"  // TEMPLATE STACK
 
@@ -16,7 +22,35 @@ using std::cout;
 using std::endl;
 using std::cin;
 
-int evaluate(int num1, int num2, Token token) {
+Token evaluate(Stack<Token>& numstack, Stack<Token>& opstack) {
+  Token newToken;
+  newToken.tt = integer;
+  int num1 = numstack.pop().val;
+  int num2 = numstack.pop().val;
+  int value;
+  Token op = opstack.pop();
+  switch(op.tt) { 
+    case pltok:
+      value = num2 + num1;
+      break;
+    case mitok:
+      value = num2 - num1;
+      break;
+    case asttok:
+      value = num2 * num1;
+      break;  
+    case slashtok:
+      value = num2 / num1;
+      break;
+    default:
+      cout << "value = -1" << endl;
+      value = -1;
+  }
+  newToken.val = value;
+  return newToken;
+}
+
+int oldEvaluate(int num1, int num2, Token token) {
   int value;
   switch(token.tt) {
     case pltok:
@@ -58,22 +92,12 @@ int main () {
         opstack.pop();
         t = S.getnext();
       } else {
-        int num1 = numstack.pop().val;
-        int num2 = numstack.pop().val;
-        Token token = opstack.pop();
-        Token newToken;
-        newToken.tt = integer;
-        newToken.val = evaluate(num2, num1, token);
+        Token newToken = evaluate(numstack, opstack);
         numstack.push(newToken); 
       }
     } else if (t.tt == pltok || t.tt == mitok || t.tt == eof) {
       if((!opstack.isEmpty()) && ((opstack.peek().tt == pltok) || (opstack.peek().tt == mitok) || (opstack.peek().tt == asttok) || (opstack.peek().tt == slashtok))) {
-        int num1 = numstack.pop().val;
-        int num2 = numstack.pop().val;
-        Token token = opstack.pop();
-        Token newToken;
-        newToken.tt = integer;
-        newToken.val = evaluate(num2, num1, token);
+        Token newToken = evaluate(numstack, opstack);
         numstack.push(newToken); 
       } else {
         opstack.push(t);
@@ -81,12 +105,7 @@ int main () {
       }
     } else if (t.tt == asttok || t.tt == slashtok) {
       if(!opstack.isEmpty() && ((opstack.peek().tt == slashtok) || (opstack.peek().tt == asttok))) {
-        int num1 = numstack.pop().val;
-        int num2 = numstack.pop().val;
-        Token token = opstack.pop();
-        Token newToken;
-        newToken.tt = integer;
-        newToken.val = evaluate(num2, num1, token);
+        Token newToken = evaluate(numstack, opstack);
         numstack.push(newToken); 
       } else {
         opstack.push(t);
