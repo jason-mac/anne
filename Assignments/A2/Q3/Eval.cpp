@@ -25,12 +25,12 @@ int evaluate(int num1, int num2, Token token) {
     case mitok:
       value = num1 - num2;
       break;
-    case slashtok:
-      value = num1 / num2;
-      break;
     case asttok:
       value = num1 * num2;
       break;  
+    case slashtok:
+      value = num1 / num2;
+      break;
     default:
       value = -1;
   }
@@ -45,7 +45,7 @@ int main () {
  //  typedef enum { pltok, mitok, asttok, slashtok, lptok, rptok, integer, errtok, eof }
 
   t = S.getnext();
-  while(t.tt != eof || !opstack.isEmpty()) {
+  while((t.tt != eof) || (!opstack.isEmpty())) {
     if(t.tt == integer) {
       numstack.push(t);
       t = S.getnext();
@@ -85,7 +85,7 @@ int main () {
         t = S.getnext();
       }
     } else if (t.tt == asttok || t.tt == slashtok) {
-      if(!opstack.isEmpty() && (opstack.peek().tt == slashtok || opstack.peek().tt == asttok)) {
+      if(!opstack.isEmpty() && ((opstack.peek().tt == slashtok) || (opstack.peek().tt == asttok))) {
         int num1 = numstack.peek().val;
         numstack.pop();
         int num2 = numstack.peek().val;
