@@ -46,6 +46,7 @@ DataCollection &DataCollection::operator=(const DataCollection &DC) {
   deepCopy(dummy, DC.head);
   head = dummy->next;
   delete dummy;
+  return *this;
 }
 
 // Description: Destroys a DataCollection object, releasing heap memory.
@@ -63,12 +64,12 @@ DataCollection::~DataCollection() {
 // Description: Appends "newElement" to the DataCollection.
 //              Returns true if "newElement" has been
 //              successful appended, otherwise, false.
-void DataCollection::append(int newElement) {
+bool DataCollection::append(int newElement) {
   // Put your code here!
   Node* nodeToInsert = new Node(newElement);
   if(!head) {
     head = nodeToInsert;
-    return;
+    return true;
   }
 
   Node* current = head;
@@ -76,17 +77,19 @@ void DataCollection::append(int newElement) {
     current = current->next;
   }
   current->next = nodeToInsert;
+  return true;
 }
 
 // Description: Prepends "newElement" to the DataCollection.
 //              Returns true if "newElement" has been
 //              successful appended, otherwise, false.
-void DataCollection::prepend(int newElement) {
+bool DataCollection::prepend(int newElement) {
   
   // Put your code here!
   Node* nodeToInsert = new Node(newElement);
   nodeToInsert->next = head;
   head = nodeToInsert;
+  return true;
 }
 
 // Description: Prints the content of this DataCollection "thisDC"

@@ -66,16 +66,16 @@ public:
   // Description: Appends "newElement" to the DataCollection.
   //              Returns true if "newElement" has been 
   //              successful appended, otherwise, false.
-  void append(int newElement);
+  bool append(int newElement);
 
   // Description: Prepends "newElement" to the DataCollection.
   //              Returns true if "newElement" has been 
   //              successful appended, otherwise, false.
-  void prepend(int newElement);
+  bool prepend(int newElement);
             
   // Description: Prints the content of this DataCollection "thisDC"
   //              using this format: {element1, element2, ..., elementn}.
-  friend ostream & operator<<(ostream & os, const DataCollection & thisDC); 
+  friend std::ostream & operator<<(std::ostream & os, const DataCollection & thisDC); 
 };
 #endif
 // clang-format on
