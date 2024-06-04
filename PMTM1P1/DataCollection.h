@@ -39,7 +39,7 @@ private:
     head = nullptr;
   }
 
-  void deepCopy(Node* lhs, const Node* rhs) {
+  void deepCopy(Node* &lhs, const Node* rhs) {
     if(!rhs) {
       return;
     }
