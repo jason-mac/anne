@@ -33,7 +33,7 @@ DataCollection::DataCollection(const DataCollection &DC) {
 // operator
 //        in Lab 3, I invite you to overload this operator for this class.
 DataCollection &DataCollection::operator=(const DataCollection &DC) {
-  deleteAll();
+  this->deleteAll();
   if (!(DC.head)) {
     return *this;
   }

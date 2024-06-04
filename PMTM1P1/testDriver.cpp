@@ -90,6 +90,8 @@ int main () {
     newOne->append(324);
     cout << *newOne << endl;
     cout << *aDC1 << endl;
+
+    delete newOne;
 	
     delete aDC1;
     aDC1 = nullptr;
