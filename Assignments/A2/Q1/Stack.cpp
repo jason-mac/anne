@@ -30,21 +30,29 @@ Stack::~Stack() {
 // Description: Adds a new element to the top of this Stack.
 // Postcondition: newElement is inserted at top of the stack
 // Time Efficiency: O(n)
-bool Stack::push(int element) {
-  // Create a new head if one has not been established
+bool Stack::push(int newElement) {
+  // Allocate StackNode onto heap for insert
+  StackNode* nodeToPush = new StackNode();                  
+  if(!nodeToPush) {
+    //failed to allocate memory for nodeToPush, return false cannot insert
+    return false;
+  }
 
-  StackNode* nodeToInsert = new StackNode();                  
-  nodeToInsert->data = element;
-  nodeToInsert->next = nullptr;
+  nodeToPush->data = newElement;
+  nodeToPush->next = nullptr;
+
+  // If stack is empty, set head to nodeToPush
   if(!head) {
-    head = nodeToInsert;
+    head = nodeToPush;
     return true;
   }
+
   StackNode* currentNode = head;
+  // Get last node in linked list to insert nodeToPush
   while(currentNode->next) {
     currentNode = currentNode->next;
   }
-  currentNode->next = nodeToInsert;
+  currentNode->next = nodeToPush;
   return true;
 }
 
@@ -55,7 +63,7 @@ bool Stack::push(int element) {
 // Time Efficiency: O(n)
 bool Stack::pop(){
   // Unsuccessful pop, no elements were popped, return false
-  if(isEmpty()) { return false; }
+  if(!head) { return false; }
 
   // Special case when linked list contains only one element
   if(head->next == nullptr) {
@@ -94,7 +102,9 @@ bool Stack::pop(){
 // Postcondition: Stack is in same state as when constructed.
 void Stack::popAll() {
   // Early return on empty linked list, no elements to pop in empty linked list
-  if(isEmpty()) { return; } 
+  if(!head) { 
+    return; 
+  } 
 
   // Keep tracking of current working node and its previous node
   StackNode* previousNode = nullptr;
@@ -116,6 +126,11 @@ void Stack::popAll() {
 // Postcondition: This Stack is unchanged.
 // Time Efficiency: O(n)
 int Stack::peek() const {
+  if(!head) {
+    // ????????
+    // ask ta?
+    return 999999999;
+  }
   // Pointer to traverse linked list
   StackNode* currentNode = head;
 

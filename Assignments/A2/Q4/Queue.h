@@ -61,6 +61,7 @@ class Queue {
     // Postconidtion: Dynamically allocated memory is freed
     ~Queue();
 
+    // Overloaded assignment operator 
     Queue& operator = (const Queue&);
 
     // Description: Inserts newElement at the back of Queue
