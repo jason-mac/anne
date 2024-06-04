@@ -23,16 +23,10 @@ DataCollection::DataCollection() {}
 // Description: Copy constructor creates a new DataCollection object as a
 //              copy of an existing DataCollection object.
 DataCollection::DataCollection(const DataCollection &DC) {
-
-  head = nullptr;
-
-  if (DC.head != nullptr) {
-    Node *current = DC.head;
-    while (current != nullptr) {
-      this->append(current->data);
-      current = current->next;
-    }
-  }
+  Node* dummy = new Node(0);
+  deepCopy(dummy, DC.head);
+  head = dummy->next;
+  delete dummy;
 }
 
 // To do: If you have not yet implemented (overloaded) the assignment (=)
