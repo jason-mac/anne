@@ -75,6 +75,12 @@ int main () {
     aDC3->append( 6 );
 
     cout << "Content of DataCollection 3: " << *aDC3 << endl;
+    aDC1 = aDC2;
+    cout << aDC2;
+    cout << aDC1;
+    aDC2->append(123);
+    cout << aDC2;
+    cout << aDC1;
 
 	
     delete aDC1;

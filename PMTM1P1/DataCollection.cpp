@@ -15,6 +15,7 @@
 using std::cin;
 using std::cout;
 using std::endl;
+using std::ostream;
 
 // Description: Default constructor. Constructs a DataCollection object.
 DataCollection::DataCollection() {}
@@ -94,7 +95,7 @@ bool DataCollection::prepend(int newElement) {
 
 // Description: Prints the content of this DataCollection "thisDC"
 //              using this format: {element1, element2, ..., elementn}.
-std::ostream &operator<<(std::ostream &os, const DataCollection &thisDC) {
+ostream &operator<<(ostream &os, const DataCollection &thisDC) {
 
   DataCollection::Node *current = thisDC.head;
   cout << "{";
