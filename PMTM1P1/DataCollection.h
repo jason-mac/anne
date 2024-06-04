@@ -12,7 +12,7 @@
 #ifndef DATA_COLLECTION_H
 #define DATA_COLLECTION_H
 
-using std::ostream;
+#include <iostream>
 
 class DataCollection {
 
