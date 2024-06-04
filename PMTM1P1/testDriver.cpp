@@ -83,7 +83,13 @@ int main () {
     aDC2->append(123);
     cout << *aDC2 << endl;
     cout << *aDC1 << endl;
-
+    
+    DataCollection* newOne = new DataCollection(*aDC1);
+    cout << *aDC1 << endl;
+    cout << *newOne << endl;
+    newOne->append(324);
+    cout << *newOne << endl;
+    cout << *aDC1 << endl;
 	
     delete aDC1;
     aDC1 = nullptr;
