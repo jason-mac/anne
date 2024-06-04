@@ -63,25 +63,25 @@ DataCollection::~DataCollection() {
 // Description: Appends "newElement" to the DataCollection.
 //              Returns true if "newElement" has been
 //              successful appended, otherwise, false.
-bool DataCollection::append(int newElement) {
+void DataCollection::append(int newElement) {
   // Put your code here!
   Node* nodeToInsert = new Node(newElement);
   if(!head) {
     head = nodeToInsert;
-    return true;
+    return;
   }
+
   Node* current = head;
   while(current->next) {
     current = current->next;
   }
   current->next = nodeToInsert;
-  return true;
 }
 
 // Description: Prepends "newElement" to the DataCollection.
 //              Returns true if "newElement" has been
 //              successful appended, otherwise, false.
-bool DataCollection::prepend(int newElement) {
+void DataCollection::prepend(int newElement) {
   
   // Put your code here!
   Node* nodeToInsert = new Node(newElement);
@@ -91,7 +91,7 @@ bool DataCollection::prepend(int newElement) {
 
 // Description: Prints the content of this DataCollection "thisDC"
 //              using this format: {element1, element2, ..., elementn}.
-ostream &operator<<(ostream &os, const DataCollection &thisDC) {
+std::ostream &operator<<(std::ostream &os, const DataCollection &thisDC) {
 
   DataCollection::Node *current = thisDC.head;
   cout << "{";
