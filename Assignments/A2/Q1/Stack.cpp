@@ -6,19 +6,16 @@
  * Class Invariant: LIFO order
  *                  Top of Stack located at the back of SHSL list.
  *
- * Author: Jason Mac  
+ * Author: Jason Mac, and Jagyjot Parmar  
  * Date: May 2024
  */
-// TODO
-// 1) proper comments for function actions
 #include "Stack.h"
 
-// Description: Default Constructor
+// Description: Constructor
 // Postcondition: Stack has no elements
 Stack::Stack() {
   head = nullptr;
 }
-
 
 // Description: Destructor 
 // Postcondition: All nodes are deallocated from heap
@@ -27,16 +24,12 @@ Stack::~Stack() {
   this->popAll();
 }
 
-// Description: Adds a new element to the top of this Stack.
+// Description: Adds a new element to the top of this Stack. Returns true
+//              if element is pushed, false otherwise
 // Postcondition: newElement is inserted at top of the stack
-// Time Efficiency: O(n)
 bool Stack::push(int newElement) {
   // Allocate StackNode onto heap for insert
   StackNode* nodeToPush = new StackNode();                  
-  if(!nodeToPush) {
-    //failed to allocate memory for nodeToPush, return false cannot insert
-    return false;
-  }
 
   nodeToPush->data = newElement;
   nodeToPush->next = nullptr;
@@ -44,53 +37,64 @@ bool Stack::push(int newElement) {
   // If stack is empty, set head to nodeToPush
   if(!head) {
     head = nodeToPush;
+    // newElement pushed, return true
     return true;
   }
 
+  // Pointer for traversal of linked list
   StackNode* currentNode = head;
-  // Get last node in linked list to insert nodeToPush
+
+  // Get last node in linked list to insert at top of stack 
   while(currentNode->next) {
     currentNode = currentNode->next;
   }
+
+  // Insert nodeToPush into linked list, top of the stack
   currentNode->next = nodeToPush;
+
+  // newElement pushed, return true
   return true;
 }
 
 
-// Description: Removes the top element of this Stack.
+// Description: Removes the top element of this Stack. Returns true 
+//              if element is popped, false otherwise
 // Precondition: The Stack is not empty.
-// Postconditon: Element at top to the stack is removed
-// Time Efficiency: O(n)
+// Postconditon: Element at top of the stack is removed
 bool Stack::pop(){
-  // Unsuccessful pop, no elements were popped, return false
-  if(!head) { return false; }
 
-  // Special case when linked list contains only one element
+  // Return false for empty linked list, cannot remove any elements
+  if(!head) { 
+    return false;
+  }
+
+  // Special case: if stack contains only one element
   if(head->next == nullptr) {
-    // head points to the only element in the linked list, delete it
+
+    // Delete only element in the stack
     delete head;
 
-    // Avoid dangling pointers
+    // Indicate that stack is now empty by setting head to nullptr
     head = nullptr;
 
-    // Successful pop, return true;
+    // Successful pop, return true
     return true;
   }
 
-  // Keep track of current working node and the previous node
-  StackNode* previousNode = nullptr;
-  StackNode* currentNode = head;
+  // General case: Traverse to last node in linked list (top of stack)
+  StackNode* previousNode = nullptr; // Pointer to previous node 
+  StackNode* currentNode = head;     // Pointer to current node
 
-  // Retrieve last node in linked list to delete and its previous to reset the next pointer data member
+  // Traverse to last node, keeping track of the previous node  
   while(currentNode->next) {
     previousNode = currentNode;
     currentNode = currentNode->next;
   }
 
-  // Set second last node's next pointer to nullptr before deleting the last node
+  // Set second last node's next pointer to nullptr 
   previousNode->next = nullptr;
 
-  // Free memory
+  // Delete the last node (top element of the stack)
   delete currentNode;
   currentNode = nullptr;
 
@@ -99,14 +103,14 @@ bool Stack::pop(){
 }
 
 // Description: Removes all elements from this Stack.
-// Postcondition: Stack is in same state as when constructed.
+// Postcondition: Stack is in same state as when constructed with default constructor
 void Stack::popAll() {
-  // Early return on empty linked list, no elements to pop in empty linked list
+  // Early return if linked list is empty
   if(!head) { 
     return; 
   } 
 
-  // Keep tracking of current working node and its previous node
+  // Keep track of current working node and its previous node
   StackNode* previousNode = nullptr;
   StackNode* currentNode = head;
 
@@ -117,36 +121,35 @@ void Stack::popAll() {
     delete previousNode;
   }
 
-  // Avoid dangling pointers
+  // Set head to nullptr to indicate stack is empty
   head = nullptr;
 }
 
 // Description: Returns the top of this Stack.
 // Precondition: The Stack is not empty.
 // Postcondition: This Stack is unchanged.
-// Time Efficiency: O(n)
 int Stack::peek() const {
-  if(!head) {
-    // ????????
-    // ask ta?
-    return 999999999;
+  if(isEmpty()) {
+    // Return random number if head is null
+    return 99;
   }
+
   // Pointer to traverse linked list
   StackNode* currentNode = head;
 
-  // Traverse through linked list until reaching the last node
+  // Traverse through linked list until reaching the last node (top of the stack)
   while(currentNode->next) {
     currentNode = currentNode->next;
   }
 
-  // return the data as desired
+  // Return data of node at top of stack
   return currentNode->data;
 }
 
 // Description: Returns true if this Stack is empty otherwise false.
 // Postcondition: This Stack is unchanged.
-// Time Efficiency: O(1)
 bool Stack::isEmpty() const {
+  // Stack is empty if head is null
   return head == nullptr;
 }
 // clang-format on
