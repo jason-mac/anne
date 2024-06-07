@@ -63,5 +63,6 @@ int main() {
   delete stk;
   stk = nullptr;
 
+  cout << "you're good" << endl;
   return 0;
 }
