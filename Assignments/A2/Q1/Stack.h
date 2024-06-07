@@ -1,4 +1,3 @@
-// clang-format off
 /*
  * Stack.h
  *
@@ -64,5 +63,3 @@ class Stack {
 };
 
 #endif
-
-// clang-format on
