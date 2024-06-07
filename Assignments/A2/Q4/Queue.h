@@ -39,6 +39,14 @@ class Queue {
         elements[(frontindex + i) % capacity] = rhs.elements[(frontindex + i) % capacity]; 
       }
     }
+    int* getNewSizeArray(unsigned int newSize) {
+      int *newArray = new int[newSize];
+      for(int i = 0; i < elementCount; i++) {
+        newArray[i] = elements[(frontindex + i) % capacity];
+      } 
+      return newArray;
+    }  
+  
 
   public:
  

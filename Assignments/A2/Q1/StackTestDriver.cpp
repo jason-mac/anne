@@ -56,7 +56,9 @@ int main() {
     stk->pop();
     cout << "pop " << x << endl;
   }
+  stk->popAll();
 
+  stk->pop();
   // Release heap memory
   delete stk;
   stk = nullptr;

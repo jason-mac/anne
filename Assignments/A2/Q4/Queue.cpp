@@ -41,15 +41,12 @@ Queue& Queue::operator=(const Queue& rhs) {
 // Time Efficiency: O(1)
 void Queue::enqueue(int newElement) {
   if(elementCount == capacity) {
-    int* newArray = new int[capacity * 2];
-    for(int i = 0; i < capacity; i++) {
-      newArray[i] = elements[(frontindex + i) % capacity];
-    }
-    elementCount++;
+    int newSize = capacity * 2;
+    int* newArray = getNewSizeArray(newSize);
     delete[] elements;
     elements = newArray;
     elements[elementCount] = newElement;
-    capacity = capacity * 2;
+    elementCount++;
     frontindex = 0;
     backindex = elementCount;
     return;
@@ -66,8 +63,14 @@ void Queue::enqueue(int newElement) {
 void Queue::dequeue() {
   // Early return, no elements in data collection
   if(elementCount == 0) { return; }
-  if(elementCount - 1 < capacity / 4) {
-    int *newArray = new int[capacity / 4];
+  if(elementCount <= capacity / 4 && capacity > INITIAL_CAPACITY) {
+    int newSize = capacity / 4 > INITIAL_CAPACITY ? capacity / 4 : INITIAL_CAPACITY;
+    int* newArray = getNewSizeArray(newSize);
+    delete[] elements;
+    elementCount--;
+    frontindex = 0;
+    backindex = elementCount;
+    return;
   }
   elementCount--;
   frontindex = (frontindex + 1) % capacity;
