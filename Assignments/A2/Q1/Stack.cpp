@@ -13,9 +13,7 @@
 
 // Description: Constructor
 // Postcondition: Stack has no elements
-Stack::Stack() {
-  head = nullptr;
-}
+Stack::Stack() {}
 
 // Description: Destructor 
 // Postcondition: All nodes are deallocated from heap
@@ -35,7 +33,7 @@ bool Stack::push(int newElement) {
   nodeToPush->next = nullptr;
 
   // If stack is empty, set head to nodeToPush
-  if(!head) {
+  if(isEmpty()) {
     head = nodeToPush;
     // newElement pushed, return true
     return true;
@@ -55,7 +53,6 @@ bool Stack::push(int newElement) {
   // newElement pushed, return true
   return true;
 }
-
 
 // Description: Removes the top element of this Stack. Returns true 
 //              if element is popped, false otherwise
@@ -81,7 +78,7 @@ bool Stack::pop(){
     return true;
   }
 
-  // General case: Traverse to last node in linked list (top of stack)
+  // General case (At least two elements): Traverse to last node in linked list (top of stack)
   StackNode* previousNode = nullptr; // Pointer to previous node 
   StackNode* currentNode = head;     // Pointer to current node
 
@@ -130,7 +127,7 @@ void Stack::popAll() {
 // Postcondition: This Stack is unchanged.
 int Stack::peek() const {
   if(isEmpty()) {
-    // Return random number if head is null
+    // TA said to return random number like 99 if stack is empty
     return 99;
   }
 
