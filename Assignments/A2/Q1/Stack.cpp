@@ -60,7 +60,7 @@ bool Stack::push(int newElement) {
 bool Stack::pop(){
 
   // Return false for empty linked list, cannot remove any elements
-  if(!head) { 
+  if(isEmpty()) {
     return false;
   }
 
@@ -102,7 +102,7 @@ bool Stack::pop(){
 // Postcondition: Stack is in same state as when constructed with default constructor
 void Stack::popAll() {
   // Early return if linked list is empty
-  if(!head) { 
+  if(isEmpty()) { 
     return; 
   } 
 

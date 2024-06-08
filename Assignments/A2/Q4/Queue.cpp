@@ -6,7 +6,7 @@
  *
  * Class Invariant: Queue maintained in FIFO order.
  *
- * Author: Jason Mac
+ * Author: Jason Mac, Jagyjot Parmar
  * Date: May 2024
  */
  
@@ -38,7 +38,6 @@ Queue& Queue::operator=(const Queue& rhs) {
   return *this;
 }
 // Description: Inserts newElement at the back of Queue
-// Time Efficiency: O(1)
 void Queue::enqueue(int newElement) {
   if(elementCount == capacity) {
     int newSize = capacity * 2;
@@ -59,7 +58,6 @@ void Queue::enqueue(int newElement) {
 
 // Description: Removes the frontmost element
 // Precondition: Queue not empty
-// Time Efficiency: O(1)
 void Queue::dequeue() {
   // Early return, no elements in data collection
   if(elementCount == 0) { return; }
@@ -79,13 +77,11 @@ void Queue::dequeue() {
 
 // Description: Returns a copy of the frontmost element
 // Precondition: Queue not empty
-// Time Efficiency: O(1)
 int Queue::peek() const {
   return elements[frontindex];    
 } 
 
 // Description: Returns true if and only if Queue empty
-// Time Efficiency: O(1)
 bool Queue::isEmpty() const {
   return elementCount == 0;
 }

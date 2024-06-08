@@ -22,7 +22,6 @@ class Queue {
   private:
     constexpr static unsigned int INITIAL_CAPACITY = 6; // Constant INITIAL_CAPACITY
     int *elements = nullptr;                     // To do: replace this array with a pointer to an array - see Question 4
-
     unsigned int elementCount = 0;             // Number of elements in the Queue - if you need it!
     unsigned int capacity = INITIAL_CAPACITY;  // Initial capacity of the data structure (number of cells in the array)
     unsigned int frontindex = 0;               // Index of front element (next dequeued/peeked element)
@@ -39,6 +38,7 @@ class Queue {
         elements[(frontindex + i) % capacity] = rhs.elements[(frontindex + i) % capacity]; 
       }
     }
+
     int* getNewSizeArray(unsigned int newSize) {
       int *newArray = new int[newSize];
       for(int i = 0; i < elementCount; i++) {
