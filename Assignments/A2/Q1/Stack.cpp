@@ -1,10 +1,10 @@
 // clang-format off
 /*
- * Stack.cpp
+ * Stack.h
  *
- * Description: Implementation of a linked list-based Stack ADT class - SHSL
- * list Class Invariant: LIFO order Top of Stack located at the back of SHSL
- * list.
+ * Description: Implementation of a linked list-based Stack ADT class - SHSL list
+ * Class Invariant: LIFO order
+ *                  Top of Stack located at the back of SHSL list.
  *
  * Author: Jason Mac, and Jagyjot Parmar
  * Date: May 2024
@@ -67,7 +67,7 @@ bool Stack::pop() {
     return false;
   }
 
-  // Special case: if stack contains only one element
+  // Special case: if stack contains only one element delete head
   if (head->next == nullptr) {
 
     // Delete only element in the stack
@@ -80,12 +80,11 @@ bool Stack::pop() {
     return true;
   }
 
-  // General case (At least two elements): Traverse to last node in linked list
-  // (top of stack)
+  // General case (At least two elements): Traverse to last node in linked list (top of stack)
   StackNode *previousNode = nullptr; // Pointer to previous node
   StackNode *currentNode = head;     // Pointer to current node
 
-  // Traverse to last node, keeping track of the previous node
+  // Traverse to last node with current, keeping track of the previous node
   while (currentNode->next) {
     previousNode = currentNode;
     currentNode = currentNode->next;
@@ -103,8 +102,7 @@ bool Stack::pop() {
 }
 
 // Description: Removes all elements from this Stack.
-// Postcondition: Stack is in same state as when constructed with default
-// constructor
+// Postcondition: Stack is in same state as when constructed with default constructor
 // Time Efficiency: O(n)
 void Stack::popAll() {
   // Early return if linked list is empty
@@ -116,8 +114,7 @@ void Stack::popAll() {
   StackNode *previousNode = nullptr;
   StackNode *currentNode = head;
 
-  // Visit each node in linked list and deleting the previous node that was
-  // visited
+  // Visit each node in linked list and deleting the previous node that was visited
   while (currentNode) {
     previousNode = currentNode;
     currentNode = currentNode->next;
@@ -141,8 +138,7 @@ int Stack::peek() const {
   // Pointer to traverse linked list
   StackNode *currentNode = head;
 
-  // Traverse through linked list until reaching the last node (top of the
-  // stack)
+  // Traverse through linked list until reaching the last node (top of the stack)
   while (currentNode->next) {
     currentNode = currentNode->next;
   }
