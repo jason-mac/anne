@@ -4,14 +4,9 @@
  *
  * Description: Evaluation of infix expressions using two Stacks.
  *
- * Author: Jason Mac
+ * Author: Jason Mac and Jagyjot Parmar
  * Date: May 2024 
  */
-// TODO 
-// 1) include comments that correspond to the algorithm
-// 2) clean up eveluate evaluate, abstract the operator evaluation
-// 3) make more test cases in samples
-// 4) extensive testing with more complex test cases
 
 #include <iostream>
 #include <new>
@@ -22,13 +17,18 @@ using std::cout;
 using std::endl;
 using std::cin;
 
+// Evaluate operation and return corresponding token
 Token evaluate(Stack<Token>& numstack, Stack<Token>& opstack) {
   Token newToken;
   newToken.tt = integer;
+
+  // Pop top two values from numstack and retrieve them
   int num1 = numstack.pop().val;
   int num2 = numstack.pop().val;
   int value;
   Token op = opstack.pop();
+
+  // Perform operation depending on token op
   switch(op.tt) { 
     // case plus
     case pltok:
@@ -47,7 +47,6 @@ Token evaluate(Stack<Token>& numstack, Stack<Token>& opstack) {
       value = num2 / num1;
       break;
     default:
-      cout << "value = -1" << endl;
       value = -1;
   }
   newToken.val = value;
@@ -96,11 +95,12 @@ int main () {
       }
     }
   }
+  // Display the final output
   cout << numstack.peek().val << endl;
-  // End pretty printer coding demo.
 
   return 0;
 }
+  // End pretty printer coding demo.
 /*
   // Pretty printer coding demo.  Please remove before coding
   while (t.tt != eof) {
