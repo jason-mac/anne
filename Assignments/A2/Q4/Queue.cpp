@@ -40,39 +40,54 @@ Queue& Queue::operator=(const Queue& rhs) {
 // Description: Inserts newElement at the back of Queue
 void Queue::enqueue(int newElement) {
   if(elementCount == capacity) {
+
+    // Create new array with double of old capacity
     int newSize = capacity * 2;
     int* newArray = getNewSizeArray(newSize);
+
+    // Delete old elements array and update appropiate data members 
     delete[] elements;
     elements = newArray;
+    capacity = newSize;
+
+    // Add new element
     elements[elementCount] = newElement;
+    backindex = elementCount;
     elementCount++;
     frontindex = 0;
-    backindex = elementCount;
     return;
   }
   elementCount++;
   elements[backindex] = newElement;
   backindex = (backindex + 1) % capacity;    
-  return;
 } 
 
 // Description: Removes the frontmost element
 // Precondition: Queue not empty
 void Queue::dequeue() {
-  // Early return, no elements in data collection
-  if(elementCount == 0) { return; }
+  if(elementCount == 0) {
+    return;
+  }
+
+  // Update frontindex to remove frontmost element
+  elementCount--;
+  frontindex = (frontindex + 1) % capacity;
+
+  // Resize array if necessary
   if(elementCount <= capacity / 4 && capacity > INITIAL_CAPACITY) {
     int newSize = capacity / 4 > INITIAL_CAPACITY ? capacity / 4 : INITIAL_CAPACITY;
     int* newArray = getNewSizeArray(newSize);
+
+    // Delete old elements array and update appropiate data members 
     delete[] elements;
-    elementCount--;
+    elements = newArray;
+    capacity = newSize;
+    
+    // Reset frontindex and backindex 
     frontindex = 0;
     backindex = elementCount;
     return;
   }
-  elementCount--;
-  frontindex = (frontindex + 1) % capacity;
-  return;
 } 
 
 // Description: Returns a copy of the frontmost element

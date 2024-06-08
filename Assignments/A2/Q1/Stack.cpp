@@ -1,6 +1,5 @@
-// clang-format off
 /*
- * Stack.h
+ * Stack.cpp
  *
  * Description: Implementation of a linked list-based Stack ADT class - SHSL list
  * Class Invariant: LIFO order
@@ -154,4 +153,3 @@ bool Stack::isEmpty() const {
   // Stack is empty if head is null
   return head == nullptr;
 }
-// clang-format on
