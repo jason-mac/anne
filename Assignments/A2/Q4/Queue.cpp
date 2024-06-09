@@ -102,7 +102,7 @@ void Queue::dequeue() {
     
     // Reset frontindex and backindex 
     frontindex = 0;
-    backindex = elementCount + 1;
+    backindex = elementCount;
   }
 } 
 
