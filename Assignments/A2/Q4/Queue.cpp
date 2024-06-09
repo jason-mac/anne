@@ -63,8 +63,8 @@ void Queue::enqueue(int newElement) {
 
     // Add new element
     elements[elementCount] = newElement;
-    backindex = elementCount;
     elementCount++;
+    backindex = elementCount;
     frontindex = 0;
     return;
   }
