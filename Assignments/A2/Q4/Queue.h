@@ -93,7 +93,12 @@ class Queue {
     // Description: Returns true if and only if Queue empty
     // Postconidtion: Queue remains unchanged
     // Time Efficiency: O(1)
-    bool isEmpty() const;
+    bool isEmpty()  const;
+
+
+    //IGNORE PRINT METHOD FOR PERSONAL USE
+    void print() const;
+    
 };
 #endif
 

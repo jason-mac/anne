@@ -171,4 +171,13 @@ int* Queue::getNewSizeArray(unsigned int newSize) {
   // Return the newly dynamically allocated array
   return newArray;
 }
+
+
+void Queue::print() const {
+  cout << "{";
+  for(int i = 0; i < capacity - 1; i++) {
+    cout << elements[i] << ", ";
+  }
+  cout << elements[capacity - 1] << "}" << endl;
+}
 // clang-format on

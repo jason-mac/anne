@@ -44,6 +44,7 @@ int main() {
     Q->enqueue(i);
     cout << "enqueue " << i << endl;
   }
+  Q->print();
 
   // Test Case 4: dequeue all elements
   // Expected result:
@@ -52,6 +53,7 @@ int main() {
     Q->dequeue();
     cout << "peek " << y << endl;
   }
+  Q->print();
 
   // Release heap memory
   delete Q;
