@@ -102,7 +102,7 @@ void Queue::dequeue() {
     
     // Reset frontindex and backindex 
     frontindex = 0;
-    backindex = elementCount + 1;
+    backindex = elementCount;
   }
 } 
 
@@ -175,8 +175,8 @@ int* Queue::getNewSizeArray(unsigned int newSize) {
 
 void Queue::print() const {
   cout << "{";
-  for(int i = 0; i < capacity - 1; i++) {
-    cout << elements[i] << ", ";
+  for(int i = frontindex; i < elementCount; i++) {
+    cout << elements[i % capacity] << ", ";
   }
   cout << elements[capacity - 1] << "}" << endl;
 }
