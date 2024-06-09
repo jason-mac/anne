@@ -178,6 +178,6 @@ void Queue::print() const {
   for(int i = frontindex; i < elementCount; i++) {
     cout << elements[i % capacity] << ", ";
   }
-  cout << elements[capacity - 1] << "}" << endl;
+  cout << "}" << endl;
 }
 // clang-format on
