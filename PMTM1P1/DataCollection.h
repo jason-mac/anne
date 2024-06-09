@@ -29,24 +29,6 @@ private:
   // Data member: 
   Node * head = nullptr;  // "head" is the pointer to the first node
 
-  void deleteAll() {
-    Node *temp = nullptr;
-    for (Node *toBeDeleted = head; toBeDeleted != nullptr;) {
-      temp = toBeDeleted->next;
-      delete toBeDeleted;
-      toBeDeleted = temp;
-    }
-    head = nullptr;
-  }
-
-  void deepCopy(Node* lhs, const Node* rhs) {
-    if(!rhs) {
-      return;
-    }
-    lhs->next = new Node(rhs->data);
-    deepCopy(lhs->next, rhs->next);
-  }
-
 public:
 
   // Description: Default constructor. Constructs a DataCollection object.

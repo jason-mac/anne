@@ -23,35 +23,48 @@ DataCollection::DataCollection() {}
 // Description: Copy constructor creates a new DataCollection object as a
 //              copy of an existing DataCollection object.
 DataCollection::DataCollection(const DataCollection &DC) {
-  Node* dummy = new Node(0);
-  deepCopy(dummy, DC.head);
-  head = dummy->next;
-  delete dummy;
+  head = nullptr;
+  Node* DCCurrent = DC.head;
+  while(DCCurrent) {
+    this->append(DCCurrent->data);
+    DCCurrent = DCCurrent->next;
+  }
 }
 
 // To do: If you have not yet implemented (overloaded) the assignment (=)
 // operator
 //        in Lab 3, I invite you to overload this operator for this class.
 DataCollection &DataCollection::operator=(const DataCollection &DC) {
-  this->deleteAll();
-  if (!(DC.head)) {
+  if(this == &DC) {
     return *this;
   }
-  Node *dummy = new Node(0);
-  deepCopy(dummy, DC.head);
-  head = dummy->next;
-  delete dummy;
+  Node* thisCurrent = head;
+  Node* DCCurrent = DC.head;
+  while(thisCurrent && DCCurrent) {
+    thisCurrent->data = DCCurrent->data;
+    thisCurrent = thisCurrent->next;
+    DCCurrent = DCCurrent->next;
+  }
+  while(DCCurrent) {
+    this->append(DCCurrent->data);
+    DCCurrent = DCCurrent->next;
+  }
+  while(thisCurrent) {
+    Node* thisPrevious = thisCurrent;
+    thisCurrent = thisCurrent->next;
+    delete thisPrevious;
+  }
   return *this;
 }
 
 // Description: Destroys a DataCollection object, releasing heap memory.
 DataCollection::~DataCollection() {
-
-  Node *temp = nullptr;
-  for (Node *toBeDeleted = head; toBeDeleted != nullptr;) {
-    temp = toBeDeleted->next;
-    delete toBeDeleted;
-    toBeDeleted = temp;
+  Node* previous = nullptr;
+  Node* current = head;
+  while(current) {
+    previous = current;
+    current = current->next;
+    delete previous;
   }
   head = nullptr;
 }
