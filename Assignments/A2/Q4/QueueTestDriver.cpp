@@ -54,6 +54,11 @@ int main() {
     cout << "peek " << y << endl;
   }
   Q->print();
+  for (int i = 69; i <= 89; i++) {
+    Q->enqueue(i);
+    cout << "enqueue " << i << endl;
+  }
+  Q->print();
 
   // Release heap memory
   delete Q;
