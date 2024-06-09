@@ -172,8 +172,8 @@ int* Queue::getNewSizeArray(unsigned int newSize) {
 
 void Queue::print() const {
   cout << "{";
-  for(int i = frontindex; i < elementCount; i++) {
-    cout << elements[i % capacity] << ", ";
+  for(int i = 0; i < elementCount; i++) {
+    cout << elements[(i + frontindex) % capacity] << ", ";
   }
   cout << "}" << endl;
 }
