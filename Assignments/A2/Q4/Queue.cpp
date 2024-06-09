@@ -48,7 +48,7 @@ Queue& Queue::operator=(const Queue& rhs) {
 }
 
 // Description: Inserts newElement at the back of Queue
-// Time Efficiency: Amortized O(1)
+// Time Efficiency: O(1)
 void Queue::enqueue(int newElement) {
   if(elementCount == capacity) {
 
@@ -75,7 +75,7 @@ void Queue::enqueue(int newElement) {
 
 // Description: Removes the frontmost element
 // Precondition: Queue not empty
-// Time Efficiency: Amortized O(1)
+// Time Efficiency: O(1)
 void Queue::dequeue() {
 
   // Return early, no elements to dequeue
@@ -120,4 +120,47 @@ bool Queue::isEmpty() const {
   return elementCount == 0;
 }
 
+// Description: Makes a deep copy of input object rhs and stores it into this instance 
+// Precondition: this->elements is not pointing to heap allocated memory
+// Postcondition: All of rhs data memebers are copied into this object
+//                and rhs elements array has been deep copied into this object
+// Time Efficiency: O(n)
+void Queue::deepCopy(const Queue& rhs) {
+  // If elements are already allocated, delete exisiting array to avoid memory leaks
+  if(elements) {
+    delete[] elements;
+    elements = nullptr;
+  }
+
+  // Copy basic data members from rhs to this instance
+  elementCount = rhs.elementCount;
+  capacity = rhs.capacity;
+  frontindex = rhs.frontindex;
+  backindex = rhs.backindex;
+
+  // Allocate new memory for elements
+  elements = new int[capacity];
+
+  // Copy elements from rhs to this instance
+  for(int i = 0; i < elementCount; i++) {
+    elements[(frontindex + i) % capacity] = rhs.elements[(frontindex + i) % capacity]; 
+  }
+}
+
+// Description: Copies elements array into a new specified sized Dynamically allocated array
+//              maintaining the relative order of the elements between each other
+// Postcondition: elements array is copied into a new array and returned 
+// Time Efficiency: O(n)
+int* Queue::getNewSizeArray(unsigned int newSize) {
+  // Dynamically allocate new array with specified sizes
+  int *newArray = new int[newSize];
+
+  // Copy elements from old array into new array maintaining relative order of the elements
+  for(int i = 0; i < elementCount; i++) {
+    newArray[i] = elements[(frontindex + i) % capacity];
+  } 
+
+  // Return the newly dynamically allocated array
+  return newArray;
+}
 // clang-format on

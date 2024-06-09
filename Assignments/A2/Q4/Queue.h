@@ -29,49 +29,20 @@ class Queue {
 
 /* You can add private methods. */
 
+    // Utility Methods
+
     // Description: Makes a deep copy of input object rhs and stores it into this instance 
     // Precondition: this->elements is not pointing to heap allocated memory
     // Postcondition: All of rhs data memebers are copied into this object
     //                and rhs elements array has been deep copied into this object
     // Time Efficiency: O(n)
-    void deepCopy(const Queue& rhs) {
-      // If elements are already allocated, delete exisiting array to avoid memory leaks
-      if(elements) {
-        delete[] elements;
-        elements = nullptr;
-      }
-
-      // Copy basic data members from rhs to this instance
-      elementCount = rhs.elementCount;
-      capacity = rhs.capacity;
-      frontindex = rhs.frontindex;
-      backindex = rhs.backindex;
-
-      // Allocate new memory for elements
-      elements = new int[capacity];
-
-      // Copy elements from rhs to this instance
-      for(int i = 0; i < elementCount; i++) {
-        elements[(frontindex + i) % capacity] = rhs.elements[(frontindex + i) % capacity]; 
-      }
-    }
+    void deepCopy(const Queue& rhs);
 
     // Description: Copies elements array into a new specified sized Dynamically allocated array
     //              maintaining the relative order of the elements between each other
     // Postcondition: elements array is copied into a new array and returned 
     // Time Efficiency: O(n)
-    int* getNewSizeArray(unsigned int newSize) {
-      // Dynamically allocate new array with specified sizes
-      int *newArray = new int[newSize];
-
-      // Copy elements from old array into new array maintaining relative order of the elements
-      for(int i = 0; i < elementCount; i++) {
-        newArray[i] = elements[(frontindex + i) % capacity];
-      } 
-
-      // Return the newly dynamically allocated array
-      return newArray;
-    }  
+    int* getNewSizeArray(unsigned int newSize);
   
 
   public:
@@ -89,13 +60,20 @@ class Queue {
     Queue();
     
     // Description: Copy Constructor
+    // Postcondition: rhs.elements is deep copied into this->elements and its basic data members
+    //                are copied into this instance data members
     Queue(const Queue&);
 
     // Description: Destructor 
     // Postconidtion: Dynamically allocated memory is freed
     ~Queue();
 
-    // Overloaded assignment operator 
+    // Description: Overloaded assignment operator=. Deletes all dyamically memory in this instance
+    //              then makes a deep copy of rhs storing it into this instance. Allows for chaining of 
+    //              assignment operator.
+    // Postcondition: rhs.elements is deep copied into this->elements and its basic data members
+    //                are copied into this instance data members, returns *this for chaining
+    //                assignmnet operator.
     Queue& operator = (const Queue&);
 
     // Description: Inserts newElement at the back of Queue
