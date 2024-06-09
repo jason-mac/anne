@@ -52,7 +52,7 @@ void testQueue(Queue &q, int testNum) {
   // Test peeking with elements
   cout << "Peek Front of original queue: " << q.peek() << endl;
 
-  // Test dequeueing
+  // Test dequeuing
   cout << "Dequeuing elements until empty..." << endl;
   while (!q.isEmpty()) {
     cout << "Dequeue: " << q.peek() << endl;
@@ -78,6 +78,47 @@ int main() {
   // Test 3
   Queue q3;
   testQueue(q3, 3);
+
+  // Test aliasing between copies and original queues after copy construction
+  cout << "==================================" << endl;
+  cout << "Testing Aliasing between Copies (Copy Constructor)" << endl;
+  cout << "==================================" << endl;
+
+  Queue aliasedQueue1(q1);
+  Queue aliasedQueue2 = q2;
+  aliasedQueue1.enqueue(100);
+  aliasedQueue2.enqueue(200);
+
+  cout << "Peek Front of q1: " << q1.peek() << endl;
+  cout << "Peek Front of q2: " << q2.peek() << endl;
+  cout << "Peek Front of aliasedQueue1: " << aliasedQueue1.peek() << endl;
+  cout << "Peek Front of aliasedQueue2: " << aliasedQueue2.peek() << endl;
+
+  // Test aliasing between copies and original queues after assignment
+  cout << "==================================" << endl;
+  cout << "Testing Aliasing between Copies (Assignment Operator)" << endl;
+  cout << "==================================" << endl;
+
+  Queue aliasedQueue3;
+  aliasedQueue3 = q3;
+  Queue aliasedQueue4 = q1;
+  aliasedQueue3.enqueue(300);
+  aliasedQueue4.enqueue(400);
+
+  cout << "Peek Front of q3: " << q3.peek() << endl;
+  cout << "Peek Front of q1: " << q1.peek() << endl;
+  cout << "Peek Front of aliasedQueue3: " << aliasedQueue3.peek() << endl;
+  cout << "Peek Front of aliasedQueue4: " << aliasedQueue4.peek() << endl;
+
+  // Test chaining of assignment operators
+  cout << "==================================" << endl;
+  cout << "Testing Chaining of Assignment Operators" << endl;
+  cout << "==================================" << endl;
+
+  Queue chainQueue;
+  chainQueue.enqueue(500) = chainQueue.enqueue(600) = chainQueue.enqueue(700);
+
+  cout << "Peek Front of chainQueue: " << chainQueue.peek() << endl;
 
   return 0;
 }
