@@ -51,7 +51,7 @@ Queue& Queue::operator=(const Queue& rhs) {
 // Time Efficiency: O(1)
 void Queue::enqueue(int newElement) {
   if(elementCount == capacity) {
-
+    cout << "too much " << endl;
     // Retrieve a new array of double the old capacity with elements in same relative order
     int newSize = capacity * 2;
     int* newArray = getNewSizeArray(newSize);
