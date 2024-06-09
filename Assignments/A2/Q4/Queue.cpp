@@ -161,9 +161,12 @@ int* Queue::getNewSizeArray(unsigned int newSize) {
   int *newArray = new int[newSize];
 
   // Copy elements from old array into new array maintaining relative order of the elements
+  cout << "{ ";
   for(int i = 0; i < elementCount; i++) {
     newArray[i] = elements[(frontindex + i) % capacity];
+    cout << "newArray[i] = " << newArray[i] " ";
   } 
+  cout << "}" << endl;
 
   // Return the newly dynamically allocated array
   return newArray;
