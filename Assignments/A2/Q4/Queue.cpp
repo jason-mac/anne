@@ -157,16 +157,12 @@ void Queue::deepCopy(const Queue& rhs) {
 // Time Efficiency: O(n)
 int* Queue::getNewSizeArray(unsigned int newSize) {
   // Dynamically allocate new array with specified sizes
-  cout << "newSizeArray: " << newSize << endl;
   int *newArray = new int[newSize];
 
   // Copy elements from old array into new array maintaining relative order of the elements
-  cout << "{ ";
   for(int i = 0; i < elementCount; i++) {
     newArray[i] = elements[(frontindex + i) % capacity];
-    cout << newArray[i] << " ";
   } 
-  cout << "}" << endl;
 
   // Return the newly dynamically allocated array
   return newArray;
