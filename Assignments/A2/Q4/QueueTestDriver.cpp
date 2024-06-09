@@ -60,6 +60,12 @@ int main() {
   }
   Q->print();
 
+  while (!Q->isEmpty()) {
+    Q->print();
+    Q->dequeue();
+  }
+  cout << " done deqing" << endl;
+  Q->print();
   // Release heap memory
   delete Q;
   Q = nullptr;
