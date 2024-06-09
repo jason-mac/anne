@@ -110,6 +110,10 @@ void Queue::dequeue() {
 // Precondition: Queue not empty
 // Time Efficiency: O(1)
 int Queue::peek() const {
+  if(isEmpty()) {
+    // Return random number if Queue is empty
+    return -1;
+  }
   return elements[frontindex];    
 } 
 
