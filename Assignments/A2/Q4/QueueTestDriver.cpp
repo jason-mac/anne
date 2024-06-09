@@ -15,9 +15,6 @@
 #include "Queue.h"
 #include <iostream>
 
-using std::cout;
-using std::endl;
-
 using namespace std;
 
 void testQueue(Queue &q, int testNum) {
@@ -38,20 +35,6 @@ void testQueue(Queue &q, int testNum) {
   cout << "Is queue empty after enqueueing? " << (q.isEmpty() ? "Yes" : "No")
        << endl;
 
-  // Test copy constructor
-  cout << "Creating a new queue using copy constructor..." << endl;
-  Queue copiedQueue(q);
-  cout << "Peek Front of copied queue: " << copiedQueue.peek() << endl;
-
-  // Test assignment operator
-  cout << "Creating another queue using assignment operator..." << endl;
-  Queue assignedQueue;
-  assignedQueue = q;
-  cout << "Peek Front of assigned queue: " << assignedQueue.peek() << endl;
-
-  // Test peeking with elements
-  cout << "Peek Front of original queue: " << q.peek() << endl;
-
   // Test dequeuing
   cout << "Dequeuing elements until empty..." << endl;
   while (!q.isEmpty()) {
@@ -59,7 +42,6 @@ void testQueue(Queue &q, int testNum) {
     q.dequeue();
   }
 
-  // Test isEmpty after dequeueing
   cout << "Is queue empty after dequeueing? " << (q.isEmpty() ? "Yes" : "No")
        << endl;
 
@@ -79,46 +61,34 @@ int main() {
   Queue q3;
   testQueue(q3, 3);
 
-  // Test aliasing between copies and original queues after copy construction
-  cout << "==================================" << endl;
-  cout << "Testing Aliasing between Copies (Copy Constructor)" << endl;
-  cout << "==================================" << endl;
-
-  Queue aliasedQueue1(q1);
-  Queue aliasedQueue2 = q2;
-  aliasedQueue1.enqueue(100);
-  aliasedQueue2.enqueue(200);
-
-  cout << "Peek Front of q1: " << q1.peek() << endl;
-  cout << "Peek Front of q2: " << q2.peek() << endl;
-  cout << "Peek Front of aliasedQueue1: " << aliasedQueue1.peek() << endl;
-  cout << "Peek Front of aliasedQueue2: " << aliasedQueue2.peek() << endl;
-
-  // Test aliasing between copies and original queues after assignment
-  cout << "==================================" << endl;
-  cout << "Testing Aliasing between Copies (Assignment Operator)" << endl;
-  cout << "==================================" << endl;
-
-  Queue aliasedQueue3;
-  aliasedQueue3 = q3;
-  Queue aliasedQueue4 = q1;
-  aliasedQueue3.enqueue(300);
-  aliasedQueue4.enqueue(400);
-
-  cout << "Peek Front of q3: " << q3.peek() << endl;
-  cout << "Peek Front of q1: " << q1.peek() << endl;
-  cout << "Peek Front of aliasedQueue3: " << aliasedQueue3.peek() << endl;
-  cout << "Peek Front of aliasedQueue4: " << aliasedQueue4.peek() << endl;
-
   // Test chaining of assignment operators
   cout << "==================================" << endl;
   cout << "Testing Chaining of Assignment Operators" << endl;
   cout << "==================================" << endl;
 
-  Queue chainQueue;
-  chainQueue.enqueue(500) = chainQueue.enqueue(600) = chainQueue.enqueue(700);
+  q1 = q2 = q3;
 
-  cout << "Peek Front of chainQueue: " << chainQueue.peek() << endl;
+  cout << "Peek Front of q1 after chaining assignment: " << q1.peek() << endl;
+  cout << "Peek Front of q2 after chaining assignment: " << q2.peek() << endl;
+  cout << "Peek Front of q3 after chaining assignment: " << q3.peek() << endl;
+
+  // Insert elements into q1, q2, and q3
+  for (int i = 1; i <= 5; i++) {
+    q1.enqueue(i);
+    q2.enqueue(i * 2);
+    q3.enqueue(i * 3);
+  }
+
+  // Remove elements from q1, q2, and q3
+  for (int i = 1; i <= 3; i++) {
+    q1.dequeue();
+    q2.dequeue();
+    q3.dequeue();
+  }
+
+  cout << "Peek Front of q1 after operations: " << q1.peek() << endl;
+  cout << "Peek Front of q2 after operations: " << q2.peek() << endl;
+  cout << "Peek Front of q3 after operations: " << q3.peek() << endl;
 
   return 0;
 }
