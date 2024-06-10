@@ -59,15 +59,28 @@ int main() {
     cout << "enqueue " << i << endl;
   }
   Q->print();
-
+  Queue *copy = new Queue(*Q);
+  copy->print();
   while (!Q->isEmpty()) {
     Q->print();
     Q->dequeue();
   }
   cout << " done deqing" << endl;
+  copy->enqueue(20);
   Q->print();
+  copy->print();
+
+  Queue *nextCopy;
+  *nextCopy = *copy;
+  nextCopy->print();
+  copy->print();
+  nextCopy->enqueue(344);
+  nextCopy->print();
+  copy->print();
+
   // Release heap memory
   delete Q;
+  delete copy;
   Q = nullptr;
 
   return 0;
