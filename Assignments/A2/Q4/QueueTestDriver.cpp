@@ -68,19 +68,23 @@ int main() {
   Queue *copy = new Queue(*Q);
   cout << "copy ";
   copy->print();
-  cout << endl;
   cout << " q ";
   Q->print();
   copy->enqueue(20);
   Q->print();
+  cout << " q ";
   copy->print();
 
   Queue *nextCopy = new Queue();
   *nextCopy = *copy;
+  cout << "nextopy ";
   nextCopy->print();
+  cout << "copy ";
   copy->print();
   nextCopy->enqueue(344);
+  cout << "nextcopy ";
   nextCopy->print();
+  cout << "copy ";
   copy->print();
 
   // Release heap memory
