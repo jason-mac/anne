@@ -70,7 +70,7 @@ int main() {
   Q->print();
   copy->print();
 
-  Queue *nextCopy;
+  Queue *nextCopy = new Queue();
   *nextCopy = *copy;
   nextCopy->print();
   copy->print();
@@ -81,6 +81,7 @@ int main() {
   // Release heap memory
   delete Q;
   delete copy;
+  delete nextCopy;
   Q = nullptr;
 
   return 0;
