@@ -59,13 +59,18 @@ int main() {
     cout << "enqueue " << i << endl;
   }
   Q->print();
-  Queue *copy = new Queue(*Q);
-  copy->print();
   while (!Q->isEmpty()) {
     Q->print();
     Q->dequeue();
   }
   cout << " done deqing" << endl;
+  Q->enqueue(69);
+  Queue *copy = new Queue(*Q);
+  cout << "copy ";
+  copy->print();
+  cout << endl;
+  cout << " q ";
+  Q->print();
   copy->enqueue(20);
   Q->print();
   copy->print();
