@@ -72,7 +72,7 @@ int main() {
   Q->print();
   copy->enqueue(20);
   Q->print();
-  cout << " q ";
+  cout << " copy ";
   copy->print();
 
   Queue *nextCopy = new Queue();
@@ -86,6 +86,14 @@ int main() {
   nextCopy->print();
   cout << "copy ";
   copy->print();
+
+  cout << "final print no confusion" << endl;
+  cout << "q";
+  Q->print();
+  cout << "copy ";
+  copy->print();
+  cout << "nextcopy ";
+  nextCopy->print();
 
   // Release heap memory
   delete Q;
