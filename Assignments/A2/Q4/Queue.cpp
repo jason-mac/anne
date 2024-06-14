@@ -10,6 +10,7 @@
  * Date: June 2024
  */
  
+#include <cstdlib>
 #include <iostream>
 #include "Queue.h"
 
@@ -36,12 +37,15 @@ Queue::~Queue() {
 // Description: Overloaded assignment operator=. Deletes all dyamically memory in this instance
 //              then makes a deep copy of rhs storing it into this instance. Allows for chaining of 
 //              assignment operator.
+// Preconditon: this->elements is not nullptr
 // Postcondition: rhs.elements is deep copied into this->elements and its basic data members
 //                are copied into this instance data members, returns *this for chaining
 //                assignmnet operator.
 Queue& Queue::operator=(const Queue& rhs) {
-  delete[] elements;
-  elements = nullptr;
+  if(elements != nullptr) {
+    delete[] elements;
+    elements = nullptr;
+  }
   this->deepCopy(rhs);
   return *this;
 }
@@ -53,7 +57,7 @@ void Queue::enqueue(int newElement) {
   if(elements == nullptr) {
     elements = new int[INITIAL_CAPACITY];
     // Failed memory allocation, cannot insert
-    if(!elements) {
+    if(elements == nullptr) {
       return;
     }
     elements[0] = newElement;
@@ -67,7 +71,7 @@ void Queue::enqueue(int newElement) {
     // Retrieve a new array of double the old capacity with elements in same relative order
     int newSize = capacity * 2;
     int* newArray = getNewSizeArray(newSize);
-    if(!newArray) {
+    if(newArray == nullptr) {
       // Failed memory allocation, cannot insert
       return;
     }
@@ -94,7 +98,7 @@ void Queue::enqueue(int newElement) {
 void Queue::dequeue() {
 
   // Return early, no elements to dequeue
-  if(elementCount == 0) {
+  if(isEmpty()) {
     return;
   }
 
@@ -165,7 +169,7 @@ void Queue::deepCopy(const Queue& rhs) {
   elements = new int[capacity];
 
   // Copy elements from rhs to this instance
-  for(int i = 0; i < elementCount; i++) {
+  for(unsigned int i = 0; i < elementCount; i++) {
     elements[(frontindex + i) % capacity] = rhs.elements[(frontindex + i) % capacity]; 
   }
 }
@@ -177,13 +181,15 @@ void Queue::deepCopy(const Queue& rhs) {
 int* Queue::getNewSizeArray(unsigned int newSize) {
   // Dynamically allocate new array with specified sizes
   int *newArray = new int[newSize];
+
+  // If memory allocation fails, return nullptr
   if(!newArray) {
     return nullptr;
   }
 
   // Copy elements from old array into new array maintaining relative order of the elements
   // The front element in the queue of the newArray will start at index 0
-  for(int i = 0; i < elementCount; i++) {
+  for(unsigned int i = 0; i < elementCount; i++) {
     newArray[i] = elements[(frontindex + i) % capacity];
   } 
 
@@ -192,13 +198,14 @@ int* Queue::getNewSizeArray(unsigned int newSize) {
 }
 
 
+/*
 // IGNORE PRINT METHOD FOR PERSONAL USE
 void Queue::print() const {
-  cout << "loooool" << endl;
   cout << "{";
   for(int i = 0; i < elementCount; i++) {
     cout << elements[(i + frontindex) % capacity] << ", ";
   }
   cout << "}" << endl;
 }
+*/
 // clang-format on
