@@ -7,7 +7,7 @@
  * Class Invariant: Queue maintained in FIFO order.
  *
  * Author: Jason Mac, Jagyjot Parmar
- * Date: May 2024
+ * Date: June 2024
  */
  
 #include <iostream>
@@ -15,11 +15,10 @@
 
 using std::cout;
 using std::endl;
+using std::max;
 
 // Description: Constructor
-Queue::Queue() {
-  elements = new int[INITIAL_CAPACITY];
-}
+Queue::Queue() {}
 
 // Description: Copy Constructor
 // Postcondition: rhs.elements is deep copied into this->elements and its basic data members
@@ -50,12 +49,29 @@ Queue& Queue::operator=(const Queue& rhs) {
 // Description: Inserts newElement at the back of Queue
 // Time Efficiency: O(1)
 void Queue::enqueue(int newElement) {
+  // Allocate memory if not done already for an array and insert newElement
+  if(elementCount == 0) {
+    elements = new int[INITIAL_CAPACITY];
+    // Failed memory allocation, cannot insert
+    if(!elements) {
+      return;
+    }
+    elements[0] = newElement;
+    elementCount++;
+    backindex++;
+    return;
+  }
+
+  // Check if resizing array is necessary before enqueuing
   if(elementCount == capacity) {
     cout << "too much " << endl;
     // Retrieve a new array of double the old capacity with elements in same relative order
     int newSize = capacity * 2;
     int* newArray = getNewSizeArray(newSize);
-
+    if(!newArray) {
+      // Failed memory allocation, cannot insert
+      return;
+    }
     // Delete old elements array and update appropiate data members 
     delete[] elements;
     elements = newArray;
@@ -90,10 +106,14 @@ void Queue::dequeue() {
   // Resize array if necessary
   if(elementCount <= capacity / 4 && capacity > INITIAL_CAPACITY) {
     // Calculate new capacity, ensuring it does not drop below INITIAL_CAPACITY
-    int newSize = std::max(capacity / 2, INITIAL_CAPACITY);
+    int newSize = max(capacity / 2, INITIAL_CAPACITY);
 
     // Retrieve a new array of newSize with same elements in its respective relative order
     int* newArray = getNewSizeArray(newSize);
+    if(!newArray) {
+      // Failed memory allocation, cannot insert, return early
+      return;
+    }
 
     // Delete old elements array and update appropiate data members 
     delete[] elements;
@@ -158,9 +178,12 @@ void Queue::deepCopy(const Queue& rhs) {
 int* Queue::getNewSizeArray(unsigned int newSize) {
   // Dynamically allocate new array with specified sizes
   int *newArray = new int[newSize];
+  if(!newArray) {
+    return nullptr;
+  }
 
-  cout << "newSize: " << newSize << endl;
   // Copy elements from old array into new array maintaining relative order of the elements
+  // The front element in the queue of the newArray will start at index 0
   for(int i = 0; i < elementCount; i++) {
     newArray[i] = elements[(frontindex + i) % capacity];
   } 
@@ -170,7 +193,9 @@ int* Queue::getNewSizeArray(unsigned int newSize) {
 }
 
 
+// IGNORE PRINT METHOD FOR PERSONAL USE
 void Queue::print() const {
+  cout << "loooool" << endl;
   cout << "{";
   for(int i = 0; i < elementCount; i++) {
     cout << elements[(i + frontindex) % capacity] << ", ";

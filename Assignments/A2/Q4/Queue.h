@@ -6,8 +6,8 @@
  *
  * Class Invariant: Queue maintained in FIFO order.
  *
- * Author: Jason Mac
- * Date: May 2024
+ * Author: Jason Mac and Jagyjot Parmar
+ * Date: June 2024
  */
  
 #ifndef QUEUE_H
@@ -21,7 +21,7 @@ class Queue {
 	
   private:
     constexpr static unsigned int INITIAL_CAPACITY = 6; // Constant INITIAL_CAPACITY
-    int *elements = nullptr;                     // To do: replace this array with a pointer to an array - see Question 4
+    int* elements = nullptr;                     // To do: replace this array with a pointer to an array - see Question 4
     unsigned int elementCount = 0;             // Number of elements in the Queue - if you need it!
     unsigned int capacity = INITIAL_CAPACITY;  // Initial capacity of the data structure (number of cells in the array)
     unsigned int frontindex = 0;               // Index of front element (next dequeued/peeked element)
@@ -33,7 +33,7 @@ class Queue {
 
     // Description: Makes a deep copy of input object rhs and stores it into this instance 
     // Precondition: this->elements is not pointing to heap allocated memory
-    // Postcondition: All of rhs data memebers are copied into this object
+    // Postcondition: All of rhs data memebers (except elements) are copied into this object
     //                and rhs elements array has been deep copied into this object
     // Time Efficiency: O(n)
     void deepCopy(const Queue& rhs);
@@ -74,7 +74,7 @@ class Queue {
     // Postcondition: rhs.elements is deep copied into this->elements and its basic data members
     //                are copied into this instance data members, returns *this for chaining
     //                assignmnet operator.
-    Queue& operator = (const Queue&);
+    Queue& operator= (const Queue&);
 
     // Description: Inserts newElement at the back of Queue
     // Time Efficiency: O(1)
