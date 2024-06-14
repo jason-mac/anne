@@ -50,7 +50,7 @@ Queue& Queue::operator=(const Queue& rhs) {
 // Time Efficiency: O(1)
 void Queue::enqueue(int newElement) {
   // Allocate memory if not done already for an array and insert newElement
-  if(elementCount == 0) {
+  if(elements == nullptr) {
     elements = new int[INITIAL_CAPACITY];
     // Failed memory allocation, cannot insert
     if(!elements) {
@@ -64,7 +64,6 @@ void Queue::enqueue(int newElement) {
 
   // Check if resizing array is necessary before enqueuing
   if(elementCount == capacity) {
-    cout << "too much " << endl;
     // Retrieve a new array of double the old capacity with elements in same relative order
     int newSize = capacity * 2;
     int* newArray = getNewSizeArray(newSize);
