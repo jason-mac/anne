@@ -23,9 +23,14 @@ int main() {
   Queue b;
   Queue c;
   a.enqueue(5);
-
+  a.print();
   a = b;
   Queue d = b;
+  cout << "abcd" << endl;
+  a.print();
+  b.print();
+  c.print();
+  d.print();
 
   // Let's get ourselves a queue!
   Queue *Q = new Queue();
