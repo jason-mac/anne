@@ -54,10 +54,12 @@ void Queue::enqueue(int newElement) {
   // Allocate memory if not done already for an array and insert newElement
   if(elements == nullptr) {
     elements = new int[INITIAL_CAPACITY];
-    // Failed memory allocation, cannot insert
+
+    // Case for failed memory allocation, cannot insert, return early
     if(elements == nullptr) {
       return;
     }
+
     elements[0] = newElement;
     elementCount++;
     backindex++;
@@ -70,7 +72,7 @@ void Queue::enqueue(int newElement) {
     int newSize = capacity * 2;
     int* newArray = getNewSizeArray(newSize);
     if(newArray == nullptr) {
-      // Failed memory allocation, cannot insert
+      // Failed memory allocation, cannot insert, return early
       return;
     }
     // Delete old elements array and update appropiate data members 
@@ -132,7 +134,7 @@ void Queue::dequeue() {
 // Time Efficiency: O(1)
 int Queue::peek() const {
   if(isEmpty()) {
-    // Return random number if Queue is empty
+    // Return -1 if Queue is empty
     return -1;
   }
   return elements[frontindex];    
@@ -145,13 +147,13 @@ bool Queue::isEmpty() const {
   return elementCount == 0;
 }
 
-// Description: Makes a deep copy of input object rhs and stores it into this instance 
-// Precondition: this->elements is not pointing to heap allocated memory
+// Description: Clears any heap allocated memory in this instance. 
+//              Makes a deep copy of input object rhs and stores it into this instance 
 // Postcondition: All of rhs data memebers are copied into this object
 //                and rhs elements array has been deep copied into this object
 // Time Efficiency: O(n)
 void Queue::deepCopy(const Queue& rhs) {
-  // check for precondition, if not satisfied, delete elements array 
+  // delete any heap allocated memory before proceding with deep copy
   if(elements != nullptr) {
     delete[] elements;
     elements = nullptr;
@@ -163,7 +165,7 @@ void Queue::deepCopy(const Queue& rhs) {
   frontindex = rhs.frontindex;
   backindex = rhs.backindex;
 
-  // Case where rhs is a Queue with no initiated heap allocated memory
+  // Case where rhs is a Queue object with no initiated heap allocated memory
   if(rhs.elements == nullptr) {
     return;
   }
