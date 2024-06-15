@@ -1,5 +1,4 @@
-// clang-format off
-/* 
+/*
  * Queue.cpp - This current version of Queue class does not work well!
  *
  * Description: Array-based implementation of Queue as an ADT class.
@@ -197,7 +196,7 @@ int* Queue::getNewSizeArray(unsigned int newSize) {
   return newArray;
 }
 
-
+/*
 // IGNORE PRINT METHOD FOR PERSONAL USE
 void Queue::print() const {
   cout << "{";
@@ -206,4 +205,4 @@ void Queue::print() const {
   }
   cout << "}" << endl;
 }
-// clang-format on
+*/

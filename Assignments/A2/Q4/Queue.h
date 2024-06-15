@@ -1,5 +1,4 @@
-// clang-format off
-/* 
+/*
  * Queue.h - This current version of Queue class does not work well!
  *
  * Description: Array-based implementation of Queue as an ADT class.
@@ -68,7 +67,7 @@ class Queue {
     // Postconidtion: Dynamically allocated memory is freed
     ~Queue();
 
-    // Description: Overloaded assignment operator=. Deletes all dyamically memory in this instance
+    // Description: Overloaded assignment operator. Deletes all dyamically memory in this instance
     //              then makes a deep copy of rhs storing it into this instance. Allows for chaining of 
     //              assignment operator.
     // Postcondition: rhs.elements is deep copied into this->elements and its basic data members
@@ -97,9 +96,7 @@ class Queue {
 
 
     //IGNORE PRINT METHOD FOR PERSONAL USE 
-    void print() const;
+    //void print() const;
     
 };
 #endif
-
-// clang-format on

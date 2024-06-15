@@ -1,5 +1,4 @@
-// clang-format off
-/* 
+/*
  * Eval.cpp
  *
  * Description: Evaluation of infix expressions using two Stacks.
@@ -133,5 +132,3 @@ int main () {
     t = S.getnext();
   }
 */
-
-// clang-format on
