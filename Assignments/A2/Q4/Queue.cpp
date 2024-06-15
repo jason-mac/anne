@@ -198,7 +198,6 @@ int* Queue::getNewSizeArray(unsigned int newSize) {
 }
 
 
-/*
 // IGNORE PRINT METHOD FOR PERSONAL USE
 void Queue::print() const {
   cout << "{";
@@ -207,5 +206,4 @@ void Queue::print() const {
   }
   cout << "}" << endl;
 }
-*/
 // clang-format on

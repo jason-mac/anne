@@ -97,7 +97,7 @@ class Queue {
 
 
     //IGNORE PRINT METHOD FOR PERSONAL USE 
-    // void print() const;
+    void print() const;
     
 };
 #endif
