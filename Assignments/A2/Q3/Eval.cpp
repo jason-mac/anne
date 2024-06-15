@@ -4,7 +4,7 @@
  * Description: Evaluation of infix expressions using two Stacks.
  *
  * Author: Jason Mac and Jagyjot Parmar
- * Date: May 2024 
+ * Date: June 2024 
  */
 
 #include <iostream>
