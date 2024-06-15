@@ -19,6 +19,13 @@ using std::cout;
 using std::endl;
 
 int main() {
+  Queue a;
+  Queue b;
+  Queue c;
+  a.enqueue(5);
+
+  a = b;
+  Queue d = b;
 
   // Let's get ourselves a queue!
   Queue *Q = new Queue();

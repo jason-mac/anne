@@ -1,3 +1,4 @@
+// clang-format off
 /*
  * Queue.cpp - This current version of Queue class does not work well!
  *
@@ -36,8 +37,7 @@ Queue::~Queue() {
 // Description: Overloaded assignment operator=. Deletes all dyamically memory in this instance
 //              then makes a deep copy of rhs storing it into this instance. Allows for chaining of 
 //              assignment operator.
-// Preconditon: this->elements is not nullptr
-// Postcondition: rhs.elements is deep copied into this->elements and its basic data members
+// Postcondition: rhs.elements is deep copied into this->elements and rhs basic data members
 //                are copied into this instance data members, returns *this for chaining
 //                assignmnet operator.
 Queue& Queue::operator=(const Queue& rhs) {
@@ -152,8 +152,8 @@ bool Queue::isEmpty() const {
 //                and rhs elements array has been deep copied into this object
 // Time Efficiency: O(n)
 void Queue::deepCopy(const Queue& rhs) {
-  // If elements are already allocated, delete exisiting array to avoid memory leaks
-  if(elements) {
+  // check for precondition, if not satisfied, delete elements array 
+  if(elements != nullptr) {
     delete[] elements;
     elements = nullptr;
   }
@@ -164,7 +164,12 @@ void Queue::deepCopy(const Queue& rhs) {
   frontindex = rhs.frontindex;
   backindex = rhs.backindex;
 
-  // Allocate new memory for elements
+  // Case where rhs is a Queue with no initiated heap allocated memory
+  if(rhs.elements == nullptr) {
+    return;
+  }
+
+  // Allocate memory for array 
   elements = new int[capacity];
 
   // Copy elements from rhs to this instance
@@ -206,3 +211,4 @@ void Queue::print() const {
   cout << "}" << endl;
 }
 */
+// clang-format on
