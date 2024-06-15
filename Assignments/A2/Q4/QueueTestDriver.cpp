@@ -23,14 +23,9 @@ int main() {
   Queue b;
   Queue c;
   a.enqueue(5);
-  a.print();
   a = b;
   Queue d = b;
   cout << "abcd" << endl;
-  a.print();
-  b.print();
-  c.print();
-  d.print();
 
   // Let's get ourselves a queue!
   Queue *Q = new Queue();
@@ -85,13 +80,11 @@ int main() {
   cout << "copy ";
   nextCopy->enqueue(344);
   cout << "nextcopy ";
-  nextCopy->print();
   cout << "copy ";
 
   cout << "final print no confusion" << endl;
   cout << "q";
   cout << "copy ";
-  Q->print();
   cout << "nextcopy ";
 
   // Release heap memory
