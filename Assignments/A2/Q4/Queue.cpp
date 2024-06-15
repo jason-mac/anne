@@ -153,6 +153,7 @@ bool Queue::isEmpty() const {
 //                and rhs elements array has been deep copied into this object
 // Time Efficiency: O(n)
 void Queue::deepCopy(const Queue& rhs) {
+  cout << "you're broke" << endl;
   // delete any heap allocated memory before proceding with deep copy
   if(elements != nullptr) {
     delete[] elements;
