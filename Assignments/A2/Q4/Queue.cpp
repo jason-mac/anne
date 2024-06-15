@@ -165,9 +165,6 @@ void Queue::deepCopy(const Queue& rhs) {
   backindex = rhs.backindex;
 
   // Case where rhs is a Queue with no initiated heap allocated memory
-  if(rhs.elements == nullptr) {
-    return;
-  }
 
   // Allocate memory for array 
   elements = new int[capacity];
