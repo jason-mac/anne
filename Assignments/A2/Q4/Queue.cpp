@@ -41,9 +41,8 @@ Queue::~Queue() {
 //                are copied into this instance data members, returns *this for chaining
 //                assignmnet operator.
 Queue& Queue::operator=(const Queue& rhs) {
-  if(elements != nullptr) {
-    delete[] elements;
-    elements = nullptr;
+  if(this == &rhs) {
+    return *this;
   }
   this->deepCopy(rhs);
   return *this;
@@ -165,6 +164,9 @@ void Queue::deepCopy(const Queue& rhs) {
   backindex = rhs.backindex;
 
   // Case where rhs is a Queue with no initiated heap allocated memory
+  if(rhs.elements == nullptr) {
+    return;
+  }
 
   // Allocate memory for array 
   elements = new int[capacity];
