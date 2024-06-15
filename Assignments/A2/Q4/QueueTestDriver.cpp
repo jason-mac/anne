@@ -44,7 +44,6 @@ int main() {
     Q->enqueue(i);
     cout << "enqueue " << i << endl;
   }
-  Q->print();
 
   // Test Case 4: dequeue all elements
   // Expected result:
@@ -53,47 +52,33 @@ int main() {
     Q->dequeue();
     cout << "peek " << y << endl;
   }
-  Q->print();
   for (int i = 69; i <= 89; i++) {
     Q->enqueue(i);
     cout << "enqueue " << i << endl;
   }
-  Q->print();
   while (!Q->isEmpty()) {
-    Q->print();
     Q->dequeue();
   }
   cout << " done deqing" << endl;
   Q->enqueue(69);
   Queue *copy = new Queue(*Q);
   cout << "copy ";
-  copy->print();
   cout << " q ";
-  Q->print();
   copy->enqueue(20);
-  Q->print();
   cout << " copy ";
-  copy->print();
 
   Queue *nextCopy = new Queue();
   *nextCopy = *copy;
   cout << "nextopy ";
-  nextCopy->print();
   cout << "copy ";
-  copy->print();
   nextCopy->enqueue(344);
   cout << "nextcopy ";
-  nextCopy->print();
   cout << "copy ";
-  copy->print();
 
   cout << "final print no confusion" << endl;
   cout << "q";
-  Q->print();
   cout << "copy ";
-  copy->print();
   cout << "nextcopy ";
-  nextCopy->print();
 
   // Release heap memory
   delete Q;
