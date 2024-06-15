@@ -1,15 +1,13 @@
-
 all: std
 
 std: Stack.o StackTestDriver.o
 	g++ -o std Stack.o StackTestDriver.o
 
-Stack.o: Stack.cpp Stack.h
+Stack.o: Stack.cpp
 	g++ -c Stack.cpp
 
-StackTestDriver.o: StackTestDriver.cpp Stack.h
+StackTestDriver.o: StackTestDriver.cpp
 	g++ -c StackTestDriver.cpp
 
-clean:	
-	rm -f std *.o
-
+clean:
+	rm -f *.o std
