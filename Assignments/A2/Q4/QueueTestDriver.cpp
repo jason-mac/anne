@@ -80,11 +80,13 @@ int main() {
   cout << "copy ";
   nextCopy->enqueue(344);
   cout << "nextcopy ";
+  nextCopy->print();
   cout << "copy ";
 
   cout << "final print no confusion" << endl;
   cout << "q";
   cout << "copy ";
+  Q->print();
   cout << "nextcopy ";
 
   // Release heap memory
