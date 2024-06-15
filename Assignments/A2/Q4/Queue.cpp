@@ -1,4 +1,3 @@
-// clang-format off
 /*
  * Queue.cpp - This current version of Queue class does not work well!
  *
@@ -202,13 +201,3 @@ int* Queue::getNewSizeArray(unsigned int newSize) {
   // Return the newly dynamically allocated array
   return newArray;
 }
-
-// IGNORE PRINT METHOD FOR PERSONAL USE
-void Queue::print() const {
-  cout << "{";
-  for(int i = 0; i < elementCount; i++) {
-    cout << elements[(i + frontindex) % capacity] << ", ";
-  }
-  cout << "}" << endl;
-}
-// clang-format on
