@@ -84,6 +84,7 @@ using std::nothrow;
 	  return;
 	  
    }                
+
     void deleteBST(BSTNode* current) {  
       if(current == nullptr) {
         return;
