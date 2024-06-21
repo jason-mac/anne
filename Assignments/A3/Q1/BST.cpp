@@ -85,7 +85,7 @@ using std::nothrow;
 	  
    }                
 
-    void destroyBST(BSTNode* current) {  
+    void BST::destroyBST(BSTNode* current) {  
       if(current == nullptr) {
         return;
       }
