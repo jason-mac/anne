@@ -85,12 +85,12 @@ using std::nothrow;
 	  
    }                
 
-    void deleteBST(BSTNode* current) {  
+    void destroyBST(BSTNode* current) {  
       if(current == nullptr) {
         return;
       }
-      deleteBST(current->left);
-      deleteBST(current->right);
+      destroyBST(current->left);
+      destroyBST(current->right);
       delete current; 
     }
    
@@ -99,7 +99,7 @@ using std::nothrow;
 
       // to do
       if(root) {
-        deleteBST(root);
+        destroyBST(root);
       }
    }                
     
@@ -134,6 +134,7 @@ using std::nothrow;
       }
       if(root == nullptr) {
         root = newBSTNode;
+        cout << "insert first node" << endl;
         return;
       }
       bool result = insertR(newBSTNode, root);
