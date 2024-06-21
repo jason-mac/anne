@@ -66,6 +66,7 @@ int main(int argc, char *argv[]) {
           WordPair aWordPair(englishW, translationW);
           
 		  // insert aWordPair into "testing" using a try/catch block
+          testing->insert(aWordPair);
         }
         myfile.close();
 
