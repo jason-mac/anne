@@ -141,8 +141,7 @@ using std::nothrow;
       if(!result) {
         throw ElementAlreadyExistsException("Element Already Exists");
       }
-	    return;
-	  
+	    return; 
    } 
    
    // Description: Recursive insertion into a BST.
@@ -151,7 +150,6 @@ using std::nothrow;
    bool BST::insertR(BSTNode * newBSTNode, BSTNode * current) {  
     
 	  // to do
-    bool result;
     if(current->element == newBSTNode->element) {
       return false;
     }
@@ -164,11 +162,11 @@ using std::nothrow;
       return true;
     } 
     if(current->element < newBSTNode->element) {
-      result = insertR(newBSTNode, current->right);
+      insertR(newBSTNode, current->right);
     } else {
-      result = insertR(newBSTNode, current->left);
+      insertR(newBSTNode, current->left);
     }
-    return result;
+    return true;
    }
 
    
