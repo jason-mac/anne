@@ -99,9 +99,7 @@ using std::nothrow;
    BST::~BST() {
 
       // to do
-      if(root) {
-        destroyBST(root);
-      }
+      destroyBST(root);
    }                
     
   
