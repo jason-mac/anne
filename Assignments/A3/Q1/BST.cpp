@@ -140,6 +140,8 @@ using std::nothrow;
       bool result = insertR(newBSTNode, root);
       if(!result) {
         throw ElementAlreadyExistsException("Element Already Exists");
+      } else {
+        elementCount++;
       }
 	    return; 
    } 
