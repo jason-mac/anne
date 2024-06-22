@@ -32,40 +32,6 @@ using std::nothrow;
 // class because the prototype of these public methods don't match, 
 // we won't be able to successfully mark your assignment.
 
-/* Helper Functions */
-
-// Description: Recursively copies all nodes from the given source BST to the current BST.
-// Precondition: 'rhsCurrent' is the root of a non-empty BST to be copied. 
-// Postcondition: 'thisCurrent' and its subtree are a deep copy of 'rhsCurrent' and its subtree.
-// Exception: Throws an exception if memory allocation fails.
-// Time efficiency: O(n), where n is the number of nodes in the BST.
-void BST::deepCopyR(BSTNode* thisCurrent, BSTNode* rhsCurrent) {
-  BSTNode* insertLeft = nullptr;
-  BSTNode* insertRight = nullptr;
-  if(rhsCurrent->hasLeft()) {
-    insertLeft = new(nothrow) BSTNode(rhsCurrent->left->element);
-  }
-  if(rhsCurrent->hasRight()) {
-    insertRight = new(nothrow) BSTNode(rhsCurrent->right->element);
-  }
-  thisCurrent->left = insertLeft;
-  thisCurrent->right = insertRight;
-  if(thisCurrent->hasLeft()) {
-    deepCopyR(thisCurrent->left, rhsCurrent->left);
-  }
-  if(thisCurrent->hasRight()) {
-    deepCopyR(thisCurrent->right, rhsCurrent->right);
-  }
-}
-
-void BST::destroyBST(BSTNode* current) {  
-  if(current == nullptr) {
-    return;
-  }
-  destroyBST(current->left);
-  destroyBST(current->right);
-  delete current; 
-}
 
 /* Constructors and destructor */
 
@@ -74,24 +40,30 @@ BST::BST() { }
 
 // Copy constructor
 BST::BST(const BST & aBST) {
-  // to do
+  // Check if aBST's BST is not empty
   if(aBST.root != nullptr) {
+    //Create a new BSTNode using the root element of aBST
     BSTNode* newBSTNode = new BSTNode(aBST.root->element);
+    // Perform a deep copy of rhs BST's nodes starting from newBSTNode and root of aBST's BST 
     deepCopyR(newBSTNode, aBST.root);
-    elementCount = aBST.elementCount;
+    // Update root pointer and element count of current BST
     root = newBSTNode;
-  }   
-}
+    elementCount = aBST.elementCount;
+  }
+}                
 
 // Overloaded oeprator
 // Description: Assignment (=) operator: copy (assign) "rhs" BST 
 //              object to "this" BST object such that both objects
 //              are an exact, yet independent, copy of each other.
 void BST::operator=(const BST & rhs) { 
-  // to do
+  // Check if rhs BST is not empty
   if(rhs.root != nullptr) {
+    //Create a new BSTNode using the root element of the rhs BST
     BSTNode* newBSTNode = new BSTNode(rhs.root->element);
+    // Perform a deep copy of rhs BST's nodes starting from newBSTNode and root of rhs BST 
     deepCopyR(newBSTNode, rhs.root);
+    // Update root pointer and element count of current BST
     root = newBSTNode;
     elementCount = rhs.elementCount;
   }
@@ -106,7 +78,61 @@ BST::~BST() {
   destroyBST(root);
 }                
 
+/* Helper Functions */
 
+// Description: Recursively copies all nodes from the given source BST to the current BST.
+// Precondition: 'rhsCurrent' is the root of a non-empty BST to be copied. 
+// Postcondition: 'thisCurrent' and its subtree are a deep copy of 'rhsCurrent' and its subtree.
+// Exception: Throws an exception if memory allocation fails.
+// Time Efficiency: O(n), where n is the number of nodes in the BST.
+void BST::deepCopyR(BSTNode* thisCurrent, BSTNode* rhsCurrent) {
+  // Pointers to new BSTNodes for left and right children of current BSTNode
+  BSTNode* insertLeft = nullptr;
+  BSTNode* insertRight = nullptr;
+
+  // Copy left child of rhs BST to current BST, if it exists
+  if(rhsCurrent->hasLeft()) {
+    insertLeft = new(nothrow) BSTNode(rhsCurrent->left->element);
+  }
+
+  // Copy right child of rhs BST to current BST, if it exists
+  if(rhsCurrent->hasRight()) {
+    insertRight = new(nothrow) BSTNode(rhsCurrent->right->element);
+  }
+
+  // Update left and right child pointers of current node
+  thisCurrent->left = insertLeft;
+  thisCurrent->right = insertRight;
+
+  // Recursively copy the left subtree, if it exists
+  if(thisCurrent->hasLeft()) {
+    deepCopyR(thisCurrent->left, rhsCurrent->left);
+  }
+
+  // Recursively copy right subtree, if it exists
+  if(thisCurrent->hasRight()) {
+    deepCopyR(thisCurrent->right, rhsCurrent->right);
+  }
+}
+
+// Description: Recursively destroys a BST starting from the given node.
+// Postcondition: The BST starting from "current" is destroyed, and memory is freed.
+// Time Efficiency: O(n)
+void BST::destroyBST(BSTNode* current) {  
+  // Base case: If current BSTNode is nullptr, return
+  if(current == nullptr) {
+    return;
+  }
+
+  // Recursively destroy left subtree
+  destroyBST(current->left);
+
+  // Recursively destroy right subtree
+  destroyBST(current->right);
+
+  // delete current BSTNode
+  delete current; 
+}
  
  
 /* BST Public Interface */
@@ -129,18 +155,24 @@ unsigned int BST::getElementCount() const {
 // Time efficiency: O(log2 n)   
 void BST::insert(WordPair & newElement) {
 
-  // to do
+  // Create a new BSTNode for the new element
   BSTNode *newBSTNode = new(nothrow) BSTNode(newElement);
   if(newBSTNode == nullptr) {
     throw UnableToInsertException("Memory could not be allocated for new node");
   }
+
+  // If the tree is empty, set the new BSTNode as the root
   if(root == nullptr) {
     root = newBSTNode;
     elementCount++;
     return;
   }
-  bool result = insertR(newBSTNode, root);
-  if(!result) {
+
+  // Call the recursive insertR method to insert the new BSTNode into BST and retrive result
+  bool hasBeenInserted = insertR(newBSTNode, root);
+
+  if(!hasBeenInserted) {
+    // If insertion was unsuccessful, delete the allocated node and throw exception
     delete newBSTNode;
     throw ElementAlreadyExistsException("Element Already Exists");
   } else {
@@ -153,28 +185,41 @@ void BST::insert(WordPair & newElement) {
 //              Returns true when "anElement" has been successfully inserted into the 
 //              BST. Otherwise, returns false.
 bool BST::insertR(BSTNode * newBSTNode, BSTNode * current) {  
-// to do
-  BSTNode* next = nullptr;
+  
+  // to do
+
+  // Initialize the next BSTNode for recursion
+  BSTNode* nextBSTNode = nullptr;
+
+  // If new BSTNode's value is less than the current BSTNode's value
   if(newBSTNode->element == current->element) {
-    return false;
+    return false; // Element already exists, insertion failed
   }
+
+  // If new node's value is less than current node's value
   if(newBSTNode->element < current->element) {
+    // If left child of current BSTNode is empty
     if(current->left == nullptr) {
-      current->left = newBSTNode;
-      return true;
+      current->left = newBSTNode; // Insert new node as left child
+      return true; // Successful insertion
     } else {
-      next = current->left;
+      nextBSTNode = current->left; // For recursive call to traverse to left child
     }
   }
+
+  // If new BSTNode's value is greater than the current BSTNode's value
   if(newBSTNode->element > current->element) {
+    // If the right child of the current BSTNode is empty
     if(current->right == nullptr) {
-      current->right = newBSTNode;
-      return true;
+      current->right = newBSTNode; // Insert newBSTNode as right child
+      return true; // Successful insertion
     } else { 
-      next = current->right;
+      nextBSTNode = current->right; // For recursive call to traverse to right child
     }
   }
-  return insertR(newBSTNode, next);
+
+  // Recursively call insertR with the new BSTNode and appropiate child BSTNode
+  return insertR(newBSTNode, nextBSTNode);
 }
 
 
@@ -207,18 +252,23 @@ WordPair& BST::retrieve(WordPair & targetElement) const {
 // Postcondition: This method does not change the BST.
 WordPair& BST::retrieveR(WordPair & targetElement, BSTNode * current) const {
 
-// to do
+  // If the current BSTNode is not null, continue searching
   if(current != nullptr) {
+    //If the current BSTNode contains the targetElement, return its element
     if(current->element == targetElement) {
       return current->element;
     }	
+    //If the targetElement is greater than current BSTNode's element, search right subtree
     if(current->element < targetElement) {
       return retrieveR(targetElement, current->right);
     }
+    //If the targetElement is greater than current BSTNode's element, search left subtree
     if(current->element > targetElement) {
       return retrieveR(targetElement, current->left);
     }
   }
+
+  // If the element is not found, throw an exception
   throw ElementDoesNotExistException("Element does not exist");
 }  
 
@@ -247,17 +297,20 @@ void BST::traverseInOrder(void visit(WordPair &)) const {
 // Postcondition: This method does not change the BST. 
 void BST::traverseInOrderR(void visit(WordPair &), BSTNode* current) const { 
 
-  // to do
-  if(current == nullptr) {
-    return;
-  }
-  if(current->hasRight()) {
-    traverseInOrderR(visit, current->right);
-  }  
-  visit(current->element);
+  // Order: Left, Visit, Right
+  
+  // Traverse left subtree, if it exists
   if(current->hasLeft()) {
     traverseInOrderR(visit, current->left);
   } 
+
+  // Call visit function on current BSTNode's element
+  visit(current->element);
+
+  // Traverse right subtree first, if it exists
+  if(current->hasRight()) {
+    traverseInOrderR(visit, current->right);
+  }  
 }
 
 // clang-format on
