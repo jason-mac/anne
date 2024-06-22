@@ -127,18 +127,18 @@ using std::nothrow;
    void BST::insert(WordPair & newElement) {
   
       // to do
-      BSTNode *newBSTNode = new BSTNode(newElement);
+      BSTNode *newBSTNode = new(nothrow) BSTNode(newElement);
       if(newBSTNode == nullptr) {
         throw UnableToInsertException("Memory could not be allocated for new node");
       }
       if(root == nullptr) {
         root = newBSTNode;
         elementCount++;
-        cout << "insert first node" << endl;
         return;
       }
       bool result = insertR(newBSTNode, root);
       if(!result) {
+        delete newBSTNode;
         throw ElementAlreadyExistsException("Element Already Exists");
       } else {
         elementCount++;
