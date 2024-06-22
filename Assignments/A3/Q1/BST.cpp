@@ -153,6 +153,7 @@ using std::nothrow;
    bool BST::insertR(BSTNode * newBSTNode, BSTNode * current) {  
     
 	  // to do
+    bool result;
     if(!(newBSTNode->element == current->element)) {
       
       if(newBSTNode->element < current->element) {
@@ -160,7 +161,7 @@ using std::nothrow;
           current->left = newBSTNode;
           return true;
         } else {
-          return insertR(newBSTNode, current->left);
+          result = insertR(newBSTNode, current->left);
         }
       }
       if(newBSTNode->element > current->element) {
@@ -168,11 +169,13 @@ using std::nothrow;
           current->right = newBSTNode;
           return true;
         } else { 
-          return insertR(newBSTNode, current->right);
+          result = insertR(newBSTNode, current->right);
         }
       }
+    } else {
+      return false;
     }
-    return true;
+    return result;
   }
 
    
