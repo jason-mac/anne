@@ -210,10 +210,10 @@ using std::nothrow;
         return current->element;
       }	
       if(current->element < targetElement) {
-        retrieveR(targetElement, current->right);
+        return retrieveR(targetElement, current->right);
       }
       if(current->element > targetElement) {
-        retrieveR(targetElement, current->left);
+        return retrieveR(targetElement, current->left);
       }
     }
     throw ElementDoesNotExistException("Element does not exist");
