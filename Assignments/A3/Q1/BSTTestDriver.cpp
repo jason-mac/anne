@@ -84,7 +84,9 @@ int main(int argc, char *argv[]) {
       myfile.close();
         // More BST testing happening here!
 	      cout << "ElementCount: " << testing->getElementCount() << endl;
+        cout << "------TRAVERSING-START--" << endl;
         testing->traverseInOrder(display);
+        cout << "------TRAVERSING END----" << endl;
       } else { 
         cout << "Unable to open file" << endl;
       }
