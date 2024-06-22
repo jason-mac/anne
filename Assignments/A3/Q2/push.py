@@ -12,7 +12,7 @@ def run():
     """
     try:
         subprocess.run(["git", "add", "."], check=True)
-        subprocess.run(["git", "commit", "-m", "A3Q1"], check=True)
+        subprocess.run(["git", "commit", "-m", "A3Q2"], check=True)
         subprocess.run(["git", "push"], check=True)
     except subprocess.CalledProcessError as e:
         print(f"An error occurred: {e}")
