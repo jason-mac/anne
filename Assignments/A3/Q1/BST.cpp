@@ -18,6 +18,7 @@
 #include "ElementDoesNotExistException.h"
 #include "UnableToInsertException.h"
 #include "WordPair.h"
+#include <cstdlib>
 #include <iostream>
 
 using std::cout;
@@ -153,29 +154,26 @@ using std::nothrow;
    bool BST::insertR(BSTNode * newBSTNode, BSTNode * current) {  
     
 	  // to do
-    bool result;
-    if(!(newBSTNode->element == current->element)) {
-      
-      if(newBSTNode->element < current->element) {
-        if(current->left == nullptr) {
-          current->left = newBSTNode;
-          return true;
-        } else {
-          result = insertR(newBSTNode, current->left);
-        }
-      }
-      if(newBSTNode->element > current->element) {
-        if(current->right == nullptr) {
-          current->right = newBSTNode;
-          return true;
-        } else { 
-          result = insertR(newBSTNode, current->right);
-        }
-      }
-    } else {
+    if(newBSTNode->element == current->element) {
       return false;
     }
-    return result;
+    if(newBSTNode->element < current->element) {
+      if(current->left == nullptr) {
+        current->left = newBSTNode;
+        return true;
+      } else {
+        return insertR(newBSTNode, current->left);
+      }
+    }
+    if(newBSTNode->element > current->element) {
+      if(current->right == nullptr) {
+        current->right = newBSTNode;
+        return true;
+      } else { 
+        return insertR(newBSTNode, current->right);
+      }
+    }
+    return EXIT_FAILURE;
   }
 
    
