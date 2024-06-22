@@ -97,15 +97,16 @@ int main(int argc, char *argv[]) {
     cout << "new failed!" << endl;	
   }
   WordPair targetElement("hello", "bonjour"); // Example target element
-    try {
-        WordPair& retrievedElement = testing->retrieve(targetElement);
-        cout << "Retrieved element: " << retrievedElement
-             << " - " << retrievedElement << endl;
-    } catch (const ElementDoesNotExistException& e) {
-       cerr << "Element does not exist: " << e.what() << endl;
-    } catch (...) {
-        cerr << "Unknown exception during retrieval" << endl;
-    }
+  testing->insert(targetElement);
+  try {
+      WordPair& retrievedElement = testing->retrieve(targetElement);
+      cout << "Retrieved element: " << retrievedElement
+           << " - " << retrievedElement << endl;
+  } catch (const ElementDoesNotExistException& e) {
+     cerr << "Element does not exist: " << e.what() << endl;
+  } catch (...) {
+      cerr << "Unknown exception during retrieval" << endl;
+  }
   delete testing; 
 
   return 0;
