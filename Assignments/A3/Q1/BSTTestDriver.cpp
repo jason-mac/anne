@@ -67,7 +67,6 @@ int main(int argc, char *argv[]) {
           WordPair aWordPair(englishW, translationW);
           
 		  // insert aWordPair into "testing" using a try/catch block
-      cout << aWordPair << endl;
       try {
               testing->insert(aWordPair);
           } catch (const ElementAlreadyExistsException &e) {
@@ -85,6 +84,7 @@ int main(int argc, char *argv[]) {
       myfile.close();
         // More BST testing happening here!
 	      cout << "ElementCount: " << testing->getElementCount() << endl;
+        testing->traverseInOrder(display);
       } else { 
         cout << "Unable to open file" << endl;
       }
