@@ -27,6 +27,7 @@ using std::cin;
 using std::cout;
 using std::ifstream;
 using std::nothrow;
+using std::cerr
 
 
 void display(WordPair& anElement) {
@@ -66,8 +67,13 @@ int main(int argc, char *argv[]) {
           WordPair aWordPair(englishW, translationW);
           
 		  // insert aWordPair into "testing" using a try/catch block
-          testing->insert(aWordPair);
-        }
+      try {
+            testing->insert(aWordPair);
+        } catch (const exception &e) {
+            cerr << "Exception during insertion: " << e.what() << endl;
+        } catch (...) {
+            cerr << "Unknown exception during insertion" << endl;
+        }      }
         myfile.close();
 
         // More BST testing happening here!
