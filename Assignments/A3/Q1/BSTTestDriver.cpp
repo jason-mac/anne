@@ -83,7 +83,7 @@ int main(int argc, char *argv[]) {
       myfile.close();
       }
         // More BST testing happening here!
-		
+	      cout << "ElementCount: " << testing->getElementCount() << endl;
       } else { 
         cout << "Unable to open file" << endl;
       }
