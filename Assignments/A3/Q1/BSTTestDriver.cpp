@@ -67,19 +67,20 @@ int main(int argc, char *argv[]) {
           WordPair aWordPair(englishW, translationW);
           
 		  // insert aWordPair into "testing" using a try/catch block
-      try {
-              testing->insert(aWordPair);
-          } catch (const ElementAlreadyExistsException &e) {
-              cerr << "Element already exists: " << e.what() << endl;
-          } catch (const ElementDoesNotExistException &e) {
-              cerr << "Element does not exist: " << e.what() << endl;
-          } catch (const EmptyDataCollectionException &e) {
-              cerr << "Data collection is empty: " << e.what() << endl;
-          } catch (const UnableToInsertException &e) {
-              cerr << "Unable to insert element: " << e.what() << endl;
-          } catch (...) {
-              cerr << "Unknown exception during insertion" << endl;
-          }
+        try {
+            testing->insert(aWordPair);
+        } catch (const ElementAlreadyExistsException &e) {
+            cerr << "Element already exists: " << e.what() << endl;
+            cout << aWordPair << " already exists" << endl;
+        } catch (const ElementDoesNotExistException &e) {
+            cerr << "Element does not exist: " << e.what() << endl;
+        } catch (const EmptyDataCollectionException &e) {
+            cerr << "Data collection is empty: " << e.what() << endl;
+        } catch (const UnableToInsertException &e) {
+            cerr << "Unable to insert element: " << e.what() << endl;
+        } catch (...) {
+            cerr << "Unknown exception during insertion" << endl;
+        }
       }
       myfile.close();
         // More BST testing happening here!
