@@ -31,11 +31,17 @@ int main () {
   string theBirthday = "";
 
   Profile peekedProfile;
-  cout << "Peeking before enqueuing:" << endl;
-  peekedProfile = aQueue->peek();
-  cout << "Now, let's have a look at the peeked Profile:" << endl;
-  cout << peekedProfile << endl;
-  cout << "\nTest Driver - Start" << endl << endl;
+  try {
+    cout << "Peeking before enqueuing:" << endl;
+    peekedProfile = aQueue->peek();
+    cout << "Now, let's have a look at the peeked Profile:" << endl;
+    cout << peekedProfile << endl;
+    cout << "\nTest Driver - Start" << endl << endl;
+  }
+  catch(EmptyQueueException& anException) {
+    cout << "peek() failed: " << anException.what() << endl << endl;
+    // recoverty code goes here
+  }
     
   while( not cin.eof() ) {   // while (there is data to be read from cin)   
     getline(cin >> ws, theUserName);	  
