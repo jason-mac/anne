@@ -169,8 +169,9 @@ using std::nothrow;
       } else { 
       result = insertR(newBSTNode, current->right);
       }
+    }
     return result;
-   }
+  }
 
    
    // Description: Retrieves "targetElement" from the BST.
@@ -255,4 +256,4 @@ using std::nothrow;
     } 
    }
 
-  // clang-format on
+// clang-format on
