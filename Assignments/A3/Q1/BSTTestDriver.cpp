@@ -27,7 +27,7 @@ using std::cin;
 using std::cout;
 using std::ifstream;
 using std::nothrow;
-using std::cerr
+using std::cerr;
 
 
 void display(WordPair& anElement) {
