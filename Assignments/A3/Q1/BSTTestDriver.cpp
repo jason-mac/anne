@@ -96,6 +96,16 @@ int main(int argc, char *argv[]) {
   } else { 
     cout << "new failed!" << endl;	
   }
+  WordPair targetElement("hello", "bonjour"); // Example target element
+  try {
+      WordPair& retrievedElement = testing->retrieve(targetElement);
+      cout << "Retrieved element: " << retrievedElement.getEnglishWord()
+           << " - " << retrievedElement << endl;
+  } catch (const ElementDoesNotExistException& e) {
+      cerr << "Element does not exist: " << e.what() << endl;
+  } catch (...) {
+      cerr << "Unknown exception during retrieval" << endl;
+  }
   delete testing; 
 
   return 0;

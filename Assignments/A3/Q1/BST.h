@@ -35,12 +35,12 @@ private:
    
    // Feel free to add private methods to this class.
    
-   void deepCopy(BSTNode* thisCurrent, BSTNode* rhsCurrent);
+   void deepCopyR(BSTNode* thisCurrent, BSTNode* rhsCurrent);
 
    void destroyBST(BSTNode* current);
-   // Description: Recursive insertion into a BST.
-   //              Returns true when "anElement" has been successfully inserted into the 
-   //              BST. Otherwise, returns false.
+   // description: recursive insertion into a bst.
+   //              returns true when "anelement" has been successfully inserted into the 
+   //              bst. otherwise, returns false.
    bool insertR(BSTNode * newBSTNode, BSTNode * current);
 
    // Description: Recursive retrieval from a BST.
