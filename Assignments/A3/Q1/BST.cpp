@@ -32,79 +32,83 @@ using std::nothrow;
 // class because the prototype of these public methods don't match, 
 // we won't be able to successfully mark your assignment.
 
+/* Helper Functions */
+
+// Description: Recursively copies all nodes from the given source BST to the current BST.
+// Precondition: 'rhsCurrent' is the root of a non-empty BST to be copied. 
+// Postcondition: 'thisCurrent' and its subtree are a deep copy of 'rhsCurrent' and its subtree.
+// Exception: Throws an exception if memory allocation fails.
+// Time efficiency: O(n), where n is the number of nodes in the BST.
+void BST::deepCopyR(BSTNode* thisCurrent, BSTNode* rhsCurrent) {
+  BSTNode* insertLeft = nullptr;
+  BSTNode* insertRight = nullptr;
+  if(rhsCurrent->hasLeft()) {
+    insertLeft = new(nothrow) BSTNode(rhsCurrent->left->element);
+  }
+  if(rhsCurrent->hasRight()) {
+    insertRight = new(nothrow) BSTNode(rhsCurrent->right->element);
+  }
+  thisCurrent->left = insertLeft;
+  thisCurrent->right = insertRight;
+  if(thisCurrent->hasLeft()) {
+    deepCopyR(thisCurrent->left, rhsCurrent->left);
+  }
+  if(thisCurrent->hasRight()) {
+    deepCopyR(thisCurrent->right, rhsCurrent->right);
+  }
+}
+
+void BST::destroyBST(BSTNode* current) {  
+  if(current == nullptr) {
+    return;
+  }
+  destroyBST(current->left);
+  destroyBST(current->right);
+  delete current; 
+}
 
 /* Constructors and destructor */
 
-   // Default constructor
-   BST::BST() { }            
+// Default constructor
+BST::BST() { }            
 
-   // Copy constructor
-   BST::BST(const BST & aBST) {
-	  // to do
-    if(aBST.root != nullptr) {
-      BSTNode* newBSTNode = new BSTNode(aBST.root->element);
-      deepCopyR(newBSTNode, aBST.root);
-      elementCount = aBST.elementCount;
-      root = newBSTNode;
-    }
-       
-   }
+// Copy constructor
+BST::BST(const BST & aBST) {
+  // to do
+  if(aBST.root != nullptr) {
+    BSTNode* newBSTNode = new BSTNode(aBST.root->element);
+    deepCopyR(newBSTNode, aBST.root);
+    elementCount = aBST.elementCount;
+    root = newBSTNode;
+  }   
+}
 
-    void BST::deepCopyR(BSTNode* thisCurrent, BSTNode* rhsCurrent) {
-      BSTNode* insertLeft = nullptr;
-      BSTNode* insertRight = nullptr;
-      if(rhsCurrent->hasLeft()) {
-        insertLeft = new BSTNode(rhsCurrent->left->element);
-      }
-      if(rhsCurrent->hasRight()) {
-        insertRight = new BSTNode(rhsCurrent->right->element);
-      }
-      thisCurrent->left = insertLeft;
-      thisCurrent->right = insertRight;
-      if(thisCurrent->hasLeft()) {
-        deepCopyR(thisCurrent->left, rhsCurrent->left);
-      }
-      if(thisCurrent->hasRight()) {
-        deepCopyR(thisCurrent->right, rhsCurrent->right);
-      }
-    }
-   
-   // Overloaded oeprator
-   // Description: Assignment (=) operator: copy (assign) "rhs" BST 
-   //              object to "this" BST object such that both objects
-   //              are an exact, yet independent, copy of each other.
-   void BST::operator=(const BST & rhs) {
-      
-      // to do
-    if(rhs.root) {
-      BSTNode* newBSTNode = new BSTNode(rhs.root->element);
-      deepCopyR(newBSTNode, rhs.root);
-      root = newBSTNode;
-      elementCount = rhs.elementCount;
-    }
-	  return;
-	  
-   }                
+// Overloaded oeprator
+// Description: Assignment (=) operator: copy (assign) "rhs" BST 
+//              object to "this" BST object such that both objects
+//              are an exact, yet independent, copy of each other.
+void BST::operator=(const BST & rhs) { 
+  // to do
+  if(rhs.root != nullptr) {
+    BSTNode* newBSTNode = new BSTNode(rhs.root->element);
+    deepCopyR(newBSTNode, rhs.root);
+    root = newBSTNode;
+    elementCount = rhs.elementCount;
+  }
+  return;
+}                
 
-    void BST::destroyBST(BSTNode* current) {  
-      if(current == nullptr) {
-        return;
-      }
-      destroyBST(current->left);
-      destroyBST(current->right);
-      delete current; 
-    }
-   
-   // Destructor 
-   BST::~BST() {
 
-      // to do
-      destroyBST(root);
-   }                
-    
-  
-   
-   
+// Destructor 
+BST::~BST() {
+
+  // to do
+  destroyBST(root);
+}                
+
+
+ 
+ 
 /* BST Public Interface */
  
 // Description: Returns the number of elements currently stored in the BST.   
@@ -150,6 +154,7 @@ void BST::insert(WordPair & newElement) {
 //              BST. Otherwise, returns false.
 bool BST::insertR(BSTNode * newBSTNode, BSTNode * current) {  
 // to do
+  BSTNode* next = nullptr;
   if(newBSTNode->element == current->element) {
     return false;
   }
@@ -158,7 +163,7 @@ bool BST::insertR(BSTNode * newBSTNode, BSTNode * current) {
       current->left = newBSTNode;
       return true;
     } else {
-      return insertR(newBSTNode, current->left);
+      next = current->left;
     }
   }
   if(newBSTNode->element > current->element) {
@@ -166,10 +171,10 @@ bool BST::insertR(BSTNode * newBSTNode, BSTNode * current) {
       current->right = newBSTNode;
       return true;
     } else { 
-      return insertR(newBSTNode, current->right);
+      next = current->right;
     }
   }
-  return EXIT_FAILURE;
+  return insertR(newBSTNode, next);
 }
 
 
