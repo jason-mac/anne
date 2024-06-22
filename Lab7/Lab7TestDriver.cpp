@@ -30,20 +30,18 @@ int main () {
   string theEmail = "";
   string theBirthday = "";
 
-
+  Profile peekedProfile;
+  cout << "Peeking before enqueuing:" << endl;
+  peekedProfile = aQueue->peek();
+  cout << "Now, let's have a look at the peeked Profile:" << endl;
+  cout << peekedProfile << endl;
   cout << "\nTest Driver - Start" << endl << endl;
     
   while( not cin.eof() ) {   // while (there is data to be read from cin)   
-    try {
-      getline(cin >> ws, theUserName);	  
-      getline(cin >> ws, theName);
-      getline(cin >> ws, theEmail);
-      getline(cin >> ws, theBirthday);      
-    } 
-    catch (EmptyQueueException& anException) {
-      cout << "peek() unsuccesful becuause " << anException.what() << endl << endl;
-      // Recvoery code goes here
-    }
+    getline(cin >> ws, theUserName);	  
+    getline(cin >> ws, theName);
+    getline(cin >> ws, theEmail);
+    getline(cin >> ws, theBirthday);      
     
 	// For testing purposes:
 	// cout << "\n***Read: " << theUserName << ", " << theName << ", " <<  theEmail << ", " <<  theBirthday << endl; 
