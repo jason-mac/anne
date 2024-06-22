@@ -150,23 +150,26 @@ using std::nothrow;
    bool BST::insertR(BSTNode * newBSTNode, BSTNode * current) {  
     
 	  // to do
-    if(current->element == newBSTNode->element) {
+    bool result;
+    if(newBSTNode->element == current->element) {
       return false;
     }
-    if(current->isLeaf()) {
-      if(newBSTNode->element < current->element) {
+    if(newBSTNode->element < current->element) {
+      if(current->left == nullptr) {
         current->left = newBSTNode;
+        return true;
       } else {
-        current->right = newBSTNode;
+        result = insertR(newBSTNode, current->left);
       }
-      return true;
-    } 
-    if(current->element < newBSTNode->element) {
-      insertR(newBSTNode, current->right);
-    } else {
-      insertR(newBSTNode, current->left);
     }
-    return true;
+    if(newBSTNode->element > current->element) {
+      if(current->right == nullptr) {
+        current->right = newBSTNode;
+        return true;
+      } else { 
+      result = insertR(newBSTNode, current->right);
+      }
+    return result;
    }
 
    
@@ -252,4 +255,4 @@ using std::nothrow;
     } 
    }
 
-// clang-format on
+  // clang-format on
