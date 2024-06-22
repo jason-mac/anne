@@ -1,3 +1,4 @@
+// clang-format off
 /*
  * Lab6TestDriver.cpp - Lab 7
  * 
@@ -33,10 +34,16 @@ int main () {
   cout << "\nTest Driver - Start" << endl << endl;
     
   while( not cin.eof() ) {   // while (there is data to be read from cin)   
-    getline(cin >> ws, theUserName);	  
-    getline(cin >> ws, theName);
-    getline(cin >> ws, theEmail);
-    getline(cin >> ws, theBirthday);      
+    try {
+      getline(cin >> ws, theUserName);	  
+      getline(cin >> ws, theName);
+      getline(cin >> ws, theEmail);
+      getline(cin >> ws, theBirthday);      
+    } 
+    catch (EmptyQueueException& anException) {
+      cout << "peek() unsuccesful becuause " << anException.what() << endl << endl;
+      // Recvoery code goes here
+    }
     
 	// For testing purposes:
 	// cout << "\n***Read: " << theUserName << ", " << theName << ", " <<  theEmail << ", " <<  theBirthday << endl; 
@@ -54,3 +61,4 @@ int main () {
   
   return 0;
 }
+// clang-format on
