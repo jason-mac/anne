@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
               cerr << "Unknown exception during insertion" << endl;
           }
       myfile.close();
-
+      }
         // More BST testing happening here!
 		
       } else { 
@@ -98,4 +98,4 @@ int main(int argc, char *argv[]) {
   return 0;
 }
 
-  // clang-format on
+// clang-format on
