@@ -80,8 +80,8 @@ int main(int argc, char *argv[]) {
           } catch (...) {
               cerr << "Unknown exception during insertion" << endl;
           }
-      myfile.close();
       }
+      myfile.close();
         // More BST testing happening here!
 	      cout << "ElementCount: " << testing->getElementCount() << endl;
       } else { 
