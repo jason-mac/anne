@@ -134,6 +134,7 @@ using std::nothrow;
       }
       if(root == nullptr) {
         root = newBSTNode;
+        elementCount++;
         cout << "insert first node" << endl;
         return;
       }
@@ -171,7 +172,7 @@ using std::nothrow;
         }
       }
     }
-    return false;
+    return true;
   }
 
    
