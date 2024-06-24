@@ -81,6 +81,8 @@ int main(int argc, char* arcv[]) {
   } else {
     cout << "Unable to open file" << endl;
   } 
+  translationFile.close();
+  delete dictionary;
 }
 
 // clang-format on
