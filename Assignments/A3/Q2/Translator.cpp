@@ -2,7 +2,7 @@
 /*
  * Translator.cpp
  * 
- * Description: Drives the testing of the BST ADT class. 
+ * Description: Drives the translation of the BST ADT class. 
  *
  * Author: AL
  * Last Modification Date: June 2024
@@ -33,76 +33,54 @@ using std::cerr;
 
 void display(WordPair& anElement) {
   cout << anElement;
-} 
+}
 
-
-// As you discover what main() does, record your understanding of the code by commenting it.
-// If you do not like this main(), feel free to write your own.
-// Remember, this is a test driver. Feel free to modify it as you wish!
-int main(int argc, char *argv[]) {
-  
-  Dictionary * testing = new Dictionary();
-  if (testing != nullptr) {
-      
-    string aLine = "";
-    string aWord = "";
-    string englishW = "";
-    string translationW = "";
-    string filename = "";
-    string delimiter = ":";
-    size_t pos = 0;
-    WordPair translated;
-	 
-    // Expecting at least a filename on the command line.
-    if ( ( argc > 1 ) ) {
-      filename = argv[1];
-
-      ifstream myfile(filename);
-      if (myfile.is_open()) {
-        cout << "Reading from a file:" << endl;  // For debugging purposes
-        while ( getline (myfile,aLine) ) {
-          pos = aLine.find(delimiter);    
-          englishW = aLine.substr(0, pos);
-          aLine.erase(0, pos + delimiter.length());
-          translationW = aLine;
-          WordPair aWordPair(englishW, translationW);
-          
-		  // insert aWordPair into "testing" using a try/catch block
-      try {
-              testing->put(aWordPair);
-          } catch (const ElementAlreadyExistsException &e) {
-              cerr << "Element already exists: " << e.what() << endl;
-          } catch (const ElementDoesNotExistException &e) {
-              cerr << "Element does not exist: " << e.what() << endl;
-          } catch (const EmptyDataCollectionException &e) {
-              cerr << "Data collection is empty: " << e.what() << endl;
-          } catch (const UnableToInsertException &e) {
-              cerr << "Unable to insert element: " << e.what() << endl;
-          } catch (...) {
-              cerr << "Unknown exception during insertion" << endl;
-          }
-      }
-      myfile.close();
-        // More BST testing happening here!
-	      cout << "ElementCount: " << testing->getElementCount() << endl;
-        cout << "------TRAVERSING-START--" << endl;
-        testing->displayContent(display);
-        cout << "------TRAVERSING END----" << endl;
-        cout << "Geting words in english to french" << endl;
-        cout << "English->French" << endl;
-        cout << "Nurse: " << testing->get(WordPair("Nurse").getTranslation());
-      } else { 
-        cout << "Unable to open file" << endl;
-      }
-    } else {
-      cout << "Missing the data filename!" << endl;
-    }
-  } else { 
-    cout << "new failed!" << endl;	
+int main(int argc, char* arcv[]) {
+  ifstream translationFile("myDataFile.txt");
+  Dictionary* dictionary = new(nothrow) Dictionary();
+  if(dictionary == nullptr) {
+    cout << "Memory allocation of new dictionary failed, program terminating...";
+    return EXIT_FAILURE;
   }
-  delete testing; 
-
-  return 0;
+  
+  string aLine = "";
+  string aWord = "";
+  string englishW = "";
+  string translationW = "";
+  string filename = "";
+  string delimiter = ":";
+  size_t pos = 0;
+  WordPair translated;
+  if(translationFile.is_open()) {
+    
+      cout << "Reading from a file:" << endl;  // For debugging purposes
+      
+      while ( getline (translationFile,aLine) ) {
+        pos = aLine.find(delimiter);    
+        englishW = aLine.substr(0, pos);
+        aLine.erase(0, pos + delimiter.length());
+        translationW = aLine;
+        WordPair aWordPair(englishW, translationW);
+        
+    // insert aWordPair into "translation" using a try/catch block
+    try {
+            dictionary->put(aWordPair);
+        } catch (const ElementAlreadyExistsException &e) {
+            cerr << "Element already exists: " << e.what() << endl;
+        } catch (const ElementDoesNotExistException &e) {
+            cerr << "Element does not exist: " << e.what() << endl;
+        } catch (const EmptyDataCollectionException &e) {
+            cerr << "Data collection is empty: " << e.what() << endl;
+        } catch (const UnableToInsertException &e) {
+            cerr << "Unable to insert element: " << e.what() << endl;
+        } catch (...) {
+            cerr << "Unknown exception during insertion" << endl;
+        }
+    }
+    translationFile.close();
+  } else {
+    cout << "Unable to open file" << endl;
+  } 
 }
 
 // clang-format on

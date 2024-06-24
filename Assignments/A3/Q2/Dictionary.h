@@ -7,7 +7,7 @@
  * 
  * Class invariant: Duplicated elements are not allowed.
  *              
- * Author: AL
+ * Author: Jason Mac, Jagyjot Parmar 
  * Date of last modification: June 2024
  */
 
