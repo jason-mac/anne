@@ -40,7 +40,7 @@ void display(WordPair& anElement) {
 // Remember, this is a test driver. Feel free to modify it as you wish!
 int main(int argc, char *argv[]) {
   BST * testOne = new BST();
-  BST * testTwo = new BST();
+  BST * testTwo = nullptr;
   WordPair one("apple", "theapple");
   WordPair two("banana", "thebanana");
   WordPair three("pear", "thepear");
