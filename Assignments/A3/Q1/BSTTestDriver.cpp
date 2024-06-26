@@ -39,7 +39,38 @@ void display(WordPair& anElement) {
 // If you do not like this main(), feel free to write your own.
 // Remember, this is a test driver. Feel free to modify it as you wish!
 int main(int argc, char *argv[]) {
+  BST * testOne = new BST();
+  BST * testTwo = new BST();
+  WordPair one("Apple", "theApple");
+  WordPair two("Banana", "theBanana");
+  WordPair three("Pear", "thePear");
 
+  testOne->insert(one);
+  testOne->insert(two);
+  testOne->insert(three);
+  
+  testTwo = new BST(*testOne);
+  BST* testThree = new BST(*testOne);
+
+  cout << "TEST ONE" << endl;
+  cout << "ElementCount: " << testTwo->getElementCount() << endl;
+  cout << "------TRAVERSING-START--" << endl;
+  testing->traverseInOrder(display);
+  cout << "------TRAVERSING END----" << endl;
+
+
+  cout << "TEST TWO" << endl;
+  cout << "ElementCount: " << testTwo->getElementCount() << endl;
+  cout << "------TRAVERSING-START--" << endl;
+  testing->traverseInOrder(display);
+  cout << "------TRAVERSING END----" << endl;
+
+  cout << "TEST THREE" << endl;
+  cout << "ElementCount: " << testThree->getElementCount() << endl;
+  cout << "------TRAVERSING-START--" << endl;
+  testing->traverseInOrder(display);
+  cout << "------TRAVERSING END----" << endl;
+  /*
   BST * testing = new(nothrow) BST();
   if (testing != nullptr) {
       
@@ -84,6 +115,7 @@ int main(int argc, char *argv[]) {
         }
       }
       myfile.close();
+      
         // More BST testing happening here!
 	      cout << "ElementCount: " << testing->getElementCount() << endl;
         cout << "------TRAVERSING-START--" << endl;
@@ -109,7 +141,10 @@ int main(int argc, char *argv[]) {
   } catch (...) {
       cerr << "Unknown exception during retrieval" << endl;
   }
-  delete testing; 
+  delete testing; */
+
+
+  
 
   return 0;
 }
