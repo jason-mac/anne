@@ -136,7 +136,7 @@ int main(int argc, char *argv[]) {
   BST * testFour = new BST();
   try {
     WordPair find("what");
-    WordPair& translation = testOne->retrieve(find);
+    WordPair& translation = testFour->retrieve(find);
     cout << "Translation of " << find.getEnglish() << " is: " << translation.getTranslation() << endl;
   } 
   catch (EmptyDataCollectionException& e) {
