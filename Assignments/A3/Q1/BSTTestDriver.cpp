@@ -68,6 +68,7 @@ int main(int argc, char *argv[]) {
           
 		  // insert aWordPair into "testing" using a try/catch block
         try {
+            cout << "testing" << endl;
             testing->insert(aWordPair);
         } catch (const ElementAlreadyExistsException &e) {
             cerr << "Element already exists: " << e.what() << endl;

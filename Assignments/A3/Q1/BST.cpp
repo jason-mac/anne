@@ -43,7 +43,7 @@ BST::BST(const BST & aBST) {
   // Check if aBST's BST is not empty
   if(aBST.root != nullptr) {
     // Perform a deep copy of rhs BST's nodes starting from newBSTNode and root of aBST's BST   
-    deepCopyR(aBST.root);
+    this->deepCopyR(aBST.root);
   }
 }                
 
@@ -55,7 +55,7 @@ void BST::operator=(const BST & rhs) {
   // Check if rhs BST is not empty
   if(rhs.root != nullptr) {
     // Perform a deep copy of rhs BST's nodes starting from newBSTNode and root of rhs BST 
-    deepCopyR(rhs.root);
+    this->deepCopyR(rhs.root);
   }
 }                
 
