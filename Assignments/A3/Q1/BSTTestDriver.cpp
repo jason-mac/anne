@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
   BST* testThree = new BST(*testOne);
 
   cout << "TEST ONE" << endl;
-  cout << "ElementCount: " << testTwo->getElementCount() << endl;
+  cout << "ElementCount: " << testOne->getElementCount() << endl;
   cout << "------TRAVERSING-START--" << endl;
   testOne->traverseInOrder(display);
   cout << "------TRAVERSING END----" << endl;
@@ -82,7 +82,7 @@ int main(int argc, char *argv[]) {
 
 
   cout << "TEST ONE" << endl;
-  cout << "ElementCount: " << testTwo->getElementCount() << endl;
+  cout << "ElementCount: " << testOne->getElementCount() << endl;
   cout << "------TRAVERSING-START--" << endl;
   testOne->traverseInOrder(display);
   cout << "------TRAVERSING END----" << endl;
