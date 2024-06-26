@@ -133,6 +133,15 @@ int main(int argc, char *argv[]) {
   catch(...) {
     cout << "?????????????" << endl;
   }
+  BST * testFour = new BST();
+  try {
+    WordPair find("what");
+    WordPair& translation = testOne->retrieve(find);
+    cout << "Translation of " << find.getEnglish() << " is: " << translation.getTranslation() << endl;
+  } 
+  catch (EmptyDataCollectionException& e) {
+    cout << e.what() << endl;
+  }
   /*
   BST * testing = new(nothrow) BST();
   if (testing != nullptr) {

@@ -132,7 +132,7 @@ void BST::insert(WordPair & newElement) {
   // Create a new BSTNode for the new element
   BSTNode *newBSTNode = new(nothrow) BSTNode(newElement);
   if(newBSTNode == nullptr) {
-    throw UnableToInsertException("Memory allocation for new WordPair failed");
+    throw UnableToInsertException("Memory allocation for new WordPair failed.");
   }
 
   // If the tree is empty, set the new BSTNode as the root
@@ -148,7 +148,7 @@ void BST::insert(WordPair & newElement) {
   if(!hasBeenInserted) {
     // If insertion was unsuccessful, delete the allocated node and throw exception
     delete newBSTNode;
-    throw ElementAlreadyExistsException("Failed Insertion, a corresponding translation for " + newElement.getEnglish() + " has been found");
+    throw ElementAlreadyExistsException("Failed Insertion, a corresponding translation for \"" + newElement.getEnglish() + "\" has been found.");
   } else {
     elementCount++;
   }
@@ -240,7 +240,7 @@ WordPair& BST::retrieveR(WordPair & targetElement, BSTNode * current) const {
   }
 
   //If none of the previous conditions hold true, it must be the case that targetElement does not exist
-  throw ElementDoesNotExistException("No Translation for " + targetElement.getEnglish() + " currently exists.");
+  throw ElementDoesNotExistException("No Translation for \"" + targetElement.getEnglish() + "\" has been found.");
 
 }  
 
