@@ -142,6 +142,11 @@ int main(int argc, char *argv[]) {
   catch (EmptyDataCollectionException& e) {
     cout << e.what() << endl;
   }
+
+  delete testOne;
+  delete testTwo;
+  delete testThree;
+  delete testFour;
   /*
   BST * testing = new(nothrow) BST();
   if (testing != nullptr) {
