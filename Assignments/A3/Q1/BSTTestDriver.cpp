@@ -144,7 +144,7 @@ int main(int argc, char *argv[]) {
     cout << e.what() << endl;
   }
   try {
-    testFour->traverseInOrder(display());
+    testFour->traverseInOrder(display);
 
   }
   catch(EmptyDataCollectionException& e) {
