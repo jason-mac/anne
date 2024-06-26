@@ -132,7 +132,7 @@ void BST::insert(WordPair & newElement) {
   // Create a new BSTNode for the new element
   BSTNode *newBSTNode = new(nothrow) BSTNode(newElement);
   if(newBSTNode == nullptr) {
-    throw UnableToInsertException("Memory could not be allocated for newElement");
+    throw UnableToInsertException("Memory allocation for new WordPair failed");
   }
 
   // If the tree is empty, set the new BSTNode as the root
@@ -148,7 +148,7 @@ void BST::insert(WordPair & newElement) {
   if(!hasBeenInserted) {
     // If insertion was unsuccessful, delete the allocated node and throw exception
     delete newBSTNode;
-    throw ElementAlreadyExistsException("Element Already Exists");
+    throw ElementAlreadyExistsException("Failed Insertion, a corresponding translation for " + newElement.getEnglish() + " has been found");
   } else {
     elementCount++;
   }
@@ -211,7 +211,7 @@ or you can replace it using your own implementation. */
 WordPair& BST::retrieve(WordPair & targetElement) const {
   
  if (elementCount == 0)  
-    throw EmptyDataCollectionException("BST is empty.");
+    throw EmptyDataCollectionException("No Elements stored in Data Collection.");
 
  WordPair& translated = retrieveR(targetElement, root);
 
@@ -240,7 +240,7 @@ WordPair& BST::retrieveR(WordPair & targetElement, BSTNode * current) const {
   }
 
   //If none of the previous conditions hold true, it must be the case that targetElement does not exist
-  throw ElementDoesNotExistException("Element Does Not Exist");
+  throw ElementDoesNotExistException("No Translation for " + targetElement.getEnglish() + " currently exists.");
 
 }  
 
@@ -258,7 +258,7 @@ or you can replace it using your own implementation. */
 void BST::traverseInOrder(void visit(WordPair &)) const {
  
  if (elementCount == 0)  
-   throw EmptyDataCollectionException("BST is empty.");
+   throw EmptyDataCollectionException("No Elements stored in Data Collection");
 
  traverseInOrderR(visit, root);
  

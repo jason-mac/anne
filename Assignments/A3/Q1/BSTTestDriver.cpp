@@ -105,6 +105,13 @@ int main(int argc, char *argv[]) {
   //retrive
   cout << "testing retrive" << endl << endl; 
   try {
+    WordPair fail("apple", "newtranslation");
+    testOne->insert(fail);
+  }
+  catch(ElementAlreadyExistsException& exception) {
+    cout << exception.what() << endl;
+  } 
+  try {
     WordPair find("apple");
     WordPair& translation = testOne->retrieve(find);
     cout << "Translation of " << find.getEnglish() << " is: " << translation.getTranslation() << endl;
