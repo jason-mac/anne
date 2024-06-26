@@ -172,10 +172,10 @@ bool BST::insertR(BSTNode * newBSTNode, BSTNode * current) {
   if(newBSTNode->element < current->element) {
     // If left child of current BSTNode is empty
     if(current->hasLeft()) {
+      nextBSTNode = current->left;              // For recursive call to traverse to left child
+    } else {
       current->left = newBSTNode;               // Insert new node as left child
       return true;                              // Successful insertion
-    } else {
-      nextBSTNode = current->left;              // For recursive call to traverse to left child
     }
   }
 
@@ -183,10 +183,10 @@ bool BST::insertR(BSTNode * newBSTNode, BSTNode * current) {
   if(newBSTNode->element > current->element) {
     // If the right child of the current BSTNode is empty
     if(current->hasRight()) {
+      nextBSTNode = current->right;             // For recursive call to traverse to right child
+    } else { 
       current->right = newBSTNode;              // Insert newBSTNode as right child
       return true;                              // Successful insertion
-    } else { 
-      nextBSTNode = current->right;             // For recursive call to traverse to right child
     }
   }
 
