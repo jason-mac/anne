@@ -31,11 +31,12 @@ private:
   BSTNode * root = nullptr; 
   unsigned int elementCount = 0;        
 
-  /* Utility methods */
+  /* Helper Functions */
 
   // Feel free to add private methods to this class.
    
-  // Description: Recursively copies all nodes from the given source BST to the current BST.
+  // Description: Recursively copies all nodes from the given source BST to the current BST
+  //              using a preorder traversal
   // Precondition: 'rhsCurrent' is the root of a non-empty BST to be copied. 
   // Postcondition: 'thisCurrent' and its subtree are a deep copy of 'rhsCurrent' and its subtree.
   // Time Efficiency: O(n), where n is the number of nodes in the BST.

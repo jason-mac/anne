@@ -69,30 +69,27 @@ BST::~BST() {
 
 /* Helper Functions */
 
-// Description: Recursively copies all nodes from the given source BST to the current BST.
-// Precondition: 'rhsCurrent' is the root of a non-empty BST to be copied. 
-// Postcondition: 'thisCurrent' and its subtree are a deep copy of 'rhsCurrent' and its subtree.
-//                elementCount of this object is equal to element count of "rhs" BST
-// Time Efficiency: O(n)
+// Description: Recursively copies all nodes from the given source BST to the current BST
+//              using a pre order traversal
 void BST::deepCopyR(BSTNode* rhsCurrent) {
-  // Insert the current right hand side BSTNode's element into the current BST
+  // Base Case for recursion
+  if(rhsCurrent == nullptr) {
+    return;
+  }
+
+  // Insert the current right hand side BSTNode's element into the this instance BST 
   this->insert(rhsCurrent->element);
+  
+  // Recursively copy left subtree
+  deepCopyR(rhsCurrent->left);
 
-  // Recursively copy the left subtree, if it exists
-  if(rhsCurrent->hasLeft()) {
-    deepCopyR(rhsCurrent->left);
-  }
-
-  // Recursively copy the right subtree, if it exists
-  if(rhsCurrent->hasRight()) {
-    deepCopyR(rhsCurrent->right);
-  }
+  // Recursively copy right subtree
+  deepCopyR(rhsCurrent->right); 
 }
 
-// Description: Recursively destroys a BST starting from the given node using
-//              a post order traversal
+// Description: Recursively destroys a BST starting from the given node using, all 
+//              heap allocatd memory is freed using a post order traversal
 // Postcondition: The BST starting from "current" is destroyed, and memory is freed.
-// Time Efficiency: O(n)
 void BST::destroyBSTr(BSTNode* current) {  
   // Base case: If current BSTNode is nullptr, return
   if(current == nullptr) {
@@ -132,7 +129,7 @@ void BST::insert(WordPair & newElement) {
   // Create a new BSTNode for the new element
   BSTNode *newBSTNode = new(nothrow) BSTNode(newElement);
   if(newBSTNode == nullptr) {
-    throw UnableToInsertException("Memory allocation for new WordPair failed.");
+    throw UnableToInsertException("New Operator failed, could not allocate memory for new element.");
   }
 
   // If the tree is empty, set the new BSTNode as the root
@@ -148,7 +145,7 @@ void BST::insert(WordPair & newElement) {
   if(!hasBeenInserted) {
     // If insertion was unsuccessful, delete the allocated node and throw exception
     delete newBSTNode;
-    throw ElementAlreadyExistsException("Failed Insertion, a corresponding translation for \"" + newElement.getEnglish() + "\" has been found.");
+    throw ElementAlreadyExistsException("Data Collection contains the element already.");
   } else {
     elementCount++;
   }
@@ -211,7 +208,7 @@ or you can replace it using your own implementation. */
 WordPair& BST::retrieve(WordPair & targetElement) const {
   
  if (elementCount == 0)  
-    throw EmptyDataCollectionException("No Elements stored in Data Collection.");
+    throw EmptyDataCollectionException("Data Collection is empty.");
 
  WordPair& translated = retrieveR(targetElement, root);
 
@@ -240,8 +237,7 @@ WordPair& BST::retrieveR(WordPair & targetElement, BSTNode * current) const {
   }
 
   //If none of the previous conditions hold true, it must be the case that targetElement does not exist
-  throw ElementDoesNotExistException("No Translation for \"" + targetElement.getEnglish() + "\" has been found.");
-
+  throw ElementDoesNotExistException("Target Element does not exist in Data Collection");
 }  
 
 // Description: Traverses the BST in order.
@@ -258,7 +254,7 @@ or you can replace it using your own implementation. */
 void BST::traverseInOrder(void visit(WordPair &)) const {
  
  if (elementCount == 0)  
-   throw EmptyDataCollectionException("No Elements stored in Data Collection");
+    throw EmptyDataCollectionException("Data Collection contains no elements");
 
  traverseInOrderR(visit, root);
  
@@ -269,20 +265,17 @@ void BST::traverseInOrder(void visit(WordPair &)) const {
 // Postcondition: This method does not change the BST. 
 void BST::traverseInOrderR(void visit(WordPair &), BSTNode* current) const { 
 
-  // Order: Left, Visit, Right
+  // to do 
   
-  // Traverse left subtree, if it exists
-  if(current->hasLeft()) {
-    traverseInOrderR(visit, current->left);
-  } 
+  // Base case for recursion
+  if(current == nullptr) {
+    return;
+  }
 
-  // Call visit function on current BSTNode's element
+  // Order: Left, Visit, Right
+  traverseInOrderR(visit, current->left);
   visit(current->element);
-
-  // Traverse right subtree first, if it exists
-  if(current->hasRight()) {
-    traverseInOrderR(visit, current->right);
-  }  
+  traverseInOrderR(visit, current->right);
 }
 
 // clang-format on
