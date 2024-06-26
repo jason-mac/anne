@@ -41,10 +41,11 @@ void display(WordPair& anElement) {
 int main(int argc, char *argv[]) {
   BST * testOne = new BST();
   BST * testTwo = new BST();
-  WordPair one("Apple", "theApple");
-  WordPair two("Banana", "theBanana");
-  WordPair three("Pear", "thePear");
+  WordPair one("apple", "theapple");
+  WordPair two("banana", "thebanana");
+  WordPair three("pear", "thepear");
 
+  cout << "elementcount: " << testOne->getElementCount() << endl << endl;
   testOne->insert(one);
   testOne->insert(two);
   testOne->insert(three);
@@ -57,6 +58,7 @@ int main(int argc, char *argv[]) {
   cout << "------TRAVERSING-START--" << endl;
   testOne->traverseInOrder(display);
   cout << "------TRAVERSING END----" << endl;
+  cout << endl;
 
 
   cout << "TEST TWO" << endl;
@@ -64,12 +66,42 @@ int main(int argc, char *argv[]) {
   cout << "------TRAVERSING-START--" << endl;
   testTwo->traverseInOrder(display);
   cout << "------TRAVERSING END----" << endl;
+  cout << endl;
 
   cout << "TEST THREE" << endl;
   cout << "ElementCount: " << testThree->getElementCount() << endl;
   cout << "------TRAVERSING-START--" << endl;
   testThree->traverseInOrder(display);
   cout << "------TRAVERSING END----" << endl;
+  cout << endl;
+
+  WordPair newOne("shirt", "theshirt");
+  WordPair newTwo("zebra", "thezebra");
+  testTwo->insert(newOne);
+  testThree->insert(newTwo);
+
+
+  cout << "TEST ONE" << endl;
+  cout << "ElementCount: " << testTwo->getElementCount() << endl;
+  cout << "------TRAVERSING-START--" << endl;
+  testOne->traverseInOrder(display);
+  cout << "------TRAVERSING END----" << endl;
+  cout << endl;
+
+
+  cout << "TEST TWO" << endl;
+  cout << "ElementCount: " << testTwo->getElementCount() << endl;
+  cout << "------TRAVERSING-START--" << endl;
+  testTwo->traverseInOrder(display);
+  cout << "------TRAVERSING END----" << endl;
+  cout << endl;
+
+  cout << "TEST THREE" << endl;
+  cout << "ElementCount: " << testThree->getElementCount() << endl;
+  cout << "------TRAVERSING-START--" << endl;
+  testThree->traverseInOrder(display);
+  cout << "------TRAVERSING END----" << endl;
+  cout << endl;
   /*
   BST * testing = new(nothrow) BST();
   if (testing != nullptr) {
