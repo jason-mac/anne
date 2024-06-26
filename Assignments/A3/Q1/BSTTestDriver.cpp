@@ -102,6 +102,30 @@ int main(int argc, char *argv[]) {
   testThree->traverseInOrder(display);
   cout << "------TRAVERSING END----" << endl;
   cout << endl;
+  //retrive
+  cout << "testing retrive" << endl << endl; 
+  try {
+    WordPair find("apple");
+    WordPair& translation = testOne->retrieve(find);
+    cout << "Translation of " << find.getEnglish() << " is: " << translation.getTranslation() << endl;
+  }
+  catch(ElementDoesNotExistException& exception) {
+    cout << exception.what() << endl;
+  }
+  catch(...) {
+    cout << "?????????????" << endl;
+  }
+  try {
+    WordPair find("what");
+    WordPair& translation = testOne->retrieve(find);
+    cout << "Translation of " << find.getEnglish() << " is: " << translation.getTranslation() << endl;
+  }
+  catch(ElementDoesNotExistException& exception) {
+    cout << exception.what() << endl;
+  }
+  catch(...) {
+    cout << "?????????????" << endl;
+  }
   /*
   BST * testing = new(nothrow) BST();
   if (testing != nullptr) {
