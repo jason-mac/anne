@@ -102,6 +102,7 @@ int main(int argc, char *argv[]) {
   testThree->traverseInOrder(display);
   cout << "------TRAVERSING END----" << endl;
   cout << endl;
+
   //retrive
   cout << "testing retrive" << endl << endl; 
   try {
@@ -140,6 +141,13 @@ int main(int argc, char *argv[]) {
     cout << "Translation of " << find.getEnglish() << " is: " << translation.getTranslation() << endl;
   } 
   catch (EmptyDataCollectionException& e) {
+    cout << e.what() << endl;
+  }
+  try {
+    testFour->traverseInOrder(display());
+
+  }
+  catch(EmptyDataCollectionException& e) {
     cout << e.what() << endl;
   }
 

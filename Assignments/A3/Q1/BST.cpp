@@ -237,7 +237,7 @@ WordPair& BST::retrieveR(WordPair & targetElement, BSTNode * current) const {
   }
 
   //If none of the previous conditions hold true, it must be the case that targetElement does not exist
-  throw ElementDoesNotExistException("Target Element does not exist in Data Collection");
+  throw ElementDoesNotExistException("Target Element does not exist in Data Collection.");
 }  
 
 // Description: Traverses the BST in order.
@@ -254,7 +254,7 @@ or you can replace it using your own implementation. */
 void BST::traverseInOrder(void visit(WordPair &)) const {
  
  if (elementCount == 0)  
-    throw EmptyDataCollectionException("Data Collection contains no elements");
+    throw EmptyDataCollectionException("Data Collection contains no elements.");
 
  traverseInOrderR(visit, root);
  
