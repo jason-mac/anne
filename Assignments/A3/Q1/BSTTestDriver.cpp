@@ -1,46 +1,41 @@
-// clang-format off
 /*
  * BSTTestDriver.cpp
- * 
- * Description: Drives the testing of the BST ADT class. 
+ *
+ * Description: Drives the testing of the BST ADT class.
  *
  * Author: AL
  * Last Modification Date: June 2024
  */
 
-#include <iostream>
-#include <stdio.h>
-#include <cstdlib>
-#include <string>
-#include <cstring>
-#include <sstream>
-#include <iomanip>
-#include <fstream>
 #include "BST.h"
-#include "WordPair.h"
 #include "ElementAlreadyExistsException.h"
 #include "ElementDoesNotExistException.h"
 #include "EmptyDataCollectionException.h"
 #include "UnableToInsertException.h"
+#include "WordPair.h"
+#include <cstdlib>
+#include <cstring>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <sstream>
+#include <stdio.h>
+#include <string>
 
+using std::cerr;
 using std::cin;
 using std::cout;
 using std::ifstream;
 using std::nothrow;
-using std::cerr;
 
+void display(WordPair &anElement) { cout << anElement; }
 
-void display(WordPair& anElement) {
-  cout << anElement;
-} 
-
-
-// As you discover what main() does, record your understanding of the code by commenting it.
-// If you do not like this main(), feel free to write your own.
+// As you discover what main() does, record your understanding of the code by
+// commenting it. If you do not like this main(), feel free to write your own.
 // Remember, this is a test driver. Feel free to modify it as you wish!
 int main(int argc, char *argv[]) {
-  BST * testOne = new BST();
-  BST * testTwo = nullptr;
+  BST *testOne = new BST();
+  BST *testTwo = nullptr;
   WordPair one("apple", "theapple");
   WordPair two("banana", "thebanana");
   WordPair three("pear", "thepear");
@@ -49,9 +44,9 @@ int main(int argc, char *argv[]) {
   testOne->insert(one);
   testOne->insert(two);
   testOne->insert(three);
-  
+
   testTwo = new BST(*testOne);
-  BST* testThree = new BST(*testOne);
+  BST *testThree = new BST(*testOne);
 
   cout << "TEST ONE" << endl;
   cout << "ElementCount: " << testOne->getElementCount() << endl;
@@ -59,7 +54,6 @@ int main(int argc, char *argv[]) {
   testOne->traverseInOrder(display);
   cout << "------TRAVERSING END----" << endl;
   cout << endl;
-
 
   cout << "TEST TWO" << endl;
   cout << "ElementCount: " << testTwo->getElementCount() << endl;
@@ -80,14 +74,12 @@ int main(int argc, char *argv[]) {
   testTwo->insert(newOne);
   testThree->insert(newTwo);
 
-
   cout << "TEST ONE" << endl;
   cout << "ElementCount: " << testOne->getElementCount() << endl;
   cout << "------TRAVERSING-START--" << endl;
   testOne->traverseInOrder(display);
   cout << "------TRAVERSING END----" << endl;
   cout << endl;
-
 
   cout << "TEST TWO" << endl;
   cout << "ElementCount: " << testTwo->getElementCount() << endl;
@@ -103,51 +95,47 @@ int main(int argc, char *argv[]) {
   cout << "------TRAVERSING END----" << endl;
   cout << endl;
 
-  //retrive
-  cout << "testing retrive" << endl << endl; 
+  // retrive
+  cout << "testing retrive" << endl << endl;
   try {
     WordPair fail("apple", "newtranslation");
     testOne->insert(fail);
-  }
-  catch(ElementAlreadyExistsException& exception) {
+  } catch (ElementAlreadyExistsException &exception) {
     cout << exception.what() << endl;
-  } 
+  }
   try {
     WordPair find("apple");
-    WordPair& translation = testOne->retrieve(find);
-    cout << "Translation of " << find.getEnglish() << " is: " << translation.getTranslation() << endl;
-  }
-  catch(ElementDoesNotExistException& exception) {
+    WordPair &translation = testOne->retrieve(find);
+    cout << "Translation of " << find.getEnglish()
+         << " is: " << translation.getTranslation() << endl;
+  } catch (ElementDoesNotExistException &exception) {
     cout << exception.what() << endl;
-  }
-  catch(...) {
+  } catch (...) {
     cout << "?????????????" << endl;
   }
   try {
     WordPair find("what");
-    WordPair& translation = testOne->retrieve(find);
-    cout << "Translation of " << find.getEnglish() << " is: " << translation.getTranslation() << endl;
-  }
-  catch(ElementDoesNotExistException& exception) {
+    WordPair &translation = testOne->retrieve(find);
+    cout << "Translation of " << find.getEnglish()
+         << " is: " << translation.getTranslation() << endl;
+  } catch (ElementDoesNotExistException &exception) {
     cout << exception.what() << endl;
-  }
-  catch(...) {
+  } catch (...) {
     cout << "?????????????" << endl;
   }
-  BST * testFour = new BST();
+  BST *testFour = new BST();
   try {
     WordPair find("what");
-    WordPair& translation = testFour->retrieve(find);
-    cout << "Translation of " << find.getEnglish() << " is: " << translation.getTranslation() << endl;
-  } 
-  catch (EmptyDataCollectionException& e) {
+    WordPair &translation = testFour->retrieve(find);
+    cout << "Translation of " << find.getEnglish()
+         << " is: " << translation.getTranslation() << endl;
+  } catch (EmptyDataCollectionException &e) {
     cout << e.what() << endl;
   }
   try {
     testFour->traverseInOrder(display);
 
-  }
-  catch(EmptyDataCollectionException& e) {
+  } catch (EmptyDataCollectionException &e) {
     cout << e.what() << endl;
   }
 
@@ -158,7 +146,7 @@ int main(int argc, char *argv[]) {
   /*
   BST * testing = new(nothrow) BST();
   if (testing != nullptr) {
-      
+
     string aLine = "";
     string aWord = "";
     string englishW = "";
@@ -167,7 +155,7 @@ int main(int argc, char *argv[]) {
     string delimiter = ":";
     size_t pos = 0;
     WordPair translated;
-	 
+
     // Expecting at least a filename on the command line.
     if ( ( argc > 1 ) ) {
       filename = argv[1];
@@ -176,13 +164,13 @@ int main(int argc, char *argv[]) {
       if (myfile.is_open()) {
         cout << "Reading from a file:" << endl;  // For debugging purposes
         while ( getline (myfile,aLine) ) {
-          pos = aLine.find(delimiter);    
+          pos = aLine.find(delimiter);
           englishW = aLine.substr(0, pos);
           aLine.erase(0, pos + delimiter.length());
           translationW = aLine;
           WordPair aWordPair(englishW, translationW);
-          
-		  // insert aWordPair into "testing" using a try/catch block
+
+                  // insert aWordPair into "testing" using a try/catch block
         try {
             cout << "testing" << endl;
             testing->insert(aWordPair);
@@ -200,20 +188,20 @@ int main(int argc, char *argv[]) {
         }
       }
       myfile.close();
-      
+
         // More BST testing happening here!
-	      cout << "ElementCount: " << testing->getElementCount() << endl;
+              cout << "ElementCount: " << testing->getElementCount() << endl;
         cout << "------TRAVERSING-START--" << endl;
         testing->traverseInOrder(display);
         cout << "------TRAVERSING END----" << endl;
-      } else { 
+      } else {
         cout << "Unable to open file" << endl;
       }
     } else {
       cout << "Missing the data filename!" << endl;
     }
-  } else { 
-    cout << "new failed!" << endl;	
+  } else {
+    cout << "new failed!" << endl;
   }
   WordPair targetElement("hello", "bonjour"); // Example target element
   testing->insert(targetElement);
@@ -228,10 +216,5 @@ int main(int argc, char *argv[]) {
   }
   delete testing; */
 
-
-  
-
   return 0;
 }
-
-// clang-format on
