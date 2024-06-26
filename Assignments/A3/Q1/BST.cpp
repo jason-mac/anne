@@ -254,7 +254,7 @@ or you can replace it using your own implementation. */
 void BST::traverseInOrder(void visit(WordPair &)) const {
  
  if (elementCount == 0)  
-    throw EmptyDataCollectionException("Data Collection contains no elements.");
+    throw EmptyDataCollectionException("Data Collection is empty.");
 
  traverseInOrderR(visit, root);
  
