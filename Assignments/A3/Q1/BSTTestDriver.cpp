@@ -55,20 +55,20 @@ int main(int argc, char *argv[]) {
   cout << "TEST ONE" << endl;
   cout << "ElementCount: " << testTwo->getElementCount() << endl;
   cout << "------TRAVERSING-START--" << endl;
-  testing->traverseInOrder(display);
+  testOne->traverseInOrder(display);
   cout << "------TRAVERSING END----" << endl;
 
 
   cout << "TEST TWO" << endl;
   cout << "ElementCount: " << testTwo->getElementCount() << endl;
   cout << "------TRAVERSING-START--" << endl;
-  testing->traverseInOrder(display);
+  testTwo->traverseInOrder(display);
   cout << "------TRAVERSING END----" << endl;
 
   cout << "TEST THREE" << endl;
   cout << "ElementCount: " << testThree->getElementCount() << endl;
   cout << "------TRAVERSING-START--" << endl;
-  testing->traverseInOrder(display);
+  testThree->traverseInOrder(display);
   cout << "------TRAVERSING END----" << endl;
   /*
   BST * testing = new(nothrow) BST();
