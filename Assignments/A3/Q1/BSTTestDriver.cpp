@@ -143,8 +143,7 @@ int main(int argc, char *argv[]) {
   delete testTwo;
   delete testThree;
   delete testFour;
-  /*
-  BST * testing = new(nothrow) BST();
+  BST *testing = new (nothrow) BST();
   if (testing != nullptr) {
 
     string aLine = "";
@@ -157,40 +156,40 @@ int main(int argc, char *argv[]) {
     WordPair translated;
 
     // Expecting at least a filename on the command line.
-    if ( ( argc > 1 ) ) {
+    if ((argc > 1)) {
       filename = argv[1];
 
       ifstream myfile(filename);
       if (myfile.is_open()) {
-        cout << "Reading from a file:" << endl;  // For debugging purposes
-        while ( getline (myfile,aLine) ) {
+        cout << "Reading from a file:" << endl; // For debugging purposes
+        while (getline(myfile, aLine)) {
           pos = aLine.find(delimiter);
           englishW = aLine.substr(0, pos);
           aLine.erase(0, pos + delimiter.length());
           translationW = aLine;
           WordPair aWordPair(englishW, translationW);
 
-                  // insert aWordPair into "testing" using a try/catch block
-        try {
+          // insert aWordPair into "testing" using a try/catch block
+          try {
             cout << "testing" << endl;
             testing->insert(aWordPair);
-        } catch (const ElementAlreadyExistsException &e) {
+          } catch (const ElementAlreadyExistsException &e) {
             cerr << "Element already exists: " << e.what() << endl;
             cout << aWordPair << " already exists" << endl;
-        } catch (const ElementDoesNotExistException &e) {
+          } catch (const ElementDoesNotExistException &e) {
             cerr << "Element does not exist: " << e.what() << endl;
-        } catch (const EmptyDataCollectionException &e) {
+          } catch (const EmptyDataCollectionException &e) {
             cerr << "Data collection is empty: " << e.what() << endl;
-        } catch (const UnableToInsertException &e) {
+          } catch (const UnableToInsertException &e) {
             cerr << "Unable to insert element: " << e.what() << endl;
-        } catch (...) {
+          } catch (...) {
             cerr << "Unknown exception during insertion" << endl;
+          }
         }
-      }
-      myfile.close();
+        myfile.close();
 
         // More BST testing happening here!
-              cout << "ElementCount: " << testing->getElementCount() << endl;
+        cout << "ElementCount: " << testing->getElementCount() << endl;
         cout << "------TRAVERSING-START--" << endl;
         testing->traverseInOrder(display);
         cout << "------TRAVERSING END----" << endl;
@@ -206,15 +205,15 @@ int main(int argc, char *argv[]) {
   WordPair targetElement("hello", "bonjour"); // Example target element
   testing->insert(targetElement);
   try {
-      WordPair& retrievedElement = testing->retrieve(targetElement);
-      cout << "Retrieved element: " << retrievedElement
-           << " - " << retrievedElement << endl;
-  } catch (const ElementDoesNotExistException& e) {
-     cerr << "Element does not exist: " << e.what() << endl;
+    WordPair &retrievedElement = testing->retrieve(targetElement);
+    cout << "Retrieved element: " << retrievedElement << " - "
+         << retrievedElement << endl;
+  } catch (const ElementDoesNotExistException &e) {
+    cerr << "Element does not exist: " << e.what() << endl;
   } catch (...) {
-      cerr << "Unknown exception during retrieval" << endl;
+    cerr << "Unknown exception during retrieval" << endl;
   }
-  delete testing; */
+  delete testing;
 
   return 0;
 }
