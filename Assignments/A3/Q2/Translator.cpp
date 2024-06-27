@@ -79,6 +79,12 @@ int main(int argc, char* argv[]) {
       cout << e.what() << endl;
     }
   }
+  string displayStr = "display";
+  if(argc == 3 && argv[3] == displayStr) {
+    dictionary->displayContent(display);
+    return EXIT_SUCCESS;
+  }
+
   string userInput = "";
   dictionary->displayContent(display);
   cout << endl;
@@ -88,16 +94,12 @@ int main(int argc, char* argv[]) {
     WordPair translation;
     try { 
       translation = dictionary->get(find);
-      cout << translation.getEnglish() << ":" << translation.getTranslation() << endl;
+      cerr << translation.getEnglish() << ":" << translation.getTranslation() << endl;
     } catch(const ElementDoesNotExistException& e) {
-      cout << "***Not Found***" << endl;
+      cerr << "***Not Found***" << endl;
     }
   }
   file.close();
-  string displayStr = "display";
-  if(argc == 3 && argv[2] == displayStr) {
-    dictionary->displayContent(display);
-  }
   return EXIT_SUCCESS; 
 }
 
