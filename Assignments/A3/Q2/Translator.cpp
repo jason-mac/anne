@@ -79,13 +79,13 @@ int main(int argc, char* argv[]) {
       cout << e.what() << endl;
     }
   }
-  file.close();
   string userInput = "";
   while(!EOF) {
     cout << "EOF?" <<endl;
     cin >> userInput;
     cout << userInput << endl;
   }
+  file.close();
   return EXIT_SUCCESS; 
 }
 
