@@ -83,7 +83,7 @@ int main(int argc, char* argv[]) {
 
   string displayStr = "display";
   if(argc == 3 && argv[2] == displayStr) {
-    dictionary->displayContent(display);
+    dictionary->displayContent();
     return EXIT_SUCCESS;
   }
 
