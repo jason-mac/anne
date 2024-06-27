@@ -39,8 +39,8 @@ WordPair & Dictionary::get(WordPair & targetElement) const {
 }
 
 
-void Dictionary::displayContent(void visit(WordPair &)) const {
-  keyValuePairs->traverseInOrder(visit);
+void Dictionary::displayContent() const {
+  keyValuePairs->traverseInOrder(display);
 }
 
 // clang-format on

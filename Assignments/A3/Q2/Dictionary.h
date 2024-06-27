@@ -15,6 +15,9 @@
 #define DICTIONARY_H
 
 #include "BST.h"
+#include <iostream>
+
+using std::cout;
 
 class Dictionary {
    
@@ -24,7 +27,10 @@ private:
    BST * keyValuePairs = nullptr;                  
 
 /* Feel free to add private methods to this class. */
-   
+void static display(WordPair& anElement) {
+  cout << anElement;
+} 
+
 public:
 
    // You cannot change the prototype of the public methods of this class.
@@ -68,7 +74,7 @@ public:
    // Precondition: Dictionary is not empty.
    // Exception: Throws the exception EmptyDataCollectionException if the Dictionary is empty.
    // Postcondition: This method does not change the Dictionary.
-   void displayContent(void visit(WordPair &)) const;
+   void displayContent() const;
    
 }; // end Dictionary
 #endif
