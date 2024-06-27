@@ -222,7 +222,7 @@ int main(int argc, char *argv[]) {
     cout << e.what() << endl;
   }
   try {
-    WordPair find("hello");
+    WordPair find("fire");
     WordPair &word = testing->retrieve(find);
     cout << "translation of " << find.getEnglish()
          << " is: " << word.getTranslation() << endl;
