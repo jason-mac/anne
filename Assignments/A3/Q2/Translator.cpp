@@ -80,7 +80,12 @@ int main(int argc, char* argv[]) {
     }
   }
   file.close();
-  dictionary->displayContent(display);
+  string userInput = "";
+  while(!EOF) {
+    cout << "EOF?" <<endl;
+    cin >> userInput;
+    cout << userInput << endl;
+  }
   return EXIT_SUCCESS; 
 }
 
