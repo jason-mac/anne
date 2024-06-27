@@ -35,54 +35,52 @@ void display(WordPair& anElement) {
   cout << anElement;
 }
 
-int main(int argc, char* arcv[]) {
-  ifstream translationFile("myDataFile.txt");
-  Dictionary* dictionary = new(nothrow) Dictionary();
+int main(int argc, char* argv[]) {
+  Dictionary * dictionary = new(nothrow) Dictionary();
+  string fileName = "";
   if(dictionary == nullptr) {
-    cout << "Memory allocation of new dictionary failed, program terminating...";
+    cout << "Memory allocation for dictionary failed. Terminating program...";
     return EXIT_FAILURE;
   }
+  if(argc < 2) {
+    cout << "File name not found. Terminating program...";
+    return EXIT_FAILURE;
+  } 
+  fileName = argv[1];
   
+  ifstream file(fileName);
+  if(!file.is_open()) {
+    cout << "Unable to open file. Terminating program...";
+    return EXIT_FAILURE;
+  }
+
   string aLine = "";
   string aWord = "";
   string englishW = "";
   string translationW = "";
-  string filename = "";
   string delimiter = ":";
   size_t pos = 0;
   WordPair translated;
-  if(translationFile.is_open()) {
-    
-      cout << "Reading from a file:" << endl;  // For debugging purposes
-      
-      while ( getline (translationFile,aLine) ) {
-        pos = aLine.find(delimiter);    
-        englishW = aLine.substr(0, pos);
-        aLine.erase(0, pos + delimiter.length());
-        translationW = aLine;
-        WordPair aWordPair(englishW, translationW);
-        
-    // insert aWordPair into "translation" using a try/catch block
+  while(getline(file, aLine)) {
+    // Read the english and translation pair line by line
+    pos = aLine.find(delimiter);
+    englishW = aLine.substr(0, pos);
+    aLine.erase(0, pos + delimiter.length());
+    translationW = aLine;
+    WordPair aWordPair(englishW, translationW);
+
+    // Insert WordPair into the dictionary Data Collection
     try {
-            dictionary->put(aWordPair);
-        } catch (const ElementAlreadyExistsException &e) {
-            cerr << "Element already exists: " << e.what() << endl;
-        } catch (const ElementDoesNotExistException &e) {
-            cerr << "Element does not exist: " << e.what() << endl;
-        } catch (const EmptyDataCollectionException &e) {
-            cerr << "Data collection is empty: " << e.what() << endl;
-        } catch (const UnableToInsertException &e) {
-            cerr << "Unable to insert element: " << e.what() << endl;
-        } catch (...) {
-            cerr << "Unknown exception during insertion" << endl;
-        }
+      dictionary->put(aWordPair);
+    } catch (const UnableToInsertException& e) {
+      cout << e.what() << endl;
+    } catch (const ElementAlreadyExistsException& e) {
+      cout << e.what() << endl;
     }
-    translationFile.close();
-  } else {
-    cout << "Unable to open file" << endl;
-  } 
-  translationFile.close();
-  delete dictionary;
+  }
+  file.close();
+  dictionary->displayContent(display);
+  return EXIT_SUCCESS; 
 }
 
 // clang-format on
