@@ -80,7 +80,8 @@ int main(int argc, char* argv[]) {
     }
   }
   string userInput = "";
-  cout << "here" << endl;
+  dictionary->displayContent(display);
+  cout << endl;
   while(userInput != "n") {
     cout << "Which word are you looking to translate? ";
     cin >> userInput;
