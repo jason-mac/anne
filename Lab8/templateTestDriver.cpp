@@ -21,6 +21,12 @@ int main() {
 
   int anInt = 3;
   List<int> * intList = new List<int>();
+  List<string> *stringList = new List<string>();
+  string fuck = "fuck";
+  string FUCK = "FUCK";
+  stringList->append(fuck);
+  stringList->append(FUCK);
+  stringList->printList();
   
 /* Test Case 1
  * An empty 'int' List has already been instantiated - the default constructor was executed.
