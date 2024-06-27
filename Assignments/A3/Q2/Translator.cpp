@@ -81,7 +81,7 @@ int main(int argc, char* argv[]) {
   }
   string userInput = "";
   cout << "here" << endl;
-  while(!EOF) {
+  while(userInput != "n") {
     cout << "EOF?" <<endl;
     cin >> userInput;
     cout << userInput << endl;
