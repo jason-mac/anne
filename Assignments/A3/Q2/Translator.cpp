@@ -83,7 +83,6 @@ int main(int argc, char* argv[]) {
   dictionary->displayContent(display);
   cout << endl;
   while(userInput != "n") {
-    cout << "Which word are you looking to translate? ";
     cin >> userInput;
     WordPair find(userInput);
     WordPair translation;
@@ -91,7 +90,7 @@ int main(int argc, char* argv[]) {
       translation = dictionary->get(find);
       cout << translation.getEnglish() << ":" << translation.getTranslation() << endl;
     } catch(const ElementDoesNotExistException& e) {
-      cout << e.what() << endl;
+      cout << "***Not Found***" << endl;
     }
   }
   file.close();
