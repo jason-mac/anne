@@ -213,6 +213,22 @@ int main(int argc, char *argv[]) {
   } catch (...) {
     cerr << "Unknown exception during retrieval" << endl;
   }
+  try {
+    WordPair find("black");
+    WordPair &word = testing->retrieve(find);
+    cout << "translation of " << find.getEnglish()
+         << " is: " << word.getTranslation() << endl;
+  } catch (ElementDoesNotExistException &e) {
+    cout << e.what() << endl;
+  }
+  try {
+    WordPair find("hello");
+    WordPair &word = testing->retrieve(find);
+    cout << "translation of " << find.getEnglish()
+         << " is: " << word.getTranslation() << endl;
+  } catch (ElementDoesNotExistException &e) {
+    cout << e.what() << endl;
+  }
   delete testing;
 
   return 0;
