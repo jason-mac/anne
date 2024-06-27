@@ -82,9 +82,16 @@ int main(int argc, char* argv[]) {
   string userInput = "";
   cout << "here" << endl;
   while(userInput != "n") {
-    cout << "EOF?" <<endl;
+    cout << "Which word are you looking to translate? " << endl;
     cin >> userInput;
-    cout << userInput << endl;
+    WordPair find(userInput);
+    WordPair translation;
+    try { 
+      translation = dictionary->get(translation);
+      cout << "Translation of " << userInput << " is: " << translation.getTranslation() << endl;
+    } catch(const ElementDoesNotExistException& e) {
+      cout << e.what() << endl;
+    }
   }
   file.close();
   return EXIT_SUCCESS; 
