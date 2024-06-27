@@ -1,5 +1,6 @@
 // clang-format off
 #include "Dictionary.h"
+#include "BST.h"
 #include "WordPair.h"
 
 
@@ -27,6 +28,9 @@ unsigned int Dictionary::getElementCount() const {
 }
 
 void Dictionary::put(WordPair& newElement) {
+  if(keyValuePairs == nullptr) {
+    keyValuePairs = new BST();
+  }
   keyValuePairs->insert(newElement);
 }
 
