@@ -80,13 +80,12 @@ int main(int argc, char* argv[]) {
     }
   }
   string displayStr = "display";
-  if(argc == 3 && argv[3] == displayStr) {
+  if(argc == 3 && argv[2] == displayStr) {
     dictionary->displayContent(display);
     return EXIT_SUCCESS;
   }
 
   string userInput = "";
-  dictionary->displayContent(display);
   cout << endl;
   while(userInput != "n") {
     cin >> userInput;
