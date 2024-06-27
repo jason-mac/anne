@@ -80,6 +80,7 @@ int main(int argc, char* argv[]) {
     }
   }
   string userInput = "";
+  cout << "here" << endl;
   while(!EOF) {
     cout << "EOF?" <<endl;
     cin >> userInput;
