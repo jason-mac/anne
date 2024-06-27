@@ -82,7 +82,7 @@ int main(int argc, char* argv[]) {
   string userInput = "";
   cout << "here" << endl;
   while(userInput != "n") {
-    cout << "Which word are you looking to translate? " << endl;
+    cout << "Which word are you looking to translate? ";
     cin >> userInput;
     WordPair find(userInput);
     WordPair translation;
