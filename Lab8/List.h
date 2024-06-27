@@ -19,7 +19,7 @@ class List  {
 
 private:
 
-   Node * head = nullptr;          // Pointer to the first node in the List.
+   Node<ElementType> * head = nullptr;          // Pointer to the first node in the List.
    unsigned int elementCount = 0;  // Number of elements in the List.
         
 public:

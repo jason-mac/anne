@@ -1,3 +1,4 @@
+// clang-format off
 /*
  * templateTestDriver.cpp
  * 
@@ -19,7 +20,7 @@ using std::endl;
 int main() {
 
   int anInt = 3;
-  List * intList = new List();
+  List<int> * intList = new List<int>();
   
 /* Test Case 1
  * An empty 'int' List has already been instantiated - the default constructor was executed.
@@ -58,3 +59,5 @@ int main() {
   return 0;
   
 }
+
+// clang-format on

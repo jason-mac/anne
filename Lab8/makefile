@@ -1,25 +1,20 @@
-all: td
+all: ttd
 
-td: templateTestDriver.o List.o Node.o ElementDoesNotExistException.o UnableToInsertException.o EmptyListException.o 
-	g++ -Wall -o td templateTestDriver.o List.o Node.o ElementDoesNotExistException.o UnableToInsertException.o EmptyListException.o 
-
-templateTestDriver.o: templateTestDriver.cpp List.h 
-	g++ -Wall -c templateTestDriver.cpp
+ttd: templateTestDriver.o List.h Node.h ElementDoesNotExistException.o UnableToInsertException.o EmptyListException.o
+	g++ -Wall -o ttd templateTestDriver.o ElementDoesNotExistException.o UnableToInsertException.o EmptyListException.o
 	
-List.o: List.h List.cpp
-	g++ -Wall -c List.cpp
-		
-Node.o: Node.h Node.cpp
-	g++ -Wall -c Node.cpp
+templateTestDriver.o: templateTestDriver.cpp
+	g++ -Wall -c templateTestDriver.cpp 
 
-ElementDoesNotExistException.o: ElementDoesNotExistException.h ElementDoesNotExistException.cpp
+ElementDoesNotExistException.o: ElementDoesNotExistException.cpp ElementDoesNotExistException.h
 	g++ -Wall -c ElementDoesNotExistException.cpp
 
-UnableToInsertException.o: UnableToInsertException.h UnableToInsertException.cpp
+UnableToInsertException.o: UnableToInsertException.cpp UnableToInsertException.h
 	g++ -Wall -c UnableToInsertException.cpp
 		
-EmptyListException.o: EmptyListException.h EmptyListException.cpp
+EmptyListException.o: EmptyListException.cpp EmptyListException.h 
 	g++ -Wall -c EmptyListException.cpp
 	
 clean:
-	rm -f td *.o
+	rm -f ttd *.o
+
