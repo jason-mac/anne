@@ -35,26 +35,7 @@ void display(WordPair& anElement) {
   cout << anElement;
 }
 
-int main(int argc, char* argv[]) {
-  Dictionary * dictionary = new(nothrow) Dictionary();
-  string fileName = "";
-  if(dictionary == nullptr) {
-    cout << "Memory allocation for dictionary failed. Terminating program...";
-    return EXIT_FAILURE;
-  }
-  if(argc < 2) {
-    cout << "File name not found. Terminating program...";
-    return EXIT_FAILURE;
-  } 
-  fileName = argv[1];
-  cout << fileName << endl;
-  
-  ifstream file(fileName);
-  if(!file.is_open()) {
-    cout << "Unable to open file. Terminating program...";
-    return EXIT_FAILURE;
-  }
-
+void readData(Dictionary* dictionary, ifstream& file) {
   string aLine = "";
   string aWord = "";
   string englishW = "";
@@ -79,12 +60,34 @@ int main(int argc, char* argv[]) {
       cout << e.what() << endl;
     }
   }
+}
+
+int main(int argc, char* argv[]) {
+  Dictionary * dictionary = new(nothrow) Dictionary();
+  string fileName = "";
+  if(dictionary == nullptr) {
+    cout << "Memory allocation for dictionary failed. Terminating program...";
+    return EXIT_FAILURE;
+  }
+  if(argc < 2) {
+    cout << "File name not found. Terminating program...";
+    return EXIT_FAILURE;
+  } 
+  fileName = argv[1];
+  
+  ifstream file(fileName);
+  if(!file.is_open()) {
+    cout << "Unable to open file. Terminating program...";
+    return EXIT_FAILURE;
+  }
+
   string displayStr = "display";
   if(argc == 3 && argv[2] == displayStr) {
     dictionary->displayContent(display);
     return EXIT_SUCCESS;
   }
 
+  readData(dictionary, file);
   string userInput = "";
   cout << endl;
   while(userInput != "n") {
