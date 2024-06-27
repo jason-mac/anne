@@ -63,6 +63,7 @@ int main(int argc, char* argv[]) {
   WordPair translated;
   while(getline(file, aLine)) {
     // Read the english and translation pair line by line
+    cout << "1" << endl;
     pos = aLine.find(delimiter);
     englishW = aLine.substr(0, pos);
     aLine.erase(0, pos + delimiter.length());
@@ -71,7 +72,9 @@ int main(int argc, char* argv[]) {
 
     // Insert WordPair into the dictionary Data Collection
     try {
+      cout << "2" << endl;
       dictionary->put(aWordPair);
+      cout << "3" << endl;
     } catch (const UnableToInsertException& e) {
       cout << e.what() << endl;
     } catch (const ElementAlreadyExistsException& e) {
