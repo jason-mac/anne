@@ -47,6 +47,7 @@ int main(int argc, char* argv[]) {
     return EXIT_FAILURE;
   } 
   fileName = argv[1];
+  cout << fileName << endl;
   
   ifstream file(fileName);
   if(!file.is_open()) {
