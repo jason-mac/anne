@@ -88,7 +88,7 @@ int main(int argc, char* argv[]) {
     WordPair find(userInput);
     WordPair translation;
     try { 
-      translation = dictionary->get(translation);
+      translation = dictionary->get(find);
       cout << "Translation of " << userInput << " is: " << translation.getTranslation() << endl;
     } catch(const ElementDoesNotExistException& e) {
       cout << e.what() << endl;
