@@ -24,6 +24,11 @@ int main() {
   char p = 'p';
   char l = 'l';
   char e = 'e';
+  charList->append(a);
+  charList->append(p);
+  charList->append(p);
+  charList->append(l);
+  charList->append(e);
   int anInt = 3;
   List<int> * intList = new List<int>();
   List<string> *stringList = new List<string>();
