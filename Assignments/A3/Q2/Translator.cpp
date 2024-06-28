@@ -100,6 +100,8 @@ int main(int argc, char* argv[]) {
     cout << "here" << endl;
     dictionary->displayContent(display);
     return EXIT_SUCCESS;
+  } else {
+    return EXIT_FAILURE;
   }
 
   string aLine = "";
