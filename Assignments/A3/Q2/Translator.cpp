@@ -76,6 +76,9 @@ void readData(Dictionary* dictionary, ifstream& file) {
  */
 
 int main(int argc, char* argv[]) {
+  while(!EOF) {
+    cout << "eof" << endl;
+  }
   Dictionary * dictionary = new(nothrow) Dictionary();
   string fileName = "";
   if(dictionary == nullptr) {
