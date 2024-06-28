@@ -19,6 +19,11 @@ using std::endl;
 
 int main() {
 
+  List<char> * charList = new List<char>();
+  char a = 'a';
+  char p = 'p';
+  char l = 'l';
+  char e = 'e';
   int anInt = 3;
   List<int> * intList = new List<int>();
   List<string> *stringList = new List<string>();
@@ -27,6 +32,7 @@ int main() {
   stringList->append(fuck);
   stringList->append(FUCK);
   stringList->printList();
+  cout << endl;
   
 /* Test Case 1
  * An empty 'int' List has already been instantiated - the default constructor was executed.
