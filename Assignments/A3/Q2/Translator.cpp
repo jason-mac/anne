@@ -97,6 +97,7 @@ int main(int argc, char* argv[]) {
 
   string displayStr = "display";
   if(argc == 3 && argv[2] == displayStr) {
+    cout << "here" << endl;
     dictionary->displayContent(display);
     return EXIT_SUCCESS;
   }
