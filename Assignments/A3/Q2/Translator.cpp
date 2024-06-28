@@ -35,7 +35,7 @@ void display(WordPair& anElement) {
   cout << anElement;
 }
 
-void readData(Dictionary* dictionary, ifstream& file) {
+/*void readData(Dictionary* dictionary, ifstream& file) {
   string aLine = "";
   string aWord = "";
   string englishW = "";
@@ -61,6 +61,7 @@ void readData(Dictionary* dictionary, ifstream& file) {
     }
   }
 }
+*/
 
 
 /*
@@ -76,9 +77,6 @@ void readData(Dictionary* dictionary, ifstream& file) {
  */
 
 int main(int argc, char* argv[]) {
-  while(!EOF) {
-    cout << "eof" << endl;
-  }
   Dictionary * dictionary = new(nothrow) Dictionary();
   string fileName = "";
   if(dictionary == nullptr) {
@@ -103,9 +101,32 @@ int main(int argc, char* argv[]) {
     return EXIT_SUCCESS;
   }
 
-  readData(dictionary, file);
+  string aLine = "";
+  string aWord = "";
+  string englishW = "";
+  string translationW = "";
+  string delimiter = ":";
+  size_t pos = 0;
+  WordPair translated;
+  while(getline(file, aLine)) {
+    // Read the english and translation pair line by line
+    pos = aLine.find(delimiter);
+    englishW = aLine.substr(0, pos);
+    aLine.erase(0, pos + delimiter.length());
+    translationW = aLine;
+    WordPair aWordPair(englishW, translationW);
+
+    // Insert WordPair into the dictionary Data Collection
+    try {
+      dictionary->put(aWordPair);
+    } catch (const UnableToInsertException& e) {
+      cout << e.what() << endl;
+    } catch (const ElementAlreadyExistsException& e) {
+      cout << e.what() << endl;
+    }
+  }
   string userInput = "";
-  while(userInput != "n") {
+  while (getline(cin, userInput)) {
     cin >> userInput;
     WordPair find(userInput);
     WordPair translation;
