@@ -24,6 +24,8 @@ int main() {
   char p = 'p';
   char l = 'l';
   char e = 'e';
+  cout << "CHARLIST" << endl;
+  charList->printList();
   charList->append(a);
   charList->append(p);
   charList->append(p);
