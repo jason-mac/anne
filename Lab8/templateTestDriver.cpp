@@ -25,12 +25,12 @@ int main() {
   char l = 'l';
   char e = 'e';
   cout << "CHARLIST" << endl;
-  charList->printList();
   charList->append(a);
   charList->append(p);
   charList->append(p);
   charList->append(l);
   charList->append(e);
+  charList->printList();
   int anInt = 3;
   List<int> * intList = new List<int>();
   List<string> *stringList = new List<string>();
