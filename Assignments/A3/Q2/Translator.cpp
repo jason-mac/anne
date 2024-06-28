@@ -30,7 +30,7 @@ using std::ifstream;
 using std::nothrow;
 using std::cerr;
 
-
+// Display Method
 void display(WordPair& anElement) {
   cout << anElement;
 }
@@ -62,6 +62,19 @@ void readData(Dictionary* dictionary, ifstream& file) {
   }
 }
 
+
+/*
+   Translation Algorithm:
+   
+  Read in the data filename the user entered at the command line.
+  Load its content (all the word pairs) into the Dictionary.
+  While not EOF
+    Read the English word the user entered at the command line.
+    Translate this English word using the Dictionary object.
+    Print <English word>:<word in the other language> on the computer monitor screen.
+    If the English word was not found, print ***Not Found!*** instead.
+ */
+
 int main(int argc, char* argv[]) {
   Dictionary * dictionary = new(nothrow) Dictionary();
   string fileName = "";
@@ -83,13 +96,12 @@ int main(int argc, char* argv[]) {
 
   string displayStr = "display";
   if(argc == 3 && argv[2] == displayStr) {
-    dictionary->displayContent();
+    dictionary->displayContent(display);
     return EXIT_SUCCESS;
   }
 
   readData(dictionary, file);
   string userInput = "";
-  cout << endl;
   while(userInput != "n") {
     cin >> userInput;
     WordPair find(userInput);
