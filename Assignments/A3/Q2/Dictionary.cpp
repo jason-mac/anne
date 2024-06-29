@@ -11,8 +11,9 @@
  * Date of last modification: June 2024
  */
 #include "Dictionary.h"
-#include "BST.h"
-#include "WordPair.h"
+#include "EmptyDataCollectionException.h"
+#include "UnableToInsertException.h"
+using std::nothrow;
 
 
 // Description: Constructor
@@ -36,6 +37,9 @@ Dictionary::~Dictionary() {
 // Description: Returns the number of elements currently stored in the Dictionary.
 // Postcondition: This method does not change the Dictionary.
 unsigned int Dictionary::getElementCount() const {
+  if(keyValuePairs == nullptr) {
+    return 0;
+  }
   return keyValuePairs->getElementCount();
 }
 
@@ -48,7 +52,10 @@ unsigned int Dictionary::getElementCount() const {
 //            if "newElement" already exists in the Dictionary.  
 void Dictionary::put(WordPair& newElement) {
   if(keyValuePairs == nullptr) {
-    keyValuePairs = new BST();
+    keyValuePairs = new(nothrow) BST();
+    if(keyValuePairs == nullptr) {
+      throw UnableToInsertException("New operator failed, new element could not be inserted into dictonary");
+    }
   }
   keyValuePairs->insert(newElement);
 }
@@ -61,6 +68,9 @@ void Dictionary::put(WordPair& newElement) {
 //            if the key is not found in the Dictionary.
 // Postcondition: This method does not change the Dictionary.
 WordPair & Dictionary::get(WordPair & targetElement) const {
+  if(keyValuePairs == nullptr) {
+    throw EmptyDataCollectionException("Empty dictionary, element cannot be found");
+  }
   return keyValuePairs->retrieve(targetElement);
 }
 
@@ -70,6 +80,9 @@ WordPair & Dictionary::get(WordPair & targetElement) const {
 // Exception: Throws the exception EmptyDataCollectionException if the Dictionary is empty.
 // Postcondition: This method does not change the Dictionary.
 void Dictionary::displayContent(void visit(WordPair &)) const {
+  if(keyValuePairs == nullptr) {
+    return;
+  }
   keyValuePairs->traverseInOrder(visit);
 }
 
