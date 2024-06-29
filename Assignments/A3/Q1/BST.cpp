@@ -50,7 +50,6 @@ BST::BST(const BST & aBST) {
   }
 }                
 
-// Overloaded opeprator
 // Description: Assignment (=) operator: copy (assign) "rhs" BST 
 //              object to "this" BST object such that both objects
 //              are an exact, yet independent, copy of each other.
