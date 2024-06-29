@@ -44,6 +44,9 @@ BST::BST(const BST & aBST) {
   if(aBST.root != nullptr) {
     // Perform a deep copy of rhs BST's nodes starting from newBSTNode and root of aBST's BST   
     this->deepCopyR(aBST.root);
+  } else {
+    this->root = nullptr;
+    this->elementCount = 0;
   }
 }                
 
@@ -220,19 +223,21 @@ WordPair& BST::retrieve(WordPair & targetElement) const {
 //            if "targetElement" is not found in the BST.
 // Postcondition: This method does not change the BST.
 WordPair& BST::retrieveR(WordPair & targetElement, BSTNode * current) const {
+  //Setup return variable and comparison variable
+  WordPair& currentElement = current->element;
 
   //If the current BSTNode contains the targetElement, return its element
-  if(current->element == targetElement) {
-    return current->element;
+  if(targetElement == currentElement) {
+    return currentElement;
   }
 
   //If targetElement is less than current BSTNode's element, search left subtree if it exists
-  if(targetElement < current->element && current->hasLeft()) {
+  if(targetElement < currentElement && current->hasLeft()) {
     return retrieveR(targetElement, current->left);
   }
 
   //If targetElement is greater than current BSTNode's element, search right subtree if it exists
-  if(targetElement > current->element && current->hasRight()) {
+  if(targetElement > currentElement && current->hasRight()) {
     return retrieveR(targetElement, current->right);
   }
 

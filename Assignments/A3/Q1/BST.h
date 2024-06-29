@@ -37,15 +37,10 @@ private:
    
   // Description: Recursively copies all nodes from the given source BST to the current BST
   //              using a preorder traversal
-  // Precondition: 'rhsCurrent' is the root of a non-empty BST to be copied. 
-  // Postcondition: 'thisCurrent' and its subtree are a deep copy of 'rhsCurrent' and its subtree.
-  // Time Efficiency: O(n), where n is the number of nodes in the BST.
   void deepCopyR(BSTNode* current);
 
   // Description: Recursively destroys a BST starting from the given node using
-  //              a post order traversal
-  // Postcondition: The BST starting from "current" is destroyed, and memory is freed.
-  // Time Efficiency: O(n)
+  //              a post order traversal, all heap allocated memory is freed
   void destroyBSTr(BSTNode* current);
 
   // description: recursive insertion into a bst.
