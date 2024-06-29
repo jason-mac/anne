@@ -59,6 +59,9 @@ void BST::operator=(const BST & rhs) {
   if(rhs.root != nullptr) {
     // Perform a deep copy of rhs BST's nodes starting from newBSTNode and root of rhs BST 
     this->deepCopyR(rhs.root);
+  } else {
+    this->root = nullptr;
+    this->elementCount = 0;
   }
 }                
 
@@ -136,7 +139,7 @@ void BST::insert(WordPair & newElement) {
   }
 
   // If the tree is empty, set the new BSTNode as the root
-  if(root == nullptr) {
+  if(elementCount == 0) {
     root = newBSTNode;
     elementCount++;
     return;
