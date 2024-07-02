@@ -99,6 +99,7 @@ int main(int argc, char* argv[]) {
   if(argc == 3 && argv[2] == displayStr) {
     cout << "here" << endl;
     dictionary->displayContent(display);
+    cout << "done display" << endl;
     return EXIT_SUCCESS;
   }
   if(argc == 3 && argv[2] != displayStr) {
