@@ -142,6 +142,7 @@ int main(int argc, char* argv[]) {
     }
   }
   file.close();
+  delete dictionary;
   return EXIT_SUCCESS; 
 }
 
