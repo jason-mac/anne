@@ -100,7 +100,8 @@ int main(int argc, char* argv[]) {
     cout << "here" << endl;
     dictionary->displayContent(display);
     return EXIT_SUCCESS;
-  } else {
+  }
+  if(argc == 3 && argv[2] != displayStr) {
     return EXIT_FAILURE;
   }
 
