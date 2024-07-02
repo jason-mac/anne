@@ -95,17 +95,6 @@ int main(int argc, char* argv[]) {
     return EXIT_FAILURE;
   }
 
-  string displayStr = "display";
-  if(argc == 3 && argv[2] == displayStr) {
-    cout << "here" << endl;
-    dictionary->displayContent(display);
-    cout << "done display" << endl;
-    return EXIT_SUCCESS;
-  }
-  if(argc == 3 && argv[2] != displayStr) {
-    return EXIT_FAILURE;
-  }
-
   string aLine = "";
   string aWord = "";
   string englishW = "";
@@ -129,6 +118,16 @@ int main(int argc, char* argv[]) {
     } catch (const ElementAlreadyExistsException& e) {
       cout << e.what() << endl;
     }
+  }
+  string displayStr = "display";
+  if(argc == 3 && argv[2] == displayStr) {
+    cout << "here" << endl;
+    dictionary->displayContent(display);
+    cout << "done display" << endl;
+    return EXIT_SUCCESS;
+  }
+  if(argc == 3 && argv[2] != displayStr) {
+    return EXIT_FAILURE;
   }
   string userInput = "";
   while (getline(cin, userInput)) {
