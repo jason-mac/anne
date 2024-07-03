@@ -1,3 +1,8 @@
+"""
+This module is a bst class
+"""
+
+
 class BST:
     def __init__(self):
         self.root = None
@@ -10,7 +15,6 @@ class BST:
 
     def insertR(self, current_node, val):
         if current_node.val == val:
-            print("seen already")
             return
         if val < current_node.val:
             if current_node.left is not None:
@@ -27,6 +31,9 @@ class BST:
                 return
 
     def pre_order_traversal(self, current, visit):
+        """
+        function
+        """
         if current is None:
             return
         visit(current)
@@ -35,17 +42,30 @@ class BST:
 
 
 class BSTNode:
+    """
+    i do not care
+    """
+
     def __init__(self, val):
+        """
+        do not care
+        """
         self.val = val
         self.left = None
         self.right = None
 
     def has_left(self):
+        """
+        still do not care
+        """
         if self.left is None:
             return False
         return True
 
     def has_right(self):
+        """
+        lmfao
+        """
         if self.right is None:
             return False
         return True

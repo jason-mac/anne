@@ -1,4 +1,4 @@
-def array_to_bst_sort(input, bst, left, right):
+def bst_sort(input, bst, left, right):
     """
     bst_sort function, sorts an array for a mostly balaned bst tree sort
     """
@@ -6,15 +6,21 @@ def array_to_bst_sort(input, bst, left, right):
         return
     middle = (right + left) // 2
     bst.insert(input[middle])
-    array_to_bst_sort(input, bst, left, middle - 1)
-    array_to_bst_sort(input, bst, middle + 1, right)
+    bst_sort(input, bst, left, middle - 1)
+    bst_sort(input, bst, middle + 1, right)
 
 
 def print_BST_node(current_node):
+    """
+    print
+    """
     print(current_node.val, end=" ")
 
 
 def bst_to_array(current, arr):
+    """
+    convert bst to array
+    """
     if current is None:
         return
     arr.append(current.val)
