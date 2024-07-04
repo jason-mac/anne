@@ -13,6 +13,7 @@
 #include "Dictionary.h"
 #include "EmptyDataCollectionException.h"
 #include "UnableToInsertException.h"
+#include <memory>
 using std::nothrow;
 
 
@@ -21,14 +22,29 @@ Dictionary::Dictionary() {}
 
 // Description: Copy Constructor
 Dictionary::Dictionary(const Dictionary & Dictionary) {
-  keyValuePairs = Dictionary.keyValuePairs;
+  if(Dictionary.keyValuePairs == nullptr) {
+    this->keyValuePairs = nullptr;
+  } else {
+    this->keyValuePairs = new(nothrow) BST(*(Dictionary.keyValuePairs));
+  }
 }
+
 
 // Description: Overloaded assingment (=) operator
 void Dictionary::operator=(const Dictionary & rhs) {
   // Check for reassignment
   if(this != &rhs) {
-    keyValuePairs = rhs.keyValuePairs;
+    if(rhs.keyValuePairs == nullptr) {
+      if(this->keyValuePairs != nullptr) {
+        delete keyValuePairs;
+      }
+      this->keyValuePairs = nullptr;
+    } else {
+      if(this->keyValuePairs != nullptr) {
+        delete this->keyValuePairs;
+      }
+      this->keyValuePairs = new(nothrow) BST(*(rhs.keyValuePairs));
+    }
   }
 }
 
@@ -41,6 +57,7 @@ Dictionary::~Dictionary() {
 // Description: Returns the number of elements currently stored in the Dictionary.
 // Postcondition: This method does not change the Dictionary.
 unsigned int Dictionary::getElementCount() const {
+  // If there is no BST allocated, return 0 elements
   if(keyValuePairs == nullptr) {
     return 0;
   }
@@ -63,6 +80,7 @@ void Dictionary::put(WordPair& newElement) {
       throw UnableToInsertException("New operator failed, new element could not be inserted into dictonary");
     }
   }
+  // TO DO ??????
   keyValuePairs->insert(newElement);
 }
 
