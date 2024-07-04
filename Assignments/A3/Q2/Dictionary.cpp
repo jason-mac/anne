@@ -33,6 +33,18 @@ Dictionary::Dictionary(const Dictionary & Dictionary) {
 // Description: Overloaded assingment (=) operator
 void Dictionary::operator=(const Dictionary & rhs) {
   // Check for reassignment
+  if(this == &rhs) {
+    return;
+  }
+
+  // Delete current bst structure if instantiated
+  if(this->keyValuePairs != nullptr) {
+    delete this->keyValuePairs;
+  }
+
+  // Copy rhs->keyValuePairs into this->keyValuePairs using copy constructor from BST class
+  this->keyValuePairs = (rhs.keyValuePairs == nullptr) ? nullptr : new(nothrow) BST(*(rhs.keyValuePairs));
+  /*
   if(this != &rhs) {
     if(rhs.keyValuePairs == nullptr) {
       if(this->keyValuePairs != nullptr) {
@@ -46,6 +58,7 @@ void Dictionary::operator=(const Dictionary & rhs) {
       this->keyValuePairs = new(nothrow) BST(*(rhs.keyValuePairs));
     }
   }
+  */
 }
 
 // Description: Destructor
@@ -80,7 +93,6 @@ void Dictionary::put(WordPair& newElement) {
       throw UnableToInsertException("New operator failed, new element could not be inserted into dictonary");
     }
   }
-  // TO DO ??????
   keyValuePairs->insert(newElement);
 }
 
