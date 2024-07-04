@@ -82,6 +82,7 @@ int main(int argc, char* argv[]) {
           dictionary->put(aWordPair);
         }
         catch (ElementAlreadyExistsException& anException) {
+          cout << "already exists" << endl;
         }
         catch (UnableToInsertException& anException) {
         }
