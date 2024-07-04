@@ -91,8 +91,7 @@ int main(int argc, char* argv[]) {
       myfile.close();
 
       // Display the dictionary if desired by the user
-      if(argc > 3 && argv[2] == displayString) {
-        cout << argv[2] << endl;
+      if(argc > 2 && argv[2] == displayString) {
         if(dictionary->getElementCount() != 0) {
           dictionary->displayContent(display);
         } else {
