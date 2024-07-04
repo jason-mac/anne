@@ -37,7 +37,7 @@ def main():
 
     # Sort data using merge sort in ascending order
     merge_sort(data_array, 0, len(data_array) - 1)
-
+    print(len(data_array), "len data array")
     # Create and populate BST that is height balanced
     bst = BST()
     bst_sort(data_array, bst, 0, len(data_array) - 1)
@@ -51,7 +51,7 @@ def main():
     print()
     bst_to_array(bst.root, bst_array)
     print(bst_array, "\n")
-
+    print(len(bst_array), "size")
     # Prompt user for output file name
     output_file_name = input(
         "Input an output file name (Press enter for default value of 'output.txt'): "
