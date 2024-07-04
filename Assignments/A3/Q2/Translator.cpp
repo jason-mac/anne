@@ -101,7 +101,6 @@ int main(int argc, char* argv[]) {
         // Get user input for translation
         while(getline(cin, englishW)) {
           WordPair target(englishW);
-          cout << englishW;
           try {
             translated = dictionary->get(target);
             cout << translated;
