@@ -82,7 +82,6 @@ int main(int argc, char* argv[]) {
           dictionary->put(aWordPair);
         }
         catch (ElementAlreadyExistsException& anException) {
-          cout << "already exists" << endl;
         }
         catch (UnableToInsertException& anException) {
         }
@@ -93,6 +92,7 @@ int main(int argc, char* argv[]) {
 
       // Display the dictionary if desired by the user
       if(argc > 3 && argv[2] == displayString) {
+        cout << argv[2] << endl;
         if(dictionary->getElementCount() != 0) {
           dictionary->displayContent(display);
         } else {
