@@ -9,7 +9,6 @@ when using a standard insertion algorithm for BSTs.
 Usage:
     Run this module directly and ensure you have a desired input text within the same directory
 """
-
 import sys
 
 from bst import BST

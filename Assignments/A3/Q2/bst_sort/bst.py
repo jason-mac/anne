@@ -13,6 +13,19 @@ class BST:
             return
         self.insertR(self.root, val)
 
+    def is_balanced(self):
+        result = self.is_balanced_rec(self.root)
+        return result
+
+    def is_balanced_rec(self, current):
+        if current is None:
+            return -1
+        left_height = self.is_balanced_rec(current.left)
+        right_height = self.is_balanced_rec(current.right)
+        if abs(left_height - left_height) == 2:
+            return False
+        return max(left_height, right_height) + 1
+
     def insertR(self, current_node, val):
         if current_node.val == val:
             return
