@@ -56,8 +56,9 @@ BST::BST(const BST & aBST) {
 void BST::operator=(const BST & rhs) { 
   if(this != &rhs) {
     if(rhs.root != nullptr) {
-      // Perform a deep copy of rhs BST's nodes starting from newBSTNode and root of rhs BST 
+      // Destroy the current bst before copying rhs over to this
       this->destroyBSTr(root);
+      // Perform a deep copy of rhs BST's nodes starting from newBSTNode and root of rhs BST 
       this->deepCopyR(rhs.root);
     } else {
       this->root = nullptr;

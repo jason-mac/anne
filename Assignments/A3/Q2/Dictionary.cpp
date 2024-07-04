@@ -26,12 +26,16 @@ Dictionary::Dictionary(const Dictionary & Dictionary) {
 
 // Description: Overloaded assingment (=) operator
 void Dictionary::operator=(const Dictionary & rhs) {
-  keyValuePairs = rhs.keyValuePairs;
+  // Check for reassignment
+  if(this != &rhs) {
+    keyValuePairs = rhs.keyValuePairs;
+  }
 }
 
 // Description: Destructor
 Dictionary::~Dictionary() {
   delete keyValuePairs;
+  keyValuePairs = nullptr;
 }
 
 // Description: Returns the number of elements currently stored in the Dictionary.
@@ -51,8 +55,10 @@ unsigned int Dictionary::getElementCount() const {
 // Exception: Throws the exception "ElementAlreadyExistsException" 
 //            if "newElement" already exists in the Dictionary.  
 void Dictionary::put(WordPair& newElement) {
+  // If there is no BST, allocate memory for BST
   if(keyValuePairs == nullptr) {
     keyValuePairs = new(nothrow) BST();
+    // Throw exception if memory allocation failed
     if(keyValuePairs == nullptr) {
       throw UnableToInsertException("New operator failed, new element could not be inserted into dictonary");
     }
@@ -68,6 +74,7 @@ void Dictionary::put(WordPair& newElement) {
 //            if the key is not found in the Dictionary.
 // Postcondition: This method does not change the Dictionary.
 WordPair & Dictionary::get(WordPair & targetElement) const {
+  // If there is no bst to search, throw exception
   if(keyValuePairs == nullptr) {
     throw EmptyDataCollectionException("Empty dictionary, element cannot be found");
   }

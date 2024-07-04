@@ -4,10 +4,11 @@
  * 
  * Description: Drives the translation of the BST ADT class. 
  *
- * Author: AL
+ * Author: Jason Mac, Jagyjot Parmar 
  * Last Modification Date: June 2024
  */
 
+#include <cstdio>
 #include <iostream>
 #include <stdio.h>
 #include <cstdlib>
@@ -35,33 +36,6 @@ void display(WordPair& anElement) {
   cout << anElement;
 }
 
-/*void readData(Dictionary* dictionary, ifstream& file) {
-  string aLine = "";
-  string aWord = "";
-  string englishW = "";
-  string translationW = "";
-  string delimiter = ":";
-  size_t pos = 0;
-  WordPair translated;
-  while(getline(file, aLine)) {
-    // Read the english and translation pair line by line
-    pos = aLine.find(delimiter);
-    englishW = aLine.substr(0, pos);
-    aLine.erase(0, pos + delimiter.length());
-    translationW = aLine;
-    WordPair aWordPair(englishW, translationW);
-
-    // Insert WordPair into the dictionary Data Collection
-    try {
-      dictionary->put(aWordPair);
-    } catch (const UnableToInsertException& e) {
-      cout << e.what() << endl;
-    } catch (const ElementAlreadyExistsException& e) {
-      cout << e.what() << endl;
-    }
-  }
-}
-*/
 
 
 /*
@@ -77,73 +51,77 @@ void display(WordPair& anElement) {
  */
 
 int main(int argc, char* argv[]) {
+  // Allocate a dictionary onto the heap
   Dictionary * dictionary = new(nothrow) Dictionary();
-  string fileName = "";
-  if(dictionary == nullptr) {
-    cout << "Memory allocation for dictionary failed. Terminating program...";
-    return EXIT_FAILURE;
-  }
-  if(argc < 2) {
-    cout << "File name not found. Terminating program...";
-    return EXIT_FAILURE;
-  } 
-  fileName = argv[1];
-  
-  ifstream file(fileName);
-  if(!file.is_open()) {
-    cout << "Unable to open file. Terminating program...";
-    return EXIT_FAILURE;
-  }
+  string displayString = "display";
 
   string aLine = "";
   string aWord = "";
   string englishW = "";
   string translationW = "";
+  string filename = "";
   string delimiter = ":";
   size_t pos = 0;
   WordPair translated;
-  while(getline(file, aLine)) {
-    // Read the english and translation pair line by line
-    pos = aLine.find(delimiter);
-    englishW = aLine.substr(0, pos);
-    aLine.erase(0, pos + delimiter.length());
-    translationW = aLine;
-    WordPair aWordPair(englishW, translationW);
 
-    // Insert WordPair into the dictionary Data Collection
-    try {
-      dictionary->put(aWordPair);
-    } catch (const UnableToInsertException& e) {
-      cout << e.what() << endl;
-    } catch (const ElementAlreadyExistsException& e) {
-      cout << e.what() << endl;
+  if (argc > 1) {
+    filename = argv[1];
+    ifstream myfile(filename);
+
+    if(myfile.is_open()) {
+      // Read in data from file and insert into the dictionary
+      while(getline(myfile, aLine)) {
+        pos = aLine.find(delimiter);
+        englishW = aLine.substr(0, pos);
+        aLine.erase(0, pos + delimiter.length());
+        translationW = aLine;
+        WordPair aWordPair(englishW, translationW);
+
+        // Try to insert the given wordpair into the dictionary
+        try {
+          dictionary->put(aWordPair);
+        }
+        catch (ElementAlreadyExistsException& anException) {
+        }
+        catch (UnableToInsertException& anException) {
+        }
+      }
+
+      // Close the file after inserting all of them into the dictionary
+      myfile.close();
+
+      // Display the dictionary if desired by the user
+      if(argc > 3 && argv[2] == displayString) {
+        if(dictionary->getElementCount() != 0) {
+          dictionary->displayContent(display);
+        } else {
+          cout << "Dictionary is empty" << endl;
+        }
+      } else if ( argc == 2) {
+        // Get user input for translation
+        while(getline(cin, englishW)) {
+          WordPair target(englishW);
+          cout << englishW;
+          try {
+            translated = dictionary->get(target);
+            cout << translated;
+          }
+          catch(ElementDoesNotExistException& anException) {
+            cout << "***Not Found!***" << endl;
+          }
+          catch(EmptyDataCollectionException& anException) {
+          }
+        }
+      }
+    } else { // File could not be open case 
+      cout << "Could not open file" << endl;
     }
+  } else { // File name not given
+    cout << "No file name given" << endl;
   }
-  string displayStr = "display";
-  if(argc == 3 && argv[2] == displayStr) {
-    cout << "here" << endl;
-    dictionary->displayContent(display);
-    cout << "done display" << endl;
-    return EXIT_SUCCESS;
-  }
-  if(argc == 3 && argv[2] != displayStr) {
-    return EXIT_FAILURE;
-  }
-  string userInput = "";
-  while (getline(cin, userInput)) {
-    cin >> userInput;
-    WordPair find(userInput);
-    WordPair translation;
-    try { 
-      translation = dictionary->get(find);
-      cerr << translation.getEnglish() << ":" << translation.getTranslation() << endl;
-    } catch(const ElementDoesNotExistException& e) {
-      cerr << "***Not Found***" << endl;
-    }
-  }
-  file.close();
   delete dictionary;
-  return EXIT_SUCCESS; 
+  dictionary = nullptr;
+  return 0;
 }
 
 // clang-format on
