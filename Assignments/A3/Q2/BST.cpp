@@ -176,7 +176,6 @@ bool BST::insertR(BSTNode * newBSTNode, BSTNode * current) {
 
   // If new node's value is less than current node's value
   if(newBSTNode->element < current->element) {
-    // If left child of current BSTNode is empty
     if(current->hasLeft()) {
       nextBSTNode = current->left;              // For recursive call to traverse to left child
     } else {
@@ -187,7 +186,6 @@ bool BST::insertR(BSTNode * newBSTNode, BSTNode * current) {
 
   // If new BSTNode's value is greater than the current BSTNode's value
   if(newBSTNode->element > current->element) {
-    // If the right child of the current BSTNode is empty
     if(current->hasRight()) {
       nextBSTNode = current->right;             // For recursive call to traverse to right child
     } else { 
@@ -196,7 +194,7 @@ bool BST::insertR(BSTNode * newBSTNode, BSTNode * current) {
     }
   }
 
-  // Recursively call insertR with the new BSTNode and appropiate child BSTNode
+  // Recursively call insertR with newBSTNode and appropiate child of current
   return insertR(newBSTNode, nextBSTNode);
 }
 
