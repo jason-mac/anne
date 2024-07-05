@@ -36,7 +36,78 @@ void display(WordPair& anElement) {
   cout << anElement;
 }
 
+int main() {
+    try {
+        // Test default constructor
+        Dictionary *dict1 = new Dictionary();
 
+        // Test inserting elements
+        WordPair wp1("key1", "value1");
+        WordPair wp2("key2", "value2");
+        WordPair wp3("key3", "value3");
+
+        dict1->put(wp1);
+        dict1->put(wp2);
+
+        // Test display content
+        cout << "Dictionary 1:" << endl;
+        dict1->displayContent(display);
+        cout << endl;
+
+        // Test copy constructor
+        Dictionary *dict2 = new Dictionary(*dict1);
+
+        // Test assignment operator
+        Dictionary *dict3 = new Dictionary();
+        *dict3 = *dict1;
+
+        // Test getElementCount
+        cout << "Number of elements in dict1: " << dict1->getElementCount() << endl;
+        cout << "Number of elements in dict2: " << dict2->getElementCount() << endl;
+        cout << "Number of elements in dict3: " << dict3->getElementCount() << endl;
+        cout << endl;
+
+        // Test get function
+        WordPair target("key2", ""); // Testing retrieval by key
+        WordPair &result = dict1->get(target);
+        cout << "Value for key 'key2' in dict1: " << result << endl;
+        cout << endl;
+
+        // Test exception handling (trying to get from empty dictionary)
+        Dictionary *emptyDict = new Dictionary();
+        try {
+            WordPair targetEmpty("key1", "");
+            WordPair &resultEmpty = emptyDict->get(targetEmpty);
+            cout << "Value for key 'key1' in emptyDict: " << resultEmpty << endl;
+        } catch (const EmptyDataCollectionException &e) {
+            cout << "Exception caught (emptyDict): " << e.what() << endl;
+        }
+        cout << endl;
+
+        // Test inserting duplicate element (exception handling)
+        try {
+            dict1->put(wp2); // wp2 is already in dict1
+        } catch (const UnableToInsertException &e) {
+            cout << "Exception caught (inserting duplicate): " << e.what() << endl;
+        }
+        cout << endl;
+
+        // Test display content of empty dictionary
+        cout << "Empty Dictionary:" << endl;
+        emptyDict->displayContent(display);
+
+        // Clean up: delete allocated dictionaries
+        delete dict1;
+        delete dict2;
+        delete dict3;
+        delete emptyDict;
+
+    } catch (const std::exception &e) {
+        cout << "Exception caught: " << e.what() << endl;
+    }
+
+    return 0;
+}
 
 /*
    Translation Algorithm:
@@ -50,6 +121,7 @@ void display(WordPair& anElement) {
     If the English word was not found, print ***Not Found!*** instead.
  */
 
+/*
 int main(int argc, char* argv[]) {
   // Allocate a dictionary onto the heap
   Dictionary * dictionary = new(nothrow) Dictionary();
@@ -122,5 +194,6 @@ int main(int argc, char* argv[]) {
   dictionary = nullptr;
   return 0;
 }
+*/
 
 // clang-format on

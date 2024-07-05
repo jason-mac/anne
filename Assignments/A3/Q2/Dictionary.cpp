@@ -22,58 +22,52 @@ Dictionary::Dictionary() {}
 
 // Description: Copy Constructor
 Dictionary::Dictionary(const Dictionary & Dictionary) {
-  // orirignal
-  this->keyValuePairs = Dictionary.keyValuePairs;
+  // Initialize a new pointer for keyValuePairs to nullptr
+  BST* newKeyValuePairs = nullptr;
 
-  // new
-  if(Dictionary.keyValuePairs == nullptr) {
-    this->keyValuePairs = nullptr;
-  } else {
-    this->keyValuePairs = new(nothrow) BST(*(Dictionary.keyValuePairs));
+  // If input Dictionary's keyValuePairs is not null, create a deep copy of it
+  if(Dictionary.keyValuePairs != nullptr) {
+    // Use the BST copy constuctor to create a new BST
+    newKeyValuePairs = new(nothrow) BST(*(Dictionary.keyValuePairs));
   }
+
+  // If memory allocation failed of the new BST and the input Dictionary's keyValuePairs is not nullptr
+  if(newKeyValuePairs == nullptr && Dictionary.keyValuePairs != nullptr) {
+    throw UnableToInsertException("Cannot allocate memory for a new Dictionary copy");
+  }
+
+  // Assign newly created BST (or nullptr) to this Dictionary's keyValuePairs
+  this->keyValuePairs = newKeyValuePairs;
 }
 
 
 // Description: Overloaded assingment (=) operator
 void Dictionary::operator=(const Dictionary & rhs) {
-  // Check for reassignment
+  // Check for reassignment 
   if(this == &rhs) {
     return;
   }
 
-  // original 
-  if(rhs.keyValuePairs != nullptr) {
-    this->keyValuePairs = rhs.keyValuePairs;
-  } else {
-    this->keyValuePairs = nullptr;
-  }
-
-
-  // new
-  // Delete current bst structure if instantiated
+  // Delete current bst structure if it is instantiated
   if(this->keyValuePairs != nullptr) {
     delete this->keyValuePairs;
   }
 
-  // Copy rhs->keyValuePairs into this->keyValuePairs using copy constructor from BST class
-  this->keyValuePairs = (rhs.keyValuePairs == nullptr) ? nullptr : new(nothrow) BST(*(rhs.keyValuePairs));
+  // Initialize a new pointer for the new BST
+  BST* newKeyValuePairs = nullptr;
 
-
-  /*
-  if(this != &rhs) {
-    if(rhs.keyValuePairs == nullptr) {
-      if(this->keyValuePairs != nullptr) {
-        delete keyValuePairs;
-      }
-      this->keyValuePairs = nullptr;
-    } else {
-      if(this->keyValuePairs != nullptr) {
-        delete this->keyValuePairs;
-      }
-      this->keyValuePairs = new(nothrow) BST(*(rhs.keyValuePairs));
-    }
+  // if rhs.keyValuePairs is not null, create a deep copy of it
+  if(rhs.keyValuePairs != nullptr) {
+    newKeyValuePairs = new(nothrow) BST(*(rhs.keyValuePairs));
   }
-  */
+
+  // If memory allocation failed for the new BST
+  if(newKeyValuePairs == nullptr && rhs.keyValuePairs != nullptr) {
+    throw UnableToInsertException("Cannot allocate memory for a new Dictionary copy");
+  }
+
+  // Assign newly created BST (or nullptr) to this Dictionary's keyValuePairs
+  this->keyValuePairs = newKeyValuePairs;
 }
 
 // Description: Destructor
