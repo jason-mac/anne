@@ -13,9 +13,11 @@
 #include "Dictionary.h"
 #include "EmptyDataCollectionException.h"
 #include "UnableToInsertException.h"
+#include <iostream>
 #include <memory>
 using std::nothrow;
-
+using std::cout;
+using std::endl;
 
 // Description: Constructor
 Dictionary::Dictionary() {}
@@ -72,6 +74,7 @@ void Dictionary::operator=(const Dictionary & rhs) {
 
 // Description: Destructor
 Dictionary::~Dictionary() {
+  cout << "delete" << endl;
   delete keyValuePairs;
   keyValuePairs = nullptr;
 }
