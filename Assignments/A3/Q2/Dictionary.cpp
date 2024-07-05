@@ -22,6 +22,10 @@ Dictionary::Dictionary() {}
 
 // Description: Copy Constructor
 Dictionary::Dictionary(const Dictionary & Dictionary) {
+  // orirignal
+  this->keyValuePairs = Dictionary.keyValuePairs;
+
+  // new
   if(Dictionary.keyValuePairs == nullptr) {
     this->keyValuePairs = nullptr;
   } else {
@@ -37,6 +41,15 @@ void Dictionary::operator=(const Dictionary & rhs) {
     return;
   }
 
+  // original 
+  if(rhs.keyValuePairs != nullptr) {
+    this->keyValuePairs = rhs.keyValuePairs;
+  } else {
+    this->keyValuePairs = nullptr;
+  }
+
+
+  // new
   // Delete current bst structure if instantiated
   if(this->keyValuePairs != nullptr) {
     delete this->keyValuePairs;
@@ -44,6 +57,8 @@ void Dictionary::operator=(const Dictionary & rhs) {
 
   // Copy rhs->keyValuePairs into this->keyValuePairs using copy constructor from BST class
   this->keyValuePairs = (rhs.keyValuePairs == nullptr) ? nullptr : new(nothrow) BST(*(rhs.keyValuePairs));
+
+
   /*
   if(this != &rhs) {
     if(rhs.keyValuePairs == nullptr) {
