@@ -85,8 +85,15 @@ int main() {
   cout << "DISPLAY END" << endl;
   Dictionary *dict4 = new Dictionary();
   *dict3 = *dict4;
+  Dictionary *dict5 = new(nothrow) Dictionary(*(dict4));
   try {
     dict3->displayContent(display);
+  } 
+  catch(EmptyDataCollectionException& e) {
+    cout << e.what() << endl;
+  }
+  try {
+    dict5->displayContent(display);
   } 
   catch(EmptyDataCollectionException& e) {
     cout << e.what() << endl;
