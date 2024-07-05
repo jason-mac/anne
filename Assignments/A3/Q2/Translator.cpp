@@ -72,9 +72,17 @@ int main() {
   cout << "Number of elements in dict2: " << dict2->getElementCount() << endl;
   cout << "Number of elements in dict3: " << dict3->getElementCount() << endl;
   cout << endl;
+  cout << "DISPALY START" << endl;
   dict1->displayContent(display);
+  cout << "DISPLAY END" << endl;
+  cout << endl;
+  cout << "DISPALY START" << endl;
   dict2->displayContent(display);
+  cout << "DISPLAY END" << endl;
+  cout << endl;
+  cout << "DISPALY START" << endl;
   dict3->displayContent(display);
+  cout << "DISPLAY END" << endl;
   Dictionary *dict4 = new Dictionary();
   *dict3 = *dict4;
   try {
