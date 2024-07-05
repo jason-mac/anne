@@ -138,6 +138,7 @@ int main(int argc, char *argv[]) {
   } catch (EmptyDataCollectionException &e) {
     cout << e.what() << endl;
   }
+  *testTwo = *testThree;
 
   delete testOne;
   delete testTwo;
