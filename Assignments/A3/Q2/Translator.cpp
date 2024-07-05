@@ -135,11 +135,13 @@ int main() {
     // Clean up: delete allocated dictionaries
 
 
-    delete dict1;
-    delete dict2;
-    delete dict3;
-    delete emptyDict;
-    return 0;
+  delete dict1;
+  delete dict2;
+  delete dict3;
+  delete emptyDict;
+  delete dict4;
+  delete dict5;
+  return 0;
 }
 
 /*
