@@ -86,7 +86,7 @@ int main() {
   // Test inserting duplicate element (exception handling)
   try {
       dict1->put(wp2); // wp2 is already in dict1
-  } catch (const UnableToInsertException &e) {
+  } catch (const ElementAlreadyExistsException &e) {
       cout << "Exception caught (inserting duplicate): " << e.what() << endl;
   }
   cout << endl;
