@@ -107,6 +107,7 @@ int main(int argc, char* argv[]) {
 
           // Try to find translation of given english word
           try {
+            cout << "try" << endl;
             translated = dictionary->get(target);
             cout << translated;
           }
