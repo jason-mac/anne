@@ -50,6 +50,9 @@ int main() {
   try {
     dict1->get(wp1);
   }
+  catch(EmptyDataCollectionException& exception) {
+    cout << exception.what() << endl;
+  }
   catch(ElementDoesNotExistException& exception) {
     cout << exception.what() << endl;
   }
