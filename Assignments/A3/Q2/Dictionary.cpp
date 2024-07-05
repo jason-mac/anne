@@ -20,10 +20,14 @@ Dictionary::Dictionary() {}
 
 // Description: Copy Constructor
 Dictionary::Dictionary(const Dictionary & Dictionary) {
-  this->keyValuePairs = (Dictionary.keyValuePairs == nullptr) ? nullptr : new(nothrow) BST(*(Dictionary.keyValuePairs));
-  if(this->keyValuePairs == nullptr) {
+  BST* newKeyValuePairs = nullptr;
+  if(Dictionary.keyValuePairs != nullptr) {
+    newKeyValuePairs = new(nothrow) BST(*(Dictionary.keyValuePairs));
+  }
+  if(newKeyValuePairs == nullptr) {
     throw UnableToInsertException();
   }
+  this->keyValuePairs = newKeyValuePairs;
 }
 
 
@@ -105,7 +109,6 @@ WordPair & Dictionary::get(WordPair & targetElement) const {
   }
   return keyValuePairs->retrieve(targetElement);
 }
-
 
 // Description: Prints the content of the Dictionary.
 // Precondition: Dictionary is not empty.

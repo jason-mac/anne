@@ -50,8 +50,8 @@ int main() {
   try {
     dict1->get(wp1);
   }
-  catch(ElementDoesNotExistException) {
-
+  catch(ElementDoesNotExistException& exception) {
+    cout << exception.what() << endl;
   }
   dict1->put(wp1);
   dict1->put(wp2);
