@@ -130,6 +130,7 @@ WordPair & Dictionary::get(WordPair & targetElement) const {
 // Postcondition: This method does not change the Dictionary.
 void Dictionary::displayContent(void visit(WordPair &)) const {
   if(keyValuePairs == nullptr) {
+    throw(EmptyDataCollectionException("Empty Data Collection, nothing to display"));
     return;
   }
   keyValuePairs->traverseInOrder(visit);

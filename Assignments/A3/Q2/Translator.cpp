@@ -44,7 +44,11 @@ int main() {
   WordPair wp1("key1", "value1");
   WordPair wp2("key2", "value2");
   WordPair wp3("key3", "value3");
-
+  WordPair wp4("key4", "value4");
+  WordPair wp5("key5", "value5");
+  WordPair wp6("key6", "value6");
+  WordPair wp7("key7", "value7");
+  WordPair wp8("key8", "value8");
   dict1->put(wp1);
   dict1->put(wp2);
 
@@ -52,6 +56,7 @@ int main() {
   cout << "Dictionary 1:" << endl;
   dict1->displayContent(display);
   cout << endl;
+  
 
   // Test copy constructor
   Dictionary *dict2 = new Dictionary(*dict1);
@@ -59,13 +64,25 @@ int main() {
   // Test assignment operator
   Dictionary *dict3 = new Dictionary();
   *dict3 = *dict1;
-
+  dict1->put(wp4);
+  dict2->put(wp5);
+  dict3->put(wp6);
   // Test getElementCount
   cout << "Number of elements in dict1: " << dict1->getElementCount() << endl;
   cout << "Number of elements in dict2: " << dict2->getElementCount() << endl;
   cout << "Number of elements in dict3: " << dict3->getElementCount() << endl;
   cout << endl;
-
+  dict1->displayContent(display);
+  dict2->displayContent(display);
+  dict3->displayContent(display);
+  Dictionary *dict4 = new Dictionary();
+  *dict3 = *dict4;
+  try {
+    dict3->displayContent(display);
+  } 
+  catch(EmptyDataCollectionException& e) {
+    cout << e.what() << endl;
+  }
   // Test get function
   WordPair target("key2", ""); // Testing retrieval by key
   WordPair &result = dict1->get(target);
