@@ -29,121 +29,10 @@ using std::cin;
 using std::cout;
 using std::ifstream;
 using std::nothrow;
-using std::cerr;
 
 // Display Method
 void display(WordPair& anElement) {
   cout << anElement;
-}
-
-int main() {
-  // Test default constructor
-  Dictionary *dict1 = new Dictionary();
-
-  // Test inserting elements
-  WordPair wp1("key1", "value1");
-  WordPair wp2("key2", "value2");
-  WordPair wp3("key3", "value3");
-  WordPair wp4("key4", "value4");
-  WordPair wp5("key5", "value5");
-  WordPair wp6("key6", "value6");
-  WordPair wp7("key7", "value7");
-  WordPair wp8("key8", "value8");
-  dict1->put(wp1);
-  dict1->put(wp2);
-
-  // Test display content
-  cout << "Dictionary 1:" << endl;
-  dict1->displayContent(display);
-  cout << endl;
-  
-
-  // Test copy constructor
-  Dictionary *dict2 = new Dictionary(*dict1);
-
-  // Test assignment operator
-  Dictionary *dict3 = new Dictionary();
-  *dict3 = *dict1;
-  dict1->put(wp4);
-  dict2->put(wp5);
-  dict3->put(wp6);
-  // Test getElementCount
-  cout << "Number of elements in dict1: " << dict1->getElementCount() << endl;
-  cout << "Number of elements in dict2: " << dict2->getElementCount() << endl;
-  cout << "Number of elements in dict3: " << dict3->getElementCount() << endl;
-  cout << endl;
-  cout << "DISPALY START" << endl;
-  dict1->displayContent(display);
-  cout << "DISPLAY END" << endl;
-  cout << endl;
-  cout << "DISPALY START" << endl;
-  dict2->displayContent(display);
-  cout << "DISPLAY END" << endl;
-  cout << endl;
-  cout << "DISPALY START" << endl;
-  dict3->displayContent(display);
-  cout << "DISPLAY END" << endl;
-  Dictionary *dict4 = new Dictionary();
-  *dict3 = *dict4;
-  *dict4 = *dict4;
-  *dict3 = *dict4;
-  Dictionary *dict5 = new(nothrow) Dictionary(*(dict4));
-  try {
-    dict3->displayContent(display);
-  } 
-  catch(EmptyDataCollectionException& e) {
-    cout << e.what() << endl;
-  }
-  try {
-    dict5->displayContent(display);
-  } 
-  catch(EmptyDataCollectionException& e) {
-    cout << e.what() << endl;
-  }
-  // Test get function
-  WordPair target("key2", ""); // Testing retrieval by key
-  WordPair &result = dict1->get(target);
-  cout << "Value for key 'key2' in dict1: " << result << endl;
-  cout << endl;
-
-  // Test exception handling (trying to get from empty dictionary)
-  Dictionary *emptyDict = new Dictionary();
-  try {
-      WordPair targetEmpty("key1", "");
-      WordPair &resultEmpty = emptyDict->get(targetEmpty);
-      cout << "Value for key 'key1' in emptyDict: " << resultEmpty << endl;
-  } catch (const EmptyDataCollectionException &e) {
-      cout << "Exception caught (emptyDict): " << e.what() << endl;
-  }
-  cout << endl;
-
-  // Test inserting duplicate element (exception handling)
-  try {
-      dict1->put(wp2); // wp2 is already in dict1
-  } catch (const ElementAlreadyExistsException &e) {
-      cout << "Exception caught (inserting duplicate): " << e.what() << endl;
-  }
-  cout << endl;
-
-  // Test display content of empty dictionary
-  cout << "Empty Dictionary:" << endl;
-  try {
-
-    emptyDict->displayContent(display);
-  }
-  catch(EmptyDataCollectionException& e) {
-  cout << e.what();
-  }
-    // Clean up: delete allocated dictionaries
-
-
-  delete dict1;
-  delete dict2;
-  delete dict3;
-  delete emptyDict;
-  delete dict4;
-  delete dict5;
-  return 0;
 }
 
 /*
@@ -158,10 +47,13 @@ int main() {
     If the English word was not found, print ***Not Found!*** instead.
  */
 
-/*
 int main(int argc, char* argv[]) {
   // Allocate a dictionary onto the heap
   Dictionary * dictionary = new(nothrow) Dictionary();
+  if(dictionary == nullptr) {
+    cout << "New operator failed. Terminating program...";
+    return 0;
+  }
   string displayString = "display";
 
   string aLine = "";
@@ -184,32 +76,36 @@ int main(int argc, char* argv[]) {
         englishW = aLine.substr(0, pos);
         aLine.erase(0, pos + delimiter.length());
         translationW = aLine;
+
+        //Create WordPair for insertion into dictionary
         WordPair aWordPair(englishW, translationW);
 
-        // Try to insert the given wordpair into the dictionary
+        // Try to insert the given WordPair into the dictionary
         try {
           dictionary->put(aWordPair);
         }
-        catch (ElementAlreadyExistsException& anException) {
-        }
-        catch (UnableToInsertException& anException) {
-        }
+        // Catch any errors
+        catch (ElementAlreadyExistsException& anException) {}
+        catch (UnableToInsertException& anException) {}
       }
 
       // Close the file after inserting all of them into the dictionary
       myfile.close();
 
-      // Display the dictionary if desired by the user
+      // Display the dictionary if desired by the user input
       if(argc > 2 && argv[2] == displayString) {
-        if(dictionary->getElementCount() != 0) {
+        try {
           dictionary->displayContent(display);
-        } else {
-          cout << "Dictionary is empty" << endl;
+        }
+        catch(EmptyDataCollectionException& anException) {
+          cout << "Empty Dictionary" << endl;
         }
       } else if ( argc == 2) {
         // Get user input for translation
         while(getline(cin, englishW)) {
           WordPair target(englishW);
+
+          // Try to find translation of given english word
           try {
             translated = dictionary->get(target);
             cout << translated;
@@ -221,7 +117,7 @@ int main(int argc, char* argv[]) {
           }
         }
       }
-    } else { // File could not be open case 
+    } else { // File could not be open  
       cout << "Could not open file" << endl;
     }
   } else { // File name not given
@@ -231,6 +127,5 @@ int main(int argc, char* argv[]) {
   dictionary = nullptr;
   return 0;
 }
-*/
 
 // clang-format on
