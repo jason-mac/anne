@@ -40,8 +40,8 @@ BST::BST() { }
 
 // Copy constructor
 BST::BST(const BST & aBST) {
-  cout << root << endl;
-  cout << elementCount << endl;
+  cout << root << "root" << endl;
+  cout << elementCount << "elementCount" <<endl;
   this->deepCopyR(aBST.root);
 }                
 
