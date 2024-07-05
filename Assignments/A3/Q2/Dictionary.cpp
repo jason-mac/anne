@@ -74,7 +74,6 @@ void Dictionary::operator=(const Dictionary & rhs) {
 
 // Description: Destructor
 Dictionary::~Dictionary() {
-  cout << "delete" << endl;
   delete keyValuePairs;
   keyValuePairs = nullptr;
 }
