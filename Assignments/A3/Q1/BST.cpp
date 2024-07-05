@@ -49,6 +49,7 @@ BST::BST(const BST & aBST) {
 //              object to "this" BST object such that both objects
 //              are an exact, yet independent, copy of each other.
 void BST::operator=(const BST & rhs) { 
+  cout << "assignment" << endl;
   // Check for reassignment
   if(this == &rhs) {
     return;
