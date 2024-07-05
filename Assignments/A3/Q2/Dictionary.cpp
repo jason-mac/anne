@@ -24,7 +24,7 @@ Dictionary::Dictionary(const Dictionary & Dictionary) {
   if(Dictionary.keyValuePairs != nullptr) {
     newKeyValuePairs = new(nothrow) BST(*(Dictionary.keyValuePairs));
   }
-  if(newKeyValuePairs == nullptr) {
+  if(newKeyValuePairs == nullptr && Dictionary.keyValuePairs != nullptr) {
     throw UnableToInsertException();
   }
   this->keyValuePairs = newKeyValuePairs;

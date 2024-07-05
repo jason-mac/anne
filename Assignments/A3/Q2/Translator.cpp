@@ -100,7 +100,9 @@ int main() {
   cout << "Dict4 elementCount -> " << dict4->getElementCount() << endl;
   *dict3 = *dict4;
   cout << "Dict3 elementCount -> " << dict3->getElementCount() << endl;
+    
   Dictionary *dict5 = new (nothrow) Dictionary(*(dict4));
+    
   try {
     dict3->displayContent(display);
   } catch (EmptyDataCollectionException &e) {
@@ -133,7 +135,10 @@ int main() {
     dict1->put(wp2); // wp2 is already in dict1
   } catch (const ElementAlreadyExistsException &e) {
     cout << "Exception caught (inserting duplicate): " << e.what() << endl;
+  } catch(const UnableToInsertException& ex) {
+    cout << ex.what() << endl;
   }
+
   cout << endl;
 
   // Test display content of empty dictionary
