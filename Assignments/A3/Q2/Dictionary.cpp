@@ -13,33 +13,17 @@
 #include "Dictionary.h"
 #include "EmptyDataCollectionException.h"
 #include "UnableToInsertException.h"
-#include <iostream>
-#include <memory>
 using std::nothrow;
-using std::cout;
-using std::endl;
 
 // Description: Constructor
 Dictionary::Dictionary() {}
 
 // Description: Copy Constructor
 Dictionary::Dictionary(const Dictionary & Dictionary) {
-  // Initialize a new pointer for keyValuePairs to nullptr
-  BST* newKeyValuePairs = nullptr;
-
-  // If input Dictionary's keyValuePairs is not null, create a deep copy of it
-  if(Dictionary.keyValuePairs != nullptr) {
-    // Use the BST copy constuctor to create a new BST
-    newKeyValuePairs = new(nothrow) BST(*(Dictionary.keyValuePairs));
+  this->keyValuePairs = (Dictionary.keyValuePairs == nullptr) ? nullptr : new(nothrow) BST(*(Dictionary.keyValuePairs));
+  if(this->keyValuePairs == nullptr) {
+    throw UnableToInsertException();
   }
-
-  // If memory allocation failed of the new BST and the input Dictionary's keyValuePairs is not nullptr
-  if(newKeyValuePairs == nullptr && Dictionary.keyValuePairs != nullptr) {
-    throw UnableToInsertException("Cannot allocate memory for a new Dictionary copy");
-  }
-
-  // Assign newly created BST (or nullptr) to this Dictionary's keyValuePairs
-  this->keyValuePairs = newKeyValuePairs;
 }
 
 
@@ -50,26 +34,26 @@ void Dictionary::operator=(const Dictionary & rhs) {
     return;
   }
 
-  // Delete current bst structure if it is instantiated
+  // Delete this->keyValuePairs BST structure if it is instantiated
   if(this->keyValuePairs != nullptr) {
     delete this->keyValuePairs;
   }
 
   // Initialize a new pointer for the new BST
-  BST* newKeyValuePairs = nullptr;
+  BST* rhsKeyValuePairsCopy = nullptr;
 
   // if rhs.keyValuePairs is not null, create a deep copy of it
   if(rhs.keyValuePairs != nullptr) {
-    newKeyValuePairs = new(nothrow) BST(*(rhs.keyValuePairs));
+    rhsKeyValuePairsCopy = new(nothrow) BST(*(rhs.keyValuePairs));
   }
 
   // If memory allocation failed for the new BST
-  if(newKeyValuePairs == nullptr && rhs.keyValuePairs != nullptr) {
+  if(rhsKeyValuePairsCopy == nullptr && rhs.keyValuePairs != nullptr) {
     throw UnableToInsertException("Cannot allocate memory for a new Dictionary copy");
   }
 
   // Assign newly created BST (or nullptr) to this Dictionary's keyValuePairs
-  this->keyValuePairs = newKeyValuePairs;
+  this->keyValuePairs = rhsKeyValuePairsCopy;
 }
 
 // Description: Destructor

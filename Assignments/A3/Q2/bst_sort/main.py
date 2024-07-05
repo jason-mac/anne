@@ -51,6 +51,10 @@ def main():
     print()
     bst_to_array(bst.root, bst_array)
     print(bst_array, "\n")
+    if bst.is_balanced():
+        print("balanced")
+    else:
+        print("not balanced")
     print(len(bst_array), "size")
     # Prompt user for output file name
     output_file_name = input(

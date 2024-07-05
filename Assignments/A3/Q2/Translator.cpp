@@ -114,6 +114,7 @@ int main(int argc, char* argv[]) {
             cout << "***Not Found!***" << endl;
           }
           catch(EmptyDataCollectionException& anException) {
+            cout << "***Not Found!***" << endl;
           }
         }
       }

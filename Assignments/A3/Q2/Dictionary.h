@@ -8,7 +8,7 @@
  * Class invariant: Duplicated elements are not allowed.
  *              
  * Author: Jason Mac, Jagyjot Parmar 
- * Date of last modification: June 2024
+ * Date of last modification: July 2024
  */
 
 #ifndef DICTIONARY_H
