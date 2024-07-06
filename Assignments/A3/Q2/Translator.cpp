@@ -94,6 +94,8 @@ int main(int argc, char* argv[]) {
       myfile.close();
       if(dictionary->keyValuePairs->isBalanced()) {
         cout << "balanced" << endl;
+      } else {
+        cout << "not balcnaed" << endl;
       }
       // Display the dictionary if desired by the user input
       if(argc > 2 && argv[2] == displayString) {
