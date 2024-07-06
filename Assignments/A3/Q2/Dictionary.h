@@ -18,7 +18,8 @@
 
 class Dictionary {
    
-public:
+private:
+
 /* You cannot change the following data member of this class. */
    BST * keyValuePairs = nullptr;                  
 
