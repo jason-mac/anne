@@ -41,30 +41,20 @@ BST::BST() { }
 // Copy constructor
 BST::BST(const BST & aBST) {
   // Check if aBST's BST is not empty
-  if(aBST.root != nullptr) {
-    // Perform a deep copy of rhs BST's nodes starting from newBSTNode and root of aBST's BST   
-    this->deepCopyR(aBST.root);
-  } else {
-    this->root = nullptr;
-    this->elementCount = 0;
-  }
+  this->deepCopyR(aBST.root);
 }                
 
 // Description: Assignment (=) operator: copy (assign) "rhs" BST 
 //              object to "this" BST object such that both objects
 //              are an exact, yet independent, copy of each other.
 void BST::operator=(const BST & rhs) { 
-  if(this != &rhs) {
-    if(rhs.root != nullptr) {
-      // Destroy the current bst before copying rhs over to this
-      this->destroyBSTr(root);
-      // Perform a deep copy of rhs BST's nodes starting from newBSTNode and root of rhs BST 
-      this->deepCopyR(rhs.root);
-    } else {
-      this->root = nullptr;
-      this->elementCount = 0;
-    }
+  if(this == &rhs) {
+    return;
   }
+  this->destroyBSTr(this->root);
+  this->elementCount = 0;
+  this->root = nullptr;
+  this->deepCopyR(rhs.root);
   // Check if rhs BST is not empty
 }                
 

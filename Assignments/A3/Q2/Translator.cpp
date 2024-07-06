@@ -1,4 +1,3 @@
-// clang-format off
 /*
  * Translator.cpp
  * 
@@ -127,5 +126,3 @@ int main(int argc, char* argv[]) {
   dictionary = nullptr;
   return 0;
 }
-
-// clang-format on

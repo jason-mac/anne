@@ -1,4 +1,3 @@
-// clang-format off
 /*
  * Dictionary.h
  * 
@@ -72,5 +71,3 @@ public:
    
 }; // end Dictionary
 #endif
-
-// clang-format on

@@ -1,4 +1,3 @@
-// clang-format off
 /*
  * Dictionary.cpp
  * 
@@ -119,5 +118,3 @@ void Dictionary::displayContent(void visit(WordPair &)) const {
   }
   keyValuePairs->traverseInOrder(visit);
 }
-
-// clang-format on
