@@ -54,8 +54,9 @@ int main(int argc, char* argv[]) {
     cout << "New operator failed. Terminating program...";
     return 0;
   }
-  string displayString = "display";
 
+  // Variable setup for main algorithm
+  string displayString = "display";
   string aLine = "";
   string aWord = "";
   string englishW = "";
@@ -85,8 +86,8 @@ int main(int argc, char* argv[]) {
           dictionary->put(aWordPair);
         }
         // Catch any errors
-        catch (ElementAlreadyExistsException& anException) {}
         catch (UnableToInsertException& anException) {}
+        catch (ElementAlreadyExistsException& anException) {}
       }
 
       // Close the file after inserting all of them into the dictionary
@@ -94,11 +95,10 @@ int main(int argc, char* argv[]) {
 
       // Display the dictionary if desired by the user input
       if(argc > 2 && argv[2] == displayString) {
-        try {
+        if(dictionary->getElementCount() != 0) {
           dictionary->displayContent(display);
-        }
-        catch(EmptyDataCollectionException& anException) {
-          cout << "Empty Dictionary" << endl;
+        } else {
+          cout << "***Empty Dictionary!***" << endl;
         }
       } else if ( argc == 2) {
         // Get user input for translation
@@ -110,11 +110,11 @@ int main(int argc, char* argv[]) {
             translated = dictionary->get(target);
             cout << translated;
           }
+          // Catch any errors
           catch(ElementDoesNotExistException& anException) {
             cout << "***Not Found!***" << endl;
           }
-          catch(EmptyDataCollectionException& anException) {
-          }
+          catch(EmptyDataCollectionException& anException) {}
         }
       }
     } else { // File could not be open  

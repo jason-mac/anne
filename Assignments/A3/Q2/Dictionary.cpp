@@ -20,14 +20,17 @@ Dictionary::Dictionary() {}
 
 // Description: Copy Constructor
 Dictionary::Dictionary(const Dictionary & Dictionary) {
-  BST* newKeyValuePairs = nullptr;
+  // Initialize a new pointer for keyValuePairs to nullptr
+  BST* newKeyValuePairsCopy = nullptr;
+
+  // If input Dictionary's keyValuePairs is not null, create a deep copy of it
   if(Dictionary.keyValuePairs != nullptr) {
-    newKeyValuePairs = new(nothrow) BST(*(Dictionary.keyValuePairs));
+    // Use the BST copy constuctor to create a new BST
+    newKeyValuePairsCopy = new(nothrow) BST(*(Dictionary.keyValuePairs));
   }
-  if(newKeyValuePairs == nullptr && Dictionary.keyValuePairs != nullptr) {
-    throw UnableToInsertException();
-  }
-  this->keyValuePairs = newKeyValuePairs;
+
+  // Assign newly created BST (or nullptr) to this Dictionary's keyValuePairs
+  this->keyValuePairs = newKeyValuePairsCopy;
 }
 
 
@@ -49,11 +52,6 @@ void Dictionary::operator=(const Dictionary & rhs) {
   // if rhs.keyValuePairs is not null, create a deep copy of it
   if(rhs.keyValuePairs != nullptr) {
     rhsKeyValuePairsCopy = new(nothrow) BST(*(rhs.keyValuePairs));
-  }
-
-  // If memory allocation failed for the new BST
-  if(rhsKeyValuePairsCopy == nullptr && rhs.keyValuePairs != nullptr) {
-    throw UnableToInsertException("Cannot allocate memory for a new Dictionary copy");
   }
 
   // Assign newly created BST (or nullptr) to this Dictionary's keyValuePairs
@@ -92,6 +90,7 @@ void Dictionary::put(WordPair& newElement) {
       throw UnableToInsertException("New operator failed, new element could not be inserted into dictonary");
     }
   }
+  // Insert newElement 
   keyValuePairs->insert(newElement);
 }
 
@@ -117,7 +116,6 @@ WordPair & Dictionary::get(WordPair & targetElement) const {
 void Dictionary::displayContent(void visit(WordPair &)) const {
   if(keyValuePairs == nullptr) {
     throw(EmptyDataCollectionException("Empty Data Collection, nothing to display"));
-    return;
   }
   keyValuePairs->traverseInOrder(visit);
 }
