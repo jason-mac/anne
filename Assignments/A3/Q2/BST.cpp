@@ -80,6 +80,21 @@ BST::~BST() {
 
 // Description: Recursively copies all nodes from the given source BST to the current BST
 //              using a pre order traversal
+
+int BST::isBalancedR(BSTNode* current) {
+  if(current == nullptr) {
+    return 0;
+  }
+  int leftHeight = isBalancedR(current->left);
+  int rightHeight = isBalancedR(current->right);
+  if(abs(leftHeight - rightHeight) > 1 || leftHeight == -1 || rightHeight == -1) {
+    return -1;
+  }
+  return std::max(leftHeight, rightHeight) + 1;
+}
+bool BST::isBalanced() {
+  return isBalancedR(this->root) != -1;
+}
 void BST::deepCopyR(BSTNode* rhsCurrent) {
   // Base Case for recursion
   if(rhsCurrent == nullptr) {

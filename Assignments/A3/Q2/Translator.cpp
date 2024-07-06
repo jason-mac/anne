@@ -92,7 +92,9 @@ int main(int argc, char* argv[]) {
 
       // Close the file after inserting all of them into the dictionary
       myfile.close();
-
+      if(dictionary->keyValuePairs->isBalanced()) {
+        cout << "balanced" << endl;
+      }
       // Display the dictionary if desired by the user input
       if(argc > 2 && argv[2] == displayString) {
         if(dictionary->getElementCount() != 0) {

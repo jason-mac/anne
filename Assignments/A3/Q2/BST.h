@@ -72,6 +72,8 @@ public:
    // class because the prototype of these public methods don't match, 
    // we won't be able to successfully mark your assignment.
 
+  int isBalancedR(BSTNode* current);
+  bool isBalanced();
 
    /* Constructors and destructor */
    BST();                            // Default constructor
