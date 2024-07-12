@@ -29,21 +29,14 @@ List::List() {}
 // Description: Copy constructor creates a new List object as a copy
 //              of an existing List object, passed as parameter.
 List::List(const List &lst) {
+  head = nullptr;
   elementCount = lst.elementCount;
   if (lst.head) {
     Node *current = lst.head;
-    Node *thisCurrent = new Node(current->data);
-    Node *newNode = nullptr;
-    head = thisCurrent;
-    current = current->next;
     while (current) {
-      newNode = new Node(current->data);
+      this->append(current->data);
       current = current->next;
-      thisCurrent->next = newNode;
-      thisCurrent = thisCurrent->next;
     }
-  } else {
-    head = nullptr;
   }
 }
 

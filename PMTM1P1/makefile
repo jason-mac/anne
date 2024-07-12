@@ -1,3 +1,4 @@
+all: td
 
 td:	testDriver.o DataCollection.o 
 	g++ -o td -Wall DataCollection.o testDriver.o 

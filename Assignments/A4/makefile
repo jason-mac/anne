@@ -10,7 +10,7 @@ Queue.o: Queue.cpp Queue.h
 BinaryHeap.o: BinaryHeap.cpp BinaryHeap.h
 	g++ -c -Wall BinaryHeap.cpp
 
-testDriver_Q.o: testDriver_Q.cpp 
+testDriver_Q.o: testDriver_Q.cpp Queue.h BinaryHeap.h 
 	g++ -c -Wall testDriver_Q.cpp
 	
 Event.o: Event.cpp Event.h

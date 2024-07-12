@@ -80,7 +80,9 @@ int main () {
     *aDC1 = *aDC2;
     cout << *aDC2 << endl;
     cout << *aDC1 << endl;
+    aDC1->append(69);
     aDC2->append(123);
+    aDC2->append(4321);
     cout << *aDC2 << endl;
     cout << *aDC1 << endl;
     
@@ -88,6 +90,7 @@ int main () {
     cout << *aDC1 << endl;
     cout << *newOne << endl;
     newOne->append(324);
+    newOne->append(123412);
     cout << *newOne << endl;
     cout << *aDC1 << endl;
 

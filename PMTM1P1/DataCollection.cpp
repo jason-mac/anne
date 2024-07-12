@@ -3,7 +3,7 @@
  * DataCollection.cpp
  *
  * Description: Implementation of a SHSL list-based DataCollection ADT class.
- * There are no class invariant!
+ * Class invariatnt:t here are no class invariant!
  *
  * Author: AL
  * Date: June 2024
@@ -24,10 +24,10 @@ DataCollection::DataCollection() {}
 //              copy of an existing DataCollection object.
 DataCollection::DataCollection(const DataCollection &DC) {
   head = nullptr;
-  Node* DCCurrent = DC.head;
-  while(DCCurrent) {
-    this->append(DCCurrent->data);
-    DCCurrent = DCCurrent->next;
+  Node* currentDC = DC.head;
+  while(currentDC) {
+    this->append(currentDC->data);
+    currentDC = currentDC->next;
   }
 }
 
@@ -38,22 +38,23 @@ DataCollection &DataCollection::operator=(const DataCollection &DC) {
   if(this == &DC) {
     return *this;
   }
-  Node* thisCurrent = head;
-  Node* DCCurrent = DC.head;
-  while(thisCurrent && DCCurrent) {
-    thisCurrent->data = DCCurrent->data;
-    thisCurrent = thisCurrent->next;
-    DCCurrent = DCCurrent->next;
+  Node* currentThis = head;
+  Node* currentDC = DC.head;
+  while(currentThis && currentDC) {
+    currentThis->data = currentDC->data;
+    currentThis = currentThis->next;
+    currentDC = currentDC->next;
   }
-  while(DCCurrent) {
-    this->append(DCCurrent->data);
-    DCCurrent = DCCurrent->next;
+  while(currentDC != nullptr) {
+    this->append(currentDC->data);
+    currentDC = currentDC->next;
   }
-  while(thisCurrent) {
-    Node* thisPrevious = thisCurrent;
-    thisCurrent = thisCurrent->next;
-    delete thisPrevious;
+  while(currentThis != nullptr){
+    Node* previous = currentThis;
+    currentThis = currentThis->next;
+    delete previous;
   }
+
   return *this;
 }
 
@@ -73,18 +74,19 @@ DataCollection::~DataCollection() {
 //              Returns true if "newElement" has been
 //              successful appended, otherwise, false.
 bool DataCollection::append(int newElement) {
-  // Put your code here!
-  Node* nodeToInsert = new Node(newElement);
+  Node* insertNode = new Node(newElement);
+  if(!insertNode) {
+    return false;
+  }
   if(!head) {
-    head = nodeToInsert;
+    head = insertNode;
     return true;
   }
-
   Node* current = head;
   while(current->next) {
     current = current->next;
   }
-  current->next = nodeToInsert;
+  current->next = insertNode;
   return true;
 }
 
@@ -92,11 +94,16 @@ bool DataCollection::append(int newElement) {
 //              Returns true if "newElement" has been
 //              successful appended, otherwise, false.
 bool DataCollection::prepend(int newElement) {
-  
-  // Put your code here!
-  Node* nodeToInsert = new Node(newElement);
-  nodeToInsert->next = head;
-  head = nodeToInsert;
+  Node* insertNode = new Node(newElement);
+  if(!insertNode) {
+    return false;
+  }
+  if(!head) {
+    head = insertNode;
+    return true;
+  }
+  insertNode->next = head;
+  head = insertNode;
   return true;
 }
 
