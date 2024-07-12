@@ -12,7 +12,7 @@ void testQueue() {
   int five = 5;
   a.enqueue(five);
   a = b;
-  Queue d = b;
+  Queue<int> d = b;
   cout << "abcd" << endl;
 
   // Let's get ourselves a queue!
