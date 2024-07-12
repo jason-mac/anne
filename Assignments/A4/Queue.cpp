@@ -1,9 +1,13 @@
 // clang-format off
 #include "Queue.h"
+#include <iostream>
 #include "EmptyDataCollectionException.h"
 #include <algorithm>
 #include <new>
 using std::nothrow;
+using std::cout;
+using std::endl;
+
 
 /* CONTRUCTORS AND DESTRUCTOR */
 
@@ -196,6 +200,19 @@ ElementType& Queue<ElementType>::peek() const {
     throw EmptyDataCollectionException("peek() called on empty Data Collection.");
   }
   return elements[frontindex];
+}
+
+template<class ElementType>
+void Queue<ElementType>::print() const {
+  if(elements == nullptr) {
+    cout << "empty" << endl;
+    return;
+  }
+  cout << "[";
+  for(int i = 0; i < elementCount - 1; i++) {
+    cout << elements[i] << ", ";
+  }
+  cout << elements[elementCount - 1] << "]" << endl;
 }
 
 // clang-format on
