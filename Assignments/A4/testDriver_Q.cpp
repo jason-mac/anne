@@ -195,7 +195,13 @@ void testBinaryHeap() {
   }
   cout << "PRINT HEAP" << endl;
   heap->print();
+  while (!(heap->getElementCount() == 0)) {
+    cout << "min->" << heap->retrieve() << " ";
+    heap->print();
+    heap->remove();
+  }
   cout << endl;
+  delete heap;
 }
 
 int main(int argc, char *argv[]) {
