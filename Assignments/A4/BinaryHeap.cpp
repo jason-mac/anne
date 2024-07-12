@@ -246,7 +246,7 @@ void BinaryHeap<ElementType>::print() const {
     return;
   }
   cout << "[";
-  for(int i = 0; i < elementCount - 1; i++) {
+  for(unsigned int i = 0; i < elementCount - 1; i++) {
     cout << elements[i] << ", ";
   }
   cout << elements[elementCount - 1] << "]" << endl;

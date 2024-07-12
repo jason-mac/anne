@@ -21,5 +21,10 @@ int main() {
   heap->print();
   cout << "ENDING PRINT" << endl;
 
+  cout << "deque" << endl;
+  while (!q->isEmpty()) {
+    q->dequeue();
+    q->print();
+  }
   return EXIT_SUCCESS;
 }
