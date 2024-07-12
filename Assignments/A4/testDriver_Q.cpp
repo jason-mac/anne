@@ -167,6 +167,7 @@ void intTest() {
 }
 
 int main(int argc, char *argv[]) {
+  testQueue();
   myTest();
   time_t t;
   srand(time(&t));
