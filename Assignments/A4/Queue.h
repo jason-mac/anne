@@ -17,10 +17,8 @@ private:
     ElementType* getNewSizeArray(unsigned int newSize);
     
 
-    // Description: Makes a deep copy of the input object rhs and stores it into this instance.
-    // Precondition: this->elements is not pointing to heap-allocated memory.
-    // Postcondition: All of rhs's data members (except elements) are copied into this object,
-    //                and rhs's elements array has been deep copied into this object.
+    // Description: Makes a deep copy of the input object rhs and returns it
+    // Postcondition: The Queue remains unchanged
     ElementType* getDeepCopyArray(const Queue& rhs);
 
     // Private Members

@@ -45,23 +45,16 @@ Queue<ElementType>& Queue<ElementType>::operator= (const Queue& rhs) {
     return *this;
   }
 
-  // Create a deep copy of rhs elements
+  // Create a deep copy of rhs elements and delete any already allocated memory
   ElementType* newElements = getDeepCopyArray(rhs);
-
-  // Deallocate old memory
-  if(this->elements == nullptr) {
-    cout << "nullptr" << endl;
-  }
   delete[] this->elements;
-  cout << "delete called" << endl;
 
-  // Assign new elements and copy basic data members
+  // Assign new elements to deep copied array and copy basic data members
   this->elements = newElements;
   this->capacity = rhs.capacity;
   this->elementCount = rhs.elementCount;
   this->frontindex = rhs.frontindex;
   this->backindex = rhs.backindex;
-
   return *this;
 }
 
@@ -94,7 +87,6 @@ ElementType* Queue<ElementType>::getDeepCopyArray(const Queue& rhs) {
 // Time Efficiency: O(n)
 template<class ElementType>
 ElementType* Queue<ElementType>::getNewSizeArray(unsigned int newSize) {
-  cout << "RESIZE" << endl;
   ElementType * newSizeArray = new(nothrow) ElementType[newSize];
   if(newSizeArray == nullptr) {
     return nullptr;

@@ -14,7 +14,14 @@ private:
   // ***Utiltiy Methods***
   void reHeapDown(unsigned int);
   void reHeapUp(unsigned int);
+
+  // Description: Copies elements array into a new specified sized dynamically allocated array
+  //              maintaining the relative order of the elements and the array is returned
+  // Postcondition: The Binary Heap remains unchaged
   ElementType* getNewSizeArray(unsigned int) const;
+
+  // Description: Makes a deep copy of the input object rhs and returns it
+  // Postcondition: The Binary Heap remains unchanged
   ElementType* getDeepCopyArray(const BinaryHeap& rhs);
 
 public:
@@ -46,7 +53,7 @@ public:
   // Precondition: The Binary Heap is not empty.
   // Postcondition: The root element is removed, and the Binary Heap's heap properties are restored.
   // Exceptions: Throws EmptyDataCollectionException if the Binary Heap is empty.
-  // Time Efficiency: O(log n)t(ElementType&);
+  // Time Efficiency: O(log n)
   void remove();
 
   

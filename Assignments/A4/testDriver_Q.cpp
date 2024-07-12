@@ -4,6 +4,7 @@
 #include "Queue.h"
 #include <cstdlib>
 #include <iostream>
+#include <vector>
 
 void testQueue() {
   Queue<int> a;
@@ -171,8 +172,35 @@ void intTest() {
   // PRIORITYQUEUE.print();
 }
 
+void printVec(std::vector<int> vec) {
+  cout << "{";
+  for (int i = 0; i < vec.size() - 1; i++) {
+    cout << vec[i] << ", ";
+  }
+  cout << vec[vec.size() - 1] << "}" << endl;
+}
+
+void testBinaryHeap() {
+  BinaryHeap<int> *heap = new BinaryHeap<int>();
+  std::vector<int> values = {4312, 4,     315,  435, 4356234, 5321,   5,
+                             4,    234,   2345, 36,  54,      76578,  69,
+                             6765, 8657,  6,    547, 56,      432513, 451,
+                             4523, 64537, 5,    478, 357,     255324};
+  std::vector<int> sorted = values;
+  std::sort(sorted.begin(), sorted.end());
+  printVec(values);
+  printVec(sorted);
+  for (auto x : values) {
+    heap->insert(x);
+  }
+  cout << "PRINT HEAP" << endl;
+  heap->print();
+  cout << endl;
+}
+
 int main(int argc, char *argv[]) {
-  testQueue();
+  // testQueue();
+  testBinaryHeap();
   /*myTest();
   time_t t;
   srand(time(&t));

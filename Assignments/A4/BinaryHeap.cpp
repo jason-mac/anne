@@ -23,6 +23,7 @@ using std::nothrow;
 template <class ElementType>
 BinaryHeap<ElementType>::BinaryHeap() {}
 
+// Copy Constructor
 template <class ElementType>
 BinaryHeap<ElementType>::BinaryHeap(const BinaryHeap& other) {
   this->elements = getDeepCopyArray(other);
@@ -30,14 +31,14 @@ BinaryHeap<ElementType>::BinaryHeap(const BinaryHeap& other) {
   this->elementCount = other.elementCount;
 }
 
+// Destructor
 template <class ElementType>
 BinaryHeap<ElementType>::~BinaryHeap() {
   delete[] elements;
   this->elements = nullptr;
 }
 
-
-
+// Assignment Operator
 template <class ElementType>
 void BinaryHeap<ElementType>::operator= (const BinaryHeap& rhs) {
  // Self-assignment check
@@ -59,6 +60,9 @@ void BinaryHeap<ElementType>::operator= (const BinaryHeap& rhs) {
 
 
 /* UTILITY METHODS */
+
+// Description: Makes a deep copy of the input object rhs and returns it
+// Postcondition: The Binary Heap remains unchanged
 template <class ElementType>
 ElementType* BinaryHeap<ElementType>::getDeepCopyArray(const BinaryHeap& rhs) {
   if(rhs.elements == nullptr) {
@@ -71,42 +75,29 @@ ElementType* BinaryHeap<ElementType>::getDeepCopyArray(const BinaryHeap& rhs) {
   return deepCopyArray;
 }
 
-// Description: Removes (but does not return) the necessary element.
-// Precondition: This Binary Heap is not empty.
-// Exceptions: Throws EmptyDataCollectionException if this Binary Heap is empty.
-// Time Efficiency: O(log2 n)
-template <class ElementType>
-void BinaryHeap<ElementType>::remove() {  
-  // Throw an exception if the heap is empty
-  if (elementCount == 0) 
-    throw EmptyDataCollectionException("remove() called with an empty BinaryHeap.");
+// Description: Copies elements array into a new specified sized dynamically allocated array
+//              maintaining the relative order of the elements and the array is returned
+// Postcondition: The Binary Heap remains unchaged
+template<class ElementType>
+ElementType* BinaryHeap<ElementType>::getNewSizeArray(unsigned int newCapacity) const {
+  // Allocate a new array with the specified new capacity
+  ElementType* newElements = new(nothrow) ElementType[newCapacity];
   
-  // Replace the root element with the last element
-  elements[0] = elements[elementCount - 1];
-  elementCount--;
-
-  // If more than one element remains, re-heapify starting from the root
-  if (elementCount > 0) 
-    reHeapDown(0);
-
-  // Resize array if necessary to maintain efficiency
-  if (elementCount <= capacity / 4 && capacity > BASE_CAPACITY) {
-    unsigned int newSize = std::max(BASE_CAPACITY, capacity / 2);
-    ElementType* newSizeArray = getNewSizeArray(newSize);
-    if (newSizeArray == nullptr) {
-      // Memory allocation failed 
-      return;
-    }
-    delete[] elements;
-    elements = newSizeArray;
-    capacity = newSize;
+  // Check if memory allocation was successful
+  if(newElements == nullptr) {
+    return nullptr; // Return nullptr if allocation failed
   }
-
-  return;   
+  
+  // Copy existing elements from the old elements array to the new elements array
+  for(unsigned int i = 0; i < elementCount; i++) {
+    newElements[i] = elements[i];
+  }
+  
+  // Return the pointer to the new array containing copied elements
+  return newElements;
 }
 
-// Utility method
-// Description: Recursively put the array back into a ____________ Binary Heap.
+// Description: Recursively put the array back into a Min Binary Heap.
 template <class ElementType>
 void BinaryHeap<ElementType>::reHeapDown(unsigned int indexOfRoot) {
 
@@ -144,24 +135,28 @@ void BinaryHeap<ElementType>::reHeapDown(unsigned int indexOfRoot) {
    return;
 }
 
+// Description: Recursively put the array back into a Min Binary Heap.
 template <class ElementType>
 void BinaryHeap<ElementType>::reHeapUp(unsigned int indexOfChild) {
+  unsigned int indexOfRoot = 0;
+
   // Calculate the parent's index
   unsigned int indexOfParent = (indexOfChild - 1) / 2;
 
   // Base case: if the child is the root node, stop the recursion
-  if(indexOfChild <= 0) {
+  if(indexOfChild <= indexOfRoot) {
     return;
   }
 
-  // If the parent's element is less than the child's element, swap them
-  if(elements[indexOfParent] > elements[indexOfChild]) {
+  // If the parent's element is greater than the child's element, swap them
+  if(!(elements[indexOfParent] <= elements[indexOfChild])) {
+
     // Swap elements at indexOfChild and indexOfParent
     ElementType temp = elements[indexOfChild];
     elements[indexOfChild] = elements[indexOfParent];
     elements[indexOfParent] = temp;
     
-    // Recursively call reHeapUp on the parent index
+    // Recursively call reHeapUp on the parent index and fix potential violation of Min Binary Heap
     reHeapUp(indexOfParent);
     
     // Return after the recursive call
@@ -169,25 +164,40 @@ void BinaryHeap<ElementType>::reHeapUp(unsigned int indexOfChild) {
   }
 }
 
-// Utility method
-// Description: Allocates a new array with the specified new capacity and copies existing elements.
-template<class ElementType>
-ElementType* BinaryHeap<ElementType>::getNewSizeArray(unsigned int newCapacity) const {
-  // Allocate a new array with the specified new capacity
-  ElementType* newElements = new(nothrow) ElementType[newCapacity];
+/* PUBLIC INTERFACE */
+// Description: Removes (but does not return) the necessary element.
+// Precondition: This Binary Heap is not empty.
+// Exceptions: Throws EmptyDataCollectionException if this Binary Heap is empty.
+// Time Efficiency: O(log2 n)
+template <class ElementType>
+void BinaryHeap<ElementType>::remove() {  
+  // Throw an exception if the heap is empty
+  if (elementCount == 0) 
+    throw EmptyDataCollectionException("remove() called with an empty BinaryHeap.");
   
-  // Check if memory allocation was successful
-  if(newElements == nullptr) {
-    return nullptr; // Return nullptr if allocation failed
+  // Replace the root element with the last element
+  elements[0] = elements[elementCount - 1];
+  elementCount--;
+
+  // If more than one element remains, re-heapify starting from the root
+  if (elementCount > 0) 
+    reHeapDown(0);
+
+  // Resize if elementCount is less than capacity / 4 to maintain efficient use of memory
+  if (elementCount <= capacity / 4 && capacity > BASE_CAPACITY) {
+    // Always maintain a capacity >= 8 == BASE_CAPACITY, otherwise take half the capacity as new size
+    unsigned int newSize = std::max(BASE_CAPACITY, capacity / 2);
+    ElementType* newSizeArray = getNewSizeArray(newSize);
+    if (newSizeArray == nullptr) {
+      // Memory allocation failed 
+      return;
+    }
+    delete[] elements;
+    elements = newSizeArray;
+    capacity = newSize;
   }
-  
-  // Copy existing elements from the old elements array to the new elements array
-  for(unsigned int i = 0; i < elementCount; i++) {
-    newElements[i] = elements[i];
-  }
-  
-  // Return the pointer to the new array containing copied elements
-  return newElements;
+
+  return;   
 }
 
 // Description: Inserts a new element into the heap.
@@ -200,7 +210,7 @@ bool BinaryHeap<ElementType>::insert(ElementType& newElement) {
     capacity = BASE_CAPACITY;
   }
 
-  // Check if current element count exceeds current capacity
+  // Check if capacity is full 
   if(elementCount == capacity) {
     unsigned int newCapacity = capacity * 2;                  // Double Current Capacity
     ElementType* newElements = getNewSizeArray(newCapacity);  // Get resized Array
@@ -208,6 +218,7 @@ bool BinaryHeap<ElementType>::insert(ElementType& newElement) {
       return false;                                           // Return false if resizing fails
     }
     delete[] elements;                                        // Delete old array
+    capacity = newCapacity;
     elements = newElements;                                   // Update elements to point to resized array
   }
 
@@ -232,11 +243,20 @@ ElementType& BinaryHeap<ElementType>::retrieve() const {
     // Check if the heap is empty
     if (elementCount == 0) {
         // Throw an exception if trying to retrieve from an empty heap
-        throw EmptyDataCollectionException("Empty");
+        throw EmptyDataCollectionException("Empty Data Collection, no element to retrieve.");
     }
     
     // Return a reference to the root element of the heap
     return elements[0];
+}
+
+
+// Description: Returns the number of elements currently stored in the Binary Heap.
+// Postcondition: The Binary Heap remains unchanged.
+// Time Efficiency: O(1)
+template<class ElementType>
+unsigned int BinaryHeap<ElementType>::getElementCount() const {
+  return elementCount;
 }
 
 template<class ElementType>
@@ -250,10 +270,5 @@ void BinaryHeap<ElementType>::print() const {
     cout << elements[i] << ", ";
   }
   cout << elements[elementCount - 1] << "]" << endl;
-}
-
-template<class ElementType>
-unsigned int BinaryHeap<ElementType>::getElementCount() const {
-  return elementCount;
 }
 // clang-format on
