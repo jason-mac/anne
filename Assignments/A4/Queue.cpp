@@ -204,7 +204,7 @@ ElementType& Queue<ElementType>::peek() const {
 
 template<class ElementType>
 void Queue<ElementType>::print() const {
-  if(elements == nullptr) {
+  if(elementCount == 0) {
     cout << "empty" << endl;
     return;
   }
