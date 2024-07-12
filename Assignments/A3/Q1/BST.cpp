@@ -40,8 +40,6 @@ BST::BST() { }
 
 // Copy constructor
 BST::BST(const BST & aBST) {
-  cout << root << "root" << endl;
-  cout << elementCount << "elementCount" <<endl;
   this->deepCopyR(aBST.root);
 }                
 
@@ -49,11 +47,12 @@ BST::BST(const BST & aBST) {
 //              object to "this" BST object such that both objects
 //              are an exact, yet independent, copy of each other.
 void BST::operator=(const BST & rhs) { 
-  cout << "assignment" << endl;
   // Check for reassignment
   if(this == &rhs) {
     return;
   }
+  
+  // Destroy and reset this BST structure before copying rhs BST structure
   this->destroyBSTr(root);
   this->elementCount = 0;
   this->root = nullptr;
@@ -78,7 +77,7 @@ void BST::deepCopyR(BSTNode* rhsCurrent) {
     return;
   }
 
-  // Insert the current right hand side BSTNode's element into the this instance BST 
+  // Insert the current right hand side BSTNode's element into this instance BST 
   this->insert(rhsCurrent->element);
   
   // Recursively copy left subtree
@@ -88,7 +87,7 @@ void BST::deepCopyR(BSTNode* rhsCurrent) {
   deepCopyR(rhsCurrent->right); 
 }
 
-// Description: Recursively destroys a BST starting from the given node using, all 
+// Description: Recursively destroys a BST starting from the given node, all 
 //              heap allocatd memory is freed using a post order traversal
 // Postcondition: The BST starting from "current" is destroyed, and memory is freed.
 void BST::destroyBSTr(BSTNode* current) {  
@@ -157,9 +156,8 @@ void BST::insert(WordPair & newElement) {
 //              Returns true when "anElement" has been successfully inserted into the 
 //              BST. Otherwise, returns false.
 bool BST::insertR(BSTNode * newBSTNode, BSTNode * current) {  
-  
-  // Initialize the next BSTNode for recursion
-  BSTNode* nextBSTNode = nullptr;
+  // Setup variable for the next BSTNode for recursion
+  BSTNode* currentNext = nullptr;
 
   // If new BSTNode's value is equal to current BSTNode's value
   if(newBSTNode->element == current->element) {
@@ -168,28 +166,28 @@ bool BST::insertR(BSTNode * newBSTNode, BSTNode * current) {
 
   // If new node's value is less than current node's value
   if(newBSTNode->element < current->element) {
-    // If left child of current BSTNode is empty
+    // Check for a left subtree
     if(current->hasLeft()) {
-      nextBSTNode = current->left;              // For recursive call to traverse to left child
+      currentNext = current->left;              // For recursive call to traverse to left child
     } else {
-      current->left = newBSTNode;               // Insert new node as left child
+      current->left = newBSTNode;               // Insert new node as left child if there is no left subtree
       return true;                              // Successful insertion
     }
   }
 
   // If new BSTNode's value is greater than the current BSTNode's value
   if(newBSTNode->element > current->element) {
-    // If the right child of the current BSTNode is empty
+    // Check for a right subtree
     if(current->hasRight()) {
-      nextBSTNode = current->right;             // For recursive call to traverse to right child
+      currentNext = current->right;             // For recursive call to traverse to right child
     } else { 
-      current->right = newBSTNode;              // Insert newBSTNode as right child
+      current->right = newBSTNode;              // Insert newBSTNode as right child if there is no right subtree
       return true;                              // Successful insertion
     }
   }
 
-  // Recursively call insertR with the new BSTNode and appropiate child BSTNode
-  return insertR(newBSTNode, nextBSTNode);
+  // Recursively call insertR with the new BSTNode and appropiate child BSTNode of current
+  return insertR(newBSTNode, currentNext);
 }
 
 
@@ -267,8 +265,6 @@ void BST::traverseInOrder(void visit(WordPair &)) const {
 // Description: Recursive "in order" traversal of a BST.   
 // Postcondition: This method does not change the BST. 
 void BST::traverseInOrderR(void visit(WordPair &), BSTNode* current) const { 
-
-  // to do 
   
   // Base case for recursion
   if(current == nullptr) {
