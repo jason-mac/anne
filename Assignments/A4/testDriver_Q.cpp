@@ -23,8 +23,9 @@ int main() {
 
   cout << "deque" << endl;
   while (!q->isEmpty()) {
-    q->dequeue();
+    cout << "PEEK" << q->peek() << endl;
     q->print();
+    q->dequeue();
   }
   return EXIT_SUCCESS;
 }
