@@ -182,10 +182,10 @@ void printVec(std::vector<int> vec) {
 
 void testBinaryHeap() {
   BinaryHeap<int> *heap = new BinaryHeap<int>();
-  std::vector<int> values = {4312, 4,     315,  435, 4356234, 5321,   5,
+  std::vector<int> values = {4312, 9,     315,  435, 4356234, 5321,   900,
                              4,    234,   2345, 36,  54,      76578,  69,
                              6765, 8657,  6,    547, 56,      432513, 451,
-                             4523, 64537, 5,    478, 357,     255324};
+                             4523, 64537, 3245, 478, 357,     255324};
   std::vector<int> sorted = values;
   std::sort(sorted.begin(), sorted.end());
   printVec(values);
