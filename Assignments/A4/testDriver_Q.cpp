@@ -27,5 +27,15 @@ int main() {
     q->print();
     q->dequeue();
   }
+  try {
+    q->dequeue();
+  } catch (EmptyDataCollectionException &e) {
+    cout << e.what() << endl;
+  }
+  try {
+    q->peek();
+  } catch (EmptyDataCollectionException &e) {
+    cout << e.what() << endl;
+  }
   return EXIT_SUCCESS;
 }
