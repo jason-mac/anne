@@ -1,7 +1,7 @@
 
 all: tdQ
 
-tdQ: testDriver_Q.o Queue.h Event.o EmptyDataCollectionException.o
+tdQ: testDriver_Q.o Event.o EmptyDataCollectionException.o Queue.o BinaryHeap.o
 	g++ -o tdQ -Wall testDriver_Q.o Event.o EmptyDataCollectionException.o Queue.o BinaryHeap.o
 	
 Queue.o: Queue.cpp Queue.h
