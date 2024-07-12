@@ -200,6 +200,11 @@ void testBinaryHeap() {
     heap->print();
     heap->remove();
   }
+  try {
+    heap->remove();
+  } catch (EmptyDataCollectionException &e) {
+    cout << e.what() << endl;
+  }
   cout << endl;
   delete heap;
 }
