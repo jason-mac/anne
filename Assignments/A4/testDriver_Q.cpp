@@ -8,7 +8,7 @@
 int main() {
   BinaryHeap<int> *heap = new BinaryHeap<int>();
   Queue<int> *q = new Queue<int>();
-  int arr[10] = {4, 12, 43, 51, 56, 743, 56, 14, 100, 3333};
+  int arr[10] = {4, 12, 43, 51, 56, 743, 89, 14, 100, 3333};
   for (int i = 0; i < 10; i++) {
     heap->insert(arr[i]);
     q->enqueue(arr[i]);
