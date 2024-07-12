@@ -71,12 +71,17 @@ void testQueue() {
   int what = 344;
   nextCopy->enqueue(what);
   cout << "nextcopy ";
+  nextCopy->print();
   cout << "copy ";
+  copy->print();
 
   cout << "final print no confusion" << endl;
   cout << "q";
+  Q->print();
   cout << "copy ";
+  copy->print();
   cout << "nextcopy ";
+  nextCopy->print();
 
   // Release heap memory
   delete Q;
@@ -173,5 +178,6 @@ int main(int argc, char *argv[]) {
   srand(time(&t));
   cout << "OTHER GUY" << endl;
   intTest(); */
+
   return EXIT_SUCCESS;
 }
