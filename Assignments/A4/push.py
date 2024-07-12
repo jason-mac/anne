@@ -8,7 +8,7 @@ import subprocess
 
 def run():
     """
-    test function
+    run function
     """
     try:
         subprocess.run(["git", "add", "."], check=True)
