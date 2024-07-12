@@ -177,11 +177,11 @@ void Queue<ElementType>::dequeue() {
     unsigned int newSize = std::max(capacity / 2, INITIAL_CAPACITY);
 
     // Retrieve a new array of newSize with same elements in its respective relative order
-    ElementType* newArray = getNewSizeArray(newSize);
+    ElementType* newSizeArray = getNewSizeArray(newSize);
 
     // Delete old elements array and update appropiate data members 
     delete[] elements;
-    elements = newArray;
+    elements = newSizeArray;
     capacity = newSize;
     
     // Reset frontindex and backindex 
