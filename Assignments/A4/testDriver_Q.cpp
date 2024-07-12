@@ -37,5 +37,10 @@ int main() {
   } catch (EmptyDataCollectionException &e) {
     cout << e.what() << endl;
   }
+  cout << "HEAP MIN TEST" << endl;
+  while (heap->getElementCount() != 0) {
+    cout << "Min: " << heap->retrieve() << endl;
+    heap->remove();
+  }
   return EXIT_SUCCESS;
 }
