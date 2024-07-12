@@ -34,7 +34,7 @@ private:
 public:		
     Queue();
     ~Queue();
-    Queue(const Queue&);
+    Queue(const Queue& other);
 
     // Description: Overloaded assignment operator. Deletes all dyamically memory in this instance
     //              then makes a deep copy of rhs storing it into this instance. Allows for chaining of 
@@ -42,7 +42,7 @@ public:
     // Postcondition: rhs.elements is deep copied into this->elements and its basic data members
     //                are copied into this instance data members, returns *this for chaining
     //                assignmnet operator.
-    Queue& operator= (const Queue&);
+    Queue& operator= (const Queue& rhs);
 
     // Description: Returns true if this Queue is empty, otherwise false.
     // Postcondition: This Queue is unchanged by this operation.
