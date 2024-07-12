@@ -90,6 +90,7 @@ ElementType* Queue<ElementType>::getDeepCopyArray(const Queue& rhs) {
 // Time Efficiency: O(n)
 template<class ElementType>
 ElementType* Queue<ElementType>::getNewSizeArray(unsigned int newSize) {
+  cout << "RESIZE" << endl;
   ElementType * newSizeArray = new(nothrow) ElementType[newSize];
   if(newSizeArray == nullptr) {
     return nullptr;
@@ -143,6 +144,7 @@ bool Queue<ElementType>::enqueue(ElementType & newElement) {
     elementCount++;
     frontindex = 0;
     backindex = elementCount; // Reset backindex after resizing
+    capacity = newSize;
     return true;
   }
 
