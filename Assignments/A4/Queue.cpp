@@ -214,7 +214,7 @@ void Queue<ElementType>::print() const {
   for(unsigned int i = 0; i < elementCount - 1; i++) {
     cout << elements[(i + frontindex) % capacity] << ", ";
   }
-  cout << elements[elementCount - 1] << "]" << endl;
+  cout << elements[(frontindex + elementCount - 1) % capacity] << "]" << endl;
 }
 
 // clang-format on
