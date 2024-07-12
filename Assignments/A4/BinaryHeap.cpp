@@ -251,4 +251,9 @@ void BinaryHeap<ElementType>::print() const {
   }
   cout << elements[elementCount - 1] << "]" << endl;
 }
+
+template<class ElementType>
+unsigned int BinaryHeap<ElementType>::getElementCount() const {
+  return elementCount;
+}
 // clang-format on
