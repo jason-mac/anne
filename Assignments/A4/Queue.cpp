@@ -49,7 +49,11 @@ Queue<ElementType>& Queue<ElementType>::operator= (const Queue& rhs) {
   ElementType* newElements = getDeepCopyArray(rhs);
 
   // Deallocate old memory
+  if(this->elements == nullptr) {
+    cout << "nullptr" << endl;
+  }
   delete[] this->elements;
+  cout << "delete called" << endl;
 
   // Assign new elements and copy basic data members
   this->elements = newElements;
