@@ -5,6 +5,86 @@
 #include <cstdlib>
 #include <iostream>
 
+void testQueue() {
+  Queue<int> a;
+  Queue<int> b;
+  Queue<int> c;
+  int five = 5;
+  a.enqueue(five);
+  a = b;
+  Queue d = b;
+  cout << "abcd" << endl;
+
+  // Let's get ourselves a queue!
+  Queue<int> *Q = new Queue<int>();
+
+  // Test Case 1: enqueue 1, 2, 3, 4, 5
+  // Expected result:
+  for (int i = 1; i <= 5; i++) {
+    Q->enqueue(i);
+    cout << "enqueue " << i << endl;
+  }
+
+  // Test Case 2: dequeue twice
+  // Expected result:
+  for (int i = 0; i < 2; i++) {
+    int y = Q->peek();
+    Q->dequeue();
+    cout << "peek " << y << endl;
+  }
+
+  // Test Case 3: enqueue 6, 7, 8, 9, 10
+  // Expected result:
+  for (int i = 6; i <= 10; i++) {
+    Q->enqueue(i);
+    cout << "enqueue " << i << endl;
+  }
+
+  // Test Case 4: dequeue all elements
+  // Expected result:
+  while (!Q->isEmpty()) {
+    int y = Q->peek();
+    Q->dequeue();
+    cout << "peek " << y << endl;
+  }
+  for (int i = 69; i <= 89; i++) {
+    Q->enqueue(i);
+    cout << "enqueue " << i << endl;
+  }
+  while (!Q->isEmpty()) {
+    Q->dequeue();
+  }
+  cout << " done deqing" << endl;
+  int sixtynine = 69;
+  Q->enqueue(sixtynine);
+  Queue<int> *copy = new Queue<int>(*Q);
+  cout << "copy ";
+  cout << " q ";
+  int lol = 20;
+  copy->enqueue(lol);
+  cout << " copy ";
+
+  Queue<int> *nextCopy = new Queue<int>();
+  *nextCopy = *copy;
+  cout << "nextopy ";
+  cout << "copy ";
+  int what = 344;
+  nextCopy->enqueue(what);
+  cout << "nextcopy ";
+  cout << "copy ";
+
+  cout << "final print no confusion" << endl;
+  cout << "q";
+  cout << "copy ";
+  cout << "nextcopy ";
+
+  // Release heap memory
+  delete Q;
+  delete copy;
+  delete nextCopy;
+  Q = nullptr;
+}
+
 void myTest() {
   BinaryHeap<int> *heap = new BinaryHeap<int>();
   Queue<int> *q = new Queue<int>();

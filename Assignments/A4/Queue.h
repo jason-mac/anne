@@ -71,7 +71,7 @@ public:
     ElementType & peek() const;
 
     // PERSONAL PRINT FUNCTION
-    void print() const;
+    void print();
 
     /******* End of Queue Public Interface *******/
 };
