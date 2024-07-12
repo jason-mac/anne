@@ -79,9 +79,9 @@ void intTest() {
     BINARYHEAP.insert(buf);
   }
   cout << "[ QUEUE ]\n";
-  // QUEUE.print();
+  QUEUE.print();
   cout << "\n[ BINARY HEAP ]\n";
-  // BINARYHEAP.print();
+  BINARYHEAP.print();
   cout << "\n[ PRIORITY QUEUE ]\n";
   // PRIORITYQUEUE.print();
 }
