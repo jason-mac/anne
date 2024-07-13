@@ -1,5 +1,4 @@
-// clang-format off
-/* 
+/*
  * BinaryHeap.cpp
  *
  * Description: Minimum Binary Heap ADT class.
@@ -266,18 +265,3 @@ template<class ElementType>
 unsigned int BinaryHeap<ElementType>::getElementCount() const {
   return elementCount;
 }
-
-// PERSONAL PRINT METHOD FOR TESTING
-template<class ElementType>
-void BinaryHeap<ElementType>::print() const {
-  if(elements == nullptr) {
-    cout << "empty" << endl;
-    return;
-  }
-  cout << "[";
-  for(unsigned int i = 0; i < elementCount - 1; i++) {
-    cout << elements[i] << ", ";
-  }
-  cout << elements[elementCount - 1] << "]" << endl;
-}
-// clang-format on

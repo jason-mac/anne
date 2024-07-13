@@ -1,4 +1,3 @@
-// clang-format off
 /*
  * Queue.h
  *
@@ -70,9 +69,6 @@ public:
     // Exception: Throws EmptyDataCollectionException if this Queue is empty.
     // Time Efficiency: O(1)
     ElementType & peek() const;
-
-    // PERSONAL PRINT FUNCTION
-    void print() const;
 };
 
 #include "Queue.cpp"

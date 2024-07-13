@@ -1,4 +1,3 @@
-// clang-format off
 /*
  * Queue.h 
  *
@@ -211,17 +210,4 @@ ElementType& Queue<ElementType>::peek() const {
   return elements[frontindex];
 }
 
-template<class ElementType>
-void Queue<ElementType>::print() const {
-  if(elementCount == 0) {
-    cout << "empty" << endl;
-    return;
-  }
-  cout << "[";
-  for(unsigned int i = 0; i < elementCount - 1; i++) {
-    cout << elements[(i + frontindex) % capacity] << ", ";
-  }
-  cout << elements[(frontindex + elementCount - 1) % capacity] << "]" << endl;
-}
 
-// clang-format on

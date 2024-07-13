@@ -1,7 +1,19 @@
-// clang-format off
+/*
+ * BinaryHeap.h
+ *
+ * Description: Minimum Binary Heap ADT class.
+ *
+ * Class Invariant: Always maintains a Minimum Binary Heap property.
+ * 
+ * Author: Jason Mac, Jagyjot Parmar 
+ * Last Modification: July 2024
+ *
+ */  
 #ifndef BINARY_HEAP_H
 #define BINARY_HEAP_H
+
 #include "EmptyDataCollectionException.h"
+
 template <class ElementType>
 class BinaryHeap {
 private:
@@ -59,11 +71,7 @@ public:
   // Exceptions: Throws EmptyDataCollectionException if this Binary Heap is empty.
   // Time Efficiency: O(1) 
   ElementType& retrieve() const;
-
-  void print() const;
 };
 
 #include "BinaryHeap.cpp"
 #endif
-
-// clang-format on
