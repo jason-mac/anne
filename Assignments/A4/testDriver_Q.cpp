@@ -73,17 +73,12 @@ void testQueue() {
   int what = 344;
   nextCopy->enqueue(what);
   cout << "nextcopy ";
-  nextCopy->print();
   cout << "copy ";
-  copy->print();
 
   cout << "final print no confusion" << endl;
   cout << "q";
-  Q->print();
   cout << "copy ";
-  copy->print();
   cout << "nextcopy ";
-  nextCopy->print();
 
   // Release heap memory
   delete Q;
@@ -101,17 +96,14 @@ void myTest() {
     q->enqueue(arr[i]);
   }
   cout << "PRINTING Q" << endl;
-  q->print();
   cout << "ENDING PRINT" << endl;
 
   cout << "PRINTING HEAP" << endl;
-  heap->print();
   cout << "ENDING PRINT" << endl;
 
   cout << "deque" << endl;
   while (!q->isEmpty()) {
     cout << "PEEK" << q->peek() << endl;
-    q->print();
     q->dequeue();
   }
   try {
@@ -166,9 +158,7 @@ void intTest() {
     BINARYHEAP.insert(buf);
   }
   cout << "[ QUEUE ]\n";
-  QUEUE.print();
   cout << "\n[ BINARY HEAP ]\n";
-  BINARYHEAP.print();
   cout << "\n[ PRIORITY QUEUE ]\n";
   // PRIORITYQUEUE.print();
 }
@@ -208,10 +198,8 @@ void testBinaryHeap() {
     heap->insert(x);
   }
   cout << "PRINT HEAP" << endl;
-  heap->print();
   while (!(heap->getElementCount() == 0)) {
     cout << "min->" << heap->retrieve() << " ";
-    heap->print();
     heap->remove();
   }
   try {
