@@ -186,6 +186,7 @@ template <typename T> void vectorSort(std::vector<T> &vec) {
 }
 void testBinaryHeap() {
   BinaryHeap<int> *heap = new BinaryHeap<int>();
+
   std::vector<int> values = {4312, 9,     315,  435, 4356234, 5321,   900,
                              4,    234,   2345, 36,  54,      76578,  69,
                              6765, 8657,  6,    6,   56,      432513, 451,
@@ -199,13 +200,29 @@ void testBinaryHeap() {
   }
   cout << "PRINT HEAP" << endl;
   while (!(heap->getElementCount() == 0)) {
-    cout << "min->" << heap->retrieve() << " ";
+    cout << "min->" << heap->retrieve() << " " << endl;
     heap->remove();
   }
   try {
     heap->remove();
   } catch (EmptyDataCollectionException &e) {
     cout << e.what() << endl;
+  }
+  heap->insert(values[0]);
+  BinaryHeap<int> *newheap = new BinaryHeap<int>(*heap);
+  while (!(heap->getElementCount() == 0)) {
+    cout << "min->" << heap->retrieve() << " " << endl;
+    heap->remove();
+  }
+
+  newheap->insert(values[1]);
+  BinaryHeap<int> *oldheap = new BinaryHeap<int>();
+  *oldheap = *heap;
+  oldheap->insert(values[7]);
+  cout << "old" << endl;
+  while (!(oldheap->getElementCount() == 0)) {
+    cout << "min->" << heap->retrieve() << " " << endl;
+    heap->remove();
   }
   cout << endl;
   delete heap;
