@@ -214,8 +214,11 @@ void testBinaryHeap() {
     cout << "min->" << heap->retrieve() << " " << endl;
     heap->remove();
   }
-
   newheap->insert(values[1]);
+  while (!(newheap->getElementCount() == 0)) {
+    cout << "min->" << heap->retrieve() << " " << endl;
+    heap->remove();
+  }
   BinaryHeap<int> *oldheap = new BinaryHeap<int>();
   *oldheap = *heap;
   oldheap->insert(values[7]);
