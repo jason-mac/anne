@@ -180,7 +180,20 @@ void printVec(std::vector<int> vec) {
   }
   cout << vec[vec.size() - 1] << "}" << endl;
 }
-
+template <typename T> void vectorSort(std::vector<T> &vec) {
+  int n = vec.size();
+  bool swapped;
+  do {
+    swapped = false;
+    for (int i = 1; i < n; ++i) {
+      if (vec[i - 1] > vec[i]) {
+        std::swap(vec[i - 1], vec[i]);
+        swapped = true;
+      }
+    }
+    --n;
+  } while (swapped);
+}
 void testBinaryHeap() {
   BinaryHeap<int> *heap = new BinaryHeap<int>();
   std::vector<int> values = {4312, 9,     315,  435, 4356234, 5321,   900,
@@ -188,7 +201,7 @@ void testBinaryHeap() {
                              6765, 8657,  6,    6,   56,      432513, 451,
                              4523, 64537, 3245, 6,   357,     255324};
   std::vector<int> sorted = values;
-  sort(sorted.begin(), sorted.end());
+  vectorSort(sorted);
   printVec(values);
   printVec(sorted);
   for (auto x : values) {
