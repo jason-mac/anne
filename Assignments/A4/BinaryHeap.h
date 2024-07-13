@@ -8,7 +8,7 @@ private:
   constexpr static unsigned int BASE_CAPACITY = 8;
   unsigned int elementCount = 0;
   ElementType* elements = nullptr;
-  unsigned int capacity;
+  unsigned int capacity = BASE_CAPACITY;
 
 
   // ***Utiltiy Methods***
@@ -19,10 +19,6 @@ private:
   //              maintaining the relative order of the elements and the array is returned
   // Postcondition: The Binary Heap remains unchaged
   ElementType* getNewSizeArray(unsigned int) const;
-
-  // Description: Makes a deep copy of the input object rhs and returns it
-  // Postcondition: The Binary Heap remains unchanged
-  ElementType* getDeepCopyArray(const BinaryHeap& rhs);
 
 public:
   

@@ -1,6 +1,14 @@
 // clang-format off
-// Class Invariant:  FIFO or LILO order
-/******* Start of Queue Public Interface *******/
+/*
+ * Queue.h
+ *
+ * Description: Array-based implementation of Queue as an ADT class.
+ *
+ * Class Invariant: Queue maintained in FIFO order.
+ *
+ * Author: Jason Mac and Jagyjot Parmar
+ * Date: July 2024
+ */
 #ifndef QUEUE_H
 #define QUEUE_H
 
@@ -15,15 +23,10 @@ private:
     //              maintaining the relative order of the elements.
     // Postcondition: elements array is copied into a new array and returned.
     ElementType* getNewSizeArray(unsigned int newSize);
-    
-
-    // Description: Makes a deep copy of the input object rhs and returns it
-    // Postcondition: The Queue remains unchanged
-    ElementType* getDeepCopyArray(const Queue& rhs);
 
     // Private Members
     constexpr static unsigned int INITIAL_CAPACITY = 8; // Constant INITIAL_CAPACITY
-    unsigned int capacity = 0;
+    unsigned int capacity = INITIAL_CAPACITY;
     unsigned int frontindex = 0;
     unsigned int backindex = 0;
     unsigned int elementCount = 0;
@@ -70,8 +73,6 @@ public:
 
     // PERSONAL PRINT FUNCTION
     void print() const;
-
-    /******* End of Queue Public Interface *******/
 };
 
 #include "Queue.cpp"

@@ -1,12 +1,22 @@
 // clang-format off
+/*
+ * Queue.h 
+ *
+ * Description: Array-based implementation of Queue as an ADT class.
+ *
+ * Class Invariant: Queue maintained in FIFO order.
+ *
+ * Author: Jason Mac and Jagyjot Parmar
+ * Date: June 2024
+ */
 #include "Queue.h"
 #include <iostream>
 #include "EmptyDataCollectionException.h"
-#include <algorithm>
 #include <new>
 using std::nothrow;
 using std::cout;
 using std::endl;
+using std::max;
 
 
 /* CONTRUCTORS AND DESTRUCTOR */
@@ -22,16 +32,22 @@ Queue<ElementType>::~Queue() {
 }
 
 // Description: Copy Constructor
-// Postcondition: rhs.elements is deep copied into this->elements and its basic data members
-//                are copied into this instance data members
 template<class ElementType>
 Queue<ElementType>::Queue(const Queue& other) {
-  this->elements = getDeepCopyArray(other);
+  ElementType* otherElementsCopy = nullptr;
+  if(other.elements != nullptr) {
+    otherElementsCopy = new(nothrow) ElementType[other.capacity];
+    for(unsigned int i = 0; i < other.elementCount; i++) {
+      otherElementsCopy[(i + other.frontindex) % other.capacity] = other.elements[(i + other.frontindex) % other.capacity];
+    }
+  }
+  this->elements = otherElementsCopy;
   this->elementCount = other.elementCount;
   this->capacity = other.capacity;
   this->frontindex = other.frontindex;
   this->backindex = other.backindex;
 }
+
 // Description: Overloaded assignment operator. Deletes all dyamically memory in this instance
 //              then makes a deep copy of rhs storing it into this instance. Allows for chaining of 
 //              assignment operator.
@@ -45,12 +61,20 @@ Queue<ElementType>& Queue<ElementType>::operator= (const Queue& rhs) {
     return *this;
   }
 
-  // Create a deep copy of rhs elements and delete any already allocated memory
-  ElementType* newElements = getDeepCopyArray(rhs);
-  delete[] this->elements;
+  // Create a deep copy of rhs elements and delete old elements array 
+  ElementType* rhsElementsCopy = nullptr;
+  if(rhs.elements != nullptr) {
+    rhsElementsCopy = new(nothrow) ElementType[rhs.capacity];
+    for(unsigned int i = 0; i < rhs.elementCount; i++) {
+      rhsElementsCopy[(i + rhs.frontindex) % rhs.capacity] = rhs.elements[(i + frontindex) % capacity];
+    }
+  }
+  if(this->elements != nullptr) {
+    delete[] this->elements;
+  }
 
   // Assign new elements to deep copied array and copy basic data members
-  this->elements = newElements;
+  this->elements = rhsElementsCopy;
   this->capacity = rhs.capacity;
   this->elementCount = rhs.elementCount;
   this->frontindex = rhs.frontindex;
@@ -60,25 +84,6 @@ Queue<ElementType>& Queue<ElementType>::operator= (const Queue& rhs) {
 
 
 /* HELPER FUNCTIONS */
-
-// Description: Makes a deep copy of the input object rhs and stores it into this instance.
-// Precondition: this->elements is not pointing to heap-allocated memory.
-// Postcondition: All of rhs's data members (except elements) are copied into this object,
-//                and rhs's elements array has been deep copied into this object.
-template<class ElementType>
-ElementType* Queue<ElementType>::getDeepCopyArray(const Queue& rhs) {
-  if(rhs.elements == nullptr) {
-    return nullptr;
-  }
-  ElementType* rhsElementsCopy = new(nothrow) ElementType[rhs.capacity];
-  if(rhsElementsCopy == nullptr) {
-    return nullptr;
-  }
-  for(unsigned int i = 0; i < rhs.elementCount; i++) {
-    rhsElementsCopy[(rhs.frontindex + i) % rhs.capacity] = rhs.elements[(rhs.frontindex + i) % rhs.capacity];
-  }
-  return rhsElementsCopy;
-}
 
 // Description: Copies elements array into a new specified sized Dynamically allocated array
 //              maintaining the relative order of the elements between each other, but not
@@ -121,11 +126,13 @@ bool Queue<ElementType>::enqueue(ElementType & newElement) {
       return false;
     }
     capacity = INITIAL_CAPACITY;
-    elements[backindex] = newElement;
+    elements[0] = newElement;
     elementCount++;
     backindex++;
     return true;
   }
+
+  // Resize before insertion if necessary
   if(elementCount == capacity) {
     //resize array
     unsigned int newSize = capacity * 2;
@@ -134,14 +141,14 @@ bool Queue<ElementType>::enqueue(ElementType & newElement) {
       // could not allocate memory for the new array
       return false;
     }
-    delete[] elements;
-    elements = newSizeArray;
-    elements[elementCount] = newElement; // Place newElement at the end 
-    elementCount++;
-    frontindex = 0;
-    backindex = elementCount; // Reset backindex after resizing
-    capacity = newSize;
-    return true;
+    delete[] elements;                    // Delete old array
+    elements = newSizeArray;              // Assingn new size array to elements pointer
+    elements[elementCount] = newElement;  // Place newElement at the end 
+    elementCount++;                       // Increment elementCount after insertion
+    frontindex = 0;                       // Reset fronindex after resizing
+    backindex = elementCount;             // Reset backindex after resizing
+    capacity = newSize;                   // Assingn new capacity
+    return true;                          // Successful insertion, return true
   }
 
   // Enqueuing procedure
@@ -161,7 +168,7 @@ template<class ElementType>
 void Queue<ElementType>::dequeue() {
   // Return early, no elements to dequeue
   if(elementCount == 0){
-    throw EmptyDataCollectionException("dequeue() called on empty Queue.");
+    throw EmptyDataCollectionException("No elements to dequeue. dequeue() called on empty Queue.");
   }
   // Update frontindex to remove frontmost element
   elementCount--;
@@ -170,10 +177,14 @@ void Queue<ElementType>::dequeue() {
   // Resize array if necessary
   if(elementCount <= capacity / 4 && capacity > INITIAL_CAPACITY) {
     // Calculate new capacity, ensuring it does not drop below INITIAL_CAPACITY
-    unsigned int newSize = std::max(capacity / 2, INITIAL_CAPACITY);
+    unsigned int newSize = max(capacity / 2, INITIAL_CAPACITY);
 
     // Retrieve a new array of newSize with same elements in its respective relative order
     ElementType* newSizeArray = getNewSizeArray(newSize);
+    if(newSizeArray == nullptr) {
+      // Memory allocation failed
+      return;
+    }
 
     // Delete old elements array and update appropiate data members 
     delete[] elements;
@@ -186,16 +197,16 @@ void Queue<ElementType>::dequeue() {
   }
 }
 
- // Description: Returns (but does not remove) the element at the "front" of this Queue
- //              (not necessarily the "front" of this Queue's data structure).
- // Precondition: This Queue is not empty.
- // Postcondition: This Queue is unchanged by this operation.
- // Exception: Throws EmptyDataCollectionException if this Queue is empty.
- // Time Efficiency: O(1)
+// Description: Returns (but does not remove) the element at the "front" of this Queue
+//              (not necessarily the "front" of this Queue's data structure).
+// Precondition: This Queue is not empty.
+// Postcondition: This Queue is unchanged by this operation.
+// Exception: Throws EmptyDataCollectionException if this Queue is empty.
+// Time Efficiency: O(1)
 template<class ElementType>
 ElementType& Queue<ElementType>::peek() const {
   if(elementCount == 0) {
-    throw EmptyDataCollectionException("peek() called on empty Data Collection.");
+    throw EmptyDataCollectionException("No elements to peek. peek() called on empty Data Collection.");
   }
   return elements[frontindex];
 }

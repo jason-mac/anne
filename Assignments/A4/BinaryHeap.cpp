@@ -26,7 +26,15 @@ BinaryHeap<ElementType>::BinaryHeap() {}
 // Copy Constructor
 template <class ElementType>
 BinaryHeap<ElementType>::BinaryHeap(const BinaryHeap& other) {
-  this->elements = getDeepCopyArray(other);
+  // Get a deep copy of other.elements
+  ElementType* otherElementsCopy = nullptr;
+  if(other.elements != nullptr) {
+    otherElementsCopy = new(nothrow) ElementType[other.capacity];
+    for(unsigned int i = 0; i < other.elementCount; i++) {
+      otherElementsCopy[i] = other.elements[i];
+    }
+  }
+  this->elements = otherElementsCopy;
   this->capacity = other.capacity;
   this->elementCount = other.elementCount;
 }
@@ -47,10 +55,17 @@ void BinaryHeap<ElementType>::operator= (const BinaryHeap& rhs) {
   }
 
   // Perform deep copy of elements array from `rhs`
-  ElementType* rhsCopyElements = getDeepCopyArray(rhs);
-
+  ElementType* rhsCopyElements = nullptr;
+  if(rhs.elements != nullptr) {
+    rhsCopyElements = new(nothrow) ElementType[rhs.capacity];
+    for(unsigned int i = 0; i < rhs.elementCount; i++) {
+      rhsCopyElements[i] = rhs.elements[i];
+    }
+  }
   // Delete current elements array and assign new one from `rhs`
-  delete[] this->elements;
+  if(this->elements != nullptr) {
+    delete[] this->elements;
+  }
   this->elements = rhsCopyElements;
 
   // Copy other basic data members
@@ -60,20 +75,6 @@ void BinaryHeap<ElementType>::operator= (const BinaryHeap& rhs) {
 
 
 /* UTILITY METHODS */
-
-// Description: Makes a deep copy of the input object rhs and returns it
-// Postcondition: The Binary Heap remains unchanged
-template <class ElementType>
-ElementType* BinaryHeap<ElementType>::getDeepCopyArray(const BinaryHeap& rhs) {
-  if(rhs.elements == nullptr) {
-    return nullptr;
-  }
-  ElementType* deepCopyArray = new(nothrow) ElementType[rhs.capacity];
-  for(unsigned int i = 0; rhs.elementCount; i++) {
-    deepCopyArray[i] = rhs.elements[i];
-  }
-  return deepCopyArray;
-}
 
 // Description: Copies elements array into a new specified sized dynamically allocated array
 //              maintaining the relative order of the elements and the array is returned
@@ -206,7 +207,11 @@ template <class ElementType>
 bool BinaryHeap<ElementType>::insert(ElementType& newElement) {
   // Check if elements array is initialized
   if(elements == nullptr) {
-    elements = new ElementType[BASE_CAPACITY];
+    elements = new(nothrow) ElementType[BASE_CAPACITY];
+    if(elements == nullptr) {
+      // Memory allocation failed
+      return false;
+    }
     capacity = BASE_CAPACITY;
   }
 
@@ -222,12 +227,15 @@ bool BinaryHeap<ElementType>::insert(ElementType& newElement) {
     elements = newElements;                                   // Update elements to point to resized array
   }
 
-  // Insert newElement at end of the array 
-  elements[elementCount] = newElement;
+  // Insert at the end of the heap
+  unsigned int insertionIndex = elementCount;
+
+  // Insert newElement at end of the heap 
+  elements[insertionIndex] = newElement;
+  elementCount++;
 
   // Fix possible violation of invariant of the min heap 
-  reHeapUp(elementCount);
-  elementCount++;
+  reHeapUp(insertionIndex);
 
 
   // Successful insertion, return true
@@ -259,6 +267,7 @@ unsigned int BinaryHeap<ElementType>::getElementCount() const {
   return elementCount;
 }
 
+// PERSONAL PRINT METHOD FOR TESTING
 template<class ElementType>
 void BinaryHeap<ElementType>::print() const {
   if(elements == nullptr) {
