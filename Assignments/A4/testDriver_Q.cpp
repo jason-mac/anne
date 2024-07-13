@@ -6,6 +6,8 @@
 #include <iostream>
 #include <vector>
 
+using std::sort;
+
 void testQueue() {
   Queue<int> a;
   Queue<int> b;
@@ -174,7 +176,7 @@ void intTest() {
 
 void printVec(std::vector<int> vec) {
   cout << "{";
-  for (int i = 0; i < vec.size() - 1; i++) {
+  for (unsigned int i = 0; i < vec.size() - 1; i++) {
     cout << vec[i] << ", ";
   }
   cout << vec[vec.size() - 1] << "}" << endl;
@@ -187,7 +189,7 @@ void testBinaryHeap() {
                              6765, 8657,  6,    6,   56,      432513, 451,
                              4523, 64537, 3245, 6,   357,     255324};
   std::vector<int> sorted = values;
-  std::sort(sorted.begin(), sorted.end());
+  sort(sorted.begin(), sorted.end());
   printVec(values);
   printVec(sorted);
   for (auto x : values) {
