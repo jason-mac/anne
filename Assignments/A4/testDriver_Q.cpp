@@ -227,10 +227,10 @@ int main(int argc, char *argv[]) {
   testQueue();
   testBinaryHeap();
   myTest();
-  time_t t;
-  srand(time(&t));
+  // time_t t;
+  // srand(time(&t));
   cout << "OTHER GUY" << endl;
-  intTest();
+  // intTest();
 
   return EXIT_SUCCESS;
 }
