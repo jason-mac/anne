@@ -103,7 +103,7 @@ void myTest() {
 
   cout << "deque" << endl;
   while (!q->isEmpty()) {
-    cout << "PEEK" << q->peek() << endl;
+    cout << "PEEK: " << q->peek() << endl;
     q->dequeue();
   }
   try {
