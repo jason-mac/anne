@@ -133,7 +133,7 @@ void myTest() {
   delete heap;
   delete q;
 }
-void sort(int array[], int n) {
+void inHousesort(int array[], int n) {
   for (int i = 0; i < n; i++) {
     for (int j = i; j < n; j++) {
       if (array[i] > array[j]) {
@@ -154,7 +154,7 @@ void intTest() {
   }
   cout << endl;
   cout << "[ SORTED ]\n";
-  sort(testInts, 15);
+  inHousesort(testInts, 15);
   for (unsigned int i = 0; i < 15; i++) {
     cout << testInts[i] << " ";
   }
