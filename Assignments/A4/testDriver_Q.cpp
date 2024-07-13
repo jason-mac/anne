@@ -7,8 +7,6 @@
 #include <vector>
 using namespace std;
 
-using std::sort;
-
 void testQueue() {
   Queue<int> a;
   Queue<int> b;
