@@ -175,8 +175,8 @@ unsigned int BST::numberOfNodesR(BSTNode* current) const {
     return 0;
   }
   currentCount++;
-  currentCount = numberOfNodesR(current->left);
-  currentCount = numberOfNodesR(current->right); 
+  currentCount += numberOfNodesR(current->left);
+  currentCount += numberOfNodesR(current->right); 
   return currentCount;
 }
   unsigned int BST::heightR(BSTNode* current) const {
