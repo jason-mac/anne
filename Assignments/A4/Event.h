@@ -8,6 +8,8 @@
  *
  * Author: AL
  * Last Modified: July 2024
+ * this class is fucking stupid
+ *
  */
 
 #ifndef EVENT_H

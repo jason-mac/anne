@@ -1,3 +1,4 @@
+// clang-format off
 /*
  * Queue.h
  *
@@ -27,15 +28,7 @@ template <class ElementType> Queue<ElementType>::~Queue() { delete[] elements; }
 
 // Description: Copy Constructor
 template <class ElementType> Queue<ElementType>::Queue(const Queue &other) {
-  ElementType *otherElementsCopy = nullptr;
-  if (other.elements != nullptr) {
-    otherElementsCopy = new (nothrow) ElementType[other.capacity];
-    for (unsigned int i = 0; i < other.elementCount; i++) {
-      otherElementsCopy[(i + other.frontindex) % other.capacity] =
-          other.elements[(i + other.frontindex) % other.capacity];
-    }
-  }
-  this->elements = otherElementsCopy;
+  this->elements = getDeepCopyArray(other);
   this->elementCount = other.elementCount;
   this->capacity = other.capacity;
   this->frontindex = other.frontindex;
@@ -58,18 +51,8 @@ Queue<ElementType> &Queue<ElementType>::operator=(const Queue &rhs) {
   }
 
   // Create a deep copy of rhs elements and delete old elements array
-  ElementType *rhsElementsCopy = nullptr;
-  if (rhs.elements != nullptr) {
-    rhsElementsCopy = new (nothrow) ElementType[rhs.capacity];
-    for (unsigned int i = 0; i < rhs.elementCount; i++) {
-      rhsElementsCopy[(i + rhs.frontindex) % rhs.capacity] =
-          rhs.elements[(i + frontindex) % capacity];
-    }
-  }
-  if (this->elements != nullptr) {
-    delete[] this->elements;
-  }
-
+  ElementType *rhsElementsCopy = getDeepCopyArray(rhs);
+  delete[] this->elements;
   // Assign new elements to deep copied array and copy basic data members
   this->elements = rhsElementsCopy;
   this->capacity = rhs.capacity;
@@ -80,6 +63,15 @@ Queue<ElementType> &Queue<ElementType>::operator=(const Queue &rhs) {
 }
 
 /* HELPER FUNCTIONS */
+
+template <class ElementType>
+ElementType *Queue<ElementType>::getDeepCopyArray(const Queue &other) {
+  ElementType* otherElementsCopy = (other == nullptr) ? nullptr : new ElementType[other.capacity];
+  for(unsigned int i = 0; i < other.elementCount; i++) {
+    otherElementsCopy[(i + other.frontindex) % other.capacity] = other.elements[(i + other.frontindex) % other.capacity];
+  }
+  return otherElementsCopy;
+}
 
 // Description: Copies elements array into a new specified sized Dynamically
 // allocated array
@@ -209,3 +201,4 @@ template <class ElementType> ElementType &Queue<ElementType>::peek() const {
   }
   return elements[frontindex];
 }
+// clang-format on
