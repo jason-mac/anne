@@ -7,7 +7,7 @@ using std::endl;
 using std::nothrow;
 
 int main() {
-  cout << "hello";
+  cout << "hello" << endl;
   BST *bst = new BST();
   bst->insert(10);
   bst->insert(3);
