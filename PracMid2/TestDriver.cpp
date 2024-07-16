@@ -19,6 +19,7 @@ int main() {
   bst->insert(6);
   bst->insert(2);
   bst->insert(5);
+  cout << bst->numberOfNodes() << "number of noes" << endl;
   if (bst->getElementCount() == bst->numberOfNodes()) {
     cout << "get element count == number of nodes, good" << endl;
   }
