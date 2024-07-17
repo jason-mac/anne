@@ -5,7 +5,7 @@ public:
   Node();
   Node(T data);
   T data;
-  Node<T> next = nullptr;
+  Node<T> *next = nullptr;
   T &getData() const;
 };
 #include "Node.cpp"
