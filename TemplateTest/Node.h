@@ -2,8 +2,7 @@
 #define NODE_H
 template <class T> class Node {
 public:
-  Node();
-  Node(T &data);
+  Node(T &theData);
   T &data;
   Node<T> *next = nullptr;
   T &getData() const;
