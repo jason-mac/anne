@@ -1,0 +1,8 @@
+td: test.o Node.o
+	g++ -c td test.o Node.o
+
+test.o: test.cpp
+	g++ -o test.o test.cpp
+
+Node.o: Node.cpp Node.h
+	g++ -o Node.o Node.cpp 

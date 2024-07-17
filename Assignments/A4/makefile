@@ -1,18 +1,16 @@
+all: bsim
 
-all: tdQ
+bsim: BankSimApp.o PriorityQueue.h BinaryHeap.h Queue.h Event.o EmptyDataCollectionException.o
+	g++ -Wall -o bsim BankSimApp.o Event.o EmptyDataCollectionException.o
 
-tdQ: testDriver_Q.o Event.o EmptyDataCollectionException.o
-	g++ -o tdQ -Wall testDriver_Q.o Event.o EmptyDataCollectionException.o
+BankSimApp.o: BankSimApp.cpp
+	g++ -Wall -c BankSimApp.cpp  
 	
-testDriver_Q.o: testDriver_Q.cpp Queue.h BinaryHeap.h 
-	g++ -c -Wall testDriver_Q.cpp
-	
-Event.o: Event.cpp Event.h
-	g++ -c -Wall Event.cpp
+Event.o: Event.h Event.cpp
+	g++ -Wall -c Event.cpp
 
-EmptyDataCollectionException.o: EmptyDataCollectionException.cpp EmptyDataCollectionException.h 
-	g++ -c -Wall EmptyDataCollectionException.cpp
+EmptyDataCollectionException.o: EmptyDataCollectionException.h EmptyDataCollectionException.cpp
+	g++ -Wall -c EmptyDataCollectionException.cpp
 
 clean:	
-	rm -f tdQ *.o
-
+	rm -f bsim *.o

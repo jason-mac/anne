@@ -158,6 +158,21 @@ using std::nothrow;
     }
   } 
 
+int BST::isBalancedR(BSTNode* current) const {
+  if(current == nullptr) {
+    return 0;
+  }
+  int leftHeight = isBalancedR(current->left);
+  int rightHeight = isBalancedR(current->right);
+  if(std::abs(leftHeight - rightHeight) > 1 || leftHeight == -1 || rightHeight == -1) {
+    return -1;
+  }
+  return std::max(leftHeight, rightHeight) + 1;
+}
+
+bool BST::isBalanced() const {
+  return isBalancedR(root) != -1;
+}
   // Description: Returns the number of nodes in this binary search tree.
   //              You cannot return "elementCount".
   //              Feel free to implement this method as an iterative method or

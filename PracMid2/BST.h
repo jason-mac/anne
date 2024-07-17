@@ -73,6 +73,8 @@ private:
   // Description: Recursive postorder traversal of a BST in order to release heap memory allocated to BSTNode.
   void destroyR(BSTNode * current);
 
+  int isBalancedR(BSTNode* current) const;
+
 
 public:
 
@@ -82,6 +84,7 @@ public:
 /* Constructors and Destructor */
 
   // Default constructor: Constructs an empty tree.
+  
   BST();            
 
   // Parameterized constructor
@@ -117,6 +120,8 @@ public:
   //              Feel free to implement this method as an iterative method or
   //              as a wrapper method calling a recursive method.
   unsigned int height() const;
+
+  bool isBalanced() const;
 
   // Description: Returns the number of nodes in this binary search tree.
   //              You cannot return "elementCount".
