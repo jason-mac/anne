@@ -1,6 +1,7 @@
 // clang-format off
 #include <cstdio>
 #include <iostream>
+#include <queue>
 #include <stdio.h>
 #include <cstdlib>
 #include <string>
@@ -86,15 +87,13 @@ int main(int argc, char* argv[]) {
         }
       }
     } else {
-      cout << "file could no be openned";
+      cout << "file could no be openned" << endl;
     }
   } else {
-    cout << "No file name given";
+    cout << "No file name given" << endl;;
   }
-
-
-
-
+  delete eventPriorityQueue;
+  delete bankLine;
   return EXIT_SUCCESS;
 }
 
