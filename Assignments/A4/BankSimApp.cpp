@@ -78,6 +78,7 @@ int main(int argc, char* argv[]) {
         Event newArrivalEvent('A', arrivalTimeInt, transactionTimeInt);
         eventPriorityQueue->enqueue(newArrivalEvent);
       }
+      cout << "done reading file " << endl;
       while(!(eventPriorityQueue->isEmpty())) {
         Event newEvent = eventPriorityQueue->peek();
         unsigned int currentTime = newEvent.getTime();
