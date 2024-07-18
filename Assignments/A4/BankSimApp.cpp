@@ -64,7 +64,7 @@ int main(int argc, char* argv[]) {
   size_t pos = 0;
   cout << "here" << endl;
   if(argc > 1) {
-    cout << "what";
+    cout << "what" << endl;
     filename = argv[1];
     ifstream myfile(filename);
     if(myfile.is_open()) {
