@@ -69,6 +69,7 @@ bool PriorityQueue<ElementType>::enqueue(ElementType &newElement) {
     heap = new(nothrow) BinaryHeap<ElementType>();
     return heap->insert(newElement);
   }
+  return heap->insert(newElement);
 }
 
 // Description: Removes (but does not return) the element with the next
