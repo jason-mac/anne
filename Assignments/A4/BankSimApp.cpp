@@ -56,13 +56,13 @@ int main(int argc, char* argv[]) {
     cout << "Failed Memory allocation. Terminationg program...";
     return EXIT_FAILURE;
   }
-  string displayString = "display";
   string aLine = "";
   string timeString = "";
   string lengthString = "";
   string filename = "";
   string delimiter = " ";
   size_t pos = 0;
+  cout << "here" << endl;
   if(argc > 1) {
     cout << "what";
     filename = argv[1];
