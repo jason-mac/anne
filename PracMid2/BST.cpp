@@ -174,6 +174,7 @@ unsigned int BST::heightR(BSTNode *current) const {
   if (current == nullptr) {
     return 0;
   }
+  cout << "heighr function" << endl;
   unsigned int leftHeight = heightR(current->left);
   unsigned int rightHeight = heightR(current->right);
   return std::max(leftHeight, rightHeight) + 1;
