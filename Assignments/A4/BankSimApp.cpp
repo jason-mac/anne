@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
   string filename = "";
   string delimiter = " ";
   size_t pos = 0;
-  if(argc > 1) {
+  if(argc < 1) {
     filename = argv[1];
     ifstream myfile(filename);
     if(myfile.is_open()) {
