@@ -90,7 +90,7 @@ int main(int argc, char* argv[]) {
       cout << "file could no be openned" << endl;
     }
   } else {
-    cout << "No file name given" << endl;;
+    cout << "No file name given" << endl;
   }
   delete eventPriorityQueue;
   delete bankLine;
