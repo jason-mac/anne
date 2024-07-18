@@ -51,6 +51,7 @@ int main(int argc, char* argv[]) {
   Queue<Event>* bankLine = new(nothrow) Queue<Event>();
   PriorityQueue<Event>* eventPriorityQueue = new (nothrow) PriorityQueue<Event>();
   bool tellerAvailable = true;
+  cout << " here" << endl;
   if(eventPriorityQueue == nullptr || bankLine == nullptr) {
     cout << "Failed Memory allocation. Terminationg program...";
     return EXIT_FAILURE;
