@@ -30,6 +30,7 @@ int main() {
   if (bst->getElementCount() == bst->numberOfNodes()) {
     cout << "get element count == number of nodes, good" << endl;
   }
+  cout << "hieght of bst2: should be 9" << bst2->height() << endl;
 
   return EXIT_SUCCESS;
 }
