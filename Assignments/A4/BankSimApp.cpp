@@ -84,8 +84,10 @@ int main(int argc, char* argv[]) {
         unsigned int currentTime = newEvent.getTime();
         if(newEvent.getType() == 'A') {
           processArrival(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
+          cout << "process " << endl;
         } else {
           processDeparture(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
+          cout << "departure" << endl;
         }
       }
     } else {
