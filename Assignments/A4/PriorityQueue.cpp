@@ -44,6 +44,7 @@ void PriorityQueue<ElementType>::operator=(const PriorityQueue& rhs) {
     return;
   }
   delete this->heap;
+  this->heap = nullptr;
   BinaryHeap rhsHeapCopy = (rhs == nullptr) ? nullptr : new(nothrow) BinaryHeap<ElementType>(*(rhs.heap));
   this->heap = rhsHeapCopy;
   return;

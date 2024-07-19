@@ -24,7 +24,7 @@ void processArrival(Event arrivalEvent, PriorityQueue<Event>* eventPriorityQueue
   eventPriorityQueue->dequeue();
   Event customer = arrivalEvent;
   if(bankLine->isEmpty() && tellerAvailable) {
-    unsigned int departureTime = customer.getTime() + customer.getLength();
+    unsigned int departureTime = currentTime + customer.getLength();
     Event newDepartureEvent('D', departureTime);
     eventPriorityQueue->enqueue(newDepartureEvent);
     tellerAvailable = false;
@@ -35,10 +35,11 @@ void processArrival(Event arrivalEvent, PriorityQueue<Event>* eventPriorityQueue
 
 void processDeparture(Event departureEvent, PriorityQueue<Event>* eventPriorityQueue, Queue<Event>* bankLine,
                       bool &tellerAvailable, unsigned int &currentTime){
+  eventPriorityQueue->dequeue();
   if(!(bankLine->isEmpty())) {
     Event customer = bankLine->peek();
     bankLine->dequeue();
-    unsigned int departureTime = currentTime + customer.getTime();
+    unsigned int departureTime = currentTime + customer.getLength();
     Event newDepartureEvent('D', departureTime);
     eventPriorityQueue->enqueue(newDepartureEvent);
   } else {
@@ -57,8 +58,6 @@ int main(int argc, char* argv[]) {
     return EXIT_FAILURE;
   }
   string aLine = "";
-  string timeString = "";
-  string lengthString = "";
   string filename = "";
   string delimiter = " ";
   size_t pos = 0;
