@@ -64,12 +64,28 @@ Queue<ElementType> &Queue<ElementType>::operator=(const Queue &rhs) {
 
 /* HELPER FUNCTIONS */
 
+// Description: Creates a deep copy of the elements array from another Queue instance.
+// Precondition: The 'other' Queue is a valid instance with its elements array initialized.
+// Postcondition: Returns a new dynamically allocated array with copied elements, or nullptr if memory allocation fails.
 template <class ElementType>
 ElementType *Queue<ElementType>::getDeepCopyArray(const Queue &other) {
-  ElementType* otherElementsCopy = (other == nullptr) ? nullptr : new ElementType[other.capacity];
-  for(unsigned int i = 0; i < other.elementCount; i++) {
-    otherElementsCopy[(i + other.frontindex) % other.capacity] = other.elements[(i + other.frontindex) % other.capacity];
+  // Setup Return variable
+  ElementType* otherElementsCopy = nullptr;
+  // Return nullptr 
+  if(other.elements == nullptr) {
+    return otherElementsCopy;
   }
+  // Allocate memory on heap for new array
+  otherElementsCopy = new(nothrow) ElementType[other.capacity];
+  if(otherElementsCopy == nullptr) {
+    return nullptr;
+  }
+  // Copy the elements into the new array in the same order as is in other.elements
+  for(unsigned int i = 0; i < other.elementCount; i++) {
+    unsigned int index = (i + other.frontindex) % other.capacity;
+    otherElementsCopy[index] = other.elements[index];
+  }
+  //return the array
   return otherElementsCopy;
 }
 

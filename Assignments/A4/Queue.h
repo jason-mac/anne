@@ -1,3 +1,4 @@
+// clang-format off
 /*
  * Queue.h
  *
@@ -18,16 +19,18 @@ private:
   /* HELPER FUNCTIONS*/
 
   // Description: Copies elements array into a new specified sized dynamically
-  // allocated array
+  //              allocated array
   //              maintaining the relative order of the elements.
   // Postcondition: elements array is copied into a new array and returned.
   ElementType *getNewSizeArray(unsigned int newSize);
 
+  // Description: Creates a deep copy of the elements array from another Queue instance.
+  // Precondition: The 'other' Queue is a valid instance with its elements array initialized.
+  // Postcondition: Returns a new dynamically allocated array with copied elements, or nullptr if memory allocation fails.
   ElementType *getDeepCopyArray(const Queue &other);
 
   // Private Members
-  constexpr static unsigned int INITIAL_CAPACITY =
-      8; // Constant INITIAL_CAPACITY
+  constexpr static unsigned int INITIAL_CAPACITY = 8; // Constant INITIAL_CAPACITY
   unsigned int capacity = INITIAL_CAPACITY;
   unsigned int frontindex = 0;
   unsigned int backindex = 0;
@@ -35,16 +38,17 @@ private:
   ElementType *elements = nullptr;
 
 public:
+  /* Constructors and Destrcutor*/
   Queue();
   ~Queue();
   Queue(const Queue &other);
 
   // Description: Overloaded assignment operator. Deletes all dyamically memory
-  // in this instance
+  //              in this instance
   //              then makes a deep copy of rhs storing it into this instance.
   //              Allows for chaining of assignment operator.
   // Postcondition: rhs.elements is deep copied into this->elements and its
-  // basic data members
+  //                basic data members
   //                are copied into this instance data members, returns *this
   //                for chaining assignmnet operator.
   Queue &operator=(const Queue &rhs);
@@ -61,7 +65,7 @@ public:
   bool enqueue(ElementType &newElement);
 
   // Description: Removes (but does not return) the element at the "front" of
-  // this Queue
+  //              this Queue
   //              (not necessarily the "front" of this Queue's data structure).
   // Precondition: This Queue is not empty.
   // Exception: Throws EmptyDataCollectionException if this Queue is empty.
@@ -69,7 +73,7 @@ public:
   void dequeue();
 
   // Description: Returns (but does not remove) the element at the "front" of
-  // this Queue
+  //              this Queue
   //              (not necessarily the "front" of this Queue's data structure).
   // Precondition: This Queue is not empty.
   // Postcondition: This Queue is unchanged by this operation.
@@ -80,3 +84,5 @@ public:
 
 #include "Queue.cpp"
 #endif
+
+// clang-format on
