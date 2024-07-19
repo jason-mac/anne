@@ -18,6 +18,12 @@ using std::cin;
 using std::cout;
 using std::ifstream;
 using std::nothrow;
+using std::string;
+
+void printEvent(const Event anEvent) {
+  string eventType = (anEvent.getType() == 'A') ? "arrival":"departure";
+  cout << "Processing an " << eventType << " at time: " << std::setw(4) << anEvent.getTime() << endl;;
+}
 
 void processArrival(Event arrivalEvent, PriorityQueue<Event>* eventPriorityQueue, Queue<Event>* bankLine, 
                     bool &tellerAvailable, unsigned int &currentTime) {
@@ -52,7 +58,6 @@ int main(int argc, char* argv[]) {
   Queue<Event>* bankLine = new(nothrow) Queue<Event>();
   PriorityQueue<Event>* eventPriorityQueue = new (nothrow) PriorityQueue<Event>();
   bool tellerAvailable = true;
-  cout << " here" << endl;
   if(eventPriorityQueue == nullptr || bankLine == nullptr) {
     cout << "Failed Memory allocation. Terminationg program...";
     return EXIT_FAILURE;
@@ -72,14 +77,16 @@ int main(int argc, char* argv[]) {
       eventPriorityQueue->enqueue(newArrivalEvent);
   }
 
+  cout << "Simulation Begins" << endl;
   while (!(eventPriorityQueue->isEmpty())) {
-      Event newEvent = eventPriorityQueue->peek();
-      unsigned int currentTime = newEvent.getTime();
-      if (newEvent.getType() == 'A') {
-          processArrival(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
-      } else {
-          processDeparture(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
-      }
+    Event newEvent = eventPriorityQueue->peek();
+    printEvent(newEvent);
+    unsigned int currentTime = newEvent.getTime();
+    if (newEvent.getType() == 'A') {
+        processArrival(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
+    } else {
+        processDeparture(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
+    }
   }
   delete eventPriorityQueue;
   delete bankLine;
