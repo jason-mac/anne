@@ -101,7 +101,7 @@ int main(int argc, char* argv[]) {
   cout << endl;
   cout << "Final Statistics:" << endl;
   cout << "    Total number of people processed: " << customerCount << endl;
-  cout << "    Average amount of time spent waiting: " << static_cast<double>(waitingTime) / customerCount << endl;
+  cout << "    Average amount of time spent waiting: " << std::fixed << std::setprecision(1) << static_cast<double>(waitingTime) / customerCount << endl;
   delete eventPriorityQueue;
   delete bankLine;
   return EXIT_SUCCESS;
