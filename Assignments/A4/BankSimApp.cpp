@@ -65,6 +65,8 @@ int main(int argc, char* argv[]) {
   string aLine = "";
   string delimiter = " ";
   size_t pos = 0;
+  unsigned int customerCount = 0;
+  unsigned int waitingTime = 0;
 
   while (getline(cin, aLine)) {
       pos = aLine.find(delimiter);
@@ -75,19 +77,27 @@ int main(int argc, char* argv[]) {
       int transactionTimeInt = stoi(transactionTimeString);
       Event newArrivalEvent('A', arrivalTimeInt, transactionTimeInt);
       eventPriorityQueue->enqueue(newArrivalEvent);
+      customerCount++;
   }
 
+  unsigned int currentTime = 0;
   cout << "Simulation Begins" << endl;
   while (!(eventPriorityQueue->isEmpty())) {
     Event newEvent = eventPriorityQueue->peek();
+    waitingTime += currentTime;
     printEvent(newEvent);
-    unsigned int currentTime = newEvent.getTime();
+    currentTime = newEvent.getTime();
     if (newEvent.getType() == 'A') {
         processArrival(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
     } else {
         processDeparture(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
     }
   }
+  cout << "Simulation Ends" << endl;
+  cout << endl;
+  cout << "Final Statistics:" << endl;
+  cout << "    Total number of people processed: " << customerCount << endl;
+  cout << "    Average amount of time spent waiting: " << static_cast<double>(waitingTime) / customerCount << endl;
   delete eventPriorityQueue;
   delete bankLine;
   return EXIT_SUCCESS;
