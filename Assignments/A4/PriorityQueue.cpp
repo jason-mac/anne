@@ -9,7 +9,8 @@
  *
  * Authors: Jason Mac, Jagyjot Parmar
  * Last Modified: July 2024
-* */
+ * 
+ * */
 #include "PriorityQueue.h"
 #include "EmptyDataCollectionException.h"
 
@@ -23,7 +24,7 @@ PriorityQueue<ElementType>::PriorityQueue(){}
 //Destructor
 template<class ElementType>
 PriorityQueue<ElementType>::~PriorityQueue(){
-  delete heap;
+  delete this->heap;
 }
 
 // Copy Constructor
@@ -43,9 +44,12 @@ void PriorityQueue<ElementType>::operator=(const PriorityQueue& rhs) {
   if(this == &rhs) {
     return;
   }
+  BinaryHeap rhsHeapCopy = (rhs == nullptr) ? nullptr : new(nothrow) BinaryHeap<ElementType>(*(rhs.heap));
+  if(rhsHeapCopy == nullptr && rhs.heap != nullptr) {
+    return;
+  }
   delete this->heap;
   this->heap = nullptr;
-  BinaryHeap rhsHeapCopy = (rhs == nullptr) ? nullptr : new(nothrow) BinaryHeap<ElementType>(*(rhs.heap));
   this->heap = rhsHeapCopy;
   return;
 }
@@ -55,7 +59,7 @@ void PriorityQueue<ElementType>::operator=(const PriorityQueue& rhs) {
 // Time Efficiency: O(1)
 template <class ElementType>
 bool PriorityQueue<ElementType>::isEmpty() const {
-  if(heap == nullptr) {
+  if(this->heap == nullptr) {
     return true;
   }
   return heap->getElementCount() == 0; 
@@ -83,6 +87,9 @@ void PriorityQueue<ElementType>::dequeue() {
   if(this->heap == nullptr) {
     throw EmptyDataCollectionException("dequeue() called on Empty Data Collection.");
   }
+  if(this->heap->getElementCount() == 0) {
+    throw EmptyDataCollectionException("dequeue() called on Empty Data Collection");
+  }
   this->heap->remove();
 }
 
@@ -96,6 +103,9 @@ template<class ElementType>
 ElementType& PriorityQueue<ElementType>::peek() const{
   if(heap == nullptr) {
     throw EmptyDataCollectionException("peek() called on Empty Data Collection.");
+  }
+  if(heap->getElementCount() == 0) {
+    throw EmptyDataCollectionException("peek() called on Empty Data Collection");
   }
   return this->heap->retrieve();
 }
