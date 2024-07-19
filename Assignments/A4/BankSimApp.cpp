@@ -24,7 +24,7 @@ void printEvent(const Event anEvent) {
   if(anEvent.getType() == 'A') {
     cout << "Processing an arrival event at time:  " << std::setw(4) << anEvent.getTime() << endl;;
   } else {
-    cout << "Processing n departure event at time: " << std::setw(4) << anEvent.getTime() << endl;;
+    cout << "Processing a departure event at time: " << std::setw(4) << anEvent.getTime() << endl;;
   } 
 }
 
