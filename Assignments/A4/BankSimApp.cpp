@@ -84,9 +84,11 @@ int main(int argc, char* argv[]) {
   cout << "Simulation Begins" << endl;
   while (!(eventPriorityQueue->isEmpty())) {
     Event newEvent = eventPriorityQueue->peek();
-    waitingTime += newEvent.getLength();
     printEvent(newEvent);
     currentTime = newEvent.getTime();
+    if(newEvent.getType() == 'D') {
+      waitingTime += currentTime - bankLine->peek().getTime(); 
+    }
     if (newEvent.getType() == 'A') {
         processArrival(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
     } else {
