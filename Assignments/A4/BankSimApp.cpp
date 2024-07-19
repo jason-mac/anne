@@ -87,7 +87,9 @@ int main(int argc, char* argv[]) {
     printEvent(newEvent);
     currentTime = newEvent.getTime();
     if(newEvent.getType() == 'D') {
-      waitingTime += currentTime - bankLine->peek().getTime(); 
+      try {
+        waitingTime += currentTime - bankLine->peek().getTime(); 
+      } catch (EmptyDataCollectionException& e) {}
     }
     if (newEvent.getType() == 'A') {
         processArrival(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
