@@ -103,7 +103,7 @@ int main(int argc, char* argv[]) {
   double averageWaitingTime = static_cast<double>(waitingTime) / customerCount;
   cout << "Simulation Ends" << endl;
   cout << endl;
-  cout << "Final Statistics:" << endl;
+  cout << "Final Statistics:" << endl << endl;;
   cout << "    Total number of people processed: " << customerCount << endl;
   cout << "    Average amount of time spent waiting: " << averageWaitingTime << endl;
   delete eventPriorityQueue;
