@@ -58,42 +58,28 @@ int main(int argc, char* argv[]) {
     return EXIT_FAILURE;
   }
   string aLine = "";
-  string filename = "";
   string delimiter = " ";
   size_t pos = 0;
-  cout << "here" << endl;
-  if(argc > 1) {
-    cout << "what" << endl;
-    filename = argv[1];
-    ifstream myfile(filename);
-    if(myfile.is_open()) {
-      while(getline(myfile, aLine)) {
-        pos = aLine.find(delimiter);
-        string arrivalTimeString = aLine.substr(0, pos);
-        aLine.erase(0, pos + delimiter.length());
-        string transactionTimeString = aLine;
-        int arrivalTimeInt = stoi(arrivalTimeString);
-        int transactionTimeInt = stoi(transactionTimeString);
-        Event newArrivalEvent('A', arrivalTimeInt, transactionTimeInt);
-        eventPriorityQueue->enqueue(newArrivalEvent);
-      }
-      cout << "done reading file " << endl;
-      while(!(eventPriorityQueue->isEmpty())) {
-        Event newEvent = eventPriorityQueue->peek();
-        unsigned int currentTime = newEvent.getTime();
-        if(newEvent.getType() == 'A') {
+
+  while (getline(cin, aLine)) {
+      pos = aLine.find(delimiter);
+      string arrivalTimeString = aLine.substr(0, pos);
+      aLine.erase(0, pos + delimiter.length());
+      string transactionTimeString = aLine;
+      int arrivalTimeInt = stoi(arrivalTimeString);
+      int transactionTimeInt = stoi(transactionTimeString);
+      Event newArrivalEvent('A', arrivalTimeInt, transactionTimeInt);
+      eventPriorityQueue->enqueue(newArrivalEvent);
+  }
+
+  while (!(eventPriorityQueue->isEmpty())) {
+      Event newEvent = eventPriorityQueue->peek();
+      unsigned int currentTime = newEvent.getTime();
+      if (newEvent.getType() == 'A') {
           processArrival(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
-          cout << "process " << endl;
-        } else {
+      } else {
           processDeparture(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
-          cout << "departure" << endl;
-        }
       }
-    } else {
-      cout << "file could no be openned" << endl;
-    }
-  } else {
-    cout << "No file name given" << endl;
   }
   delete eventPriorityQueue;
   delete bankLine;
