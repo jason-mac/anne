@@ -97,7 +97,10 @@ int main(int argc, char* argv[]) {
         processDeparture(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
     }
   }
+  cout << "wainting time: " << waitingTime << " customerCount: " << customerCount << endl;
   double averageWaitingTime = static_cast<double>(waitingTime) / customerCount;
+
+  
   cout << "Simulation Ends" << endl;
   cout << endl;
   cout << "Final Statistics:" << endl;
