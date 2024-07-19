@@ -84,7 +84,7 @@ int main(int argc, char* argv[]) {
   cout << "Simulation Begins" << endl;
   while (!(eventPriorityQueue->isEmpty())) {
     Event newEvent = eventPriorityQueue->peek();
-    waitingTime += currentTime;
+    waitingTime += newEvent.getLength();
     printEvent(newEvent);
     currentTime = newEvent.getTime();
     if (newEvent.getType() == 'A') {
