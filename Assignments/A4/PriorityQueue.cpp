@@ -30,7 +30,9 @@ PriorityQueue<ElementType>::~PriorityQueue(){
 // Copy Constructor
 template <class ElementType>
 PriorityQueue<ElementType>::PriorityQueue(const PriorityQueue& other){
+  // Check if other has a heap instantiated
   if(other.heap != nullptr) {
+    // Deep Copy the BinaryHeap using the copy constructor from BinaryHeap class
     this->heap = new(nothrow) BinaryHeap<ElementType>(*(other.heap));
   } else {
     this->heap = nullptr;
@@ -38,16 +40,29 @@ PriorityQueue<ElementType>::PriorityQueue(const PriorityQueue& other){
 }
 
 
+//BinaryHeap * rhsHeapCopy = (rhs == nullptr) ? nullptr : new(nothrow) BinaryHeap<ElementType>(*(rhs.heap));
 // Overlaoded Assignment Operator
 template <class ElementType>
 void PriorityQueue<ElementType>::operator=(const PriorityQueue& rhs) {
+  // Check for self assignment
   if(this == &rhs) {
     return;
   }
-  BinaryHeap rhsHeapCopy = (rhs == nullptr) ? nullptr : new(nothrow) BinaryHeap<ElementType>(*(rhs.heap));
+
+  // Variable for storing pointer to copy of rhs heap, assume that rhs does not have heap initially
+  BinaryHeap<ElementType> * rhsHeapCopy = nullptr;
+
+  // Get rhs copy if it exists
+  if(rhs.heap != nullptr) {
+    rhsHeapCopy = new(nothrow) BinaryHeap<ElementType>(*(rhs.heap));
+  }
+
+  // Memory allocation failure
   if(rhsHeapCopy == nullptr && rhs.heap != nullptr) {
     return;
   }
+
+  // delete this->heap to avoid memory leak before assigning new array
   delete this->heap;
   this->heap = nullptr;
   this->heap = rhsHeapCopy;
@@ -59,6 +74,7 @@ void PriorityQueue<ElementType>::operator=(const PriorityQueue& rhs) {
 // Time Efficiency: O(1)
 template <class ElementType>
 bool PriorityQueue<ElementType>::isEmpty() const {
+  // No heap, must be empty
   if(this->heap == nullptr) {
     return true;
   }
@@ -70,11 +86,13 @@ bool PriorityQueue<ElementType>::isEmpty() const {
 // Time Efficiency: O(log2 n)
 template<class ElementType>
 bool PriorityQueue<ElementType>::enqueue(ElementType &newElement) {
-  if(heap == nullptr) {
-    heap = new(nothrow) BinaryHeap<ElementType>();
-    return heap->insert(newElement);
+  if(this->heap == nullptr) {
+    this->heap = new(nothrow) BinaryHeap<ElementType>();
+    if(heap == nullptr) {
+      return false;
+    }
   }
-  return heap->insert(newElement);
+  return this->heap->insert(newElement);
 }
 
 // Description: Removes (but does not return) the element with the next
