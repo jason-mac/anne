@@ -21,7 +21,7 @@ using std::nothrow;
 using std::string;
 
 void printEvent(const Event anEvent) {
-  string eventType = (anEvent.getType() == 'A') ? "arrival event":"departure event";
+  string eventType = (anEvent.getType() == 'A') ? "arrival event   ":"departure event";
   cout << "Processing an " << eventType << " at time: " << std::setw(4) << anEvent.getTime() << endl;;
 }
 
