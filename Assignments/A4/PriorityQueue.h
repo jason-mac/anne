@@ -11,6 +11,7 @@
  * Last Modified: July 2024
 */
 #include "BinaryHeap.h"
+#include "EmptyDataCollectionException.h"
 
 #ifndef PRIORITY_QUEUE_H
 #define PRIORITY_QUEUE_H

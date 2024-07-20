@@ -102,12 +102,15 @@ bool PriorityQueue<ElementType>::enqueue(ElementType &newElement) {
 // Time Efficiency: O(log2 n)
 template<class ElementType>
 void PriorityQueue<ElementType>::dequeue() {
+  // No heap instantiated
   if(this->heap == nullptr) {
     throw EmptyDataCollectionException("dequeue() called on Empty Data Collection.");
   }
+  // Heap instantiated, but there are still zero elements
   if(this->heap->getElementCount() == 0) {
     throw EmptyDataCollectionException("dequeue() called on Empty Data Collection");
   }
+  // Remove element using remove function from binaryHeap
   this->heap->remove();
 }
 
@@ -119,12 +122,15 @@ void PriorityQueue<ElementType>::dequeue() {
 // empty. Time Efficiency: O(1)
 template<class ElementType>
 ElementType& PriorityQueue<ElementType>::peek() const{
-  if(heap == nullptr) {
+  // No heap instantiated
+  if(this->heap == nullptr) {
     throw EmptyDataCollectionException("peek() called on Empty Data Collection.");
   }
-  if(heap->getElementCount() == 0) {
+  // Heap instantiated, but there are still zero elements
+  if(this->heap->getElementCount() == 0) {
     throw EmptyDataCollectionException("peek() called on Empty Data Collection");
   }
+  // Remove element using remove function from binaryHeap
   return this->heap->retrieve();
 }
 // clang-format on
