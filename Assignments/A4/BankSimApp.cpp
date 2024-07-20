@@ -25,7 +25,7 @@ void printEvent(const Event anEvent);
 void processArrival(Event arrivalEvent, PriorityQueue<Event>* eventPriorityQueue, Queue<Event>* bankLine, 
                     bool &tellerAvailable, unsigned int &currentTime);
 void processDeparture(Event departureEvent, PriorityQueue<Event>* eventPriorityQueue, Queue<Event>* bankLine,
-                      bool &tellerAvailable, unsigned int &currentTime, unsigned int &customersProcessed);
+                      bool &tellerAvailable, unsigned int &currentTime);
 
 int main() {
   simulate();
@@ -69,19 +69,16 @@ void simulate() {
     // Get currentTime
     currentTime = newEvent.getTime();
 
-    // Calculate the waiting time of the next incoming customer waiting in line, if there is one 
-    if(newEvent.getType() == 'D') {
-      // If the bankLine is empty, no one is waiting
-      try {
-        waitingTime += currentTime - bankLine->peek().getTime(); 
-      } catch (EmptyDataCollectionException& e) {}
-    }
-    
     // Process event depending if arrival or departure
     if (newEvent.getType() == 'A') {
-        processArrival(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
+      processArrival(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
     } else {
-        processDeparture(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime, customersProcessed);
+      try {                                                          // Try calculating the waiting time of the next incoming customer waiting in line, if there is one 
+        waitingTime += currentTime - bankLine->peek().getTime();     // Formula for calculating the waiting time of the next customer
+      } catch (EmptyDataCollectionException& e) {}                   // If the bankLine was empty catch the exception
+      processDeparture(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
+      //Increment customersProcessed after processing a departure
+      customersProcessed++;
     }
   }
   double averageWaitingTime = static_cast<double>(waitingTime) / customersProcessed;
@@ -124,12 +121,10 @@ void processArrival(Event arrivalEvent, PriorityQueue<Event>* eventPriorityQueue
 }
 
 void processDeparture(Event departureEvent, PriorityQueue<Event>* eventPriorityQueue, Queue<Event>* bankLine,
-                      bool &tellerAvailable, unsigned int &currentTime, unsigned int &customersProcessed){
+                      bool &tellerAvailable, unsigned int &currentTime){
   // dequeue the top event
   eventPriorityQueue->dequeue();
 
-  //Increment customersProcessed after processing a departure event 
-  customersProcessed++;
   if(!(bankLine->isEmpty())) {
     // The next customer in line we get from the front of the bankLine
     Event customer = bankLine->peek();
