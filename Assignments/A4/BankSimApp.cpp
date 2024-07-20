@@ -2,11 +2,12 @@
 /*
 * BankSimApp.cpp
 * 
+* Description: Bank Simulation App that is event driven, which implements an algorithm as outlined in Section 13.4 of the document Bank Simulation
+*              of our class textbook. The app makes use of Priority Queue ADT class implemented using a Minimum Binary Heap and a Queue ADT class implemented 
+*              using an array
 *
-*
-*
-*
-*
+* Authors: Jason Mac, Jagyjot Parmar
+* Last Modification: July 2024
 */
 #include <cstdio>
 #include <iostream>
@@ -46,6 +47,7 @@ void processArrival(Event arrivalEvent, PriorityQueue<Event>* eventPriorityQueue
 void processDeparture(Event departureEvent, PriorityQueue<Event>* eventPriorityQueue, Queue<Event>* bankLine,
                       bool &tellerAvailable, unsigned int &currentTime);
 
+// Desciption: Main function that calls simulate to start bank simulation
 int main() {
   simulate();
   return EXIT_SUCCESS;
@@ -53,6 +55,7 @@ int main() {
 
 /* FUNCTION DEFINITIONS */
 
+// Description: Simulate a bank with incoming and outgoing customers
 void simulate() {
   // Allocate memory for bank line
   Queue<Event>* bankLine = new(nothrow) Queue<Event>();
@@ -103,9 +106,9 @@ void simulate() {
     if (newEvent.getType() == 'A') {
       processArrival(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
     } else {
-      try {                                                          // Try calculating the waiting time of the next incoming customer waiting in line, if there is one 
+      try {                                                               // Try calculating the waiting time of the next incoming customer waiting in line, if there is one 
         waitingTimeTotal += currentTime - bankLine->peek().getTime();     // Formula for calculating the waiting time of the next customer
-      } catch (EmptyDataCollectionException& e) {}                   // If the bankLine was empty catch the exception
+      } catch (EmptyDataCollectionException& e) {}                        // If the bankLine was empty catch the exception
       processDeparture(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
       //Increment customersProcessed after processing a departure
       customersProcessed++;
@@ -121,7 +124,7 @@ void simulate() {
   delete bankLine;
 }
 
-// Printing event function
+// Description: Print an event out to the console
 void printEvent(const Event anEvent) {
   if(anEvent.getType() == 'A') {
     cout << "Processing an arrival event at time:  " << std::setw(4) << anEvent.getTime() << endl;;
@@ -130,6 +133,7 @@ void printEvent(const Event anEvent) {
   } 
 }
 
+//Description: Function for processing arrival events and adds departure events to the PriorityQueue
 void processArrival(Event arrivalEvent, PriorityQueue<Event>* eventPriorityQueue, Queue<Event>* bankLine, 
                     bool &tellerAvailable, unsigned int &currentTime) {
   // dequeue the event
@@ -150,15 +154,18 @@ void processArrival(Event arrivalEvent, PriorityQueue<Event>* eventPriorityQueue
   }
 }
 
+// Description: Function for processing arrival events and adds departure events to PriorityQueue if there are more 
+//              customers to be processed in bank line
 void processDeparture(Event departureEvent, PriorityQueue<Event>* eventPriorityQueue, Queue<Event>* bankLine,
                       bool &tellerAvailable, unsigned int &currentTime){
   // dequeue the top event
   eventPriorityQueue->dequeue();
 
+  // If line is not empty, process the next customer into a departure event
   if(!(bankLine->isEmpty())) {
-    // The next customer in line we get from the front of the bankLine
+    // Get the next customer in line we get from the front of the bankLine
     Event customer = bankLine->peek();
-    // Deqeue the front customer
+    // dequeue the front customer
     bankLine->dequeue();
     // Calculate Departure time 
     unsigned int departureTime = currentTime + customer.getLength();
