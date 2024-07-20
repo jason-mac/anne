@@ -61,9 +61,9 @@ int main(int argc, char *argv[]) {
     cout << "Unable to open file" << endl;
   }
 */
-  simulate()
+  simulate();
 
-      return 0;
+  return 0;
 }
 
 void simulate() {
