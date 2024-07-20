@@ -40,20 +40,14 @@ void simulate() {
     cout << "Failed Memory allocation. Terminationg program...";
     return;
   }
-  string aLine = "";
-  string delimiter = " ";
   size_t pos = 0;
+  int arrivalTime;
+  int transactionTime;
   unsigned int customersProcessed = 0;
   unsigned int waitingTime = 0;
 
-  while (getline(cin, aLine)) {
-      pos = aLine.find(delimiter);
-      string arrivalTimeString = aLine.substr(0, pos);
-      aLine.erase(0, pos + delimiter.length());
-      string transactionTimeString = aLine;
-      int arrivalTimeInt = stoi(arrivalTimeString);
-      int transactionTimeInt = stoi(transactionTimeString);
-      Event newArrivalEvent('A', arrivalTimeInt, transactionTimeInt);
+  while (cin >> arrivalTime >> transactionTime) {
+      Event newArrivalEvent('A', arrivalTime, transactionTime);
       eventPriorityQueue->enqueue(newArrivalEvent);
   }
 
