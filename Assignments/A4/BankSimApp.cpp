@@ -40,7 +40,6 @@ void simulate() {
     cout << "Failed Memory allocation. Terminationg program...";
     return;
   }
-  size_t pos = 0;
   int arrivalTime;
   int transactionTime;
   unsigned int customersProcessed = 0;
