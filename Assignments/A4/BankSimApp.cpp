@@ -97,7 +97,7 @@ void simulate() {
 
 void processArrival(Event &arrivalEvent,
                     PriorityQueue<Event> &eventPriorityQueue,
-                    Queue<Event> &bankLine) {
+                    Queue<Event> &bankLine, int current_time) {
   eventPriorityQueue.dequeue();
   if (bankLine.isEmpty() && tellerAvailable) {
     int departure_time = current_time + arrivalEvent.getLength();
@@ -111,7 +111,7 @@ void processArrival(Event &arrivalEvent,
 
 void processDeparture(Event &departureEvent,
                       PriorityQueue<Event> &eventPriorityQueue,
-                      Queue<Event> &bankLine) {
+                      Queue<Event> &bankLine, int current_time) {
   eventPriorityQueue.dequeue();
 
   if (!bankLine.isEmpty()) {
