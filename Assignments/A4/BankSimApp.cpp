@@ -87,6 +87,8 @@ void simulate() {
   cout << "Final Statistics:" << endl << endl;;
   cout << "    Total number of people processed: " << customersProcessed << endl;
   cout << "    Average amount of time spent waiting: " << averageWaitingTime << endl;
+  delete eventPriorityQueue;
+  delete bankLine;
 }
 
 // Printing event function

@@ -106,10 +106,6 @@ void PriorityQueue<ElementType>::dequeue() {
   if(this->heap == nullptr) {
     throw EmptyDataCollectionException("dequeue() called on Empty Data Collection.");
   }
-  // Heap instantiated, but there are still zero elements
-  if(this->heap->getElementCount() == 0) {
-    throw EmptyDataCollectionException("dequeue() called on Empty Data Collection");
-  }
   // Remove element using remove function from binaryHeap
   this->heap->remove();
 }
@@ -125,10 +121,6 @@ ElementType& PriorityQueue<ElementType>::peek() const{
   // No heap instantiated
   if(this->heap == nullptr) {
     throw EmptyDataCollectionException("peek() called on Empty Data Collection.");
-  }
-  // Heap instantiated, but there are still zero elements
-  if(this->heap->getElementCount() == 0) {
-    throw EmptyDataCollectionException("peek() called on Empty Data Collection");
   }
   // Remove element using remove function from binaryHeap
   return this->heap->retrieve();
