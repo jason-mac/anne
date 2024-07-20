@@ -1,135 +1,123 @@
-/*
- * BankSimApp.cpp
- *
- * Description: Priority Queue implemented using the Binary Heap data collection
- * ADT class
- *
- * Author: Kyungryeong Kang and Sabrina Nguyen
- * Last Modification: July 2024
- *
- */
-// Code inspired by section 13.4 from Assignment 4
-#include "Event.h"
-#include "PriorityQueue.h"
-#include "Queue.h"
-#include <cstdlib>
-#include <cstring>
-#include <fstream>
-#include <iomanip>
+// clang-format off
+#include <cstdio>
 #include <iostream>
-#include <sstream>
+#include <queue>
 #include <stdio.h>
+#include <cstdlib>
 #include <string>
+#include <cstring>
+#include <sstream>
+#include <iomanip>
+#include <fstream>
+#include "PriorityQueue.h"
+#include "Event.h"
+#include "EmptyDataCollectionException.h"
+#include "Queue.h"
 
 using std::cin;
 using std::cout;
-using std::endl;
 using std::ifstream;
-
-bool tellerAvailable = true;
-int current_time = 0;
-
-void printEvent(const Event anEvent) {
-  if (anEvent.getType() == 'A') {
-    cout << "Processing an arrival event at time:  " << std::setw(4)
-         << anEvent.getTime() << endl;
-    ;
-  } else {
-    cout << "Processing a departure event at time: " << std::setw(4)
-         << anEvent.getTime() << endl;
-    ;
-  }
-}
-
-void processArrival(Event &arrivalEvent,
-                    PriorityQueue<Event> &eventPriorityQueue,
-                    Queue<Event> &bankLine);
-
-void processDeparture(Event &departureEvent,
-                      PriorityQueue<Event> &eventPriorityQueue,
-                      Queue<Event> &bankLine);
+using std::nothrow;
+using std::string;
 
 void simulate();
+void printEvent(const Event anEvent);
+void processArrival(Event arrivalEvent, PriorityQueue<Event>* eventPriorityQueue, Queue<Event>* bankLine, 
+                    bool &tellerAvailable, unsigned int &currentTime);
+void processDeparture(Event departureEvent, PriorityQueue<Event>* eventPriorityQueue, Queue<Event>* bankLine,
+                      bool &tellerAvailable, unsigned int &currentTime);
 
-int main(int argc, char *argv[]) {
-
-  /*
-  if (argc > 1) {
-    sign = argv[1];
-    if (sign == "<") {
-      filename = argv[2];
-    }
-    ifstream myfile(filename);
-    if (myfile.is_open()) {
-      simulate();
-    }
-
-  } else {
-    cout << "Unable to open file" << endl;
-  }
-*/
+int main() {
   simulate();
-
-  return 0;
+  return EXIT_SUCCESS;
 }
 
 void simulate() {
-  Queue<Event> bankLine;
-  PriorityQueue<Event> eventPriorityQueue;
-  string aLine = "";
-  string filename = "";
-  string sign = "";
-  string space = " ";
-  size_t pos = 0;
-  int arrival_time;
-  int transaction_time;
-  while (getline(cin, aLine)) {
-    pos = aLine.find(space);
-    arrival_time = stoi(aLine.substr(0, pos));
-    aLine.erase(0, pos + space.length());
-    transaction_time = stoi(aLine);
-    Event newarrival('A', arrival_time, transaction_time);
-    eventPriorityQueue.enqueue(newarrival);
+  Queue<Event>* bankLine = new(nothrow) Queue<Event>();
+  PriorityQueue<Event>* eventPriorityQueue = new (nothrow) PriorityQueue<Event>();
+  bool tellerAvailable = true;
+  if(eventPriorityQueue == nullptr || bankLine == nullptr) {
+    cout << "Failed Memory allocation. Terminationg program...";
+    return;
   }
-  while (!eventPriorityQueue.isEmpty()) {
-    Event newEvent = eventPriorityQueue.peek();
+  string aLine = "";
+  string delimiter = " ";
+  size_t pos = 0;
+  unsigned int customerCount = 0;
+  unsigned int waitingTime = 0;
+
+  while (getline(cin, aLine)) {
+      pos = aLine.find(delimiter);
+      string arrivalTimeString = aLine.substr(0, pos);
+      aLine.erase(0, pos + delimiter.length());
+      string transactionTimeString = aLine;
+      int arrivalTimeInt = stoi(arrivalTimeString);
+      int transactionTimeInt = stoi(transactionTimeString);
+      Event newArrivalEvent('A', arrivalTimeInt, transactionTimeInt);
+      eventPriorityQueue->enqueue(newArrivalEvent);
+      customerCount++;
+  }
+
+  unsigned int currentTime = 0;
+  cout << "Simulation Begins" << endl;
+  while (!(eventPriorityQueue->isEmpty())) {
+    Event newEvent = eventPriorityQueue->peek();
     printEvent(newEvent);
-    current_time = newEvent.getTime();
+    currentTime = newEvent.getTime();
+    if(newEvent.getType() == 'D') {
+      try {
+        waitingTime += currentTime - bankLine->peek().getTime(); 
+      } catch (EmptyDataCollectionException& e) {}
+    }
     if (newEvent.getType() == 'A') {
-      processArrival(newEvent, eventPriorityQueue, bankLine);
+        processArrival(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
     } else {
-      processDeparture(newEvent, eventPriorityQueue, bankLine);
+        processDeparture(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
     }
   }
+  double averageWaitingTime = static_cast<double>(waitingTime) / customerCount;
+  cout << "Simulation Ends" << endl;
+  cout << endl;
+  cout << "Final Statistics:" << endl << endl;;
+  cout << "    Total number of people processed: " << customerCount << endl;
+  cout << "    Average amount of time spent waiting: " << averageWaitingTime << endl;
+  delete eventPriorityQueue;
+  delete bankLine;
 }
 
-void processArrival(Event &arrivalEvent,
-                    PriorityQueue<Event> &eventPriorityQueue,
-                    Queue<Event> &bankLine) {
-  eventPriorityQueue.dequeue();
-  if (bankLine.isEmpty() && tellerAvailable) {
-    int departure_time = current_time + arrivalEvent.getLength();
-    Event newDepartureEvent('D', departure_time, 0);
-    eventPriorityQueue.enqueue(newDepartureEvent);
+void printEvent(const Event anEvent) {
+  if(anEvent.getType() == 'A') {
+    cout << "Processing an arrival event at time:  " << std::setw(4) << anEvent.getTime() << endl;;
+  } else {
+    cout << "Processing a departure event at time: " << std::setw(4) << anEvent.getTime() << endl;;
+  } 
+}
+
+void processArrival(Event arrivalEvent, PriorityQueue<Event>* eventPriorityQueue, Queue<Event>* bankLine, 
+                    bool &tellerAvailable, unsigned int &currentTime) {
+  eventPriorityQueue->dequeue();
+  Event customer = arrivalEvent;
+  if(bankLine->isEmpty() && tellerAvailable) {
+    unsigned int departureTime = currentTime + customer.getLength();
+    Event newDepartureEvent('D', departureTime);
+    eventPriorityQueue->enqueue(newDepartureEvent);
     tellerAvailable = false;
   } else {
-    bankLine.enqueue(arrivalEvent);
+    bankLine->enqueue(customer);
   }
 }
 
-void processDeparture(Event &departureEvent,
-                      PriorityQueue<Event> &eventPriorityQueue,
-                      Queue<Event> &bankLine) {
-  eventPriorityQueue.dequeue();
-
-  if (!bankLine.isEmpty()) {
-    Event customer = bankLine.peek();
-    bankLine.dequeue();
-
-    int departure_time = current_time + customer.getLength();
-    Event newDepartureEvent('D', departure_time, 0);
-    eventPriorityQueue.enqueue(newDepartureEvent);
+void processDeparture(Event departureEvent, PriorityQueue<Event>* eventPriorityQueue, Queue<Event>* bankLine,
+                      bool &tellerAvailable, unsigned int &currentTime){
+  eventPriorityQueue->dequeue();
+  if(!(bankLine->isEmpty())) {
+    Event customer = bankLine->peek();
+    bankLine->dequeue();
+    unsigned int departureTime = currentTime + customer.getLength();
+    Event newDepartureEvent('D', departureTime);
+    eventPriorityQueue->enqueue(newDepartureEvent);
   } else {
     tellerAvailable = true;
   }
 }
+// clang-format on
