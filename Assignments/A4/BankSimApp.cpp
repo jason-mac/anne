@@ -80,7 +80,7 @@ void simulate() {
     pos = aLine.find(space);
     arrival_time = stoi(aLine.substr(0, pos));
     aLine.erase(0, pos + space.length());
-    transaction_time = stoi(aLine.substr(pos + 1));
+    transaction_time = stoi(aLine);
     Event newarrival('A', arrival_time, transaction_time);
     eventPriorityQueue.enqueue(newarrival);
   }
