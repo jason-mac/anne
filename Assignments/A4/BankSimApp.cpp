@@ -1,4 +1,13 @@
 // clang-format off
+/*
+* BankSimApp.cpp
+* 
+*
+*
+*
+*
+*
+*/
 #include <cstdio>
 #include <iostream>
 #include <queue>
@@ -20,10 +29,20 @@ using std::ifstream;
 using std::nothrow;
 using std::string;
 
+/* FUNCTION PROTOTYPES */
+
+// Description: Simulate a bank with incoming and outgoing customers
 void simulate();
+
+// Description: Print an event out to the console
 void printEvent(const Event anEvent);
+
+//Description: Function for processing arrival events and adds departure events to the PriorityQueue
 void processArrival(Event arrivalEvent, PriorityQueue<Event>* eventPriorityQueue, Queue<Event>* bankLine, 
                     bool &tellerAvailable, unsigned int &currentTime);
+
+// Description: Function for processing arrival events and adds departure events to PriorityQueue if there are more 
+//              customers to be processed in bank line
 void processDeparture(Event departureEvent, PriorityQueue<Event>* eventPriorityQueue, Queue<Event>* bankLine,
                       bool &tellerAvailable, unsigned int &currentTime);
 
@@ -32,21 +51,39 @@ int main() {
   return EXIT_SUCCESS;
 }
 
+/* FUNCTION DEFINITIONS */
+
 void simulate() {
+  // Allocate memory for bank line
   Queue<Event>* bankLine = new(nothrow) Queue<Event>();
+
+  // Allocate memory for Priority Queue
   PriorityQueue<Event>* eventPriorityQueue = new (nothrow) PriorityQueue<Event>();
+
+  // Variable that indicates if a teller can process a customer in the bank line queue
   bool tellerAvailable = true;
+
+  // Failed memory allocation, return early cannot run program
   if(eventPriorityQueue == nullptr || bankLine == nullptr) {
     cout << "Failed Memory allocation. Terminationg program...";
     return;
   }
+
   int arrivalTime;
   int transactionTime;
-  unsigned int customersProcessed = 0;
-  unsigned int waitingTime = 0;
 
+  // Incrementer variable for processing customers as they depart
+  unsigned int customersProcessed = 0;
+
+  // Variable for holding waiting times of all customers
+  unsigned int waitingTimeTotal = 0;
+
+  // Get the Data from Input File
   while (cin >> arrivalTime >> transactionTime) {
+      // Create event for the given arrival time and transation time in file
       Event newArrivalEvent('A', arrivalTime, transactionTime);
+
+      // enqueue the event into the Priority Queue
       eventPriorityQueue->enqueue(newArrivalEvent);
   }
 
@@ -67,14 +104,14 @@ void simulate() {
       processArrival(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
     } else {
       try {                                                          // Try calculating the waiting time of the next incoming customer waiting in line, if there is one 
-        waitingTime += currentTime - bankLine->peek().getTime();     // Formula for calculating the waiting time of the next customer
+        waitingTimeTotal += currentTime - bankLine->peek().getTime();     // Formula for calculating the waiting time of the next customer
       } catch (EmptyDataCollectionException& e) {}                   // If the bankLine was empty catch the exception
       processDeparture(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
       //Increment customersProcessed after processing a departure
       customersProcessed++;
     }
   }
-  double averageWaitingTime = static_cast<double>(waitingTime) / customersProcessed;
+  double averageWaitingTime = static_cast<double>(waitingTimeTotal) / customersProcessed;
   cout << "Simulation Ends" << endl;
   cout << endl;
   cout << "Final Statistics:" << endl << endl;;
