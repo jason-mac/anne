@@ -27,6 +27,7 @@ using std::endl;
 using std::ifstream;
 
 bool tellerAvailable = true;
+int current_time = 0;
 
 void processArrival(Event &arrivalEvent,
                     PriorityQueue<Event> &eventPriorityQueue,
@@ -60,9 +61,9 @@ int main(int argc, char *argv[]) {
     cout << "Unable to open file" << endl;
   }
 */
-  simulate();
+  simulate()
 
-  return 0;
+      return 0;
 }
 
 void simulate() {
@@ -73,7 +74,6 @@ void simulate() {
   string sign = "";
   string space = " ";
   size_t pos = 0;
-  int current_time = 0;
   int arrival_time;
   int transaction_time;
   while (getline(cin, aLine)) {
@@ -97,7 +97,7 @@ void simulate() {
 
 void processArrival(Event &arrivalEvent,
                     PriorityQueue<Event> &eventPriorityQueue,
-                    Queue<Event> &bankLine, int current_time) {
+                    Queue<Event> &bankLine) {
   eventPriorityQueue.dequeue();
   if (bankLine.isEmpty() && tellerAvailable) {
     int departure_time = current_time + arrivalEvent.getLength();
@@ -111,7 +111,7 @@ void processArrival(Event &arrivalEvent,
 
 void processDeparture(Event &departureEvent,
                       PriorityQueue<Event> &eventPriorityQueue,
-                      Queue<Event> &bankLine, int current_time) {
+                      Queue<Event> &bankLine) {
   eventPriorityQueue.dequeue();
 
   if (!bankLine.isEmpty()) {
