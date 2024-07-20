@@ -1,4 +1,3 @@
-// clang-format off
 /*
  * PriorityQueue.cpp
  * Description: Class modelling a Priority Queue using a Minimum Binary Heap
@@ -124,4 +123,3 @@ ElementType& PriorityQueue<ElementType>::peek() const{
   // Remove element using remove function from binaryHeap
   return this->heap->retrieve();
 }
-// clang-format on

@@ -1,4 +1,3 @@
-// clang-format off
 /*
  * PriorityQueue.cpp
  * Description: Class modelling a Priority Queue using a Minimum Binary Heap
@@ -20,11 +19,12 @@ private:
   BinaryHeap<ElementType> *heap = nullptr;
 
 public:
-  // Constructor
+  // Constructors and Destructor
   PriorityQueue();
   ~PriorityQueue();
   PriorityQueue(const PriorityQueue& other); 
   void operator= (const PriorityQueue& rhs);
+  
   // Description: Returns true if this Priority Queue is empty, otherwise false.
   // Postcondition: This Priority Queue is unchanged by this operation.
   // Time Efficiency: O(1)
@@ -54,5 +54,3 @@ public:
 #include "PriorityQueue.cpp"
 
 #endif
-
-// clang-format off

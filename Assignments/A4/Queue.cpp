@@ -1,4 +1,3 @@
-// clang-format off
 /*
  * Queue.h
  *
@@ -217,4 +216,3 @@ template <class ElementType> ElementType &Queue<ElementType>::peek() const {
   }
   return elements[frontindex];
 }
-// clang-format on

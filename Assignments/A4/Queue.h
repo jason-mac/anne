@@ -1,4 +1,3 @@
-// clang-format off
 /*
  * Queue.h
  *
@@ -84,5 +83,3 @@ public:
 
 #include "Queue.cpp"
 #endif
-
-// clang-format on

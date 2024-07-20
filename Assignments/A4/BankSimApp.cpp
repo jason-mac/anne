@@ -1,4 +1,3 @@
-// clang-format off
 /*
 * BankSimApp.cpp
 * 
@@ -114,12 +113,16 @@ void simulate() {
       customersProcessed++;
     }
   }
+  // Get average waiting time
   double averageWaitingTime = static_cast<double>(waitingTimeTotal) / customersProcessed;
+  // Print the Final Statistics
   cout << "Simulation Ends" << endl;
   cout << endl;
   cout << "Final Statistics:" << endl << endl;;
   cout << "    Total number of people processed: " << customersProcessed << endl;
   cout << "    Average amount of time spent waiting: " << averageWaitingTime << endl;
+
+  // Delete all heap allocated memory
   delete eventPriorityQueue;
   delete bankLine;
 }
@@ -178,4 +181,3 @@ void processDeparture(Event departureEvent, PriorityQueue<Event>* eventPriorityQ
     tellerAvailable = true;
   }
 }
-// clang-format on
