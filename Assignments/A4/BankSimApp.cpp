@@ -29,6 +29,18 @@ using std::ifstream;
 bool tellerAvailable = true;
 int current_time = 0;
 
+void printEvent(const Event anEvent) {
+  if (anEvent.getType() == 'A') {
+    cout << "Processing an arrival event at time:  " << std::setw(4)
+         << anEvent.getTime() << endl;
+    ;
+  } else {
+    cout << "Processing a departure event at time: " << std::setw(4)
+         << anEvent.getTime() << endl;
+    ;
+  }
+}
+
 void processArrival(Event &arrivalEvent,
                     PriorityQueue<Event> &eventPriorityQueue,
                     Queue<Event> &bankLine);
@@ -40,11 +52,6 @@ void processDeparture(Event &departureEvent,
 void simulate();
 
 int main(int argc, char *argv[]) {
-  string aLine = "";
-  string filename = "";
-  string sign = "";
-  string space = " ";
-  size_t pos = 0;
 
   /*
   if (argc > 1) {
@@ -86,6 +93,7 @@ void simulate() {
   }
   while (!eventPriorityQueue.isEmpty()) {
     Event newEvent = eventPriorityQueue.peek();
+    printEvent(newEvent);
     current_time = newEvent.getTime();
     if (newEvent.getType() == 'A') {
       processArrival(newEvent, eventPriorityQueue, bankLine);
