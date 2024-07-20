@@ -40,7 +40,6 @@ PriorityQueue<ElementType>::PriorityQueue(const PriorityQueue& other){
 }
 
 
-//BinaryHeap * rhsHeapCopy = (rhs == nullptr) ? nullptr : new(nothrow) BinaryHeap<ElementType>(*(rhs.heap));
 // Overlaoded Assignment Operator
 template <class ElementType>
 void PriorityQueue<ElementType>::operator=(const PriorityQueue& rhs) {
