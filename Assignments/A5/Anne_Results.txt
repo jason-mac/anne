@@ -1,0 +1,173 @@
+
+Printing the Dictionary with 100 elements: 
+HashTable[0] = 6363344397258902
+HashTable[3] = 8741638550126485
+HashTable[4] = 5036106320615547
+HashTable[5] = 6649504871727226
+HashTable[8] = 7532197682064336
+HashTable[9] = 4797221630215650
+HashTable[10] = 9244499383295439
+HashTable[11] = 9354364319109456
+HashTable[12] = 8549468323622470
+HashTable[13] = 7868843149206892
+HashTable[14] = 4122162022974356
+HashTable[16] = 3850592685283678
+HashTable[20] = 1403127798107601
+HashTable[22] = 4520290994510378
+HashTable[25] = 2897361293194784
+HashTable[28] = 5843713809799324
+HashTable[30] = 1692177976271588
+HashTable[31] = 5646258628472406
+HashTable[33] = 5707899394645556
+HashTable[34] = 1626992965538673
+HashTable[35] = 4179362125391887
+HashTable[37] = 1561722928124786
+HashTable[38] = 9568955215991621
+HashTable[39] = 3618705110300454
+HashTable[41] = 2245175716981333
+HashTable[43] = 2346602589506083
+HashTable[44] = 1626187920237592
+HashTable[45] = 6026930876524006
+HashTable[50] = 6289607010137726
+HashTable[52] = 3138793884008682
+HashTable[56] = 4765713338510876
+HashTable[58] = 7266297037235178
+HashTable[60] = 8063908387310050
+HashTable[62] = 5466399521309913
+HashTable[63] = 8356599076376150
+HashTable[64] = 1962120731190567
+HashTable[66] = 1170408516621964
+HashTable[67] = 5871706041302960
+HashTable[68] = 2990813110340391
+HashTable[70] = 8358509980249012
+HashTable[71] = 4955739072729050
+HashTable[72] = 7048042961042220
+HashTable[73] = 7776911908988037
+HashTable[74] = 6074379002269035
+HashTable[76] = 4059469224775481
+HashTable[77] = 7081997825349020
+HashTable[78] = 9154925749945935
+HashTable[82] = 5529028380409196
+HashTable[83] = 3837937874190988
+HashTable[84] = 3741130321756542
+HashTable[85] = 3772372537681364
+HashTable[87] = 2443860892231834
+HashTable[89] = 6252691331526944
+HashTable[90] = 6569374525474430
+HashTable[91] = 7251971312068749
+HashTable[95] = 2591774119138749
+HashTable[97] = 9960649908931489
+HashTable[98] = 1743146942264128
+HashTable[99] = 2573272134941957
+HashTable[102] = 7689068790333732
+
+Histogram showing distribution of hash indices over the hash table: 
+At hashTable[0]: *
+At hashTable[1]: 
+At hashTable[2]: 
+At hashTable[3]: **
+At hashTable[4]: *
+At hashTable[5]: *
+At hashTable[6]: 
+At hashTable[7]: 
+At hashTable[8]: *
+At hashTable[9]: *
+At hashTable[10]: ***
+At hashTable[11]: *
+At hashTable[12]: **
+At hashTable[13]: *
+At hashTable[14]: *
+At hashTable[15]: 
+At hashTable[16]: **
+At hashTable[17]: 
+At hashTable[18]: 
+At hashTable[19]: 
+At hashTable[20]: *
+At hashTable[21]: 
+At hashTable[22]: ***
+At hashTable[23]: 
+At hashTable[24]: 
+At hashTable[25]: *
+At hashTable[26]: 
+At hashTable[27]: 
+At hashTable[28]: *
+At hashTable[29]: 
+At hashTable[30]: **
+At hashTable[31]: *
+At hashTable[32]: 
+At hashTable[33]: ***
+At hashTable[34]: **
+At hashTable[35]: **
+At hashTable[36]: 
+At hashTable[37]: ****
+At hashTable[38]: *
+At hashTable[39]: **
+At hashTable[40]: 
+At hashTable[41]: *
+At hashTable[42]: 
+At hashTable[43]: **
+At hashTable[44]: *
+At hashTable[45]: **
+At hashTable[46]: 
+At hashTable[47]: 
+At hashTable[48]: 
+At hashTable[49]: 
+At hashTable[50]: *
+At hashTable[51]: 
+At hashTable[52]: *
+At hashTable[53]: 
+At hashTable[54]: 
+At hashTable[55]: 
+At hashTable[56]: **
+At hashTable[57]: 
+At hashTable[58]: **
+At hashTable[59]: 
+At hashTable[60]: *
+At hashTable[61]: 
+At hashTable[62]: ****
+At hashTable[63]: *
+At hashTable[64]: *
+At hashTable[65]: 
+At hashTable[66]: *
+At hashTable[67]: **
+At hashTable[68]: *
+At hashTable[69]: 
+At hashTable[70]: ***
+At hashTable[71]: *
+At hashTable[72]: *
+At hashTable[73]: **
+At hashTable[74]: **
+At hashTable[75]: 
+At hashTable[76]: *
+At hashTable[77]: **
+At hashTable[78]: *
+At hashTable[79]: 
+At hashTable[80]: 
+At hashTable[81]: 
+At hashTable[82]: *
+At hashTable[83]: **
+At hashTable[84]: ***
+At hashTable[85]: **
+At hashTable[86]: 
+At hashTable[87]: *
+At hashTable[88]: 
+At hashTable[89]: **
+At hashTable[90]: *
+At hashTable[91]: **
+At hashTable[92]: 
+At hashTable[93]: 
+At hashTable[94]: 
+At hashTable[95]: ***
+At hashTable[96]: 
+At hashTable[97]: *
+At hashTable[98]: **
+At hashTable[99]: ***
+At hashTable[100]: 
+At hashTable[101]: 
+At hashTable[102]: *
+
+There are 43 empty cells in this Dictionary (hash table) -> 	41.75% of the hash table is empty.
+There are 31 elements inserted that have no synonyms -> 		30.1% of the hash table has been probed only once (no collisions).
+There were 20 indexing keys that hashed into cells 2 times -> 	19.42% of the hash table has been probed 2 times (1 collisions).
+There were 7 indexing keys that hashed into cells 3 times -> 	6.796% of the hash table has been probed 3 times (2 collisions).
+There were 2 indexing keys that hashed into cells 4 times -> 	1.942% of the hash table has been probed 4 times (3 collisions).
