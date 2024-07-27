@@ -32,11 +32,17 @@ class Dictionary  {
  */ 
  
 private:
-unsigned int evenDistributionHash(int key) {
-    key = key ^ (key >> 16); // XOR key with the top 16 bits
-    key = key * 0x45d9f3b; // Multiplicative hash constant
-    key = key ^ (key >> 16); // XOR with the top 16 bits again
-    return key;
+unsigned int fnv1aHash(int key) {
+    const unsigned int FNV_32_PRIME = 16777619u; // FNV-1a prime
+    const unsigned int FNV_32_OFFSET_BASIS = 2166136261u; // FNV-1a offset basis
+
+    unsigned int hash = FNV_32_OFFSET_BASIS;
+    unsigned char* data = reinterpret_cast<unsigned char*>(&key);
+    for (size_t i = 0; i < sizeof(key); ++i) {
+        hash ^= data[i];          // XOR the hash with the current byte
+        hash *= FNV_32_PRIME;     // Multiply by the FNV-1a prime
+    }
+    return hash;
 }
 uint64_t xxHash64(const void* input, size_t length, uint64_t seed = 1) {
     const uint64_t PRIME64_1 = 11400714785074694791ULL;

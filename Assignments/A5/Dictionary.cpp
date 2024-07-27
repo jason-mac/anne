@@ -66,7 +66,7 @@ unsigned int Dictionary::hashFunction( string indexingKey ) {
 
   // Put your code here
   uint64_t indexingKeyInt = stoul(indexingKey);
-  unsigned int hashCode = evenDistributionHash(indexingKeyInt);
+  unsigned int hashCode = fnv1aHash(indexingKeyInt);
   return hashCode % CAPACITY;
 }
 
