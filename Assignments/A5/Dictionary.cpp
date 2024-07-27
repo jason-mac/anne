@@ -113,7 +113,7 @@ void Dictionary::insert( Profile * newElement )  {
   }
    
   // When found a cell: insert newElement in hashTable at hashIndex
-  hashTable[hashIndex] = newElement; 
+  hashTable[(hashIndex + i) % CAPACITY] = newElement; 
 
   // One more element inserted!
   elementCount++;
