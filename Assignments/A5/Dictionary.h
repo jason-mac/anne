@@ -32,7 +32,7 @@ class Dictionary  {
  */ 
  
 private:
-uint64_t xxHash64(const void* input, size_t length, uint64_t seed = 0) {
+uint64_t xxHash64(const void* input, size_t length, uint64_t seed = 1) {
     const uint64_t PRIME64_1 = 11400714785074694791ULL;
     const uint64_t PRIME64_2 = 14029467366897019727ULL;
     const uint64_t PRIME64_3 =  1609587929392839161ULL;
