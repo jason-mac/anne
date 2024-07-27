@@ -32,6 +32,12 @@ class Dictionary  {
  */ 
  
 private:
+unsigned int evenDistributionHash(int key) {
+    key = key ^ (key >> 16); // XOR key with the top 16 bits
+    key = key * 0x45d9f3b; // Multiplicative hash constant
+    key = key ^ (key >> 16); // XOR with the top 16 bits again
+    return key;
+}
 uint64_t xxHash64(const void* input, size_t length, uint64_t seed = 1) {
     const uint64_t PRIME64_1 = 11400714785074694791ULL;
     const uint64_t PRIME64_2 = 14029467366897019727ULL;

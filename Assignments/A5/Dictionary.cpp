@@ -66,8 +66,8 @@ unsigned int Dictionary::hashFunction( string indexingKey ) {
 
   // Put your code here
   uint64_t indexingKeyInt = stoul(indexingKey);
-  uint64_t hashCode = xxHash64(&indexingKeyInt, sizeof(indexingKeyInt));
-  return static_cast<unsigned int>(hashCode) & CAPACITY;
+  unsigned int hashCode = evenDistributionHash(indexingKeyInt);
+  return hashCode % CAPACITY;
 }
 
 // Description: Inserts an element into the Dictionary and increments "elementCount".
