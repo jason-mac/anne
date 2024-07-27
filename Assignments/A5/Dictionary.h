@@ -33,7 +33,7 @@ class Dictionary  {
  
 private:
 uint32_t murmurHash3(uint64_t key) {
-    const uint32_t seed = 4; // Seed value can be adjusted as needed
+    const uint32_t seed = 5; // Seed value can be adjusted as needed
     const uint32_t c1 = 0xcc9e2d51;
     const uint32_t c2 = 0x1b873593;
     const uint32_t r1 = 15;
