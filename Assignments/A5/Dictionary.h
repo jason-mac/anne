@@ -32,15 +32,33 @@ class Dictionary  {
  */ 
  
 private:
-uint32_t cityHash32(uint64_t key) {
-    key = (~key) + (key << 21); // key = (key << 21) - key - 1;
-    key = key ^ (key >> 24);
-    key = (key + (key << 3)) + (key << 8); // key * 265
-    key = key ^ (key >> 14);
-    key = (key + (key << 2)) + (key << 4); // key * 21
-    key = key ^ (key >> 28);
-    key = key + (key << 31); // key * 31
-    return static_cast<uint32_t>(key);
+uint32_t murmurHash3(uint64_t key) {
+    const uint32_t seed = 0; // Seed value can be adjusted as needed
+    const uint32_t c1 = 0xcc9e2d51;
+    const uint32_t c2 = 0x1b873593;
+    const uint32_t r1 = 15;
+    const uint32_t r2 = 13;
+    const uint32_t m = 5;
+    const uint32_t n = 0x561ccd1b;
+
+    uint32_t h1 = seed;
+    uint32_t k1 = static_cast<uint32_t>(key);
+
+    k1 *= c1;
+    k1 = (k1 << r1) | (k1 >> (32 - r1));
+    k1 *= c2;
+    h1 ^= k1;
+    h1 = (h1 << r2) | (h1 >> (32 - r2));
+    h1 = h1 * m + n;
+
+    h1 ^= 8; // Length of the key
+    h1 ^= (h1 >> 16);
+    h1 *= 0x85ebca6b;
+    h1 ^= (h1 >> 13);
+    h1 *= 0xc2b2ae35;
+    h1 ^= (h1 >> 16);
+
+    return h1;
 }
 uint64_t xxHash64(const void* input, size_t length, uint64_t seed = 1) {
     const uint64_t PRIME64_1 = 11400714785074694791ULL;

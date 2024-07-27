@@ -66,7 +66,7 @@ unsigned int Dictionary::hashFunction( string indexingKey ) {
 
   // Put your code here
   uint64_t indexingKeyInt = stoul(indexingKey);
-  unsigned int hashCode = cityHash32(indexingKeyInt);
+  unsigned int hashCode = murmurHash3(indexingKeyInt) ;
   return hashCode % CAPACITY;
 }
 
