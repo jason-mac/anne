@@ -118,7 +118,7 @@ void Dictionary::insert( Profile * newElement )  {
 
   while (count < CAPACITY) {
     // Alternating positive and negative quadratic steps
-    int step = (i % 2 == 0 ? (i / 2) * (i / 2) : -(i / 2) * (i / 2));
+    int step = (i % 2 == 0) ? (i / 2) * (i / 2) : -((i + 1) / 2) * ((i + 1) / 2);
     probeIndex = (hashIndex + step + CAPACITY) % CAPACITY;
 
     if (hashTable[probeIndex] == nullptr) {
@@ -133,9 +133,14 @@ void Dictionary::insert( Profile * newElement )  {
 
     count++;
     i++;
-}  
-  // When found a cell: insert newElement in hashTable at hashIndex
-  hashTable[(hashIndex + i) % CAPACITY] = newElement; 
+}
+
+// When found a cell: insert newElement in hashTable at calculated probeIndex
+if (hashTable[probeIndex] == nullptr) {
+    hashTable[probeIndex] = newElement;
+} else {
+    throw UnableToInsertException("In insert(): Dictionary is full.");
+}
 
   // One more element inserted!
   elementCount++;
