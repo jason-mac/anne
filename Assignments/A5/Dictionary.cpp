@@ -103,13 +103,14 @@ void Dictionary::insert( Profile * newElement )  {
   while ( hashTable[(hashIndex + i)%CAPACITY] != nullptr ) {   
     // If newElement not already in Dictionary
     if ( *(hashTable[(hashIndex + i)%CAPACITY]) == *newElement ) {
-	  // newElement was found -> already exists in Dictionary.
-	  throw ElementAlreadyExistsException("In insert(): newElement already in Dictionary.");
-	}
+      // newElement was found -> already exists in Dictionary.
+      throw ElementAlreadyExistsException("In insert(): newElement already in Dictionary.");
+	  }
     count++;
-	i++;
-    if ( count == CAPACITY ) 
-	  throw UnableToInsertException("In insertHelper(): Dictionary is full.");
+    i++;
+    if ( count == CAPACITY ) {
+	    throw UnableToInsertException("In insertHelper(): Dictionary is full.");
+    } 
   }
    
   // When found a cell: insert newElement in hashTable at hashIndex
