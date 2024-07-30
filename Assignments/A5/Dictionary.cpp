@@ -94,7 +94,6 @@ void Dictionary::insert( Profile * newElement )  {
     throw UnableToInsertException("In insert(): Dictionary is full.");
    
   // Call hash function using indexing key to get hash index
-  unsigned int hashIndex = hashFunction(newElement->getUserName());
 
   // Keep hashing and probing until no more collisions using 
   // Linear Probing Hashing Collision Resolution Strategy
@@ -112,38 +111,34 @@ void Dictionary::insert( Profile * newElement )  {
 	    throw UnableToInsertException("In insertHelper(): Dictionary is full.");
     } 
   }*/
-  unsigned int i = 0;
-  unsigned int count = 0;
-  unsigned int probeIndex = hashIndex;
+  unsigned int hashIndex = hashFunction(newElement->getUserName());
 
-  while (count < CAPACITY) {
-    // Alternating positive and negative quadratic steps
-    int step = (i % 2 == 0) ? (i / 2) * (i / 2) : -((i + 1) / 2) * ((i + 1) / 2);
-    probeIndex = (hashIndex + step + CAPACITY) % CAPACITY;
+    unsigned int i = 0;
+    unsigned int count = 0;
+    unsigned int probeIndex = hashIndex;
 
-    if (hashTable[probeIndex] == nullptr) {
-        // Insert newElement here
-        hashTable[probeIndex] = newElement;
-        return;
+    while (count < CAPACITY) {
+        // Alternating positive and negative quadratic steps
+        int step = (i % 2 == 0) ? (i / 2) * (i / 2) : -((i + 1) / 2) * ((i + 1) / 2);
+        probeIndex = (hashIndex + step + CAPACITY) % CAPACITY;
+
+        if (hashTable[probeIndex] == nullptr) {
+            // Insert newElement here
+            hashTable[probeIndex] = newElement;
+            elementCount++; // Increment element count
+            return;
+        }
+
+        if (*(hashTable[probeIndex]) == *newElement) {
+            throw ElementAlreadyExistsException("In insert(): newElement already in Dictionary.");
+        }
+
+        count++;
+        i++;
     }
 
-    if (*(hashTable[probeIndex]) == *newElement) {
-        throw ElementAlreadyExistsException("In insert(): newElement already in Dictionary.");
-    }
-
-    count++;
-    i++;
-}
-
-// When found a cell: insert newElement in hashTable at calculated probeIndex
-if (hashTable[probeIndex] == nullptr) {
-    hashTable[probeIndex] = newElement;
-} else {
+    // If we exit the loop, it means we could not find an empty slot and the dictionary is full
     throw UnableToInsertException("In insert(): Dictionary is full.");
-}
-
-  // One more element inserted!
-  elementCount++;
     
   return;
 }
