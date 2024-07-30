@@ -98,7 +98,7 @@ void Dictionary::insert( Profile * newElement )  {
 
   // Keep hashing and probing until no more collisions using 
   // Linear Probing Hashing Collision Resolution Strategy
-  unsigned int i = 0;
+  /*unsigned int i = 0;
   unsigned int count = 0;
   while ( hashTable[(hashIndex + i)%CAPACITY] != nullptr ) {   
     // If newElement not already in Dictionary
@@ -111,8 +111,29 @@ void Dictionary::insert( Profile * newElement )  {
     if ( count == CAPACITY ) {
 	    throw UnableToInsertException("In insertHelper(): Dictionary is full.");
     } 
-  }
-   
+  }*/
+  unsigned int i = 0;
+  unsigned int count = 0;
+  unsigned int probeIndex = hashIndex;
+
+  while (count < CAPACITY) {
+    // Alternating positive and negative quadratic steps
+    int step = (i % 2 == 0 ? (i / 2) * (i / 2) : -(i / 2) * (i / 2));
+    probeIndex = (hashIndex + step + CAPACITY) % CAPACITY;
+
+    if (hashTable[probeIndex] == nullptr) {
+        // Insert newElement here
+        hashTable[probeIndex] = newElement;
+        return;
+    }
+
+    if (*(hashTable[probeIndex]) == *newElement) {
+        throw ElementAlreadyExistsException("In insert(): newElement already in Dictionary.");
+    }
+
+    count++;
+    i++;
+}  
   // When found a cell: insert newElement in hashTable at hashIndex
   hashTable[(hashIndex + i) % CAPACITY] = newElement; 
 
