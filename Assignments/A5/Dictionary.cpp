@@ -18,6 +18,7 @@
 #include <iostream>
 #include <cmath>
 #include <cstring>
+#include <sys/types.h>
 #include "Dictionary.h"  
 #include "Profile.h"
 #include "UnableToInsertException.h"
@@ -74,9 +75,8 @@ unsigned int Dictionary::getCapacity() const{
 unsigned int Dictionary::hashFunction( string indexingKey ) {
 
   // Put your code here
-  // 211
   uint64_t indexingKeyInt = stoul(indexingKey);
-  const uint64_t PRIME = 223;
+  const uint64_t PRIME = 211;
   uint64_t hashCode = 0;
   while (indexingKeyInt > 0) {
       hashCode = hashCode * PRIME + (indexingKeyInt % 10);
@@ -88,13 +88,14 @@ unsigned int Dictionary::hashFunction( string indexingKey ) {
 unsigned int Dictionary::hashFunctionTwo(string indexingKey) {
 // Convert the string to an unsigned long integer using stoul
     uint64_t keyInt = stoul(indexingKey);
+    const uint64_t PRIME = 37;
     // hash function using bit manipulation and modulo operation
     // Inspired by MIT video 
-    uint64_t hash = keyInt ^ (keyInt >> 33);  // XOR and shift
+    uint64_t hash = keyInt ^ (keyInt >> 37);  // XOR and shift
     hash = hash * 0xFF51AFD7ED558CC7;        // Multiply by a large prime number
-    hash = hash ^ (hash >> 33);              // XOR and shift again
+    hash = hash ^ (hash >> 37);              // XOR and shift again
 
-    return static_cast<unsigned int>((hash % 199) + 1); // Ensure hash fits in table size
+    return static_cast<unsigned int>((hash % 211) + 1); // Ensure hash fits in table size
 }
 
 // Description: Inserts an element into the Dictionary and increments "elementCount".
