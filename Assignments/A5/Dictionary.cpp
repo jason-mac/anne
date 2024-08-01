@@ -87,8 +87,9 @@ unsigned int Dictionary::hashFunctionTwo( string indexingKey ) {
 
 unsigned int Dictionary::hashFunction(string indexingKey) {
 // Convert the string to an unsigned long integer using stoul
+  // 59
     uint64_t keyInt = stoul(indexingKey);
-    const uint64_t PRIME = 59;
+    const uint64_t PRIME = 47;
     // hash function using bit manipulation and modulo operation
     // Inspired by MIT video 
     uint64_t hash = keyInt ^ (keyInt >> PRIME);  // XOR and shift
