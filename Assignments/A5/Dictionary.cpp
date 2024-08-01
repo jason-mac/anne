@@ -91,9 +91,9 @@ unsigned int Dictionary::hashFunction(string indexingKey) {
     uint64_t keyInt = stoul(indexingKey);
     const uint64_t PRIME = 61;
     // hash function using bit manipulation and modulo operation
-    // Inspired by MIT video 
+    // Inspired by MIT video and random prime number testing
     uint64_t hash = keyInt ^ (keyInt >> PRIME);  // XOR and shift
-    hash = hash * 18446744073709551557ULL;        // Multiply by a large prime number
+    hash = hash * 1099511628211ULL;        // Multiply by a large prime number
     hash = hash ^ (hash >> PRIME);              // XOR and shift again
 
     return static_cast<unsigned int>(hash % CAPACITY); // Ensure hash fits in table size
