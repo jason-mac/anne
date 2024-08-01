@@ -76,7 +76,9 @@ unsigned int Dictionary::hashFunction( string indexingKey ) {
   uint64_t indexingKeyInt = stoul(indexingKey);
   uint64_t intermediate = 0;
   int power = indexingKey.size();
-  for(int i = 1; i < power - 1; i++) {
+  for(int i = 0; i < power; i++) {
+    intermediate += indexingKeyInt % 10 * pow(10, i);
+    indexingKeyInt /= 10;
     intermediate = intermediate >> i;
   }
   unsigned int hashCode = intermediate;
