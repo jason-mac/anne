@@ -75,8 +75,6 @@ unsigned int Dictionary::hashFunction( string indexingKey ) {
 
   // Put your code here
   uint64_t indexingKeyInt = stoul(indexingKey);
-  uint64_t intermediate = 0;
-  int power = indexingKey.size();
   const uint64_t PRIME = 101;
   uint64_t hashCode = 0;
   while (indexingKeyInt > 0) {
@@ -146,7 +144,7 @@ void Dictionary::insert( Profile * newElement )  {
   unsigned int count = 0;
   unsigned int probeIndex = hashIndex;
   while(count < CAPACITY) {
-    int step = secondaryHashIndex * i;
+    int step = secondaryHashIndex * i + 1;
     probeIndex = (hashIndex + step) % CAPACITY;
     if(hashTable[probeIndex] == nullptr) {
       hashTable[probeIndex] = newElement;
