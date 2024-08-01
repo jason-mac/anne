@@ -72,7 +72,7 @@ unsigned int Dictionary::getCapacity() const{
 // on the size of the string indexingKey, but we know this is always going to be 16 characters
 // thus its O(1) space efficiency
 // Space Efficiency: O(1), all of the usernames have fixed size of 16 characters
-unsigned int Dictionary::hashFunction( string indexingKey ) {
+unsigned int Dictionary::hashFunctionTwo( string indexingKey ) {
 
   // Put your code here
   uint64_t indexingKeyInt = stoul(indexingKey);
@@ -85,7 +85,7 @@ unsigned int Dictionary::hashFunction( string indexingKey ) {
   return hashCode % 151;
 }
 
-unsigned int Dictionary::hashFunctionTwo(string indexingKey) {
+unsigned int Dictionary::hashFunction(string indexingKey) {
 // Convert the string to an unsigned long integer using stoul
     uint64_t keyInt = stoul(indexingKey);
     const uint64_t PRIME = 61;
@@ -141,8 +141,8 @@ void Dictionary::insert( Profile * newElement )  {
     } 
   }
   */
-  unsigned int hashIndex = hashFunctionTwo(newElement->getUserName());
-  unsigned int secondaryHashIndex = hashFunction(newElement->getUserName());
+  unsigned int hashIndex = hashFunction(newElement->getUserName());
+  unsigned int secondaryHashIndex = hashFunctionTwo(newElement->getUserName());
   unsigned int i = 0;
   unsigned int count = 0;
   unsigned int probeIndex = hashIndex;
