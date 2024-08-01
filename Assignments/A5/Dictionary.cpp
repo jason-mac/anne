@@ -82,7 +82,7 @@ unsigned int Dictionary::hashFunction( string indexingKey ) {
       hashCode = hashCode * PRIME + (indexingKeyInt % 10);
       indexingKeyInt /= 10;
   }
-  return hashCode % CAPACITY;
+  return hashCode % 211;
 }
 
 unsigned int Dictionary::hashFunctionTwo(string indexingKey) {
@@ -95,7 +95,7 @@ unsigned int Dictionary::hashFunctionTwo(string indexingKey) {
     hash = hash * 18446744073709551557ULL;        // Multiply by a large prime number
     hash = hash ^ (hash >> PRIME);              // XOR and shift again
 
-    return (hash == 0) ? static_cast<unsigned int>(hash % 199) : 1; // Ensure hash fits in table size
+    return static_cast<unsigned int>(hash % CAPACITY); // Ensure hash fits in table size
 }
 
 // Description: Inserts an element into the Dictionary and increments "elementCount".
