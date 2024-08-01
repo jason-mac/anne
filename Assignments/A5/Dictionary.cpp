@@ -156,6 +156,7 @@ void Dictionary::insert( Profile * newElement )  {
     }
 
     count++;
+    cout << count << endl;
     i++;
   }
 
