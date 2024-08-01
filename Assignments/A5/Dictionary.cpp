@@ -9,7 +9,7 @@
  *            
  * Class Invariant: Each element stored in this Dictionary is unique (no duplications allowed).
  *
- * Author: AL
+ * Author: Jason Mac, Jagyjot Parmar
  * Date: Last modified: July 2024
  */
 
@@ -60,43 +60,45 @@ unsigned int Dictionary::getCapacity() const{
   return CAPACITY;
 }
 
-
-// Hash Function <- For you to complete!
-// Description: Hashes the given indexingKey producing a "hash table index".
-// Time Efficiency is dependent on two functions, indexingKeyInt, and murmurHash3
-// Time Efficiency = max {O(stoul(indexingKey)), murmurHash3(indexingKey)}
-// Time Efficiency = max {O(1), O(1)}
-// Time Efficiency: O(1)
-//
-// Space Efficiency is dependent on storing uint64_t, whose value is dependent on 
-// on the size of the string indexingKey, but we know this is always going to be 16 characters
-// thus its O(1) space efficiency
-// Space Efficiency: O(1), all of the usernames have fixed size of 16 characters
+// Description: Secondary hash function for probing 
 unsigned int Dictionary::hashFunctionTwo( string indexingKey ) {
 
   // Put your code here
-  uint64_t indexingKeyInt = stoul(indexingKey);
+  // Convert string to integral value
+  uint64_t indexingKeyInt = stoul(indexingKey);  
   const uint64_t PRIME = 191;
   uint64_t hashCode = 0;
+  // Try to mix up the numbers using Prime and the value of indexingKeyInt at its end
   while (indexingKeyInt > 0) {
       hashCode = hashCode * PRIME + (indexingKeyInt % 10);
       indexingKeyInt /= 10;
   }
+  // Ensure we do not return 0
   return (hashCode == 0) ? hashCode % PRIME : 1;
 }
 
+// ASSUMPTION: That the userNames of each inserting object is going to be bounded by 16 characters as 
+//             given by our dataFile_100_16.txt
+//             However, if we assume that that the indexingKey can be n characters long then
+//             Time Efficiency becomes O(n)
+// Description: Hashes the given indexingKey producing a "hash table index".
+// Time Efficiency = max {O(1), O(1), O(1), O(1)}
+// Time Efficiency: O(1)
+//
+// Space Efficiency: O(1), all of the usernames have fixed size of 16 characters
+//                         so space needed to store keyInt is fixed
 unsigned int Dictionary::hashFunction(string indexingKey) {
 // Convert the string to an unsigned long integer using stoul
-  // 59
-    uint64_t keyInt = stoul(indexingKey);
+    uint64_t keyInt = stoul(indexingKey); // O(1) Time
+    // Get Prime number for shifting
     const uint64_t PRIME = 61;
-    // hash function using bit manipulation and modulo operation
-    // Inspired by MIT video and random prime number testing
-    uint64_t hash = keyInt ^ (keyInt >> PRIME);  // XOR and shift
-    hash = hash * 997525853ULL;        // Multiply by a large prime number
-    hash = hash ^ (hash >> PRIME);              // XOR and shift again
+    // hash alogrithm using bit manipulation and modulo operation
+    // Inspired by MIT video (Original idea came from Dr. Erik Demaine) and many prime number testing 
+    uint64_t hash = keyInt ^ (keyInt >> PRIME);  // XOR and shift, O(1)
+    hash = hash * 997525853ULL;        // Multiply by a large prime number O(1)
+    hash = hash ^ (hash >> PRIME);              // XOR and shift again O(1)
 
-    return static_cast<unsigned int>(hash % CAPACITY); // Ensure hash fits in table size
+    return static_cast<unsigned int>(hash % CAPACITY); // Ensure hash fits in table size O(1)
 }
 
 // Description: Inserts an element into the Dictionary and increments "elementCount".
