@@ -77,7 +77,7 @@ unsigned int Dictionary::hashFunction( string indexingKey ) {
   uint64_t indexingKeyInt = stoul(indexingKey);
   uint64_t intermediate = 0;
   int power = indexingKey.size();
-  const uint64_t PRIME = 37;
+  const uint64_t PRIME = 101;
   uint64_t hashCode = 0;
   while (indexingKeyInt > 0) {
       hashCode = hashCode * PRIME + (indexingKeyInt % 10);
