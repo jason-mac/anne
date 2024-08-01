@@ -77,10 +77,7 @@ unsigned int Dictionary::hashFunction( string indexingKey ) {
   uint64_t intermediate = 0;
   int power = indexingKey.size();
   for(int i = 1; i < power - 1; i++) {
-    intermediate += indexingKeyInt % 10;
     intermediate = intermediate >> i;
-    indexingKeyInt /= 10;
-    cout << indexingKeyInt << endl;
   }
   unsigned int hashCode = intermediate;
   return hashCode % CAPACITY;
