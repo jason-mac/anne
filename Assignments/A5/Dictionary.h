@@ -96,6 +96,12 @@ public:
   // Space Efficiency: <- For you to complete!
   unsigned int hashFunction( string indexingKey );
 
+  // Description: Secondary Hash Function for probing
+  //              and dealing with collisions
+  // Time Efficiency: O(1) 
+  // Space Efficiency: O(1)
+  unsigned int hashFunctionTwo(string indexingKey);
+
   // Description: Inserts an element into the Dictionary and increments "elementCount".
   //              For this Assignment 5, you do not have to expand the Dictionary when it is full. 
   // Precondition: newElement must not already be in in the Dictionary.  

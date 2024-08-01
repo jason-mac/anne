@@ -59,6 +59,7 @@ unsigned int Dictionary::getCapacity() const{
   return CAPACITY;
 }
 
+
 // Hash Function <- For you to complete!
 // Description: Hashes the given indexingKey producing a "hash table index".
 // Time Efficiency is dependent on two functions, indexingKeyInt, and murmurHash3
@@ -70,7 +71,6 @@ unsigned int Dictionary::getCapacity() const{
 // on the size of the string indexingKey, but we know this is always going to be 16 characters
 // thus its O(1) space efficiency
 // Space Efficiency: O(1), all of the usernames have fixed size of 16 characters
-// 
 unsigned int Dictionary::hashFunction( string indexingKey ) {
 
   // Put your code here
@@ -84,6 +84,17 @@ unsigned int Dictionary::hashFunction( string indexingKey ) {
       indexingKeyInt /= 10;
   }
   return hashCode % CAPACITY;
+}
+
+unsigned int Dictionary::hashFunctionTwo(string indexingKey) {
+// Convert the string to an unsigned long integer using stoul
+    uint64_t keyInt = stoul(indexingKey);
+    // Simple hash function using bit manipulation and modulo operation
+    uint64_t hash = keyInt ^ (keyInt >> 33);  // XOR and shift
+    hash = hash * 0xFF51AFD7ED558CC7;        // Multiply by a large prime number
+    hash = hash ^ (hash >> 33);              // XOR and shift again
+
+    return static_cast<unsigned int>(hash % CAPACITY); // Ensure hash fits in table size
 }
 
 // Description: Inserts an element into the Dictionary and increments "elementCount".
@@ -130,30 +141,25 @@ void Dictionary::insert( Profile * newElement )  {
   }
   */
   unsigned int hashIndex = hashFunction(newElement->getUserName());
-
-    unsigned int i = 0;
-    unsigned int count = 0;
-    unsigned int probeIndex = hashIndex;
-
-    while (count < CAPACITY) {
-        // Alternating positive and negative quadratic steps
-        int step = (i % 2 == 0) ? (i / 2) * (i / 2) : -((i + 1) / 2) * ((i + 1) / 2);
-        probeIndex = (hashIndex + step + CAPACITY) % CAPACITY;
-
-        if (hashTable[probeIndex] == nullptr) {
-            // Insert newElement here
-            hashTable[probeIndex] = newElement;
-            elementCount++; // Increment element count
-            return;
-        }
-
-        if (*(hashTable[probeIndex]) == *newElement) {
-            throw ElementAlreadyExistsException("In insert(): newElement already in Dictionary.");
-        }
-
-        count++;
-        i++;
+  unsigned int secondaryHashIndex = hashFunctionTwo(newElement->getUserName());
+  unsigned int i = 0;
+  unsigned int count = 0;
+  unsigned int probeIndex = hashIndex;
+  while(count < CAPACITY) {
+    int step = secondaryHashIndex * i;
+    probeIndex = (hashIndex + step) % CAPACITY;
+    if(hashTable[probeIndex] == nullptr) {
+      hashTable[probeIndex] = newElement;
+      elementCount++;
+      return;
     }
+    if (*(hashTable[probeIndex]) == *newElement) {
+        throw ElementAlreadyExistsException("In insert(): newElement already in Dictionary.");
+    }
+
+    count++;
+    i++;
+  }
 
     // If we exit the loop, it means we could not find an empty slot and the dictionary is full
     throw UnableToInsertException("In insert(): Dictionary is full.");
