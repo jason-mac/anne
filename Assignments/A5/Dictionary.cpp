@@ -113,7 +113,7 @@ void Dictionary::insert( Profile * newElement )  {
 
   // Keep hashing and probing until no more collisions using 
   // Linear Probing Hashing Collision Resolution Strategy
-  *unsigned int i = 0;
+  /*unsigned int i = 0;
   unsigned int count = 0;
   while ( hashTable[(hashIndex + i)%CAPACITY] != nullptr ) {   
     // If newElement not already in Dictionary
@@ -127,7 +127,7 @@ void Dictionary::insert( Profile * newElement )  {
 	    throw UnableToInsertException("In insertHelper(): Dictionary is full.");
     } 
   }
-  /*
+  */
   unsigned int hashIndex = hashFunction(newElement->getUserName());
 
     unsigned int i = 0;
@@ -153,7 +153,6 @@ void Dictionary::insert( Profile * newElement )  {
         count++;
         i++;
     }
-  */
 
     // If we exit the loop, it means we could not find an empty slot and the dictionary is full
     throw UnableToInsertException("In insert(): Dictionary is full.");
