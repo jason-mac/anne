@@ -16,6 +16,7 @@
 // You can add more #include statements if you wish.
 
 #include <iostream>
+#include <cmath>
 #include <cstring>
 #include "Dictionary.h"  
 #include "Profile.h"
@@ -24,7 +25,6 @@
 #include "EmptyDataCollectionException.h"
 #include "ElementDoesNotExistException.h"
 
-using std::pow;
 using std::cout;
 using std::endl;
 using std::__cxx11::stoul;
