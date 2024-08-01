@@ -77,12 +77,12 @@ unsigned int Dictionary::hashFunction( string indexingKey ) {
   uint64_t indexingKeyInt = stoul(indexingKey);
   uint64_t intermediate = 0;
   int power = indexingKey.size();
-  for(int i = 0; i < power; i++) {
-    intermediate += indexingKeyInt % 10 * pow(10, i);
-    indexingKeyInt /= 10;
-    intermediate = intermediate >> i;
+  const uint64_t PRIME = 31;
+  uint64_t hashCode = 0;
+  while (indexingKeyInt > 0) {
+      hashCode = hashCode * PRIME + (indexingKeyInt % 10);
+      indexingKeyInt /= 10;
   }
-  unsigned int hashCode = intermediate;
   return hashCode % CAPACITY;
 }
 
