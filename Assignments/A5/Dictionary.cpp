@@ -24,6 +24,7 @@
 #include "EmptyDataCollectionException.h"
 #include "ElementDoesNotExistException.h"
 
+using std::pow;
 using std::cout;
 using std::endl;
 using std::__cxx11::stoul;
