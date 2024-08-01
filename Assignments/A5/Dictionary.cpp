@@ -144,7 +144,7 @@ void Dictionary::insert( Profile * newElement )  {
   unsigned int count = 0;
   unsigned int probeIndex = hashIndex;
   while(count < CAPACITY) {
-    int step = secondaryHashIndex * i + 1;
+    unsigned int step = (secondaryHashIndex * i + 1) % CAPACITY;
     probeIndex = (hashIndex + step) % CAPACITY;
     if(hashTable[probeIndex] == nullptr) {
       hashTable[probeIndex] = newElement;
