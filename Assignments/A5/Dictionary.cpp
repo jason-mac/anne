@@ -141,8 +141,8 @@ void Dictionary::insert( Profile * newElement )  {
     } 
   }
   */
-  unsigned int hashIndex = hashFunction(newElement->getUserName());
-  unsigned int secondaryHashIndex = hashFunctionTwo(newElement->getUserName());
+  unsigned int hashIndex = hashFunctionTwo(newElement->getUserName());
+  unsigned int secondaryHashIndex = hashFunction(newElement->getUserName());
   unsigned int i = 0;
   unsigned int count = 0;
   unsigned int probeIndex = hashIndex;
