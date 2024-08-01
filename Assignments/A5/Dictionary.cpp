@@ -82,7 +82,7 @@ unsigned int Dictionary::hashFunctionTwo( string indexingKey ) {
       hashCode = hashCode * PRIME + (indexingKeyInt % 10);
       indexingKeyInt /= 10;
   }
-  return hashCode % 151;
+  return hashCode % PRIME;
 }
 
 unsigned int Dictionary::hashFunction(string indexingKey) {
