@@ -88,14 +88,14 @@ unsigned int Dictionary::hashFunction( string indexingKey ) {
 unsigned int Dictionary::hashFunctionTwo(string indexingKey) {
 // Convert the string to an unsigned long integer using stoul
     uint64_t keyInt = stoul(indexingKey);
-    const uint64_t PRIME = 37;
+    const uint64_t PRIME = 31;
     // hash function using bit manipulation and modulo operation
     // Inspired by MIT video 
-    uint64_t hash = keyInt ^ (keyInt >> 37);  // XOR and shift
+    uint64_t hash = keyInt ^ (keyInt >> PRIME);  // XOR and shift
     hash = hash * 0xFF51AFD7ED558CC7;        // Multiply by a large prime number
-    hash = hash ^ (hash >> 37);              // XOR and shift again
+    hash = hash ^ (hash >> PRIME);              // XOR and shift again
 
-    return static_cast<unsigned int>((hash % 211) + 1); // Ensure hash fits in table size
+    return static_cast<unsigned int>((hash % 199) + 1); // Ensure hash fits in table size
 }
 
 // Description: Inserts an element into the Dictionary and increments "elementCount".
