@@ -60,13 +60,28 @@ unsigned int Dictionary::getCapacity() const{
 
 // Hash Function <- For you to complete!
 // Description: Hashes the given indexingKey producing a "hash table index".
-// Time Efficiency: O(1) 
-// Space Efficiency: <- For you to complete!
+// Time Efficiency is dependent on two functions, indexingKeyInt, and murmurHash3
+// Time Efficiency = max {O(stoul(indexingKey)), murmurHash3(indexingKey)}
+// Time Efficiency = max {O(1), O(1)}
+// Time Efficiency: O(1)
+//
+// Space Efficiency is dependent on storing uint64_t, whose value is dependent on 
+// on the size of the string indexingKey, but we know this is always going to be 16 characters
+// thus its O(1) space efficiency
+// Space Efficiency: O(1), all of the usernames have fixed size of 16 characters
+// 
 unsigned int Dictionary::hashFunction( string indexingKey ) {
 
   // Put your code here
   uint64_t indexingKeyInt = stoul(indexingKey);
-  unsigned int hashCode = murmurHash3(indexingKeyInt) ;
+  uint64_t intermediate = 0;
+  int power = indexingKey.size();
+  for(int i = 1; i < power - 1; i++) {
+    intermediate += indexingKeyInt % 10;
+    intermediate = intermediate >> i;
+    indexingKeyInt /= 10;
+  }
+  unsigned int hashCode = intermediate;
   return hashCode % CAPACITY;
 }
 
@@ -90,6 +105,7 @@ void Dictionary::insert( Profile * newElement )  {
   // If Dictionary is full, it would make send to expand the Dictionary.
   // However, for this Assignment 5, you do not have to expand the Dictionary when it is full. 
   // We shall simply throw an exception.
+  // TO DO FIX IT 
   if ( elementCount == CAPACITY ) 
     throw UnableToInsertException("In insert(): Dictionary is full.");
    
@@ -97,7 +113,7 @@ void Dictionary::insert( Profile * newElement )  {
 
   // Keep hashing and probing until no more collisions using 
   // Linear Probing Hashing Collision Resolution Strategy
-  /*unsigned int i = 0;
+  *unsigned int i = 0;
   unsigned int count = 0;
   while ( hashTable[(hashIndex + i)%CAPACITY] != nullptr ) {   
     // If newElement not already in Dictionary
@@ -110,7 +126,8 @@ void Dictionary::insert( Profile * newElement )  {
     if ( count == CAPACITY ) {
 	    throw UnableToInsertException("In insertHelper(): Dictionary is full.");
     } 
-  }*/
+  }
+  /*
   unsigned int hashIndex = hashFunction(newElement->getUserName());
 
     unsigned int i = 0;
@@ -136,6 +153,7 @@ void Dictionary::insert( Profile * newElement )  {
         count++;
         i++;
     }
+  */
 
     // If we exit the loop, it means we could not find an empty slot and the dictionary is full
     throw UnableToInsertException("In insert(): Dictionary is full.");

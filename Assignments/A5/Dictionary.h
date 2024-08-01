@@ -32,6 +32,9 @@ class Dictionary  {
  */ 
  
 private:
+
+// Hash Function inspired by Austin Appleby
+// Time complexity O(1)
 uint32_t murmurHash3(uint64_t key) {
     const uint32_t seed = 3; // Seed value can be adjusted as needed
     const uint32_t c1 = 0xcc9e2d51;
@@ -59,80 +62,6 @@ uint32_t murmurHash3(uint64_t key) {
     h1 ^= (h1 >> 16);
 
     return h1;
-}
-uint64_t xxHash64(const void* input, size_t length, uint64_t seed = 1) {
-    const uint64_t PRIME64_1 = 11400714785074694791ULL;
-    const uint64_t PRIME64_2 = 14029467366897019727ULL;
-    const uint64_t PRIME64_3 =  1609587929392839161ULL;
-    const uint64_t PRIME64_4 =  9650029242287828579ULL;
-    const uint64_t PRIME64_5 =  2870177450012600261ULL;
-
-    const uint8_t* p = (const uint8_t*)input;
-    const uint8_t* const bEnd = p + length;
-    uint64_t h64;
-
-    if (length >= 32) {
-        const uint8_t* const limit = bEnd - 32;
-        uint64_t v1 = seed + PRIME64_1 + PRIME64_2;
-        uint64_t v2 = seed + PRIME64_2;
-        uint64_t v3 = seed + 0;
-        uint64_t v4 = seed - PRIME64_1;
-
-        do {
-            v1 += *((uint64_t*)p) * PRIME64_2;
-            v1 = (v1 << 31) | (v1 >> 33);
-            v1 *= PRIME64_1;
-            p += 8;
-            v2 += *((uint64_t*)p) * PRIME64_2;
-            v2 = (v2 << 31) | (v2 >> 33);
-            v2 *= PRIME64_1;
-            p += 8;
-            v3 += *((uint64_t*)p) * PRIME64_2;
-            v3 = (v3 << 31) | (v3 >> 33);
-            v3 *= PRIME64_1;
-            p += 8;
-            v4 += *((uint64_t*)p) * PRIME64_2;
-            v4 = (v4 << 31) | (v4 >> 33);
-            v4 *= PRIME64_1;
-            p += 8;
-        } while (p <= limit);
-
-        h64 = ((v1 << 1) | (v1 >> 63)) + ((v2 << 7) | (v2 >> 57)) + ((v3 << 12) | (v3 >> 52)) + ((v4 << 18) | (v4 >> 46));
-    } else {
-        h64 = seed + PRIME64_5;
-    }
-
-    h64 += length;
-
-    while (p + 8 <= bEnd) {
-        uint64_t k1 = *((uint64_t*)p);
-        k1 *= PRIME64_2;
-        k1 = (k1 << 31) | (k1 >> 33);
-        k1 *= PRIME64_1;
-        h64 ^= k1;
-        h64 = ((h64 << 27) | (h64 >> 37)) * PRIME64_1 + PRIME64_4;
-        p += 8;
-    }
-
-    while (p + 4 <= bEnd) {
-        h64 ^= *((uint32_t*)p) * PRIME64_1;
-        h64 = ((h64 << 23) | (h64 >> 41)) * PRIME64_2 + PRIME64_3;
-        p += 4;
-    }
-
-    while (p < bEnd) {
-        h64 ^= (*p) * PRIME64_5;
-        h64 = ((h64 << 11) | (h64 >> 53)) * PRIME64_1;
-        p++;
-    }
-
-    h64 ^= h64 >> 33;
-    h64 *= PRIME64_2;
-    h64 ^= h64 >> 29;
-    h64 *= PRIME64_3;
-    h64 ^= h64 >> 32;
-
-    return h64;
 }
 
   constexpr static unsigned int CAPACITY = 103;  // Size of hashTable - underlying data structure (array) of Dictionary.
