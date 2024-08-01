@@ -80,7 +80,7 @@ unsigned int Dictionary::hashFunction( string indexingKey ) {
     intermediate += indexingKeyInt % 10;
     intermediate = intermediate >> i;
     indexingKeyInt /= 10;
-    cout << intermediate<< endl;
+    cout << indexingKeyInt << endl;
   }
   unsigned int hashCode = intermediate;
   return hashCode % CAPACITY;
