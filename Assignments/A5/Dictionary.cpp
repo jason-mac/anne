@@ -1,4 +1,3 @@
-// clang-format off
 /*
  * Dictionary.cpp
  * 
@@ -192,5 +191,3 @@ void Dictionary::printDictionary()  const {
   }   
   return;
 }
-
-//clang-format on
