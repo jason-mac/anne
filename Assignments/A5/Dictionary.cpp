@@ -60,29 +60,30 @@ unsigned int Dictionary::getCapacity() const{
 }
 
 // Description: Secondary hash function for probing 
+// Time Efficiency = max {O(1), O(1), O(1)} = O(1)
+// Space Efficiency = O(1), fixed by size of indexingKey
 unsigned int Dictionary::hashFunctionTwo( string indexingKey ) {
 
   // Put your code here
   // Convert string to integral value
-  uint64_t indexingKeyInt = stoul(indexingKey);  
+  uint64_t indexingKeyInt = stoul(indexingKey);  // O(1)
   const uint64_t PRIME = 191;
   uint64_t hashCode = 0;
   // Try to mix up the numbers using Prime and the value of indexingKeyInt at its end
-  while (indexingKeyInt > 0) {
+  while (indexingKeyInt > 0) { // O(1)
       hashCode = hashCode * PRIME + (indexingKeyInt % 10);
       indexingKeyInt /= 10;
   }
   // Ensure we do not return 0
-  return (hashCode == 0) ? hashCode % PRIME : 1;
+  return (hashCode == 0) ? hashCode % PRIME : 1; // O(1)
 }
 
-// ASSUMPTION: That the userNames of each inserting object is going to be bounded by 16 characters as 
+// ASSUMPTION: That the userNames of each inserting object is going to be fixed by 16 characters as 
 //             given by our dataFile_100_16.txt
 //             However, if we assume that that the indexingKey can be n characters long then
 //             Time Efficiency becomes O(n)
 // Description: Hashes the given indexingKey producing a "hash table index".
-// Time Efficiency = max {O(1), O(1), O(1), O(1)}
-// Time Efficiency: O(1)
+// Time Efficiency = max {O(1), O(1), O(1), O(1), O(1)} = O(1)
 //
 // Space Efficiency: O(1), all of the usernames have fixed size of 16 characters
 //                         so space needed to store keyInt is fixed
@@ -143,19 +144,25 @@ void Dictionary::insert( Profile * newElement )  {
     } 
   }
   */
+
+  // Double Hashing probing strategy
   unsigned int hashIndex = hashFunction(newElement->getUserName());
   unsigned int secondaryHashIndex = hashFunctionTwo(newElement->getUserName());
   unsigned int i = 0;
   unsigned int count = 0;
   unsigned int probeIndex = hashIndex;
   while(count < CAPACITY) {
+    // get step amount for probing
     unsigned int step = (secondaryHashIndex * i);
     probeIndex = (hashIndex + step) % CAPACITY;
+    // Insert if nullptr
     if(hashTable[probeIndex] == nullptr) {
       hashTable[probeIndex] = newElement;
       elementCount++;
+      // return as element has been inserted
       return;
     }
+    // If already exists, throw exception
     if (*(hashTable[probeIndex]) == *newElement) {
         throw ElementAlreadyExistsException("In insert(): newElement already in Dictionary.");
     }
@@ -164,8 +171,8 @@ void Dictionary::insert( Profile * newElement )  {
     i++;
   }
 
-    // If we exit the loop, it means we could not find an empty slot and the dictionary is full
-    throw UnableToInsertException("In insert(): Dictionary is full.");
+  // If we exit the loop, it means we could not find an empty slot and the dictionary is full
+  throw UnableToInsertException("In insert(): Dictionary is full.");
     
   return;
 }

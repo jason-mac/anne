@@ -60,8 +60,14 @@ public:
   
   // Hash Function <- For you to complete!
   // Description: Hashes the given indexingKey producing a "hash table index".
-  // Time Efficiency: This is given in the cpp file! 
-  // Space Efficiency: This is given in the cpp file!
+  // ASSUMPTION: That the userNames of each inserting object is going to be fixed by 16 characters as 
+  //             given by our dataFile_100_16.txt
+  //             However, if we assume that that the indexingKey can be n characters long then
+  //             Time Efficiency becomes O(n)
+  // Time Efficiency = max {O(1), O(1), O(1), O(1), O(1)} = O(1)
+  //
+  // Space Efficiency: O(1), all of the usernames have fixed size of 16 characters
+  //                         so space needed to store keyInt is fixed
   unsigned int hashFunction( string indexingKey );
 
   // Description: Secondary Hash Function for probing
