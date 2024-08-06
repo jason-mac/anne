@@ -16,7 +16,7 @@ int main() {
     cout << a << " has been inserted into heap " << endl;
   }
   cout << q.peek() << " peek q" << endl;
-  cout << " heap retrive " << heap.retrieve();
+  cout << "heap retrive() " << heap.retrieve() << endl;
   cout << heap.getElementCount() << endl;
   heap.remove();
   try {
@@ -24,5 +24,7 @@ int main() {
   } catch (EmptyDataCollectionException &e) {
     cout << e.what() << endl;
   }
+  cout << heap.getElementCount()
+       << " elemntCount of heap after removin its only element" << endl;
   return 0;
 }
