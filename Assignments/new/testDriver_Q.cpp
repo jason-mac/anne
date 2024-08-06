@@ -15,9 +15,6 @@ int main() {
   if (heap.insert(a)) {
     cout << a << " has been inserted into heap " << endl;
   }
-
-  heap.insert(b);
-  heap.insert(c);
   cout << q.peek() << " peek q" << endl;
   cout << " heap retrive " << heap.retrieve();
   cout << heap.getElementCount() << endl;
