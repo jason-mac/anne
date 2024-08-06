@@ -12,7 +12,10 @@ int main() {
   q.enqueue(b);
   q.enqueue(c);
   BinaryHeap<int> heap;
-  heap.insert(a);
+  if (heap.insert(a)) {
+    cout << a << " has been inserted into heap " << endl;
+  }
+
   heap.insert(b);
   heap.insert(c);
   cout << q.peek() << " peek q" << endl;
